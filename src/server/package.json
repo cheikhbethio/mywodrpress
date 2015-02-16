@@ -1,0 +1,10 @@
+{
+"name": "ServerPedWordPress",
+"version": "1.0.0",
+"description": "Back end PEDWordPress",
+"dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "mongoose": "*"
+    }
+}
