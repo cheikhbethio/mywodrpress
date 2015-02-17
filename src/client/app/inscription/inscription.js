@@ -9,17 +9,15 @@ angular.module('myWordPress.inscription', ['ui.router'])
 	$stateProvider.state('inscription', {
 		url: '/inscription',
 		templateUrl: 'inscription/inscription.html',
-		controller: 'inscriptionController'
+		controller: 'registrationController'
 	});
 
 }])
 
-.controller('inscriptionController', ['$scope', 
+.controller('registrationController', ['$scope', 
 	function($scope){
 
 		$scope.newUser = {};
-
-		console.log("In inscription controller");
 
 		$scope.saveNewUser = function() {
 	  		$scope.$broadcast('show-errors-check-validity');
@@ -39,11 +37,12 @@ angular.module('myWordPress.inscription', ['ui.router'])
 		    $scope.newUser = {};
   		};
 
+  		/* For debugging purposes only */
   		var printNewUser = function(newUser){
-  			console.log("User lastName: " + $scope.lastName);
-  			console.log("User firstName: " + $scope.firstName);
-  			console.log("User email: " + $scope.email);
-  			console.log("User password: " + $scope.password);
-  			console.log("User passwordConfirmation: " + $scope.passwordConfirmation);
+  			console.log("User lastName: " + newUser.lastName);
+  			console.log("User firstName: " + newUser.firstName);
+  			console.log("User email: " + newUser.email);
+  			console.log("User password: " + newUser.password);
+  			console.log("User passwordConfirmation: " + newUser.passwordConfirmation);
   		};
 }]);
