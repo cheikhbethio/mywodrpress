@@ -2,6 +2,7 @@
 
 angular.module('myWordPress', [
 	'myWordPress.inscription',
+	'ui.bootstrap.showErrors',
 	'ui.router'
 ])
 
