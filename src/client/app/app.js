@@ -11,8 +11,8 @@ angular.module('myWordPress', [
 	$urlRouterProvider.otherwise('/');
 
 	$stateProvider.state("home", {
-		url: '/',
-		template: '<a ui-sref="inscription">Inscription</a>'
+		url: '/'
+		//template: '<a ui-sref="inscription">Inscription</a>'
 	});
 
 }]);

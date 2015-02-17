@@ -6,11 +6,33 @@
 	<title>MyWordPress</title>
 
 	<link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/blog.css" rel="stylesheet">
 
 </head>
 <body>
+	<div ng-include="'master_template/header.html'"></div>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h1 class="blog-title">MyWordPress</h1>
+        <p class="lead blog-description">Template de base</p>
+      </div>
+
+      <div class="row">
 
 	<div ui-view></div>
+
+	<div ng-include="'master_template/content.html'"></div>
+
+	<div ng-include="'master_template/sidebar.html'"></div>
+
+	      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+	<div ng-include="'master_template/footer.html'"></div>
+
 
 	<script src="bower_components/angular/angular.js"></script>
 
