@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myWordPress', [
-	'myWordPress.inscription',
+	'myWordPress.registration',
 	'myWordPress.master_template',
 	'myWordPress.connection',
 	'ui.bootstrap.showErrors',
