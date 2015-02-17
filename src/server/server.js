@@ -4,6 +4,7 @@ var application_root = __dirname,
     path = require('path'), //Utilities for dealing with file paths
     bodyParser  = require('body-parser'),
     mongoose = require('mongoose'); //MongoDB integration
+    user=require('./Route/user.js')
 
 
 //Create server
@@ -14,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(application_root ,'../client')));
 //Show all errors in development
-app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+//app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 
 
 //Start server
@@ -29,3 +30,8 @@ app.listen(port, function () {
 
 //Connect to database
 var db = mongoose.connect('mongodb://localhost/myWP');
+
+
+app.post('/api/user/create',user.create)
+
+app.post('api/user/edit',user.edit)
