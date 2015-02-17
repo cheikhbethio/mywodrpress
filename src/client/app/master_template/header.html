@@ -1,7 +1,7 @@
-<div class="blog-masthead">
+<div class="blog-masthead" ng-controller="mastertemplateController">
     <div class="container">
         <nav class="blog-nav navbar-left">
-            <a class="blog-nav-item active" href="#">Accueil</a>
+            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" href="#">Accueil</a>
             <a class="blog-nav-item" href="#">Menu 1</a>
             <a class="blog-nav-item" href="#">Menu 2</a>
             <a class="blog-nav-item" href="#">Menu 3</a>
@@ -9,7 +9,7 @@
 
         <nav class="blog-nav navbar-right">
             <a class="blog-nav-item" href="#">Connexion</a>
-            <a class="blog-nav-item" ui-sref="inscription">Inscription</a>
+            <a ng-class="{ active: isActiveHeader('/inscription')}" class="blog-nav-item" ui-sref="inscription">Inscription</a>
         </nav>
     </div>
 </div>
