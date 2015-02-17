@@ -11,23 +11,23 @@
 </head>
 <body>
 	<div ng-include="'master_template/header.html'"></div>
+	
+	<div class="container">
+		<div class="blog-header">
+        	<h1 class="blog-title">MyWordPress</h1>
+        	<p class="lead blog-description">Template de base</p>
+      	</div>
 
-    <div class="container">
+      	<div class="row">
+      		<div class="col-sm-8 blog-main">
 
-      <div class="blog-header">
-        <h1 class="blog-title">MyWordPress</h1>
-        <p class="lead blog-description">Template de base</p>
-      </div>
+				<div ui-view></div>
 
-      <div class="row">
+				<div ng-include="'master_template/content.html'"></div>
+	     	</div><!-- /.blog-main -->
 
-	<div ui-view></div>
-
-	<div ng-include="'master_template/content.html'"></div>
-
-	<div ng-include="'master_template/sidebar.html'"></div>
-
-	      </div><!-- /.row -->
+			<div ng-include="'master_template/sidebar.html'"></div>
+	    </div><!-- /.row -->
 
     </div><!-- /.container -->
 
