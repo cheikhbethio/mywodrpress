@@ -3,6 +3,7 @@
 angular.module('myWordPress', [
 	'myWordPress.inscription',
 	'myWordPress.master_template',
+	'myWordPress.connection',
 	'ui.bootstrap.showErrors',
 	'ui.router'
 ])
