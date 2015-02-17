@@ -5,6 +5,7 @@ var application_root = __dirname,
     bodyParser  = require('body-parser'),
     mongoose = require('mongoose'); //MongoDB integration
     user=require('./Route/user.js')
+    page=require('./Route/page.js')
 
 
 //Create server
@@ -35,3 +36,7 @@ var db = mongoose.connect('mongodb://localhost/myWP');
 app.post('/api/user/create',user.create)
 
 app.post('api/user/edit',user.edit)
+
+app.post('/api/page/create',page.create);
+
+app.get('/api/pages/:id', page.getPage);
