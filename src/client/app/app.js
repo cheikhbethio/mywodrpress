@@ -15,7 +15,6 @@ angular.module('myWordPress', [
 
 	$stateProvider.state("home", {
 		url: '/'
-		//template: '<a ui-sref="inscription">Inscription</a>'
 	});
 
 }]);
