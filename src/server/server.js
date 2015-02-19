@@ -38,6 +38,8 @@ app.post('/api/user/create',user.create);
 
 app.post('api/user/edit',user.edit);
 
+app.get('api/users/:id',user.get);
+
 app.post('/api/page/create',page.create);
 
 app.get('/api/pages/:id', page.getPage);

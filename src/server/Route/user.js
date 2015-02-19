@@ -9,12 +9,37 @@ var userSchema = Schema({
 					},
 	password	: String,
 	name		: String,
-    email	    : String,
+    email	    : {
+					type: String,
+					unique: true
+					},
     token       : String,	
 	right		: Number
 });
 
+
 var user= mongoose.model('user',userSchema);
+
+userSchema.path('login').validate(function(value, done) {
+    this.model('user').count({ login: value }, function(err, count) {
+        if (err) {
+            return done(err);
+        } 
+        // If `count` is greater than zero, "invalidate"
+        done(!count);
+    });
+}, 'Login already exists');
+
+userSchema.path('email').validate(function(value, done) {
+    this.model('user').count({ email: value }, function(err, count) {
+        if (err) {
+            return done(err);
+        } 
+        // If `count` is greater than zero, "invalidate"
+        done(!count);
+    });
+}, 'Email already exists');
+
 
 exports.create=function (req, resp , next) {
     var newUser = new user(req.body);
@@ -43,3 +68,10 @@ exports.edit=function (req, resp , next) {
         res.send(404)
     })
 };
+
+exports.get=function(req,res,next){
+        var id = req.params.id;
+        user.findById(id, function(err,result){
+                     if(err) return next(err);
+                    res.json(result);
+    });
