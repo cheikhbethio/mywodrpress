@@ -13,13 +13,11 @@
 				placeholder="Nom"
 				required
 			/>
-			<p ng-show="$scope.noLastName">Nom obligatoire</p>
 		</div>
 
 		<div class="form-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
 			<label for="firstname">Prenom:</label>
 			<input id="input_firstname" type="text" name="firstname" class="form-control"  ng-model="newUser.firstName" placeholder="Prenom" required/>
-			<p class="help-block" ng-show="registrationForm.lastname.$error.required">Prenom obligatoire</p>
 		</div>
 
 		<div class="form-group" ng-class="{ 'has-error': registrationForm.login.$invalid && registrationForm.login.$dirty }">
