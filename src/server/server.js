@@ -33,10 +33,14 @@ app.listen(port, function () {
 var db = mongoose.connect('mongodb://localhost/myWP');
 
 
-app.post('/api/user/create',user.create)
+app.post('/api/user/create',user.create);
 
-app.post('api/user/edit',user.edit)
+app.post('api/user/edit',user.edit);
 
 app.post('/api/page/create',page.create);
+
+app.post('/api/page/edit', page.edit);
+
+app.post('/api/page/delete', page.deletePage);
 
 app.get('/api/pages/:id', page.getPage);
