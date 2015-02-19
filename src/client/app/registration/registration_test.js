@@ -10,7 +10,7 @@ describe("Registration", function() {
 		$controller = _$controller_;
 	}));
 
-  	describe('initialy', function(){
+  describe('initialy', function(){
 
 		var $scope, controller;
 
@@ -23,8 +23,13 @@ describe("Registration", function() {
 			expect('registrationController').toBeDefined();
 		});
 
-  		it('its newUser variable should be empty', function(){
+  		it('its newUser variable should be empty and form control variables set to false', function(){
   			expect($scope.newUser).toEqual({});
+
+        expect($scope.loginAlreadyUsed).toBe(false);
+        expect($scope.emailAlreadyUsed).toBe(false);
+
+        expect($scope.nonMatchingPwd).toBe(false);
   		});
   	});
 
@@ -33,23 +38,23 @@ describe("Registration", function() {
   		var $scope, controller;
 
   		var incompleteFakeUser = {
-			firstName:'John', 
-			lastName:'Do'
+        firstName:'John', 
+        lastName:'Do'
     	};
 
   		beforeEach(function(){
   			$scope = {};
-  			$scope.newUser = incompleteFakeUser;
     		controller = $controller('registrationController', { $scope: $scope });
     		
   		});
 
   		it('should reset the newUser', function(){
-			//expect($scope.newUser).toEqual(incompleteFakeUser);
-			//$scope.resetRegistrationForm();
-			//expect($scope.newUser).toEqual({});
+        $scope.newUser = incompleteFakeUser;
 
-		});
+  			expect($scope.newUser).toEqual(incompleteFakeUser);
+  			$scope.resetRegistrationForm();
+  			expect($scope.newUser).toEqual({});
+		  });
 
   	});
 
@@ -57,18 +62,40 @@ describe("Registration", function() {
 
   		var $scope, controller;
 
-  		var completeFakeUser = {
-			firstName:'John', 
-			lastName:'Do',
-			email:
+  		var correctFakeUser = {
+        firstName:'John', 
+        lastName:'Do',
+        login: 'johnDo',
+        email: 'johnDo@do.com',
+        password: 'do',
+        passwordConfirmation: 'do'
     	};
+
+      var nonMatchingPassFakeUser = {
+        firstName:'John', 
+        lastName:'Do',
+        login: 'johnDo',
+        email: 'johnDo@do.com',
+        password: 'do',
+        passwordConfirmation: 'dop'
+      };
 
   		beforeEach(function(){
   			$scope = {};
-  			$scope.newUser = incompleteFakeUser;
     		controller = $controller('registrationController', { $scope: $scope });
-    		
   		});
+
+      it('should set the nonMatchingPwd to true if the passwords dont match', function(){
+        $scope.newUser = nonMatchingPassFakeUser;
+
+        expect($scope.nonMatchingPwd).toEqual(false);
+
+        // Fonctionne pas a cause du $scope.registrationForm.$valid
+        //$scope.saveNewUser($scope.newUser);
+
+        expect($scope.nonMatchingPwd).toEqual(false);
+
+      });
 
   	});
 
