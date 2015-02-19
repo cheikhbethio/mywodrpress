@@ -9,7 +9,9 @@ module.exports = function(config){
 			'node_modules/angular-bootstrap-show-errors/src/showErrors.js',
 			'app/bower_components/angular-mocks/angular-mocks.js',
 			'app/app.js',
-			'app/registration/*.js'
+			'app/registration/*.js',
+			'app/master_template/*.js',
+			'app/connection/*.js'
 			
 		],
 
