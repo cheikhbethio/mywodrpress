@@ -1,14 +1,19 @@
 mongoose = require('mongoose'); //MongoDB integration
+var bcrypt=require('bcrypt');
+
+
+//init Passord Hash
 
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-	login		: String,					
+	login			: String,					
 	password	: String,
-	name		: String,
-    email	    : String,					
-    token       : String,	
-	right		: Number
+	firstname	: String,
+	lastname	: String,
+  email	  	: String,					
+  token   	: String,	
+	right			: Number
 });
 
 
@@ -26,7 +31,10 @@ userSchema.pre("save", function(next) {
             next();
         }
     });
+});
 
+userSchema.pre("save", function(next) {
+    var self = this;
     user.findOne({login : this.login}, 'login', function(err, results) {
         if(err) {
             next(err);
@@ -44,7 +52,12 @@ userSchema.pre("save", function(next) {
 
 
 exports.create=function (req, res , next) {
-    var newUser = new user(req.body);
+    var newUser = new user();
+    newUser.login=req.body.login;
+    newUser.password=bcrypt.hashSync(req.body.password, 8);
+    newUser.firstname=req.body.firstname;
+   	newUser.lastname=req.body.lastname;
+		newUser.email=req.body.email;    
     newUser.right=1;
     newUser.save(function(err, results){
             if (err) {
@@ -55,28 +68,27 @@ exports.create=function (req, res , next) {
     })
 };
 
-exports.edit=function (req, res , next) {
-   user.findById(req.body.id).exec(function(err, doc){
-        if (err) return next(err);
-        else{
-            if(doc!=null){
-                if(req.body.password!=null)
-            	   doc.password=req.body.password;
-                if(req.body.name!=null)
-            	   doc.name=req.body.name;
-                if(req.body.email!=null)
-            	   doc.email=req.body.email;
-                doc.save(function(err, results){
-            	   if (err) return next(err);
-                    else
-            	       res.sendStatus(200);
-                })
-            }
-            else
-                res.sendStatus(404);
-        }
-    })
+var callback= function(err, numAffected){
 };
+
+exports.edit=function (req, res , next) {
+								var query= ({login : req.body.login});
+                if(req.body.password!=null)
+            	   		user.update(query, { password : bcrypt.hashSync(req.body.password, 8) }, function(err, n){
+            	   																																										if(err) res.write(err.message);
+            	   																																										});
+                if(req.body.firstname!=null)
+                		user.update(query, { firstname : req.body.firstname }, function(err, n){
+            	   																																										if(err) res.write(err.message);
+            	   																																										});
+            	  if(req.body.lastname!=null)
+            	 			user.update(query, { lastname : req.body.lastname }, function(err, n){
+            	   																																										if(err) res.write(err.message);
+            	   																																										});
+								res.sendStatus(200);
+								
+
+            };
 
 exports.get = function(req,res,next){
         var id = req.params.id;

@@ -6,16 +6,16 @@ angular.module('myWordPress.registration', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', 
 	function($stateProvider, $urlRouterProvider){
 
-	$stateProvider.state('registration', {
-		url: '/registration',
+	$stateProvider.state('app.registration', {
+		url: 'registration',
 		templateUrl: 'registration/registration.html',
 		controller: 'registrationController'
 	});
 
 }])
 
-.controller('registrationController', ['$scope', 'user', 'pages',
-	function($scope, user, PAGES){
+.controller('registrationController', ['$scope', 'user',
+	function($scope, user){
 
 		$scope.newUser = {};
 
@@ -24,29 +24,33 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 		$scope.nonMatchingPwd = false;
 
-		var testjson = {
-			login:"samlog4",
-			password:"sampass4",
-			name:"samname4",
-			email:"sam4@sam.com"
-		};
-
-		$scope.page = PAGES.get({id: '54e735a791f0a7b543e55a32'}, function(page) {
-        //console.log("get page "+$stateParams.id);
-    	});
+		/*var testjson = {
+			firstname: "john",
+			lastname: "doe", 
+			login:"jd",
+			email:"jd@sam.com",
+			password:"jspass"
+		};*/
 
 		$scope.saveNewUser = function() {
-
-
-			user.save(testjson, function(page) {
-				console.log("Successfuly posted");
-			});
 
 		  	if ($scope.registrationForm.$valid) {
 
 		    	if($scope.newUser.password === $scope.newUser.passwordConfirmation){
 
 		    		console.log("The passwords match");
+
+		    		var nuser =  {
+						firstname: $scope.newUser.firstName,
+						lastname: $scope.newUser.lastName, 
+						login: $scope.newUser.login,
+						email: $scope.newUser.email,
+						password: $scope.newUser.password
+					};
+
+		    		user.save(nuser, function(page) {
+						console.log("Successfuly posted");
+					});
 
 		    	}
 		    	else{

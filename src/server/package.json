@@ -4,11 +4,12 @@
 "description": "Back end PEDWordPress",
 
 "devDependencies": {
-		"frisby": "^0.8.4"
+		"frisby": "*"
 	},
 "dependencies": {
     "express": "*",
     "body-parser": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "bcrypt":"*"
     }
 }

@@ -33,9 +33,15 @@ app.listen(port, function () {
 //Connect to database
 var db = mongoose.connect('mongodb://localhost/myWP');
 
-
+/* POST /api/user/create : 
+req: {login: , email, password, lastname, firstname }
+res: "message erreur" ou OK*/
 app.post('/api/user/create',user.create);
 
+/* POST /api/user/edit : 
+req: {login: , password, lastname, firstname }
+login correspond au login de l'entrée a modifié 
+res: "message erreur" ou OK*/
 app.post('/api/user/edit',user.edit);
 
 app.get('/api/users/:id',user.get);
