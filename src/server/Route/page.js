@@ -5,7 +5,14 @@ var PageSchema = new mongoose.Schema({
                          content : String
 });
 
+var MenuSchema = new mongoose.Schema({
+                        name: String,
+                        pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
+                        link : [{type: Schema.Types.ObjectId, ref:'Menu'}]
+});
+
 var Page = mongoose.model('Page',PageSchema);
+var Menu = mongoose.model('Menu' ,MenuSchema);
 
 exports.create = function(req,res,next){
         var reqBody = req.body,
