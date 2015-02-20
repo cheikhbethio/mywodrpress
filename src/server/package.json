@@ -2,6 +2,10 @@
 "name": "ServerPedWordPress",
 "version": "1.0.0",
 "description": "Back end PEDWordPress",
+
+"devDependencies": {
+		"frisby": "^0.8.4"
+	},
 "dependencies": {
     "express": "*",
     "body-parser": "*",
