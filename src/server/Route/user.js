@@ -3,16 +3,10 @@ mongoose = require('mongoose'); //MongoDB integration
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-	login		: {
-					type: String,
-					unique: true
-					},
+	login		: String,					
 	password	: String,
 	name		: String,
-    email	    : {
-					type: String,
-					unique: true
-					},
+    email	    : String,					
     token       : String,	
 	right		: Number
 });
@@ -20,52 +14,67 @@ var userSchema = Schema({
 
 var user= mongoose.model('user',userSchema);
 
-userSchema.path('login').validate(function(value, done) {
-    this.model('user').count({ login: value }, function(err, count) {
-        if (err) {
-            return done(err);
-        } 
-        // If `count` is greater than zero, "invalidate"
-        done(!count);
+userSchema.pre("save", function(next) {
+    var self = this;
+    user.findOne({email : this.email}, 'email', function(err, results) {
+        if(err) {
+            next(err);
+        } else if(results) {
+            self.invalidate("email", "Email must be unique");
+            next(new Error("Email must be unique"));
+        } else {
+            next();
+        }
     });
-}, 'Login already exists');
 
-userSchema.path('email').validate(function(value, done) {
-    this.model('user').count({ email: value }, function(err, count) {
-        if (err) {
-            return done(err);
-        } 
-        // If `count` is greater than zero, "invalidate"
-        done(!count);
+    user.findOne({login : this.login}, 'login', function(err, results) {
+        if(err) {
+            next(err);
+        } else if(results) {
+            self.invalidate("login", "Login must be unique");
+            next(new Error("Login must be unique"));
+        } else {
+            next();
+        }
     });
-}, 'Email already exists');
+
+});
 
 
-exports.create=function (req, resp , next) {
+
+
+exports.create=function (req, res , next) {
     var newUser = new user(req.body);
     newUser.right=1;
-    newUser.save(function(e, results){
-        if (e) return next(e);
-        res.send(results);
+    newUser.save(function(err, results){
+            if (err) {
+                res.send(err.message);
+            }
+            else
+                res.sendStatus(200);
     })
 };
 
-exports.edit=function (req, resp , next) {
-   user.findById(req.id).exec(function(err, doc){
-        if (e) return next(e);
-        if(doc!=null){
-            if(req.password!=null)
-            	doc.password=req.password;
-            if(req.name!=null)
-            	doc.name=req.name;
-            if(req.email!=null)
-            	doc.email=req.email;
-            doc.save(function(e, results){
-            	if (e) return next(e);
-            	res.send(results);
-            })
+exports.edit=function (req, res , next) {
+   user.findById(req.body.id).exec(function(err, doc){
+        if (err) return next(err);
+        else{
+            if(doc!=null){
+                if(req.body.password!=null)
+            	   doc.password=req.body.password;
+                if(req.body.name!=null)
+            	   doc.name=req.body.name;
+                if(req.body.email!=null)
+            	   doc.email=req.body.email;
+                doc.save(function(err, results){
+            	   if (err) return next(err);
+                    else
+            	       res.sendStatus(200);
+                })
+            }
+            else
+                res.sendStatus(404);
         }
-        res.send(404)
     })
 };
 
@@ -73,6 +82,18 @@ exports.get = function(req,res,next){
         var id = req.params.id;
         user.findById(id, function(err,result){
                         if(err) return next(err);
+                        else
                             res.json(result);
                 });
     };
+
+exports.view = function (req, res ,next) {
+    user.find().exec(function (err, result) {
+        if (!err) {
+            return res.send(result);
+        } else {
+            console.log(err);
+            next(err);
+        }
+    });
+};

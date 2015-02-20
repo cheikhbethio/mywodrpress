@@ -36,9 +36,11 @@ var db = mongoose.connect('mongodb://localhost/myWP');
 
 app.post('/api/user/create',user.create);
 
-app.post('api/user/edit',user.edit);
+app.post('/api/user/edit',user.edit);
 
-app.get('api/users/:id',user.get);
+app.get('/api/users/:id',user.get);
+
+app.get('/api/users',user.view);
 
 app.post('/api/page/create',page.create);
 
