@@ -5,8 +5,10 @@ angular.module('myWordPress', [
 	'myWordPress.master_template',
 	'myWordPress.connection',
 	'myWordPress.editProfile',
+	'myWordPress.pages',
 	'ui.bootstrap.showErrors',
-	'ui.router'
+	'ui.router',
+	'pageServices'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', 
