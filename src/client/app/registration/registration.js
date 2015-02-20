@@ -19,22 +19,38 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 		$scope.newUser = {};
 
+		$scope.loginAlreadyUsed = false;
+		$scope.emailAlreadyUsed = false;
+
+		$scope.nonMatchingPwd = false;
+
 		$scope.saveNewUser = function() {
-	  		$scope.$broadcast('show-errors-check-validity');
 
 		  	if ($scope.registrationForm.$valid) {
-		    	console.log("Saving the user");
-		    	console.log($scope.newUser);
+
+		    	if($scope.newUser.password === $scope.newUser.passwordConfirmation){
+		    		console.log("The passwords match");
+
+		    	}
+		    	else{
+		    		$scope.nonMatchingPwd = true;
+		    		console.log("the passwords don't match !!");
+		    	}
 		  	}
 		  	else{
-		  		console.log("Invalide user: ");
-		  		console.log($scope.newUser);
+		  		console.log("Invalide form: ");
 		  	}
+
+		  	console.log($scope.newUser);
 		};
 
 		$scope.resetRegistrationForm = function() {
-		    $scope.$broadcast('show-errors-reset');
-		    $scope.newUser = {};
+			$scope.newUser = {};
+
+			$scope.loginAlreadyUsed = false;
+			$scope.emailAlreadyUsed = false;
+
+			$scope.nonMatchingPwd = false;;
   		};
 
   		/* For debugging purposes only */

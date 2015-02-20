@@ -1,11 +1,13 @@
+'use strict';
+
 // Module dependencies.
 var application_root = __dirname,
     express = require('express'), //Web framework
     path = require('path'), //Utilities for dealing with file paths
     bodyParser  = require('body-parser'),
-    mongoose = require('mongoose'); //MongoDB integration
-    user=require('./Route/user.js')
-    page=require('./Route/page.js')
+    mongoose = require('mongoose'), //MongoDB integration
+    user = require('./Route/user.js'),
+    page = require('./Route/page.js');
 
 
 //Create server
@@ -22,7 +24,6 @@ app.use(express.static(path.join(application_root ,'../client')));
 //Start server
 var port = 4711;
 app.listen(port, function () {
-    'use strict';
     console.log('Express server listening on port %d in %s mode', port, app.settings.env);
     console.log('application_root is %s',path.join(application_root ,'../client'));
 });
@@ -35,7 +36,10 @@ var db = mongoose.connect('mongodb://localhost/myWP');
 
 app.post('/api/user/create',user.create);
 
+
 app.post('api/user/edit',user.edit);
+
+app.get('api/users/:id',user.get);
 
 app.post('/api/page/create',page.create);
 

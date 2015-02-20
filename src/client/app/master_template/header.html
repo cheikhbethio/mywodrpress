@@ -1,13 +1,22 @@
 <div class="blog-masthead" ng-controller="mastertemplateController">
     <div class="container">
-        <nav class="blog-nav navbar-left">
-            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" href="#">Accueil</a>
+        <div class="navbar-header navbar-default blog-masthead ">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-col" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
+            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" ui-sref="home">Accueil</a>
             <a class="blog-nav-item" href="#">Menu 1</a>
             <a class="blog-nav-item" href="#">Menu 2</a>
             <a class="blog-nav-item" href="#">Menu 3</a>
         </nav>
 
-        <nav class="blog-nav navbar-right">
+        <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
             <a ng-class="{ active: isActiveHeader('/connection')}" class="blog-nav-item" ui-sref="connection">Connexion</a>
             <a ng-class="{ active: isActiveHeader('/registration')}" class="blog-nav-item" ui-sref="registration">Inscription</a>
         </nav>
