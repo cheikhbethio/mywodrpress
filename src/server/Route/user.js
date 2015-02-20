@@ -70,7 +70,7 @@ exports.create=function (req, res , next) {
 
 exports.edit=function (req, res , next) {
    user.findOne({login : req.body.login}, function(err, doc){
-        if (err) res.send(err.message);;
+        if (err) res.send(err.message);
         else{
             if(doc!=null){
                 if(req.body.password!=null)
