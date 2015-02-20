@@ -3,12 +3,14 @@
 angular.module('myWordPress', [
 	'myWordPress.registration',
 	'myWordPress.master_template',
+	'myWordPress.dashboard_template',
 	'myWordPress.connection',
 	'myWordPress.editProfile',
 	'myWordPress.pages',
+	'pageServices',
 	'ui.bootstrap.showErrors',
 	'ui.router',
-	'pageServices'
+	'uiRouterStyles'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', 
@@ -16,7 +18,8 @@ angular.module('myWordPress', [
 
 	$urlRouterProvider.otherwise('/');
 
-	$stateProvider.state("app", {
+	$stateProvider
+	.state("app", {
 		url: '/',
 		views: {
             'header': {
@@ -29,7 +32,21 @@ angular.module('myWordPress', [
             'footer': {
                 templateUrl: 'master_template/footer.html'
             }
-        }
+        },
+        data: { css: 'css/blog.css' }
+	})
+	.state("dashboard", {
+		url: '/dashboard',
+		views: {
+            'header': {
+                templateUrl: 'dashboard_template/header.html',
+                controller: 'mastertemplateController'
+            },
+            'content': {
+                templateUrl: 'dashboard_template/content.html'
+            },
+        },
+        data: { css: 'css/dashboard.css' }
 	});
 
 }]);
