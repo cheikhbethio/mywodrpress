@@ -14,3 +14,15 @@ pageServices.factory('pages', ['$resource',
       update: {method:'PUT', isArray:false}
     });
   }]);
+
+
+pageServices.factory('user', ['$resource',
+  function($resource){
+
+    return $resource('/api/user/create', {}, {
+      save: {method:'POST', isArray:false}
+    });
+  }]);
+
+
+/* http://localhost:4711 */
