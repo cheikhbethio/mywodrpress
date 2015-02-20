@@ -68,28 +68,27 @@ exports.create=function (req, res , next) {
     })
 };
 
-exports.edit=function (req, res , next) {
-   user.findOne({login : req.body.login}, function(err, doc){
-        if (err) res.send(err.message);
-        else{
-            if(doc!=null){
-                if(req.body.password!=null)
-            	   doc.password=bcrypt.hashSync(req.body.password, 8);
-                if(req.body.firstname!=null)
-            	   doc.firstname=req.body.firstname;
-            	  if(req.body.lastname!=null)
-            	  	doc.lastname=req.body.lastname;
-                doc.save(function(err, results){
-            	   if (err) return next(err);
-                    else
-            	       res.sendStatus(200);
-                })
-            }
-            else
-                res.sendStatus(404);
-        }
-    });
+var callback= function(err, numAffected){
 };
+
+exports.edit=function (req, res , next) {
+								var query= ({login : req.body.login});
+                if(req.body.password!=null)
+            	   		user.update(query, { password : bcrypt.hashSync(req.body.password, 8) }, function(err, n){
+            	   																																										if(err) res.write(err.message);
+            	   																																										});
+                if(req.body.firstname!=null)
+                		user.update(query, { firstname : req.body.firstname }, function(err, n){
+            	   																																										if(err) res.write(err.message);
+            	   																																										});
+            	  if(req.body.lastname!=null)
+            	 			user.update(query, { lastname : req.body.lastname }, function(err, n){
+            	   																																										if(err) res.write(err.message);
+            	   																																										});
+								res.sendStatus(200);
+								
+
+            };
 
 exports.get = function(req,res,next){
         var id = req.params.id;
