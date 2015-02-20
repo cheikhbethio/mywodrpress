@@ -1,14 +1,19 @@
 mongoose = require('mongoose'); //MongoDB integration
+var bcrypt=require('bcrypt');
+
+
+//init Passord Hash
 
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-	login		: String,					
+	login			: String,					
 	password	: String,
-	name		: String,
-    email	    : String,					
-    token       : String,	
-	right		: Number
+	firstname	: String,
+	lastname	: String,
+  email	  	: String,					
+  token   	: String,	
+	right			: Number
 });
 
 
@@ -26,7 +31,10 @@ userSchema.pre("save", function(next) {
             next();
         }
     });
+});
 
+userSchema.pre("save", function(next) {
+    var self = this;
     user.findOne({login : this.login}, 'login', function(err, results) {
         if(err) {
             next(err);
@@ -44,7 +52,12 @@ userSchema.pre("save", function(next) {
 
 
 exports.create=function (req, res , next) {
-    var newUser = new user(req.body);
+    var newUser = new user();
+    newUser.login=req.body.login;
+    newUser.password=bcrypt.hashSync(req.body.password, 8);
+    newUser.firstname=req.body.firstname;
+   	newUser.lastname=req.body.lastname;
+		newUser.email=req.body.email;    
     newUser.right=1;
     newUser.save(function(err, results){
             if (err) {
@@ -56,16 +69,16 @@ exports.create=function (req, res , next) {
 };
 
 exports.edit=function (req, res , next) {
-   user.findById(req.body.id).exec(function(err, doc){
-        if (err) return next(err);
+   user.findOne({login : req.body.login}, function(err, doc){
+        if (err) res.send(err.message);;
         else{
             if(doc!=null){
                 if(req.body.password!=null)
-            	   doc.password=req.body.password;
-                if(req.body.name!=null)
-            	   doc.name=req.body.name;
-                if(req.body.email!=null)
-            	   doc.email=req.body.email;
+            	   doc.password=bcrypt.hashSync(req.body.password, 8);
+                if(req.body.firstname!=null)
+            	   doc.firstname=req.body.firstname;
+            	  if(req.body.lastname!=null)
+            	  	doc.lastname=req.body.lastname;
                 doc.save(function(err, results){
             	   if (err) return next(err);
                     else
@@ -75,7 +88,7 @@ exports.edit=function (req, res , next) {
             else
                 res.sendStatus(404);
         }
-    })
+    });
 };
 
 exports.get = function(req,res,next){

@@ -6,7 +6,7 @@ frisby.create('Test create user')
 		login : 'tes10t',
 		password:'test',
 		name : 'test',
-		email: 'tes110t@test.com'
+		email: 'tes10t@test.com'
 		}, 
 		{json: true})
 	.expectStatus(200)

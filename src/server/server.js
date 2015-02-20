@@ -6,7 +6,7 @@ var application_root = __dirname,
     path = require('path'), //Utilities for dealing with file paths
     bodyParser  = require('body-parser'),
     mongoose = require('mongoose'), //MongoDB integration
-    user = require('./Route/user.js'),
+    user = require('./Route/user.js');
     page = require('./Route/page.js');
 
 
