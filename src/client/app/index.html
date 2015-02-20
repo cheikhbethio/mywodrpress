@@ -11,7 +11,13 @@
 
 </head>
 <body>
-	<div ng-include="'master_template/header.html'"></div>
+	 <div ui-view="header"></div>
+
+     <div ui-view="content"></div>
+
+     <div ui-view="footer"></div>
+
+	<!--<div ng-include="'master_template/header.html'"></div>
 	
 	<div class="container">
 		<div class="blog-header">
@@ -24,15 +30,15 @@
 
 				<div ui-view></div>
 
-				<!--<div ng-include="'master_template/content.html'"></div>-->
-	     	</div><!-- /.blog-main -->
+				<div ng-include="'master_template/content.html'"></div>
+	     	</div>
 
 			<div ng-include="'master_template/sidebar.html'"></div>
-	    </div><!-- /.row -->
+	    </div>
 
-    </div><!-- /.container -->
+    </div>
 
-	<div ng-include="'master_template/footer.html'"></div>
+	<div ng-include="'master_template/footer.html'"></div>-->
 
 
 	

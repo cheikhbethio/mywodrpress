@@ -16,8 +16,20 @@ angular.module('myWordPress', [
 
 	$urlRouterProvider.otherwise('/');
 
-	$stateProvider.state("home", {
-		url: '/'
+	$stateProvider.state("app", {
+		url: '/',
+		views: {
+            'header': {
+                templateUrl: 'master_template/header.html',
+                controller: 'mastertemplateController'
+            },
+            'content': {
+                templateUrl: 'master_template/content.html'
+            },
+            'footer': {
+                templateUrl: 'master_template/footer.html'
+            }
+        }
 	});
 
 }]);

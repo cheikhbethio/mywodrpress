@@ -5,8 +5,8 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
-	$stateProvider.state('pages', {
-		url: '/page/:id',
+	$stateProvider.state('app.pages', {
+		url: 'page/:id',
 		templateUrl: 'pages/pages.html',
 		controller: 'pagesController'
 	});
