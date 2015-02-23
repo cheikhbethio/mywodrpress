@@ -10,7 +10,8 @@ angular.module('myWordPress', [
 	'pageServices',
 	'ui.bootstrap.showErrors',
 	'ui.router',
-	'uiRouterStyles'
+	'uiRouterStyles',
+	'myWordPress.registration.registration-directive'
 ])
 
 .config(['$stateProvider', '$urlRouterProvider', 
