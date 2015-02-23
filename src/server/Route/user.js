@@ -16,8 +16,13 @@ var userSchema = Schema({
 	right			: Number
 });
 
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
-var user= mongoose.model('user',userSchema);
+var user = mongoose.model('user', userSchema);
+
+module.exports.users=user;
 
 userSchema.pre("save", function(next) {
     var self = this;
@@ -47,7 +52,6 @@ userSchema.pre("save", function(next) {
     });
 
 });
-
 
 
 

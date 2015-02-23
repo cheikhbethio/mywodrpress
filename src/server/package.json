@@ -7,9 +7,16 @@
 		"frisby": "*"
 	},
 "dependencies": {
-    "express": "*",
+    "express":"~4.0.0", 
     "body-parser": "*",
-    "mongoose": "*",
-    "bcrypt":"*"
+    "mongoose": "*",			
+    "passport" : "~0.1.17", 		
+    "passport-local" : "~0.1.6",
+    "connect-flash" : "~0.1.1", 	
+    "bcrypt":"*",
+    "morgan": "~1.0.0",
+    "cookie-parser": "~1.0.0",
+    "method-override": "~1.0.0",
+    "express-session": "~1.0.0"
     }
 }
