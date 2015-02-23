@@ -6,14 +6,19 @@ var PageSchema = new mongoose.Schema({
                          content : String
 });
 
-var MenuSchema = new mongoose.Schema({
+var ItemSchema = new mongoose.Schema({
                         name: String,
+                        items: [{type: Schema.Types.ObjectId, ref:'MenuItem'}]
+});
+
+var MenuItemSchema = new mongoose.Schema({
                         pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
-                        link : [{type: Schema.Types.ObjectId, ref:'Menu'}]
+                        menu : [{type: Schema.Types.ObjectId, ref:'MenuItem'}]
 });
 
 var Page = mongoose.model('Page',PageSchema);
-var Menu = mongoose.model('Menu' ,MenuSchema);
+var MenuItem = mongoose.model('MenuItem',MenuItemSchema);
+var Item = mongoose.model('Item' ,ItemSchema);
 
 exports.create = function(req,res,next){
         var reqBody = req.body,
@@ -74,3 +79,17 @@ exports.view = function(req,res,next){
     });
 
 };
+
+exports.createItem = function(req,res,next){
+       var itemObj = {name : req.body.name};
+       var model = new Item(itemObj);
+        model.save(function(err,doc){
+                       if(err || !doc){
+                           return next(err);
+                         } else {
+                               res.json(doc);       
+                        }
+            });
+
+};
+
