@@ -28,15 +28,6 @@ angular.module('myWordPress.registration.registration-directive', [])
 				console.log("Valid: " + valid);
 				controller.$setValidity("unique", valid);
 			});
-
-			/*return toggleClasses = function(invalid) {
-          		el.toggleClass('has-error', invalid);
-          		if (showSuccess) {
-            		return el.toggleClass('has-success', !invalid);
-          		}
-          		return element;
-        	};*/
-
 		}
 }
 	

@@ -14,8 +14,8 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 }])
 
-.controller('registrationController', ['$scope', 'user',
-	function($scope, user){
+.controller('registrationController', ['$scope', 'user', '$state',
+	function($scope, user, $state){
 
 		$scope.newUser = {};
 
@@ -24,21 +24,11 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 		$scope.nonMatchingPwd = false;
 
-		/*var testjson = {
-			firstname: "john",
-			lastname: "doe", 
-			login:"jd",
-			email:"jd@sam.com",
-			password:"jspass"
-		};*/
-
 		$scope.saveNewUser = function() {
 
 		  	if ($scope.registrationForm.$valid) {
 
 		    	if($scope.newUser.password === $scope.newUser.passwordConfirmation){
-
-		    		console.log("The passwords match");
 
 		    		var nuser =  {
 						firstname: $scope.newUser.firstName,
@@ -49,7 +39,15 @@ angular.module('myWordPress.registration', ['ui.router'])
 					};
 
 		    		user.save(nuser, function(resp) {
-						console.log("Successfuly pgosted: " + resp.error);
+						if(resp.error == 0){
+							console.log("Successfuly posted: " + resp.error);
+							$state.go('app');
+						}else if( resp.error == 1){
+							$scope.emailAlreadyUsed = true;
+						}else if(resp.error == 2){
+							$scope.loginAlreadyUsed = true;
+						}
+
 					}, function(error){
 						console.log("Response: " + error);
 					});

@@ -54,29 +54,27 @@
 	</div>
 
 	<div class="form-group">
-		<label for="password">Password: </label>
+		<label for="password">Mot de passe: </label>
 		<input id="input_password"
 		type="password"
 		class="form-control"
 		name="password"
 		placeholder="Mot de passe" 
-		ng-model="password" />
+		ng-model="newUser.password" />
 	</div>
 
 	<div class="form-group" ng-class="{ 'has-error': registrationForm.passwordConfirmation.$invalid}">
-		<label for="passwordConfirmation">Password confirmation: </label>
+		<label for="passwordConfirmation">Confirmation du mot de passe</label>
 		<input id="input_passwordConfirmation"
 		type="password"
 		name="passwordConfirmation"
 		class="form-control"
-		ng-model="passwordConfirmation"
+		ng-model="newUser.passwordConfirmation"
 		placeholder="Confirmation du mot de passe" 
-		password-validate="password"/>
+		password-validate="newUser.password"/>
 	</div>
 
-	<p ng-show="nonMatchingPwd">Les mot de passes ne sont pas identiques.</p> 
-
-
+	<p ng-show="nonMatchingPwd">Les mot de passes ne sont pas identiques.</p>
 
 	<button class="btn btn-default" ng-click="saveNewUser(newUser)">Submit</button>
 	<button class="btn btn-link" ng-click="resetRegistrationForm()">Reset</button>
