@@ -145,3 +145,5 @@ app.post('/api/page/edit', page.edit);
 app.post('/api/page/delete', page.deletePage);
 
 app.get('/api/pages/:id', page.getPage);
+
+app.get('/api/pages', page.view);
