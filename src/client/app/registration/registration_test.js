@@ -99,14 +99,5 @@ describe("Registration", function() {
 
   	});
 
-	/*var printNewUser = function(newUser){
-		console.log("User lastName: " + $scope.lastName);
-		console.log("User firstName: " + $scope.firstName);
-		console.log("User email: " + $scope.email);
-		console.log("User password: " + $scope.password);
-		console.log("User passwordConfirmation: " + $scope.passwordConfirmation);
-	};*/
-
-
 });
 
