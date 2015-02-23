@@ -31,7 +31,7 @@ userSchema.pre("save", function(next) {
             next(err);
         } else if(results) {
             self.invalidate("email", "Email must be unique");
-            next(new Error("Email must be unique"));
+            next(new Error("1"));
         } else {
             next();
         }
@@ -45,7 +45,7 @@ userSchema.pre("save", function(next) {
             next(err);
         } else if(results) {
             self.invalidate("login", "Login must be unique");
-            next(new Error("Login must be unique"));
+            next(new Error("2"));
         } else {
             next();
         }
@@ -65,10 +65,10 @@ exports.create=function (req, res , next) {
     newUser.right=1;
     newUser.save(function(err, results){
             if (err) {
-                res.send(err.message);
+                res.send({error : err.message});
             }
             else
-                res.sendStatus(200);
+                res.send({error : 0});
     })
 };
 

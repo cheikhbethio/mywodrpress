@@ -131,7 +131,7 @@ app.post('/api/user/create',user.create);
 /* POST /api/user/edit : 
 req: {login: , password, lastname, firstname }
 login correspond au login de l'entrée a modifié 
-res: "message erreur" ou OK*/
+res: {error : %nb} 0 : pas d'erreur , 1 : email utilisé, 2 : login utilisé*/
 app.post('/api/user/edit',user.edit);
 
 app.get('/api/users/:id',user.get);
