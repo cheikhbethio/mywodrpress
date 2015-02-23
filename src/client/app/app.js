@@ -2,8 +2,8 @@
 
 angular.module('myWordPress', [
 	'myWordPress.registration',
-	'myWordPress.master_template',
-	'myWordPress.dashboard_template',
+	'myWordPress.appTemplate',
+	'myWordPress.dashboardTemplate',
 	'myWordPress.connection',
 	'myWordPress.editProfile',
 	'myWordPress.pages',
@@ -24,30 +24,42 @@ angular.module('myWordPress', [
 		url: '/',
 		views: {
             'header': {
-                templateUrl: 'master_template/header.html',
-                controller: 'mastertemplateController'
+                templateUrl: 'appTemplate/header.html',
+                controller: 'appTemplateController'
             },
             'content': {
-                templateUrl: 'master_template/content.html'
+                templateUrl: 'appTemplate/content.html'
             },
             'footer': {
-                templateUrl: 'master_template/footer.html'
+                templateUrl: 'appTemplate/footer.html'
             }
         },
-        data: { css: 'css/blog.css' }
+        data: { css: 'appTemplate/blog.css' }
 	})
 	.state("dashboard", {
 		url: '/dashboard',
 		views: {
             'header': {
-                templateUrl: 'dashboard_template/header.html',
-                controller: 'mastertemplateController'
+                templateUrl: 'dashboardTemplate/header.html',
+                controller: 'dashboardTemplateController'
             },
             'content': {
-                templateUrl: 'dashboard_template/content.html'
+                templateUrl: 'dashboardTemplate/content.html'
             },
         },
-        data: { css: 'css/dashboard.css' }
+        data: { css: 'dashboardTemplate/dashboard.css' }
 	});
 
-}]);
+}]).directive('scrollToItem', function() {                                                      
+    return {                                                                                 
+        restrict: 'A',                                                                       
+        scope: {                                                                             
+            scrollTo: "@"                                                                    
+        },                                                                                   
+        link: function(scope, $elm,attr) {                                                   
+
+            $elm.on('click', function() {                                                    
+                $('html,body').animate({scrollTop: 0}, "slow");
+            });                                                                              
+        }                                                                                    
+}});
