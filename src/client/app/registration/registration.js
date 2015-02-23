@@ -48,8 +48,10 @@ angular.module('myWordPress.registration', ['ui.router'])
 						password: $scope.newUser.password
 					};
 
-		    		user.save(nuser, function(page) {
-						console.log("Successfuly posted");
+		    		user.save(nuser, function(resp) {
+						console.log("Successfuly pgosted: " + resp.error);
+					}, function(error){
+						console.log("Response: " + error);
 					});
 
 		    	}
