@@ -11,6 +11,7 @@ angular.module('myWordPress', [
 	'ui.bootstrap.showErrors',
 	'ui.router',
 	'uiRouterStyles',
+    'ngStorage',
 	'myWordPress.registration.registration-directive'
 ])
 

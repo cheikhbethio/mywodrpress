@@ -13,7 +13,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 }])
 
-.controller('connectionController', ['$scope','$http', '$rootScope', '$state', 'login' , function($scope, $http, $rootScope, $state, login){
+.controller('connectionController', ['$scope','$http', '$rootScope', '$state', 'login', "$localStorage", function($scope, $http, $rootScope, $state, login, $localStorage){
 	$scope.newUser;
 	$scope.connectUser=function(){
   		if ($scope.connectionForm.$valid) {
@@ -24,7 +24,8 @@ angular.module('myWordPress.connection', ['ui.router'])
 				password: $scope.newUser.password,
 			}, function(user){
 
-				$rootScope.currentUser = user;
+				//$rootScope.currentUser = user;
+				$localStorage.currentUser = user;
 
 				console.log("current user : " + $rootScope.currentUser);
 				$state.go('app');
