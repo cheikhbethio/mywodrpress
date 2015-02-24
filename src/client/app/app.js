@@ -25,18 +25,18 @@ angular.module('myWordPress', [
 		url: '/',
 		views: {
             'header': {
-                templateUrl: 'appTemplate/header.html',
+                templateUrl: 'app/appTemplate/header.html',
                 controller: 'appTemplateController'
             },
             'content': {
-                templateUrl: 'appTemplate/content.html'
+                templateUrl: 'app/appTemplate/content.html'
             },
             'footer': {
-                templateUrl: 'appTemplate/footer.html'
+                templateUrl: 'app/appTemplate/footer.html'
             }
         },
         data: { 
-            css: 'appTemplate/blog.css',
+            css: 'app/appTemplate/blog.css',
             requireLogin: false
         }
 	})
@@ -44,15 +44,15 @@ angular.module('myWordPress', [
 		url: '/dashboard',
 		views: {
             'header': {
-                templateUrl: 'dashboardTemplate/header.html',
+                templateUrl: 'dashboard/dashboardTemplate/header.html',
                 controller: 'dashboardTemplateController'
             },
             'content': {
-                templateUrl: 'dashboardTemplate/content.html'
-            },
+                templateUrl: 'dashboard/dashboardTemplate/content.html'
+            }
         },
         data: { 
-            css: 'dashboardTemplate/dashboard.css',
+            css: 'dashboard/dashboardTemplate/dashboard.css',
             requireLogin: true
         }
 	});

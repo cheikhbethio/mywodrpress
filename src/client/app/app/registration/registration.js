@@ -8,14 +8,14 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 	$stateProvider.state('app.registration', {
 		url: 'registration',
-		templateUrl: 'registration/registration.html',
+		templateUrl: 'app/registration/registration.html',
 		controller: 'registrationController'
 	});
 
 }])
 
-.controller('registrationController', ['$scope', 'user', '$state',
-	function($scope, user, $state){
+.controller('registrationController', ['$scope', 'users', '$state',
+	function($scope, users, $state){
 
 		$scope.newUser = {};
 
@@ -38,10 +38,10 @@ angular.module('myWordPress.registration', ['ui.router'])
 						password: $scope.newUser.password
 					};
 
-		    		user.save(nuser, function(resp) {
+		    		users.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
-							$state.go('app');
+							$state.go('dashboard');
 						}else if( resp.error == 1){
 							$scope.emailAlreadyUsed = true;
 						}else if(resp.error == 2){

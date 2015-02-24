@@ -7,7 +7,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 	$stateProvider.state('app.connection', {
 		url: 'connection',
-		templateUrl: 'connection/connection.html',
+		templateUrl: 'app/connection/connection.html',
 		controller: 'connectionController'
 	});
 

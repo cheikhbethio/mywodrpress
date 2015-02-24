@@ -6,7 +6,7 @@ angular.module('myWordPress.appTemplate', ['ui.router'])
 .controller('appTemplateController', ['$scope', '$rootScope', '$location', '$localStorage' , function($scope, $rootScope, $location, $localStorage){
 
 
-		$scope.isActiveHeader = function (viewLocation) { 
+        $scope.isActiveHeader = function (viewLocation) { 
         	return viewLocation === $location.path();
         }
 
