@@ -22,18 +22,18 @@ var application_root = __dirname,
 var app = express();
 
 // Configure server
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended: true}));
-	app.use(express.static(path.join(application_root ,'../client')));
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.cookieParser()); 
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.session({ secret: 'securedsession' }));
-	app.use(passport.initialize()); // Add passport initialization
-	app.use(passport.session());    // Add passport initialization
-	app.use(app.router);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static(path.join(application_root ,'../client')));
+app.use(express.favicon());
+app.use(express.logger('dev'));
+app.use(express.cookieParser()); 
+app.use(express.bodyParser());
+app.use(express.methodOverride());
+app.use(express.session({ secret: 'securedsession' }));
+app.use(passport.initialize()); // Add passport initialization
+app.use(passport.session());    // Add passport initialization
+app.use(app.router);
 //
 
 //Show all errors in development
@@ -53,35 +53,35 @@ app.listen(port, function () {
 var db = mongoose.connect('mongodb://localhost/myWP');
 
 
-	app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
-		console.log(req.session.passport.user.roles);
-		res.cookie('userid', req.user.right, { maxAge: 2592000000 });
-		  res.send(req.user);
-	});
-	app.post('/api/logout',  function(req, res){
-		req.logOut();
-		res.send(200);
-	})
+app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
+	console.log(req.session.passport.user.roles);
+	res.cookie('userid', req.user.right, { maxAge: 2592000000 });
+	  res.send(req.user);
+});
+app.post('/api/logout',  function(req, res){
+	req.logOut();
+	res.send(200);
+})
 
 ///
 
 
+/***** Users ******/
+
+/* Create a user */
+app.post('/api/users', user.create);
+
+/* Update a user */
+app.put('/api/users/:id', user.edit);
+
+/* Get a user */
+app.get('/api/users/:id', user.get);
+
+/* Get all users */
+app.get('/api/users', user.view);
 
 
-/* POST /api/user/create : 
-req: {login: , email, password, lastname, firstname }
-res: "message erreur" ou OK*/
-app.post('/api/user/create',user.create);
-
-/* POST /api/user/edit : 
-req: {login: , password, lastname, firstname }
-login correspond au login de l'entrée a modifié 
-res: {error : %nb} 0 : pas d'erreur , 1 : email utilisé, 2 : login utilisé*/
-app.post('/api/user/edit',user.edit);
-
-app.get('/api/users/:id',user.get);
-
-app.get('/api/users',user.view);
+/***** Pages ******/
 
 app.post('/api/page/create',page.create);
 

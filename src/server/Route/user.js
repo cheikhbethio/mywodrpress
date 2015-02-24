@@ -1,19 +1,17 @@
-mongoose = require('mongoose'); //MongoDB integration
+var mongoose = require('mongoose');
 var bcrypt=require('bcrypt');
 
-
-//init Passord Hash
 
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
-	login			: String,					
-	password	: String,
-	firstname	: String,
-	lastname	: String,
-  email	  	: String,					
-  token   	: String,	
-	right			: Number
+    login		: String,
+    password	: String,
+    firstname	: String,
+    lastname	: String,
+    email	  	: String,
+    token   	: String,
+    right		: Number
 });
 
 userSchema.methods.validPassword = function(password) {
@@ -53,46 +51,56 @@ userSchema.pre("save", function(next) {
 
 });
 
-
-
 exports.create=function (req, res , next) {
+
     var newUser = new user();
+
     newUser.login=req.body.login;
     newUser.password=bcrypt.hashSync(req.body.password, 8);
     newUser.firstname=req.body.firstname;
    	newUser.lastname=req.body.lastname;
-		newUser.email=req.body.email;    
+	newUser.email=req.body.email;    
     newUser.right=0;
+
     newUser.save(function(err, results){
-            if (err) {
-                res.send({error : err.message});
-            }
-            else
-                res.send({error : 0});
-    })
+        if (err) {
+            res.send({error : err.message});
+        }
+        else
+            res.send({error : 0});
+    });
 };
 
-var callback= function(err, numAffected){
+var callback = function(err, numAffected){
 };
 
-exports.edit=function (req, res , next) {
-								var query= ({login : req.body.login});
-                if(req.body.password!=null)
-            	   		user.update(query, { password : bcrypt.hashSync(req.body.password, 8) }, function(err, n){
-            	   																																										if(err) res.write(err.message);
-            	   																																										});
-                if(req.body.firstname!=null)
-                		user.update(query, { firstname : req.body.firstname }, function(err, n){
-            	   																																										if(err) res.write(err.message);
-            	   																																										});
-            	  if(req.body.lastname!=null)
-            	 			user.update(query, { lastname : req.body.lastname }, function(err, n){
-            	   																																										if(err) res.write(err.message);
-            	   																																										});
-								res.sendStatus(200);
-								
+exports.edit = function (req, res , next) {
 
-            };
+    var query= ({login : req.body.login});
+
+    if(req.body.password!=null)
+        user.update(query, { password : bcrypt.hashSync(req.body.password, 8) }, 
+            function(err, n){
+                if(err) 
+                    res.write(err.message);
+    });
+
+    if(req.body.firstname!=null)
+        user.update(query, { firstname : req.body.firstname }, 
+            function(err, n){
+                if(err)
+                    res.write(err.message);
+    });
+
+    if(req.body.lastname!=null)
+        user.update(query, { lastname : req.body.lastname }, 
+            function(err, n){
+                if(err) 
+                    res.write(err.message);
+    });
+
+    res.sendStatus(200);
+};
 
 exports.get = function(req,res,next){
         var id = req.params.id;

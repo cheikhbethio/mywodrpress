@@ -13,11 +13,12 @@ pageServices.factory('pages', ['$resource', function($resource){
     });
   }]);
 
-
-pageServices.factory('user', ['$resource',
+pageServices.factory('users', ['$resource',
   function($resource){
-    return $resource('http://localhost:4711/api/user/create', {}, {
-      save: {method:'POST', isArray:false}
+    return $resource('http://localhost:4711/api/users/:id', {}, {
+      register: {method:'POST', isArray:false },
+      get: {method:'GET', isArray:false },
+      update: {method:'PUT', isArray:false}
     });
   }]);
 
@@ -27,10 +28,4 @@ pageServices.factory('login', ['$resource', function($resource){
 	});
 }]);
 
-
-/*pageServices.factory('logout', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/logout') {
-
-	};
-}]); */
 
