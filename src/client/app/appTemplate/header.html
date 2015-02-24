@@ -16,9 +16,18 @@
             <a class="blog-nav-item" href="#">Menu 3</a>
         </nav>
 
-        <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-            <a ng-class="{ active: isActiveHeader('/connection')}" class="blog-nav-item" ui-sref="app.connection">Connexion</a>
-            <a ng-class="{ active: isActiveHeader('/registration')}" class="blog-nav-item" ui-sref="app.registration">Inscription</a>
-        </nav>
+        <div ng-hide="isUserConnected()" >
+            <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+                <a ng-class="{ active: isActiveHeader('/connection')}" class="blog-nav-item" ui-sref="app.connection">Connexion</a>
+                <a ng-class="{ active: isActiveHeader('/registration')}" class="blog-nav-item" ui-sref="app.registration">Inscription</a>
+            </nav>
+        </div>
+
+        <div ng-show = "isUserConnected()">
+            <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
+                <div class="blog-nav-item">Bienvenue {{user.firstname}} {{user.lastname}}</div>
+                <button class="blog-nav-item btn btn-link" ng-click="logOut()">Se déconnecter</button>
+            </nav>
+        </div>
     </div>
 </div>
