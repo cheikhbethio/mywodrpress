@@ -54,8 +54,9 @@ var db = mongoose.connect('mongodb://localhost/myWP');
 
 
 	app.post('/connection', passport.authenticate('local-login'), function(req, res) {
-	  console.log(req.user);
-	  res.send(req.user);
+		console.log(req.session.passport.user.roles);
+		res.cookie('userid', req.user.right, { maxAge: 2592000000 });
+		  res.send(req.user);
 	});
 	app.post('/logout',  function(req, res){
 		req.logOut();

@@ -6,14 +6,25 @@ var LocalStrategy = require('passport-local').Strategy;
 module.exports=passport;
 	///connextion
 	// Serialized and deserialized methods when got from session
+	/*
 	passport.serializeUser(function(user, done) {
 	    done(null, user);
 	});
 
 	passport.deserializeUser(function(user, done) {
 	    done(null, user);
-	});
-	
+	});*/
+
+	passport.serializeUser( function(user, done){
+	  var sessionUser = { _id: user._id, name: user.lastname, email: user.email, roles: user.right }
+	  done(null, sessionUser)
+	})
+
+	passport.deserializeUser( function(sessionUser, done){
+	  // The sessionUser object is different from the user mongoose collection
+	  // it's actually req.session.passport.user and comes from the session collection
+	  done(null, sessionUser)
+	})
 	passport.use('local-login', new LocalStrategy({
 	    usernameField : 'username',
 	    passwordField : 'password',
@@ -31,15 +42,23 @@ module.exports=passport;
 	                    return done(err);}
 
 	                // if no user is found, return the message
-	                if (!user){console.log('no user found');
-	                    return done(null, false,  { message: 'no user found.' });}
+	                if (!user){
+	                	console.log( user + ' no user found');
+	                    return done(null, false,  { message: 'no user found.' });
+
+	                }
 
 	                if (!user.validPassword(password)){console.log('wrong password');
 	                    return done(null, false,  { message: 'Oops!! wrong password.' });}
 
 	                // all is well, return user
-	                else{ console.log('va benne');
-	                    return done(null, user);}
+	                else{ 
+	                	///
+	                	//res.cookie('user_right', user.right, { maxAge: 2592000000 });
+	                	///
+	                	
+	                    return done(null, user);
+	                }
 	            });
 	        });
 

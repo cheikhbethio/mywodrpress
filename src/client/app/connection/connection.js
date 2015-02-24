@@ -24,7 +24,11 @@ angular.module('myWordPress.connection', ['ui.router'])
 	    	})
 		    .success(function(user){
 		    	console.log('success');
-		    	$rootScope.message = 'Authentication successful!';
+		    	$rootScope.message = 'Authentication successful!'
+		    	$rootScope.userRight = user.right;
+		    	$rootScope.userID = user._id;
+		    	console.log('id de l\'utilisateur '+$rootScope.userID);
+		    	console.log('droit de l\'user '+$rootScope.userRight);
 	    		$location.url('/registration');
 	    	})
 	    	.error(function(){
