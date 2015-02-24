@@ -13,12 +13,35 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 }])
 
-.controller('connectionController', ['$scope','$http', '$rootScope', '$location' , function($scope, $http, $rootScope, $location){
+.controller('connectionController', ['$scope','$http', '$rootScope', '$state', 'login' , function($scope, $http, $rootScope, $state, login){
 	$scope.newUser;
 	$scope.connectUser=function(){
   		if ($scope.connectionForm.$valid) {
 			console.log($scope.newUser);
-			$http.post('/connection', {
+
+			login.login({
+				username: $scope.newUser.login,
+				password: $scope.newUser.password,
+			}, function(user){
+
+				$rootScope.message = 'Authentication successful!'
+				$rootScope.userRight = user.right;
+				$rootScope.userID = user._id;
+
+				console.log('id de l\'utilisateur '+$rootScope.userID);
+				console.log('droit de l\'user '+$rootScope.userRight);
+
+				$state.go('app');
+
+			}, function(error){
+
+				console.log('defaite');
+				$rootScope.message = 'Authentication failed.';
+
+			});
+
+
+			/*$http.post('/connection', {
 		      	username: $scope.newUser.login,
 		      	password: $scope.newUser.password,
 	    	})
@@ -35,7 +58,9 @@ angular.module('myWordPress.connection', ['ui.router'])
 	    		console.log('defaite');
 	      		$rootScope.message = 'Authentication failed.';
 	      		$location.url('/connection');
-	    	});
+	    	});*/
+
+
 		}else{
 
 		}

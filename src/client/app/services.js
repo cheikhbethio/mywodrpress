@@ -20,3 +20,17 @@ pageServices.factory('user', ['$resource',
       save: {method:'POST', isArray:false}
     });
   }]);
+
+pageServices.factory('login', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/login', {}, {
+		login: {method:'POST', isArray:false}
+	});
+}]);
+
+
+/*pageServices.factory('logout', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/logout') {
+
+	};
+}]); */
+

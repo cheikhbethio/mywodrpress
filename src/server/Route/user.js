@@ -62,7 +62,7 @@ exports.create=function (req, res , next) {
     newUser.firstname=req.body.firstname;
    	newUser.lastname=req.body.lastname;
 		newUser.email=req.body.email;    
-    newUser.right=1;
+    newUser.right=0;
     newUser.save(function(err, results){
             if (err) {
                 res.send({error : err.message});

@@ -53,12 +53,12 @@ app.listen(port, function () {
 var db = mongoose.connect('mongodb://localhost/myWP');
 
 
-	app.post('/connection', passport.authenticate('local-login'), function(req, res) {
+	app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
 		console.log(req.session.passport.user.roles);
 		res.cookie('userid', req.user.right, { maxAge: 2592000000 });
 		  res.send(req.user);
 	});
-	app.post('/logout',  function(req, res){
+	app.post('/api/logout',  function(req, res){
 		req.logOut();
 		res.send(200);
 	})
