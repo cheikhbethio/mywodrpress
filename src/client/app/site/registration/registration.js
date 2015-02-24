@@ -6,9 +6,9 @@ angular.module('myWordPress.registration', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', 
 	function($stateProvider, $urlRouterProvider){
 
-	$stateProvider.state('app.registration', {
+	$stateProvider.state('site.registration', {
 		url: 'registration',
-		templateUrl: 'app/registration/registration.html',
+		templateUrl: 'site/registration/registration.html',
 		controller: 'registrationController'
 	});
 
@@ -41,7 +41,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 		    		users.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
-							$state.go('dashboard');
+							$state.go('site');
 						}else if( resp.error == 1){
 							$scope.emailAlreadyUsed = true;
 						}else if(resp.error == 2){

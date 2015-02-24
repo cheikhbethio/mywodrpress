@@ -21,22 +21,22 @@ angular.module('myWordPress', [
 	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
-	.state("app", {
+	.state("site", {
 		url: '/',
 		views: {
             'header': {
-                templateUrl: 'app/appTemplate/header.html',
+                templateUrl: 'site/appTemplate/header.html',
                 controller: 'appTemplateController'
             },
             'content': {
-                templateUrl: 'app/appTemplate/content.html'
+                templateUrl: 'site/appTemplate/content.html'
             },
             'footer': {
-                templateUrl: 'app/appTemplate/footer.html'
+                templateUrl: 'site/appTemplate/footer.html'
             }
         },
         data: { 
-            css: 'app/appTemplate/blog.css',
+            css: 'site/appTemplate/blog.css',
             requireLogin: false
         }
 	})

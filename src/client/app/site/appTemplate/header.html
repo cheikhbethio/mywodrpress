@@ -10,7 +10,7 @@
         </div>
 
         <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
-            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" ui-sref="app">Accueil</a>
+            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" ui-sref="site">Accueil</a>
             <a class="blog-nav-item" href="#">Menu 1</a>
             <a class="blog-nav-item" href="#">Menu 2</a>
             <a class="blog-nav-item" href="#">Menu 3</a>
@@ -18,8 +18,8 @@
 
         <div ng-hide="isUserConnected()" >
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <a ng-class="{ active: isActiveHeader('/connection')}" class="blog-nav-item" ui-sref="app.connection">Connexion</a>
-                <a ng-class="{ active: isActiveHeader('/registration')}" class="blog-nav-item" ui-sref="app.registration">Inscription</a>
+                <a ng-class="{ active: isActiveHeader('/connection')}" class="blog-nav-item" ui-sref="site.connection">Connexion</a>
+                <a ng-class="{ active: isActiveHeader('/registration')}" class="blog-nav-item" ui-sref="site.registration">Inscription</a>
             </nav>
         </div>
 
