@@ -8,4 +8,8 @@ angular.module('myWordPress.appTemplate', ['ui.router'])
 		$scope.isActiveHeader = function (viewLocation) { 
         	return viewLocation === $location.path();
         }
+
+        $scope.isUserConnected = function() {
+        	return $rootScope.currentUser != undefined;
+        }
 }]);

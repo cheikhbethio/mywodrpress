@@ -34,7 +34,10 @@ angular.module('myWordPress', [
                 templateUrl: 'appTemplate/footer.html'
             }
         },
-        data: { css: 'appTemplate/blog.css' }
+        data: { 
+            css: 'appTemplate/blog.css',
+            requireLogin: false
+        }
 	})
 	.state("dashboard", {
 		url: '/dashboard',
@@ -47,7 +50,10 @@ angular.module('myWordPress', [
                 templateUrl: 'dashboardTemplate/content.html'
             },
         },
-        data: { css: 'dashboardTemplate/dashboard.css' }
+        data: { 
+            css: 'dashboardTemplate/dashboard.css',
+            requireLogin: true
+        }
 	});
 
 }]).directive('scrollToItem', function() {                                                      
