@@ -1,6 +1,6 @@
 angular.module('myWordPress.userService', ['ngResource'])
 
-.factory('user', ['$resource',
+.factory('User', ['$resource',
   function($resource){
     return $resource('http://localhost:4711/api/users/:id', {}, {
       register: {method:'POST', isArray:false },

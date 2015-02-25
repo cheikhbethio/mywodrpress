@@ -13,7 +13,7 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 }])
 
-.controller('editProfileController', ['$scope', '$rootScope', 'user', function($scope, $rootScope, user){
+.controller('editProfileController', ['$scope', '$rootScope', 'User', function($scope, $rootScope, User){
 
 	$scope.profile = {
 		firstname: 'test_fname',
@@ -44,7 +44,7 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 						password: $scope.newUser.password
 					};
 
-		    		user.save(nuser, function(resp) {
+		    		User.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
 							$state.go('app');

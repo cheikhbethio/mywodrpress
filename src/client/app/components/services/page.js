@@ -1,6 +1,6 @@
 angular.module('myWordPress.pageService', ['ngResource'])
 
-.factory('page', ['$resource', function($resource){
+.factory('Page', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/pages/:id', {}, {
     	query: {method:'GET', isArray:true},
     	get: {method:'GET', isArray:false},

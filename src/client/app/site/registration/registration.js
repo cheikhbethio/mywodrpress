@@ -14,8 +14,8 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 }])
 
-.controller('registrationController', ['$scope', 'user', '$state',
-	function($scope, users, $state){
+.controller('registrationController', ['$scope', 'User', '$state',
+	function($scope, User, $state){
 
 		$scope.newUser = {};
 
@@ -38,7 +38,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 						password: $scope.newUser.password
 					};
 
-		    		users.save(nuser, function(resp) {
+		    		User.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
 							$state.go('site');
