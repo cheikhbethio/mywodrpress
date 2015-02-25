@@ -15,5 +15,13 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 
 .controller('adminPageController', ['$scope', 'Page', '$state','$stateParams',function($scope,Page, $state,$stateParams){
 	$scope.pages = Page.query();
+	
+	$scope.deletepage=function(pageid) {
+			if (confirm("sure to delete") == true) {
+				Page.remove({id: pageid});
+				$scope.pages = Page.query();
+        
+    }
+   };
 
 }]);

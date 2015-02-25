@@ -18,7 +18,9 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
         console.log("get page "+$stateParams.id);
     });
     
- $scope.editpage=$scope.page;
+ $scope.editpage=Page.get({id: $stateParams.id}, function(page) {
+        console.log("get page "+$stateParams.id);
+    });
  
  $scope.valid=function(){
  	var npage={
@@ -26,12 +28,13 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
  	title : $scope.editpage.title,
  	content : $scope.editpage.content
  	};
- 	Page.update(npage);
+ 	Page.update({id: $stateParams.id},npage);
  };
  
  $scope.reset= function(valedit,valinit){
  	console.log("reset");
-	valedit=valinit;
+	valedit.title=valinit.title;
+	valedit.content=valinit.content;
  };
  	
 

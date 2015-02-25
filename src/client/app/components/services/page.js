@@ -5,6 +5,7 @@ angular.module('myWordPress.pageService', ['ngResource'])
     	query: {method:'GET', isArray:true},
     	get: {method:'GET', isArray:false},
     	save: {method:'POST', isArray:true},
-     	update: {method:'PUT', isArray:false}
+     	update: {method:'PUT', isArray:false},
+     	remove : {method : 'DELETE'}
     });
   }]);
