@@ -20,8 +20,8 @@ frisby.create('Test vue member')
 	.toss();
 	
 frisby.create('Test edit user')
-	.post('http://localhost:4711/api/user/edit', {
-		login : 'tes6t',
+	.put('http://localhost:4711/api/user/', {
+		login : 'test',
 		password:'tes5t',
 		lastname : 'tes9t'
 		}, 

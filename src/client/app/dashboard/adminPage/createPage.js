@@ -5,25 +5,26 @@ angular.module('myWordPress.createPage', ['ui.router'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
-	$stateProvider.state('site.createPage', {
-		url: 'create/page',
+	$stateProvider.state('dashboard.createPage', {
+		url: '/page/create',
 		templateUrl: 'dashboard/adminPage/createPage.html',
 		controller: 'createPageController'
 	});
 
 }])
 
-.controller('createPageController', ['$scope', 'pages', '$state',function($scope,pages, $state){
+.controller('createPageController', ['$scope', 'Page', '$state',function($scope,Page, $state){
 	$scope.newPage = {};
 
 	$scope.save=function(obj) {
 
 		var nPage={
 			title: obj.title,
-			content: obj.title
+			content: obj.content
 		};
 
-		pages.save(nPage);
+		Page.save(nPage);
+		$state.go('dashboard.adminPage');
 	}
 
 }]);

@@ -9,13 +9,13 @@
 			name="title" 
 			class="form-control"  
 			ng-model="newPage.title" 
-			placeholder="Titre"
+			placeholder="Titre requis"
 			required
 		/>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
-		<label for="firstname">Prenom:</label>
+	<div class="form-group" >
+		<label for="firstname">Contenu:</label>
 		<textarea
 			row="10"
 			col="100"
@@ -24,11 +24,12 @@
 			name="content" 
 			class="form-control"  
 			ng-model="newPage.content" 
-			placeholder="Contenu" 
+			placeholder="Optionel" 
 		/>
 	</div>
 
-	 <input type="submit" class="btn btn-default"/>
+	 <input type="submit" class="btn btn-primary"/>
+	 <a ui-sref="dashboard.adminPage" class="btn btn-default">Annuler</a>
 
 
 </form>
