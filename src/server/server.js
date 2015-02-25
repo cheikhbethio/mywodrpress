@@ -7,7 +7,8 @@ var application_root = __dirname,
     bodyParser  = require('body-parser'),
     mongoose = require('mongoose'), //MongoDB integration
     user = require('./Route/user.js'),
-    page = require('./Route/page.js');
+    page = require('./Route/page.js'),
+    article = require('./Route/article.js');
 
     //miiddleware connection ::: Moussa
 		var express = require('express');
@@ -96,3 +97,11 @@ app.get('/api/pages/:id', page.getPage);
 
 /* Get all pages */
 app.get('/api/pages', page.view);
+
+/***** Articles *****/
+
+app.post('/api/articles', article.create);
+
+app.get('/api/articles/:id', article.get);
+
+
