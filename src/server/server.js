@@ -76,15 +76,23 @@ app.put('/api/users/:id', user.edit);
 /* Get a user */
 app.get('/api/users/:id', user.get);
 
+/* Get all users */
+app.get('/api/users', user.view);
+
 
 /***** Pages ******/
 
+/* Create a page */
 app.post('/api/pages',page.create);
 
-app.post('/api/page/edit', page.edit);
+/* Update a page */
+app.put('/api/pages/:id', page.edit);
 
-app.post('/api/page/delete', page.deletePage);
+/* Delete a page */
+app.delete('/api/pages/:id', page.deletePage);
 
+/* Get a page */
 app.get('/api/pages/:id', page.getPage);
 
+/* Get all pages */
 app.get('/api/pages', page.view);
