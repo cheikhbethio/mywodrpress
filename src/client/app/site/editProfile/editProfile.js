@@ -13,7 +13,7 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 }])
 
-.controller('editProfileController', ['$scope', '$rootScope', function($scope, $rootScope){
+.controller('editProfileController', ['$scope', '$rootScope', 'user', function($scope, $rootScope, user){
 
 	$scope.profile = {
 		firstname: 'test_fname',

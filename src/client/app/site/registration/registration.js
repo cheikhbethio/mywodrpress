@@ -14,7 +14,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 
 }])
 
-.controller('registrationController', ['$scope', 'users', '$state',
+.controller('registrationController', ['$scope', 'user', '$state',
 	function($scope, users, $state){
 
 		$scope.newUser = {};

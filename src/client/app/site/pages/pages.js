@@ -13,7 +13,7 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 }])
 
-.controller('pagesController', ['$scope', '$stateParams', 'pages', function($scope, $stateParams, PAGES){
+.controller('pagesController', ['$scope', '$stateParams', 'page', function($scope, $stateParams, PAGES){
 	$scope.page = PAGES.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);
     });

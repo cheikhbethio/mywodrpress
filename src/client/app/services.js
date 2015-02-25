@@ -13,15 +13,6 @@ pageServices.factory('pages', ['$resource', function($resource){
     });
   }]);
 
-pageServices.factory('users', ['$resource',
-  function($resource){
-    return $resource('http://localhost:4711/api/users/:id', {}, {
-      register: {method:'POST', isArray:false },
-      get: {method:'GET', isArray:false },
-      update: {method:'PUT', isArray:false}
-    });
-  }]);
-
 pageServices.factory('login', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/login', {}, {
 		login: {method:'POST', isArray:false}
