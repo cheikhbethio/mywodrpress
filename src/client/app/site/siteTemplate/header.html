@@ -1,3 +1,27 @@
+<div ng-show="isUserConnected()" style="padding-bottom: 50px;"> 
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> MyWordPress Mini-DashBoard</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="dashboard">Aller au Dashboard</a></li>
+                    <li><a href="#">Préférences</a></li>
+                    <li><a href="#">Profil</a></li>
+                    <li><a href="#">Aide</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
 <div class="blog-masthead" id="top-scroll" name="top">
     <div class="container">
         <div class="navbar-header navbar-default blog-masthead ">
