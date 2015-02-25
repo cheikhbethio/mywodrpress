@@ -79,7 +79,7 @@ app.get('/api/users/:id', user.get);
 
 /***** Pages ******/
 
-app.post('/api/page/create',page.create);
+app.post('/api/pages',page.create);
 
 app.post('/api/page/edit', page.edit);
 

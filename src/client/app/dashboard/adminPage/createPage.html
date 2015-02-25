@@ -1,0 +1,34 @@
+<h2 class="page-header"> Ajouter une page</h2>
+
+<form ng-model="newPage" ng-submit="save(newPage)">
+
+	<div class="form-group" >
+		<label for="title">Titre de la Page:</label>
+		<input id="input_title" 
+			type="text"  
+			name="title" 
+			class="form-control"  
+			ng-model="newPage.title" 
+			placeholder="Titre"
+			required
+		/>
+	</div>
+
+	<div class="form-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
+		<label for="firstname">Prenom:</label>
+		<textarea
+			row="10"
+			col="100"
+			id="input_content"
+			type="text" 
+			name="content" 
+			class="form-control"  
+			ng-model="newPage.content" 
+			placeholder="Contenu" 
+		/>
+	</div>
+
+	 <input type="submit" class="btn btn-default"/>
+
+
+</form>

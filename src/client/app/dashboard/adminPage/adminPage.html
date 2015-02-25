@@ -1,3 +1,9 @@
-adminPage.html
-test 23
-.
+<h2 class="page-header"> Gestion des Pages</h2>
+
+<a href="#/dashboard/page/add" class="btn btn-default btn-sm">Ajouter une Page</a>
+
+<h3> Liste des Pages</h3>
+<div ng-reapeat="page in lpages">
+	{{page.title}}
+	<a href="#/dashboard/page/{{page.id}}" class="btn btn-default btn-sm">Modifier</a>
+</div>

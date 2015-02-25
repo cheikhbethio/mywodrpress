@@ -7,6 +7,8 @@ angular.module('myWordPress', [
 	'myWordPress.connection',
 	'myWordPress.editProfile',
 	'myWordPress.pages',
+    'myWordPress.adminPage',
+    'myWordPress.createPage',
 	'pageServices',
 	'ui.bootstrap.showErrors',
 	'ui.router',
