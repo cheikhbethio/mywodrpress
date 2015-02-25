@@ -25,8 +25,8 @@
 
         <div ng-show="isUserConnected()">
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <div class="blog-nav-item">Bienvenue {{user.firstname}} {{user.lastname}}</div>
-                <button class="blog-nav-item btn btn-link" style="margin-top:-2.5px; margin-bottom:-2px;" ng-click="logOut()">Se déconnecter</button>
+                <div class="blog-nav-item">Bienvenue {{currentUser.firstname}} {{currentUser.lastname}}</div>
+                <a class="blog-nav-item" href="javascript:void(0)" ng-click="logOut()">Se déconnecter</a>
             </nav>
         </div>
     </div>
