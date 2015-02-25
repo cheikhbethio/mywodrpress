@@ -16,6 +16,7 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
         }
 
         $scope.logOut = function() {
+                delete $rootScope.currentUser;
         	delete $localStorage.currentUser;
         }
 }]);

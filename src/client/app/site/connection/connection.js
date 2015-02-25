@@ -15,6 +15,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 .controller('connectionController', ['$scope','$http', '$rootScope', '$state', 'Login', "$localStorage", function($scope, $http, $rootScope, $state, Login, $localStorage){
 	$scope.newUser;
+	
 	$scope.connectUser=function(){
   		if ($scope.connectionForm.$valid) {
 			console.log($scope.newUser);

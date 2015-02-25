@@ -41,7 +41,7 @@ angular.module('myWordPress', [
             }
         },
         data: { 
-            css: 'site/siteTemplate/blog.css',
+            //css: 'site/siteTemplate/blog.css',
             requireLogin: false
         }
 	})
@@ -57,9 +57,21 @@ angular.module('myWordPress', [
             }
         },
         data: { 
-            css: 'dashboard/dashboardTemplate/dashboard.css',
+            //css: 'dashboard/dashboardTemplate/dashboard.css',
             requireLogin: true
         }
 	});
 
-}])
+}]).run(function ($rootScope,  $state) {
+
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
+        var requireLogin = toState.data.requireLogin;
+
+        if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+            event.preventDefault();
+            console.log($state);
+            $state.go('site.connection', {data: { css: 'site/siteTemplate/blog.css'}});
+        } 
+  });
+
+});
