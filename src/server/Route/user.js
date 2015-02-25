@@ -59,7 +59,7 @@ exports.create=function (req, res , next) {
     newUser.password=bcrypt.hashSync(req.body.password, 8);
     newUser.firstname=req.body.firstname;
    	newUser.lastname=req.body.lastname;
-	newUser.email=req.body.email;    
+		newUser.email=req.body.email;    
     newUser.right=0;
 
     newUser.save(function(err, results){
@@ -76,30 +76,57 @@ var callback = function(err, numAffected){
 
 exports.edit = function (req, res , next) {
 
-    var query= ({login : req.body.login});
+    var query= ({_id : req.params.id});
+    var valid=true;
+    var error={ message : "0"};
+ 		var maj={};
+    user.findById(req.params.id, function(err,result){
+                        if(err) return next(err);
+                        else if(result.email!=req.body.email)
+                        	 user.findOne({email : req.body.email}, 'email', function(err, results) {
+        												if(err) {
+            											next(err);
+        												} else if(results) {
+            											valid=false;
+           												error.message="1"
+       												 } else {
+            											next();
+        											}
+   														});
+   														
+   											else if(result.login!=req.body.login)
+                        	 user.findOne({login : req.body.login}, 'login', function(err, results) {
+        												if(err) {
+            											next(err);
+        												} else if(results) {
+            											valid=false;
+           												error.message="2"
+       												 } else {
+            											next();
+        											}
+   														});
+                        	
+                            
+                });
 
     if(req.body.password!=null)
-        user.update(query, { password : bcrypt.hashSync(req.body.password, 8) }, 
-            function(err, n){
-                if(err) 
-                    res.write(err.message);
-    });
+        maj.password=bcrypt.hashSync(req.body.password, 8);
 
     if(req.body.firstname!=null)
-        user.update(query, { firstname : req.body.firstname }, 
-            function(err, n){
-                if(err)
-                    res.write(err.message);
-    });
+       maj.firstname=req.body.firstname;
 
     if(req.body.lastname!=null)
-        user.update(query, { lastname : req.body.lastname }, 
+       maj.lastname=req.body.lastname;
+    
+    if(valid)   		
+		 	user.update(query, maj, 
             function(err, n){
                 if(err) 
                     res.write(err.message);
-    });
+    	});
+    
+    res.send(error);
 
-    res.sendStatus(200);
 };
 
 exports.get = function(req,res,next){

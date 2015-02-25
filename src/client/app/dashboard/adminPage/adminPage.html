@@ -1,9 +1,21 @@
 <h2 class="page-header"> Gestion des Pages</h2>
 
-<a href="#/dashboard/page/add" class="btn btn-default btn-sm">Ajouter une Page</a>
+<a ui-sref="dashboard.createPage" class="btn btn-default btn-sm">Ajouter une Page</a>
 
 <h3> Liste des Pages</h3>
-<div ng-reapeat="page in lpages">
-	{{page.title}}
-	<a href="#/dashboard/page/{{page.id}}" class="btn btn-default btn-sm">Modifier</a>
-</div>
+<table class="table">
+<thead>
+<tr>
+	<th>Id</th>
+	<th>Titre</th>
+	<th></th>
+</thead>
+<tbody>
+	<tr ng-repeat="page in pages">
+	<td>{{page._id}}</td>
+	<td>{{page.title}}</td>
+	<td><a ui-sref="dashboard.editPage({id : page._id})" class="btn btn-default btn-sm">Modifier</a>
+			<a href="#/dashboard/page/{{page.id}}" class="btn btn-default btn-sm">Supprimer</a></td>
+	</tr>
+<tbody>
+</table>

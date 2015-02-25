@@ -81,7 +81,7 @@ app.get('/api/users/:id', user.get);
 
 app.post('/api/pages',page.create);
 
-app.post('/api/page/edit', page.edit);
+app.put('/api/page/:id', page.edit);
 
 app.post('/api/page/delete', page.deletePage);
 
