@@ -86,14 +86,17 @@ app.get('/api/users', user.view);
 /* Create a page */
 app.post('/api/pages',page.create);
 
+
 /* Update a page */
 app.put('/api/pages/:id', page.edit);
+
 
 /* Delete a page */
 app.delete('/api/pages/:id', page.deletePage);
 
 /* Get a page */
 app.get('/api/pages/:id', page.getPage);
+
 
 /* Get all pages */
 app.get('/api/pages', page.view);

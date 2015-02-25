@@ -1,0 +1,22 @@
+<h2 class="page-header"> Modifier la page {{page._id}} </h2>
+
+
+
+  <label contenteditable="true"
+        ng-model="editpage.title"
+        strip-br="false"
+        select-non-editable="false">
+  </label>
+  
+  
+  <pre contenteditable="true"
+        ng-model="editpage.content"
+        strip-br="false"
+        select-non-editable="false">
+  </pre>
+
+
+
+	<button class="btn btn-default" ng-click="valid()">Valider</button>
+	<button class="btn btn-default" ng-click="reset(editpage,page)">Annuler</button>
+
