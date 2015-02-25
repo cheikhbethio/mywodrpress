@@ -1,9 +1,9 @@
 'use strict';
 
 
-angular.module('myWordPress.appTemplate', ['ui.router'])
+angular.module('myWordPress.siteTemplate', ['ui.router'])
 
-.controller('appTemplateController', ['$scope', '$rootScope', '$location', '$localStorage' , function($scope, $rootScope, $location, $localStorage){
+.controller('siteTemplateController', ['$scope', '$rootScope', '$location', '$localStorage' , function($scope, $rootScope, $location, $localStorage){
 
 
         $scope.isActiveHeader = function (viewLocation) { 
@@ -11,7 +11,7 @@ angular.module('myWordPress.appTemplate', ['ui.router'])
         }
 
         $scope.isUserConnected = function() {
-        	$rootScope.user = $localStorage.currentUser;
+        	$rootScope.currentUser = $localStorage.currentUser;
         	return typeof $localStorage.currentUser != 'undefined';
         }
 

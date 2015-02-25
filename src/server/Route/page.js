@@ -43,7 +43,7 @@ exports.getPage = function(req,res,next){
 };
 
 exports.edit = function(req,res,next){
-        Page.findById(req.id,function(err,doc){
+        Page.findById(req.params.id,function(err,doc){
               if(err || !doc) return next(err);
               if(req.body.title != null) 
                     doc.title = req.body.title;
@@ -61,7 +61,7 @@ exports.edit = function(req,res,next){
 };
 
 exports.deletePage = function(req,res,next){
-        Page.findById(req.id, function(err,doc){
+        Page.findById(req.params.id, function(err,doc){
              if(err || !doc) return next(err);
              doc.remove();
              res.json(doc);
