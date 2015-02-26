@@ -1,4 +1,4 @@
-/*var should = require('should'); 
+var should = require('should'); 
 var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
@@ -11,6 +11,7 @@ describe('Routing', function() {
     mongoose.connect('localhost:27017');	
     done();
   });
+  /*
   describe('Account Creation', function() {
     it('should return error when Creation failed', function(done) {
      	var profile = {
@@ -63,21 +64,16 @@ describe('Routing', function() {
           done();
         });
 	    });
-    });
+    });*/
 
      describe('Editing profile', function(){
 	    it('should return error when saving edition failed', function(done) {
      	var profile = {
-     		_id			:'54eefae54483978f5fcd8b78',
-	        login		: 'k1k',
-	    	password	: 'kkk',
-	   	 	firstname	: 'k44k',
-	    	lastname	: 'kkk',
-	    	email	  	: 'kkk@kkk.kkk',
-	    	right		: 1
+     	email	  	: 'k8k@kkk.kkk',
+	    	lastname	: '465kk'
 	      };
 		request(url)
-		.put('/api/users/54eefae54483978f5fcd8b78')
+		.put('/api/users/54ef19fe5d03aa647cb9e483')
 		.send(profile)
 	    // end handles the response
 		.end(function(err, res) {
@@ -93,7 +89,7 @@ describe('Routing', function() {
 	    });
     });   
 
-     //view a user profile
+   /*  //view a user profile
      describe('View profile', function(){
 	    it('should return error we cannot see the user profile', function(done) {
      	var profile = {
@@ -120,13 +116,13 @@ describe('Routing', function() {
           done();
         });
 	    });
-    });   
+    });   */
 
      //view all users profiles
      describe('View all users profiles', function(){
 	    it('should return error we cannot see all users profiles', function(done) {
 		request(url)
-		.get('/api/users/')
+		.get('/api/users')
 		.send()
 	    // end handles the response
 		.end(function(err, res) {
@@ -148,7 +144,7 @@ describe('Routing', function() {
   });
 
 
-*/
+
 
 
 

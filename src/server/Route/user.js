@@ -77,60 +77,46 @@ var callback = function(err, numAffected){
 exports.edit = function (req, res , next) {
 
     var query= ({_id : req.params.id});
-    var valid=true;
-    var error={ message : "0"};
  		var maj={};
- 		console.log("edit");
-    user.findById(req.params.id, function(err,result){
-    	console.log(red.body);
-    	console.log(result);
-                        if(err) return next(err);
-                        else if(result.email!=req.body.email)
-                        	 user.findOne({email : req.body.email}, 'email', function(err, results) {
-        												if(err) {
-            											next(err);
-        												} else if(results) {
-            											valid=false;
-           												error.message="1"
-       												 } else {
-       												 		maj.email=req.body.email;
-            											next();
-        											}
-   														});
-   														
-   											else if(result.login!=req.body.login)
-                        	 user.findOne({login : req.body.login}, 'login', function(err, results) {
-        												if(err) {
-            											next(err);
-        												} else if(results) {
-            											valid=false;
-           												error.message="2"
-       												 } else {
-       												 		maj.login=req.body.login;
-            											next();
-        											}
-   														});
-                        	
-                            
-                });
+    user.findById(req.params.id, function(error,result){
+                        if(error) next(error);
+                        else if(result==null){
+                        console.log("user not found when editing");
+                        res.sendStatus(404, {error : "0"});
+                        next();                        
+                        }                        
+                        else
+                        	user.findOne({email : req.body.email}, 'email', function(errt, doc) {
+                        		if(errt) next(errt);
+                        		else{
+                        			if(result.email!=req.body.email){
+																	if(doc) {
+           													res.sendStatus(401,{error : "1"});
+           													next();           													
+       												 		}else{
+       												 			if(req.body.email!=null)
+       												 				maj.email=req.body.email;
+        														if(req.body.password!=null)
+        															maj.password=bcrypt.hashSync(req.body.password, 8);
+        														if(req.body.firstname!=null)
+      										 						maj.firstname=req.body.firstname;
+      										 					if(req.body.lastname!=null)
+      											 					maj.lastname=req.body.lastname;
+    	       													console.log("maj",maj);
+		 																	user.update(query, maj,function(errs,n){
+               							 							if(errs) 
+                    												next(errs);
+                    											else
+                    												res.send({error : "0"});
+                    												next();
+    																		});
+    															}
+    														}
+    													}
+    									});
+ });
 
-    if(req.body.password!=null)
-        maj.password=bcrypt.hashSync(req.body.password, 8);
-
-    if(req.body.firstname!=null)
-       maj.firstname=req.body.firstname;
-
-    if(req.body.lastname!=null)
-       maj.lastname=req.body.lastname;
     
-    if(valid)   		
-		 	user.update(query, maj, 
-            function(err, n){
-                if(err) 
-                    res.write(err.message);
-    	});
-    
-    res.send(error);
 
 };
 
