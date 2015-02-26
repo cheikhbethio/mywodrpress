@@ -12,10 +12,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="dashboard">Aller au Dashboard</a></li>
-                    <li><a href="#">Préférences</a></li>
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Aide</a></li>
+                    <li><a ui-sref="dashboard"><span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span> Aller au Dashboard</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Préférences</a></li>
+                    <li><a ui-sref="site.editprofile"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Profil</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Aide</a></li>
                 </ul>
             </div>
         </div>
@@ -34,7 +34,7 @@
         </div>
 
         <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
-            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" ui-sref="site">Accueil</a>
+            <a ng-class="{ active: isActiveHeader('/')}" class="blog-nav-item" ui-sref="site"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
             <a class="blog-nav-item" href="#">Menu 1</a>
             <a class="blog-nav-item" href="#">Menu 2</a>
             <a class="blog-nav-item" href="#">Menu 3</a>
@@ -49,9 +49,9 @@
 
         <div ng-show="isUserConnected()">
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <div class="blog-nav-item">Bienvenue <strong>{{currentUser.firstname}} {{currentUser.lastname}}</strong></div>
-                <a ng-class="{ active: isActiveHeader('/editprofile')}" class="blog-nav-item" ui-sref="site.editprofile">Profil</a>
-                <a class="blog-nav-item" href="javascript:void(0)" ng-click="logOut()">Se déconnecter</a>
+                <div class="blog-nav-item"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bienvenue <strong>{{currentUser.firstname}} {{currentUser.lastname}}</strong></div>
+                <a ng-class="{ active: isActiveHeader('/editprofile')}" class="blog-nav-item" ui-sref="site.editprofile"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Profil</a>
+                <a class="blog-nav-item" href="javascript:void(0)" ng-click="logOut()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Se déconnecter</a>
             </nav>
         </div>
     </div>
