@@ -21,9 +21,8 @@
             <td>
               <button type="button" 
                       class="btn btn-primary btn-sm pull-right"
-                      ng-click="editInformation($index)"
+                      ng-click="editInformation($index, key)"
                       ng-hide="isEditMode($index) == true"
-                      ng-disabled="edit_mode != false && edit_index != false && $index != edit_index"
                       >
                        <span class="glyphicon glyphicon-pencil"></span>
               </button>

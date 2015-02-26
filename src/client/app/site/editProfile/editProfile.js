@@ -21,7 +21,8 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 	$scope.keysToValues = {
 		firstname: 'Nom',
 		lastname: 'Prenom', 
-		login: 'Login'
+		login: 'Login',
+		email: 'Email'
 	};
 	
 
@@ -32,8 +33,9 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 	$scope.editMode = false;
 	$scope.edit_index = false;
 
-	$scope.editInformation = function(index){
-		console.log("found index: " + $scope.profile[index]);
+	$scope.editInformation = function(index, key){
+		console.log("key: " + key);
+		console.log("found index: " + $scope.profile[key]);
 		$scope.editMode = true;
 		$scope.edit_index = index;
 	};
