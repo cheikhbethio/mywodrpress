@@ -1,8 +1,6 @@
 <h2 class="page-header">Edition du profil</h2>
 
 
-PROFIL {{ profile }}
-
 <div class="table-responsive">
       <table class="table">
         <thead>
@@ -35,13 +33,13 @@ PROFIL {{ profile }}
               </button>
               <button type="button" 
                       class="btn btn-danger btn-sm pull-right"
-                      ng-click="cancelEditInformation()"
+                      ng-click="cancelEditInformation(key)"
                       ng-show="isEditMode($index) == true">
                       Cancel
               </button>
               <button type="button" 
                       class="btn btn-primary btn-sm pull-right"
-                      ng-click="editMode = false;saveEditInformation()"
+                      ng-click="saveEditInformation()"
                       ng-show="isEditMode($index) == true">
                       Save
               </button>
@@ -49,6 +47,10 @@ PROFIL {{ profile }}
 
         </tbody>
       </table>
+
+      <button class="btn btn-success" ng-click="saveUser()">Submit</button>
+
+
       </div>
     </div>
 
