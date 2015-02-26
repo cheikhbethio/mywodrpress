@@ -10,7 +10,7 @@ describe('Routing', function() {
     // In our tests we use the test db
     mongoose.connect('localhost:27017');	
     done();
-  });/*
+  });
   describe('Account Creation', function() {
     it('should return error when Creation failed', function(done) {
      	var profile = {
@@ -120,7 +120,7 @@ describe('Routing', function() {
           done();
         });
 	    });
-    });   */   
+    });   
 
      //view all users profiles
      describe('View all users profiles', function(){
