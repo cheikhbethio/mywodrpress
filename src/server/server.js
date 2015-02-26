@@ -1,47 +1,51 @@
 'use strict';
 
-// Module dependencies.
-var application_root = __dirname,
-    express = require('express'), //Web framework
-    path = require('path'), //Utilities for dealing with file paths
-    bodyParser  = require('body-parser'),
-    mongoose = require('mongoose'), //MongoDB integration
-    user = require('./Route/user.js'),
-    page = require('./Route/page.js'),
-    article = require('./Route/article.js');
 
-    //miiddleware connection ::: Moussa
-		var express = require('express');
-		var passport = require('./Route/passport.js');
-		
-		var flash    = require('connect-flash');
-		var cookieParser = require('cookie-parser');
-		var session      = require('express-session');
-	// fin 
+var application_root = __dirname;
+var path             = require('path');
 
-//Create server
+var express  = require('express');
+var mongoose = require('mongoose');
+
+var favicon        = require('serve-favicon');
+var logger         = require('morgan');
+var methodOverride = require('method-override');
+var bodyParser     = require('body-parser');
+
+// Deprecated !!
+var session = require('express-session');
+
+
+var flash        = require('connect-flash');
+var cookieParser = require('cookie-parser');
+
+
+var user     = require('./Route/user.js');
+var page     = require('./Route/page.js');
+var article  = require('./Route/article.js');
+var passport = require('./Route/passport.js');
+
+
 var app = express();
 
-// Configure server
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({extended: true}));
-	app.use(express.static(path.join(application_root ,'../client')));
-	app.use(express.favicon());
-	app.use(express.logger('dev'));
-	app.use(express.cookieParser()); 
-	app.use(express.bodyParser());
-	app.use(express.methodOverride());
-	app.use(express.session({ secret: 'securedsession' }));
-	app.use(passport.initialize()); // Add passport initialization
-	app.use(passport.session());    // Add passport initialization
-	app.use(app.router);
-//
+app.use(express.static(path.join(application_root ,'../client')));
+//app.use(express.favicon());
+app.use(logger('dev'));
 
-//Show all errors in development
-//app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+app.use(cookieParser()); 
+app.use(bodyParser());
+app.use(methodOverride());
+app.use(session({ secret: 'securedsession' }));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+//app.use(app.router);
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 
-//Start server
 var port = 4711;
 app.listen(port, function () {
     console.log('Express server listening on port %d in %s mode', port, app.settings.env);
@@ -49,8 +53,6 @@ app.listen(port, function () {
 });
 
 
-
-//Connect to database
 var db = mongoose.connect('mongodb://localhost/myWP');
 
 
@@ -68,18 +70,10 @@ app.post('/api/logout',  function(req, res){
 
 /***** Users ******/
 
-/* Create a user */
 app.post('/api/users', user.create);
-
-/* Update a user */
 app.put('/api/users/:id', user.edit);
-
-/* Get a user */
 app.get('/api/users/:id', user.get);
-
-/* Get all users */
 app.get('/api/users', user.view);
-
 
 /***** Pages ******/
 
