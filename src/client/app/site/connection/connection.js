@@ -28,7 +28,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 				//$rootScope.currentUser = user;
 				$localStorage.currentUser = user;
 
-				console.log("current user : " + $localStorage.currentUser);
+				console.log("current user : " + $localStorage.currentUser.login);
 				$state.go('site');
 
 			}, function(error){

@@ -17,6 +17,14 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 	function($scope, $rootScope, User, $localStorage){
 
 	$scope.profile = $localStorage.currentUser;
+	/*$scope.profile = {
+		firstname: 'firectname_uuxu',
+		lastname: 'lastName_uuxu', 
+		login: 'login_uuxu',
+		email: 'email_uuxu@uxu',
+	};*/
+
+	console.log("USER editprofile: " + $scope.profile);
 
 	$scope.keysToValues = {
 		firstname: 'Nom',
@@ -28,7 +36,6 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 	$scope.loginAlreadyUsed = false;
 	$scope.emailAlreadyUsed = false;
-
 
 	$scope.editMode = false;
 	$scope.edit_index = false;
@@ -49,6 +56,10 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 		return $scope.edit_index == index && $scope.editMode == true;
 	};
 
+	$scope.isDisabled = function(index){
+		return $scope.edit_mode == true && $scope.edit_index != index;
+	}
+
 
 	$scope.saveNewUser = function() {
 
@@ -68,9 +79,9 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 					if(resp.error == 0){
 						console.log("Successfuly posted: " + resp.error);
 						$state.go('app');
-					}else if( resp.error == 1){
+					} else if( resp.error == 1){
 						$scope.emailAlreadyUsed = true;
-					}else if(resp.error == 2){
+					} else if(resp.error == 2){
 						$scope.loginAlreadyUsed = true;
 					}
 

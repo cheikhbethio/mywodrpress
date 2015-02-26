@@ -1,5 +1,8 @@
 <h2 class="page-header">Edition du profil</h2>
 
+
+PROFIL {{ profile }}
+
 <div class="table-responsive">
       <table class="table">
         <thead>
@@ -11,18 +14,22 @@
         </thead>
 
         <tbody ng-repeat="(key, value) in keysToValues">
-          <tr>
+
             <td>
               <p>{{ value }}</p>
             </td>
+
             <td>
-              <p ng-hide="isEditMode($index) == true">{{ profile[key] }}</p>
+              <p ng-hide="isEditMode($index) == true"> {{ profile[key] }}</p>
               <input type="text" ng-show="isEditMode($index) == true" ng-model="profile[key]" />
+            </td>
             <td>
+
               <button type="button" 
                       class="btn btn-primary btn-sm pull-right"
                       ng-click="editInformation($index, key)"
                       ng-hide="isEditMode($index) == true"
+                      ng-disabled="edit_index != $index && editMode == true"
                       >
                        <span class="glyphicon glyphicon-pencil"></span>
               </button>
@@ -39,10 +46,8 @@
                       Save
               </button>
             </td>
-          </tr>
+
         </tbody>
-
-
       </table>
       </div>
     </div>
