@@ -74,7 +74,7 @@ angular.module('myWordPress', [
         if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
             event.preventDefault();
             console.log($state);
-            $state.go('site.connection', {data: { css: 'site/siteTemplate/blog.css'}});
+            $state.go('site.connection');
         } 
   });
 
