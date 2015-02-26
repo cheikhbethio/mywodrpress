@@ -80,7 +80,10 @@ exports.edit = function (req, res , next) {
     var valid=true;
     var error={ message : "0"};
  		var maj={};
+ 		console.log("edit");
     user.findById(req.params.id, function(err,result){
+    	console.log(red.body);
+    	console.log(result);
                         if(err) return next(err);
                         else if(result.email!=req.body.email)
                         	 user.findOne({email : req.body.email}, 'email', function(err, results) {
