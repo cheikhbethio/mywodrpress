@@ -1,4 +1,4 @@
-
+/*
 var frisby = require('frisby');
 
 frisby.create('Test create user')
@@ -34,3 +34,4 @@ frisby.create('Test vue member')
 	.get('http://localhost:4711/api/users')
 	.inspectBody()
 	.toss();
+*/
