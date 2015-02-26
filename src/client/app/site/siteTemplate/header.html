@@ -50,6 +50,7 @@
         <div ng-show="isUserConnected()">
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
                 <div class="blog-nav-item">Bienvenue {{currentUser.firstname}} {{currentUser.lastname}}</div>
+                <a ng-class="{ active: isActiveHeader('/editprofile')}" class="blog-nav-item" ui-sref="site.editprofile" ng-click="logOut()">Profil</a>
                 <a class="blog-nav-item" href="javascript:void(0)" ng-click="logOut()">Se déconnecter</a>
             </nav>
         </div>
