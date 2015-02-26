@@ -24,6 +24,7 @@ var user     = require('./Route/user.js');
 var page     = require('./Route/page.js');
 var article  = require('./Route/article.js');
 var passport = require('./Route/passport.js');
+var menu     = require('./Route/menu.js');
 
 
 var app = express();
@@ -77,28 +78,21 @@ app.get('/api/users', user.view);
 
 /***** Pages ******/
 
-/* Create a page */
+
 app.post('/api/pages',page.create);
-
-
-/* Update a page */
 app.put('/api/pages/:id', page.edit);
-
-
-/* Delete a page */
 app.delete('/api/pages/:id', page.deletePage);
-
-/* Get a page */
 app.get('/api/pages/:id', page.getPage);
-
-
-/* Get all pages */
 app.get('/api/pages', page.view);
 
 /***** Articles *****/
 
-app.post('/api/articles', article.create);
 
+app.post('/api/articles', article.create);
 app.get('/api/articles/:id', article.get);
 
+/***** Menus *****/
 
+app.post('/api/menus', menu.createItem);
+app.get('/api/menus', menu.getItems);
+app.post('/api/menus/:id', menu.addPageToItem);
