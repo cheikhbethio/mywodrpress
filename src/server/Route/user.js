@@ -90,6 +90,7 @@ exports.edit = function (req, res , next) {
             											valid=false;
            												error.message="1"
        												 } else {
+       												 		maj.email=req.body.email;
             											next();
         											}
    														});
@@ -102,6 +103,7 @@ exports.edit = function (req, res , next) {
             											valid=false;
            												error.message="2"
        												 } else {
+       												 		maj.login=req.body.login;
             											next();
         											}
    														});
