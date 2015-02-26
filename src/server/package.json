@@ -5,7 +5,8 @@
 
     "devDependencies": {
        "mocha": "*",
-       "should": ">= 0.0.1"
+       "should": ">= 0.0.1",
+       "supertest" : "0.15.x"
     },
 
     "scripts": {

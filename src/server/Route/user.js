@@ -64,7 +64,7 @@ exports.create=function (req, res , next) {
 
     newUser.save(function(err, results){
         if (err) {
-            res.send({error : err.message});
+            res.sendStatus(401,{error : err.message});
         }
         else
             res.send({error : 0});
@@ -90,6 +90,7 @@ exports.edit = function (req, res , next) {
             											valid=false;
            												error.message="1"
        												 } else {
+       												 		maj.email=req.body.email;
             											next();
         											}
    														});
@@ -102,6 +103,7 @@ exports.edit = function (req, res , next) {
             											valid=false;
            												error.message="2"
        												 } else {
+       												 		maj.login=req.body.login;
             											next();
         											}
    														});
