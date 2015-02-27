@@ -13,6 +13,8 @@ var ArticleSchema = new mongoose.Schema({
 
 var Article = mongoose.model('Article',ArticleSchema);
 
+exports.articles=Article;
+
 exports.create = function(req,res,next){
                  /* var user_author;
                   user.users.findById(req.body.userId, function(err,result){
