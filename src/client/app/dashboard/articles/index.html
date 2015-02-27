@@ -18,10 +18,13 @@
 	<tbody>
 		<tr ng-repeat="article in articles">
 			<td>{{article.title}}</td>
-			<td>{{article.author}}</td>
-			<td>{{article.date | date : format : timezone}}</td>
-			<td>{{article.ispublic}}</td>
-			<td>{{article.keywords}}</td>
+			<td>{{article.author.firstname}} {{article.author.lastname}}</td>
+			<td>{{article.date | date:'dd/MM/yyyy'}}</td>
+			<td>
+				<span ng-hide="{{article.ispublic}}" class="glyphicon glyphicon-remove" style="color:red" aria-hidden="true"></span>
+				<span ng-show="{{article.ispublic}}" class="glyphicon glyphicon-ok" style="color:green" aria-hidden="true"></span>
+			</td>
+			<td><div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div> </td>
 			<td></td>
 		</tr>
 	</tbody>
