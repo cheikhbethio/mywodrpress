@@ -24,7 +24,7 @@ describe('Routing', function() {
 describe('Create a new Page',function(){
          var resBody;
         it('should create a new page', function(done){
-        var page = {title: "test", content: "Ceci est un test"};
+        var page = {title: "test", content: []};
         request(url)
         .post('/api/pages')
         .send(page)
@@ -37,7 +37,7 @@ describe('Create a new Page',function(){
       });
  });
    it('should create another new page', function(done){
-        var page = {title: "un autre test", content: "Ceci est un autre test"};
+        var page = {title: "un autre test", content: []};
         request(url)
         .post('/api/pages')
         .send(page)
@@ -49,7 +49,7 @@ describe('Create a new Page',function(){
       });
  });
   it('should update an existing page', function(done){
-     var body = {title: "modification du titre", content: "test de la modification du contenu"};
+     var body = {title: "modification du titre", content: ["test de la modification du contenu"]};
      var id = resBody._id;
      request(url)
      .put('/api/pages/'+id)
@@ -58,7 +58,7 @@ describe('Create a new Page',function(){
      .end(function(err, res){
        should.not.exist(err);
          res.body.title.should.equal('modification du titre');
-         res.body.content.should.equal('test de la modification du contenu');
+         res.body.content.should.equal(['test de la modification du contenu']);
          done();
       
     });

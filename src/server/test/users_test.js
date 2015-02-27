@@ -3,15 +3,17 @@ var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
 var bcrypt=require('bcrypt');
+var mydb     = require('../Route/user.js');
 //var winston = require('winston');
  
-describe('Routing', function() {
+describe('User Routing', function() {
   	var url = 'http://localhost:4711';
- 		 before(function(done) {
-    // In our tests we use the test db
-    	mongoose.connect('localhost:27017');	
+ 	
+ 	/*before(function(done) {
+    	mongoose.connect('localhost:27017');
     	done();
-  	});
+  	});*/
+
 	  
 	describe('Account Creation', function() {
 	  	var myUser;
@@ -186,6 +188,8 @@ describe('Routing', function() {
 		});
 
 	});
+
+
 
 
 
