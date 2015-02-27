@@ -45,3 +45,13 @@ exports.get = function(req,res,next){
         });
 }; 
                
+exports.view = function(req,res,next){
+  Article.find(function (err, result) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json(result);
+        }
+    });
+
+};
