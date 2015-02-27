@@ -19,8 +19,7 @@ angular.module('myWordPress.createPage', ['ui.router'])
 	$scope.save=function(obj) {
 
 		var nPage={
-			title: obj.title,
-			content: obj.content
+			title: obj.title
 		};
 
 		Page.save(nPage);

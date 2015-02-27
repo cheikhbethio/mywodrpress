@@ -25,8 +25,7 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
  $scope.valid=function(){
  	var npage={
  	id : $scope.page._id,
- 	title : $scope.editpage.title,
- 	content : $scope.editpage.content
+ 	title : $scope.editpage.title
  	};
  	Page.update({id: $stateParams.id},npage);
  };
@@ -34,7 +33,6 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
  $scope.reset= function(valedit,valinit){
  	console.log("reset");
 	valedit.title=valinit.title;
-	valedit.content=valinit.content;
  };
  	
 

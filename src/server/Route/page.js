@@ -4,7 +4,7 @@ var article=require('./article.js')
 
 var PageSchema = new mongoose.Schema({
                          title : String,
-                         content : [{type: Schema.Types.ObjectId, ref:'article.articles'}]
+                         content : [{type: Schema.Types.ObjectId, ref:'Article'}]
 });
 
 
@@ -74,7 +74,23 @@ exports.addarticle = function(req,res,next){
         Page.findById(req.params.id,function(err,doc){
               if(err || !doc) return next(err);
               if(req.body.articleid != null) 
-                    doc.content.push(req.body.articleid);
+                    doc.content.push(req.body.id);
+              doc.save(function(err,result){
+                       if(err || !doc){
+                          return next(err);
+                       } else {
+                           res.json(result);
+                        }
+               });
+          });
+
+};
+
+exports.delarticle = function(req,res,next){
+        Page.findById(req.params.id,function(err,doc){
+              if(err || !doc) return next(err);
+              if(req.body.articleid != null) 
+                    doc.content.splice(doc.content.indexOf(req.body.id),1);
               doc.save(function(err,result){
                        if(err || !doc){
                           return next(err);
