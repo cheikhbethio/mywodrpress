@@ -1,0 +1,25 @@
+<h2 class="page-header">Création d'un article</h2>
+
+
+<form>
+    <div class="form-group">
+        <label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
+        <input class="form-control" name="title" type="text" id="title" placeholder="Titre de l'article" ng-model="title">
+    </div>
+
+    <text-angular ng-model="htmlVariable"></text-angular>
+
+    <div class="form-group">
+        <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
+        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list=",">
+    </div>
+
+    <button type="submit" class="btn btn-primary pull-right" ng-click="addArticle()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder</button>
+
+    <div class="checkbox pull-right" style="margin-right: 15px">
+        <label>
+            <input type="checkbox" ng-model="ispublic"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> Publier maintenant? 
+        </label>
+    </div>
+
+</form>

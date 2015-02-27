@@ -16,6 +16,13 @@
 		</tr>
 	</thead>
 	<tbody>
-
+		<tr ng-repeat="article in articles">
+			<td>{{article.title}}</td>
+			<td>{{article.author}}</td>
+			<td>{{article.date | date : format : timezone}}</td>
+			<td>{{article.ispublic}}</td>
+			<td>{{article.keywords}}</td>
+			<td></td>
+		</tr>
 	</tbody>
 </table>

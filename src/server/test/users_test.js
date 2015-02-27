@@ -2,146 +2,194 @@ var should = require('should');
 var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
+var bcrypt=require('bcrypt');
 //var winston = require('winston');
  
 describe('Routing', function() {
-  var url = 'http://localhost:4711';
-  before(function(done) {
+  	var url = 'http://localhost:4711';
+ 		 before(function(done) {
     // In our tests we use the test db
-    mongoose.connect('localhost:27017');	
-    done();
-  });
-  /*
-  describe('Account Creation', function() {
-    it('should return error when Creation failed', function(done) {
-     	var profile = {
-        login		: 'kkk',
-    	password	: 'kkk',
-   	 	firstname	: 'kkk',
-    	lastname	: 'kkk',
-    	email	  	: 'kkk@kkk.kkk',
-    	right		: 1
-      };
-    request(url)
-	.post('/api/users')
-	.send(profile)
-    // end handles the response
-	.end(function(err, res) {
-          if (err) {
-            throw err;
-          }
-          // this is should.js syntax, very clear
-          console.log(res.status+ '  code de requete retournéé');
-          //res.should.have.status(400);
-          res.should.have.property('status',401);
-          done();
-        });
-    });
-});
-
-    describe('Account Creation duplicated', function(){
-	    it('should return error trying to save duplicate username', function(done) {
-     	var profile = {
-	        login		: 'k1k',
+    	mongoose.connect('localhost:27017');	
+    	done();
+  	});
+	  
+	describe('Account Creation', function() {
+	  	var myUser;
+	  	var createdAcount = {
+	        login		: 'kkk',
 	    	password	: 'kkk',
 	   	 	firstname	: 'kkk',
 	    	lastname	: 'kkk',
-	    	email	  	: 'k1k@kkk.kkk',
-	    	right		: 1
-	      };
-		request(url)
-		.post('/api/users')
-		.send(profile)
-	    // end handles the response
-		.end(function(err, res) {
-	          if (err) {
-	            throw err;
-	          }
-	          // this is should.js syntax, very clear
-          console.log(res.status+ '  code de requete retournéé');
-          //res.should.have.status(400);
-          res.should.have.property('status',401);
-          done();
-        });
-	    });
-    });*/
-
-     describe('Editing profile', function(){
-	    it('should return error when saving edition failed', function(done) {
-     	var profile = {
-     	email	  	: 'k8k@kkk.kkk',
-	    	lastname	: '465kk'
-	      };
-		request(url)
-		.put('/api/users/54ef19fe5d03aa647cb9e483')
-		.send(profile)
-	    // end handles the response
-		.end(function(err, res) {
-	          if (err) {
-	            throw err;
-	          }
-	          // this is should.js syntax, very clear
-          console.log(res.body);
-          //res.should.have.status(400);
-          res.should.have.property('status',200);
-          done();
-        });
-	    });
-    });   
-
-   /*  //view a user profile
-     describe('View profile', function(){
-	    it('should return error we cannot see the user profile', function(done) {
-     	var profile = {
-     		_id			:'54eefae54483978f5fcd8b78',
-	        login		: 'k1k',
-	    	password	: 'kkk',
-	   	 	firstname	: 'k44k',
-	    	lastname	: 'kkk',
 	    	email	  	: 'kkk@kkk.kkk',
 	    	right		: 1
-	      };
+	    };
+	    var updateAccont = {
+	    	password	: '1kkk',
+	   	 	firstname	: '1kkk',
+	    	lastname	: '1kkk',
+	    	email	  	: '1kkk@kkk.kkk',
+	    };
+
+	    it('should return error when Creation failed', function(done) {
+
+		    request(url)
+			.post('/api/users')
+			.send(createdAcount)
+		    // end handles the response
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ '  code de requete retournéé pour la Creation');
+		          //res.should.have.status(400);
+		          myUser = res.body.result;
+		       //   console.log(myUser);
+		          res.should.have.property('status',200);
+		          done();
+		        });
+	    });
+
+		//for duplicate accont
+	    it('should return error trying to save duplicate username', function(done) {
 		request(url)
-		.get('/api/users/54eefae54483978f5fcd8b78')
-		.send(profile)
-	    // end handles the response
+		.post('/api/users')
+		.send(createdAcount)
 		.end(function(err, res) {
 	          if (err) {
 	            throw err;
 	          }
-	          // this is should.js syntax, very clear
-          console.log(res.body);
-          //res.should.have.status(400);
-          res.should.have.property('status',200);
-          done();
-        });
+	        console.log(res.status+ '  code de requete pour tests de duplicate');
+		    res.should.have.property('status',401);
+	      	done();
 	    });
-    });   */
-
-     //view all users profiles
-     describe('View all users profiles', function(){
-	    it('should return error we cannot see all users profiles', function(done) {
-		request(url)
-		.get('/api/users')
-		.send()
-	    // end handles the response
-		.end(function(err, res) {
-	          if (err) {
-	            throw err;
-	          }
-	          // this is should.js syntax, very clear
-          console.log(res.body);
-          //res.should.have.status(400);
-          res.should.have.property('status',200);
-          done();
-        });
 	    });
-    });  
+
+	    //edit a profile	    
+	    it('return error when saving edition failed', function(done) {
+			//console.log(myUser._id);
+			//console.log(myUser.firstname,  	myUser.lastname)
+			var newUserUpdated;
+			request(url)
+			.put('/api/users/'+myUser._id)
+			.send(updateAccont)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+	          	console.log(res.status+ '  code de requete pour le update');
+	        	newUserUpdated = res.body.result; 
+	      		//console.log(newUserUpdated);
+	        	newUserUpdated.firstname.should.equal('1kkk');
+	        	newUserUpdated.lastname.should.equal('1kkk');
+	        	newUserUpdated.email.should.equal('1kkk@kkk.kkk');
+	          	res.should.have.property('status',200);
+	          	done();
+	        });
+	    });
+
+	    //edit a profile Mail only	    
+	    it('return error when edition mail only failed', function(done) {
+		    var updateAccontMail = {
+		    	email	  	: 'onlymail@kkk.kkk',
+		    };
+			var newUserUpdated;
+			request(url)
+			.put('/api/users/'+myUser._id)
+			.send(updateAccontMail)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+	          	console.log(res.status+ '  code de requete pour le update Mail');
+	        	newUserUpdated = res.body.result; 
+	      		//console.log(newUserUpdated);
+	        	newUserUpdated.email.should.equal('onlymail@kkk.kkk');
+	          	res.should.have.property('status',200);
+	          	done();
+	        });
+	    });
+
+	    //edit a profile password only	    
+	    it('return error when edition password only failed', function(done) {
+		    var updateAccontPass = {
+		    	password	  	: 'newPassword',
+		    };
+			var newUserUpdated;
+			request(url)
+			.put('/api/users/'+myUser._id)
+			.send(updateAccontPass)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+	          	console.log(res.status+ '  code de requete pour le update Mail');
+	        	newUserUpdated = res.body.result; 
+	        	(bcrypt.compareSync('newPassword', newUserUpdated.password)).should.equal(true);
+	          	res.should.have.property('status',200);
+	          	done();
+	        });
+	    });
+
+	    //edit a profile password firstname and las name	    
+	    it('return error when edition password only failed', function(done) {
+		    var updateAccontPass = {
+		    	firstname	  	: 'newfirstname',
+		    	lastname	: "newlastname"
+		    };
+			var newUserUpdated;
+			request(url)
+			.put('/api/users/'+myUser._id)
+			.send(updateAccontPass)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+	          	console.log(res.status+ '  code de requete pour le update Mail');
+	        	newUserUpdated = res.body.result; 
+	        	newUserUpdated.firstname.should.equal('newfirstname');
+	        	newUserUpdated.lastname.should.equal('newlastname');
+	          	res.should.have.property('status',200);
+	          	done();
+	        });
+	    });
+
+	    //view profile
+	    it('should return error we cannot see the user profile', function(done) {
+			request(url)
+			.get('/api/users/'+myUser._id)
+			.send()
+		    // end handles the response
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+	          	console.log(res.status+ '  code de requete pour voir le profile d\'un user');
+		      res.should.have.property('status',200);
+		      done();
+		    });
+		});
+
+	     //view all users profiles
+		it('return error we cannot see all users profiles', function(done) {
+			request(url)
+			.get('/api/users')
+			.send()
+		    // end handles the response
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+	          	console.log(res.status+ '  code de requete pour voir tous les profiles ');
+	          res.should.have.property('status',200);
+	          done();
+	        });
+		});
+
+	});
 
 
 
-
-  });
+});
 
 
 
