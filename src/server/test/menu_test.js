@@ -34,17 +34,17 @@ describe('Create a new menu', function(){
       });
    });
   it('should add page to a menu', function(done){
-      var page = {title: 'test', content: 'Ceci est un test',pageId: '54ef39793f8dac1713838a83'};
+      var pageId = '54f055d8f2e8d9a51d273e85';
       var id = resBody._id;
       request(url)
       .post('/api/menus/'+id)
-      .send(page)
+      .send(pageId)
       .expect(200)
      .end(function(err, res){
        should.not.exist(err);
          //res.body.title.should.equal('modification du titre');
          //res.body.content.should.equal('test de la modification du contenu');
-         done()
+         done();
       });
   });
 });
@@ -57,7 +57,7 @@ describe('Get all menus', function(){
           .end(function(err,res){
            should.not.exist(err);
            res.body.should.be.an.instanceOf(Array);
-            console.log(res.body);
+            console.log(res.body[0].items);
           done();
         });
       });

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var page = require('./page.js');
+//var page = require('./page.js');
 var Schema = mongoose.Schema;
 
 var ItemSchema = new mongoose.Schema({
@@ -8,9 +8,16 @@ var ItemSchema = new mongoose.Schema({
 });
 
 var MenuItemSchema = new mongoose.Schema({
-                        pages: [{type: Schema.Types.ObjectId, ref:'page.Page'}],
-                        menu : [{type: Schema.Types.ObjectId, ref:'ItemSchema'}]
+                        pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
+                        menu : [{type: Schema.Types.ObjectId, ref:'Item'}]
 });
+/*var PageSchema = new mongoose.Schema({
+                         title : String,
+                         content : String
+});
+
+
+var Page = mongoose.model('Page',PageSchema);*/
 
 var MenuItem = mongoose.model('MenuItem',MenuItemSchema);
 var Item = mongoose.model('Item' ,ItemSchema);
@@ -34,6 +41,7 @@ exports.getItems = function(req,res,next){
                        return next(err);
                     }else{
                         res.json(result);
+                        console.log(result);
                        }
                   });
 };

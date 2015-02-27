@@ -36,6 +36,18 @@ describe('Create a new Page',function(){
          done();
       });
  });
+   it('should create another new page', function(done){
+        var page = {title: "un autre test", content: "Ceci est un autre test"};
+        request(url)
+        .post('/api/pages')
+        .send(page)
+        .expect(200)
+        .end(function(err,res){
+         should.not.exist(err);
+         console.log(res.body);
+         done();
+      });
+ });
   it('should update an existing page', function(done){
      var body = {title: "modification du titre", content: "test de la modification du contenu"};
      var id = resBody._id;
@@ -76,8 +88,8 @@ describe('Get Pages', function(){
            should.not.exist(err);
            res.body.should.be.an.instanceOf(Array);
             console.log(res.body);
-           res.body[0].title.should.equal("test");
-           res.body[0].content.should.equal("Ceci est un test");
+           res.body[0].title.should.equal("un autre test");
+           res.body[0].content.should.equal("Ceci est un autre test");
           done();
         });
       });

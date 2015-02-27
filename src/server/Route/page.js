@@ -9,7 +9,7 @@ var PageSchema = new mongoose.Schema({
 
 var Page = mongoose.model('Page',PageSchema);
 
-exports.Page = Page;
+module.exports.Page = Page;
 
 exports.create = function(req,res,next){
         var reqBody = req.body,
@@ -70,6 +70,7 @@ exports.view = function(req,res,next){
     });
 
 };
+
 
 
 
