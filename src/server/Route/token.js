@@ -8,6 +8,9 @@ moment.format();
 
 
 
+
+
+//obtenir un token suite a iddentification;
 module.exports.login=function(req,res,next){
 var login=req.body.login;
 var password=req.body.password;

@@ -111,7 +111,7 @@ exports.edit = function (req, res , next) {
                                 next(errs);
                             }
                             else
-                                res.send({error : "0"});
+                                res.send({error : "0", numAffected : n, result : maj});
                                 next();
                             });
                     }
