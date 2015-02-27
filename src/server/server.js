@@ -90,6 +90,7 @@ app.get('/api/pages', page.view);
 
 app.post('/api/articles', article.create);
 app.get('/api/articles/:id', article.get);
+app.get('/api/articles', article.view);
 
 /***** Menus *****/
 

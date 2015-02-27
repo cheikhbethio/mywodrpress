@@ -20,6 +20,24 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 .controller('indexArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
 	$scope.articles = Article.query();
 
-}]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
+}]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', '$localStorage', function($scope, $state, $stateParams, Article, $localStorage){
+	$scope.addArticle = function() {
 
+		if(typeof $scope.ispublic === 'undefined')
+			$scope.ispublic = false;
+		
+		var newArticle={
+			title: $scope.title,
+			author : $localStorage.currentUser._id,
+			date : Date.now(),
+			content: $scope.htmlVariable,
+			ispublic : $scope.ispublic,
+			keywords : $scope.keywords
+		};
+
+		console.log(newArticle);
+
+		Article.save(newArticle);
+		$state.go('dashboard.indexArticle');
+	}
 }]);
