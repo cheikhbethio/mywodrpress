@@ -18,8 +18,8 @@ angular.module('myWordPress', [
 	'ui.bootstrap.showErrors',
 	'ui.router',
 	'contenteditable',
-	'uiRouterStyles',
-    'ngStorage',
+    'ngStorage',    
+    'textAngular',
 	'myWordPress.registration.registration-directive',
     'myWordPress.siteTemplate.siteTemplate-directive'
 ])

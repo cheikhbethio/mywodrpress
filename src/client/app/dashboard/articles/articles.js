@@ -11,12 +11,15 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 		controller: 'indexArticleController'
 	}).state('dashboard.createArticle', {
 		url: '/article/create',
-		templateUrl: 'dashboard/articles/create.html'
+		templateUrl: 'dashboard/articles/create.html',
+		controller: 'createArticleController'
 	});
 
 }])
 
 .controller('indexArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
 	$scope.articles = Article.query();
+
+}]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
 
 }]);
