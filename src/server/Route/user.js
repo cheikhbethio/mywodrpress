@@ -67,7 +67,7 @@ exports.create=function (req, res , next) {
             res.sendStatus(401,{error : err.message});
         }
         else
-            res.send({error : 0, result results});
+            res.send({error : 0, result : results});
     });
 };
 
