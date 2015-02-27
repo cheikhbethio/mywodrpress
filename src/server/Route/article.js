@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var ArticleSchema = new mongoose.Schema({
                      title : String,
-                     author : {type : Schema.Types.ObjectId, ref:'user.users'},
+                     author : {type : Schema.Types.ObjectId, ref:'user'},
                      date : Date,
                      ispublic : Boolean,
                      content : String,
@@ -48,12 +48,12 @@ exports.get = function(req,res,next){
 }; 
                
 exports.view = function(req,res,next){
-  Article.find(function (err, result) {
+  Article.find().populate('author').exec((function (err, result) {
         if (err) {
             return next(err);
         } else {
             res.json(result);
         }
-    });
+    }));
 
 };
