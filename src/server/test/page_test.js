@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
  
 
-
+/*
 describe('Routing', function() {
   var url = 'http://localhost:4711';
   before(function(done) {
@@ -83,3 +83,4 @@ describe('Get Pages', function(){
       });
 });
 });
+*/
