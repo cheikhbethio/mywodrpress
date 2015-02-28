@@ -2,21 +2,13 @@ var should = require('should');
 var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
-
+/*
 describe('Routing', function() {
   var url = 'http://localhost:4711';
- /*before(function(done) {
-    // In our tests we use the test db
-    function clearDB() {
-   for (var i in mongoose.connection.collections) {
-     mongoose.connection.collections[i].remove(function() {});
-   }
-   return done();
- }
-    mongoose.connect('localhost:27017');	
-    clearDB();
+  before(function(done) {
+    mongoose.connect('localhost:27017');
     done();
-  });*/
+  });
 
 describe('Create a new menu', function(){
         var resBody;
@@ -65,3 +57,4 @@ describe('Get all menus', function(){
 });
       
 
+*/

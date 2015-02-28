@@ -8,14 +8,20 @@ var mydb     = require('../Route/user.js');
  
 describe('article Routing', function() {
   	var url = 'http://localhost:4711';
-/*
+
  	before(function(done) {
     	mongoose.connect('localhost:27017');
     	done();
+  	});
+/*
+  	after(function(done){
+  		mongoose.disconnect();
+  		done();
   	});*/
 
 	describe('Account Creation', function() {
 	  	var myUser;
+	  	var myArtcile;
 	  	var createdAcount = {
 	        login		: 'kksdsdk',
 	    	password	: 'ksdsdskk',
@@ -29,13 +35,11 @@ describe('article Routing', function() {
 		    request(url)
 			.post('/api/users')
 			.send(createdAcount)
-		    // end handles the response
 			.end(function(err, res) {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ '  code de requete retournéé pour la Creation gioffffffffffffffffffffffffffffffffffffff');
-		          //res.should.have.status(400);
+		          console.log(res.status+ ': code retourné pour la création de compte pour un articel');
 		          myUser = res.body.result;
 		          console.log(myUser);
 		          res.should.have.property('status',200);
@@ -43,7 +47,7 @@ describe('article Routing', function() {
 		    });
 		});
 	 	
-
+	// article creation
 	    it('should return error when Creation article failed', function(done) {
 		 	var id = myUser._id;
 		  	var createdArticle = {
@@ -58,18 +62,72 @@ describe('article Routing', function() {
 		    request(url)
 			.post('/api/articles')
 			.send(createdArticle)
-		    // end handles the response
 			.end(function(err, res) {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ '  code de requete retournéé pour la Creation d\'articles');
-		          //res.should.have.status(400);
-		          myUser = res.body.result;
-		       //   console.log(myUser);
+		          myArtcile = res.body;
+		          console.log(myArtcile);
+		          console.log(res.status+ ': code retourné pour la Creation d\'articles ');
 		          res.should.have.property('status',200);
 		          done();
-		        });
+		    });
+	    });
+
+	//duplicated article
+	    it('should return error when Creation article failed', function(done) {
+		 	var id = myUser._id;
+		  	var createdArticle = {
+	             title : "myartcile",
+	             author : id,
+	             date : "10-10-2000",
+	             ispublic : true,
+	             content : "mycontent",
+	             keywords : ["str1", "str2"]
+		    };
+
+		    request(url)
+			.post('/api/articles')
+			.send(createdArticle)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ ': code retourné pour la Creation d\'articles dupliqués');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+
+	//view one article
+	    it('should return error when Creation article failed', function(done) {
+		 	var id_articles = myArtcile._id;
+		    request(url)
+			.get('/api/articles/'+ id_articles)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ ': code retourné pour la vue d\'un article');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+
+	//view all articles
+	    it('should return error when Creation article failed', function(done) {
+		    request(url)
+			.get('/api/articles')
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
+		          res.should.have.property('status',200);
+		          done();
+		    });
 	    });
 	});
 });
