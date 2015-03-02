@@ -45,7 +45,6 @@ angular.module('myWordPress', [
             }
         },
         data: { 
-            //css: 'site/siteTemplate/blog.css',
             requireLogin: false
         }
 	})
@@ -61,7 +60,6 @@ angular.module('myWordPress', [
             }
         },
         data: { 
-            //css: 'dashboard/dashboardTemplate/dashboard.css',
             requireLogin: true
         }
 	});

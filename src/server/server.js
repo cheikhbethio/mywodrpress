@@ -91,6 +91,8 @@ app.delete('/api/pages/article/:id',page.delarticle);
 
 
 app.post('/api/articles', article.create);
+app.put('/api/articles/:id', article.edit);
+app.delete('/api/articles/:id', article.deleteArticle);
 app.get('/api/articles/:id', article.get);
 app.get('/api/articles', article.view);
 

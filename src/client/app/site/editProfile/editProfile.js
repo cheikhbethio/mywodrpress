@@ -8,7 +8,10 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 	$stateProvider.state('site.editprofile', {
 		url: 'editprofile',
 		templateUrl: 'site/editProfile/editProfile.html',
-		controller: 'editProfileController'
+		controller: 'editProfileController',
+		data: { 
+            requireLogin: true
+        }
 	});
 
 }])
