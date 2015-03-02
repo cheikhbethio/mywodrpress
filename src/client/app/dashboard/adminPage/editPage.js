@@ -6,7 +6,7 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('dashboard.editPage', {
-		url: '/page/edit/:id',
+		url: '/page/:id/edit',
 		templateUrl: 'dashboard/adminPage/editPage.html',
 		controller: 'editPageController'
 	});

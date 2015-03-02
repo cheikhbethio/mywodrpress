@@ -1,20 +1,20 @@
 <h2 class="page-header">Edition de l'article <i>{{article.title}}</i></h2>
 
 
-<form>
+<form name="editArticleForm">
     <div class="form-group">
         <label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
-        <input class="form-control" name="title" type="text" id="title" placeholder="Titre de l'article" ng-model="article.title">
+        <input class="form-control" name="title" type="text" id="title" placeholder="Titre de l'article" ng-model="article.title" required>
     </div>
 
-    <text-angular ng-model="article.content"></text-angular>
+    <text-angular ng-model="article.content" required></text-angular>
 
     <div class="form-group">
         <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
-        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="article.keywords" ng-list=",">
+        <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="article.keywords" ng-list="," required>
     </div>
 
-    <button type="submit" class="btn btn-primary pull-right" ng-click="editArticle()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder les modifications</button>
+    <button class="btn btn-primary pull-right" ng-click="editArticle()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder les modifications</button>
 
     <div class="checkbox pull-right" style="margin-right: 15px">
         <label>

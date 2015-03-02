@@ -35,21 +35,24 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 }]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', '$localStorage', function($scope, $state, $stateParams, Article, $localStorage){
 	
 	$scope.addArticle = function() {
+		if ($scope.createArticleForm.$valid){ 
+			if(typeof $scope.ispublic === 'undefined')
+				$scope.ispublic = false;
+			
+			var newArticle={
+				title: $scope.title,
+				author : $localStorage.currentUser._id,
+				date : Date.now(),
+				content: $scope.htmlVariable,
+				ispublic : $scope.ispublic,
+				keywords : $scope.keywords
+			};
 
-		if(typeof $scope.ispublic === 'undefined')
-			$scope.ispublic = false;
-		
-		var newArticle={
-			title: $scope.title,
-			author : $localStorage.currentUser._id,
-			date : Date.now(),
-			content: $scope.htmlVariable,
-			ispublic : $scope.ispublic,
-			keywords : $scope.keywords
-		};
-
-		Article.save(newArticle);
-		$state.go('dashboard.indexArticle');
+			Article.save(newArticle);
+			$state.go('dashboard.indexArticle');
+		} else {
+			console.log('Formulaire Invalide.');
+		}
 	}
 
 }]).controller('editArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
@@ -59,8 +62,12 @@ angular.module('myWordPress.admin.article', ['ui.router'])
     });
 
     $scope.editArticle = function(){
-    	Article.update({id: $stateParams.id}, $scope.article);
-    	$state.go('dashboard.indexArticle');
+    	if ($scope.editArticleForm.$valid){ 
+	    	Article.update({id: $stateParams.id}, $scope.article);
+	    	$state.go('dashboard.indexArticle');
+	   	} else {
+			console.log('Formulaire Invalide.');
+		}
     }
 
 }]);
