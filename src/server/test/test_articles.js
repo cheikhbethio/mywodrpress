@@ -13,11 +13,11 @@ describe('article Routing', function() {
     	mongoose.connect('localhost:27017');
     	done();
   	});
-/*
+
   	after(function(done){
   		mongoose.disconnect();
   		done();
-  	});*/
+  	});
 
 	describe('Account Creation', function() {
 	  	var myUser;
@@ -39,7 +39,7 @@ describe('article Routing', function() {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ ': code retourné pour la création de compte pour un articel');
+		          console.log(res.status+ ': code retourné pour la création de compte pour test la creation d\'un article');
 		          myUser = res.body.result;
 		          console.log(myUser);
 		          res.should.have.property('status',200);
@@ -119,6 +119,22 @@ describe('article Routing', function() {
 	    it('should return error when Creation article failed', function(done) {
 		    request(url)
 			.get('/api/articles')
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+
+	//view all articles by author
+	    it('should return error when Creation article failed', function(done) {
+	    	var id_author = myArtcile.author;
+		    request(url)
+			.get('/api/articles_editor/' + id_author)
 			.send()
 			.end(function(err, res) {
 		          if (err) {

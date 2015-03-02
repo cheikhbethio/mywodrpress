@@ -23,6 +23,7 @@ var cookieParser = require('cookie-parser');
 var user     = require('./Route/user.js');
 var page     = require('./Route/page.js');
 var article  = require('./Route/article.js');
+var comment  = require('./Route/commentaire.js');
 var passport = require('./Route/passport.js');
 var menu     = require('./Route/menu.js');
 
@@ -67,7 +68,6 @@ app.post('/api/logout',  function(req, res){
 	res.send(200);
 });
 
-///
 
 /***** Users ******/
 
@@ -93,9 +93,18 @@ app.put('/api/pages/del/:id',page.delarticle);
 app.post('/api/articles', article.create);
 app.get('/api/articles/:id', article.get);
 app.get('/api/articles', article.view);
+app.get('/api/articles_editor/:id', article.getByEditor);
 
 /***** Menus *****/
 
 app.post('/api/menus', menu.createItem);
 app.get('/api/menus', menu.getItems);
 app.post('/api/menus/:id', menu.addPageToItem);
+
+
+
+/*****Commentaires*****/
+
+app.post('/api/comments', comment.create);
+app.get('/api/comments/:id', comment.get);
+//app.get('/api/comments', comment.view);
