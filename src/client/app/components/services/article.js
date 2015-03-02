@@ -4,7 +4,7 @@ angular.module('myWordPress.articleService', ['ngResource'])
 	return $resource('http://localhost:4711/api/articles/:id', {}, {
     	query: {method:'GET', isArray:true},
     	get: {method:'GET', isArray:false},
-    	save: {method:'POST', isArray:true},
+    	save: {method:'POST', isArray:false},
      	update: {method:'PUT', isArray:false},
      	remove : {method : 'DELETE'}
     });

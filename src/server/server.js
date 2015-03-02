@@ -84,13 +84,15 @@ app.put('/api/pages/:id', page.edit);
 app.delete('/api/pages/:id', page.deletePage);
 app.get('/api/pages/:id', page.getPage);
 app.get('/api/pages', page.view);
-app.put('/api/pages/add/:id',page.addarticle);
-app.put('/api/pages/del/:id',page.delarticle);
+app.put('/api/pages/article/:id',page.addarticle);
+app.delete('/api/pages/article/:id',page.delarticle);
 
 /***** Articles *****/
 
 
 app.post('/api/articles', article.create);
+app.put('/api/articles/:id', article.edit);
+app.delete('/api/articles/:id', article.deleteArticle);
 app.get('/api/articles/:id', article.get);
 app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);

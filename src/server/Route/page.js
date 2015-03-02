@@ -60,7 +60,8 @@ exports.deletePage = function(req,res,next){
 };
 
 exports.view = function(req,res,next){
-  Page.find(function (err, result) {
+  Page.find().populate('content').exec(function (err, result) {
+        console.log(result);
         if (err) {
             return next(err);
         } else {
@@ -71,10 +72,12 @@ exports.view = function(req,res,next){
 };
 
 exports.addarticle = function(req,res,next){
+  console.log(req.body);
         Page.findById(req.params.id,function(err,doc){
-              if(err || !doc) return next(err);
-              if(req.body.articleid != null) 
+              if(err) return next(err);
+              if(req.body.id != null) 
                     doc.content.push(req.body.id);
+                  console.log()
               doc.save(function(err,result){
                        if(err || !doc){
                           return next(err);
@@ -89,7 +92,7 @@ exports.addarticle = function(req,res,next){
 exports.delarticle = function(req,res,next){
         Page.findById(req.params.id,function(err,doc){
               if(err || !doc) return next(err);
-              if(req.body.articleid != null) 
+              if(req.body.id != null) 
                     doc.content.splice(doc.content.indexOf(req.body.id),1);
               doc.save(function(err,result){
                        if(err || !doc){
