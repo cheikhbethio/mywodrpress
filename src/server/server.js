@@ -84,8 +84,8 @@ app.put('/api/pages/:id', page.edit);
 app.delete('/api/pages/:id', page.deletePage);
 app.get('/api/pages/:id', page.getPage);
 app.get('/api/pages', page.view);
-app.put('/api/pages/add/:id',page.addarticle);
-app.put('/api/pages/del/:id',page.delarticle);
+app.put('/api/pages/article/:id',page.addarticle);
+app.delete('/api/pages/article/:id',page.delarticle);
 
 /***** Articles *****/
 
