@@ -35,8 +35,6 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 			keywords : $scope.keywords
 		};
 
-		console.log(newArticle);
-
 		Article.save(newArticle);
 		$state.go('dashboard.indexArticle');
 	}
