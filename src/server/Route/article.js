@@ -29,7 +29,6 @@ exports.create = function(req,res,next){
 };
 
 exports.get = function(req,res,next){
-<<<<<<< HEAD
     Article.findById(req.params.id).populate('author').exec(function(err,result){
         if(err){
           return next(err);
@@ -37,15 +36,6 @@ exports.get = function(req,res,next){
           res.json(result);
         }
     });
-=======
-        Article.findById(req.params.id).populate('author').exec(function(err,result){
-               if(err){
-                  return next(err);
-               }else {
-                  res.json(result);
-                }
-        });
->>>>>>> 07e82182216d9cac39621907ebfa4b74e4ae235f
 }; 
         
 exports.getByEditor = function(req,res,next){

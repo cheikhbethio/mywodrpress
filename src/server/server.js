@@ -109,4 +109,4 @@ app.post('/api/menus/:id', menu.addPageToItem);
 
 app.post('/api/comments', comment.create);
 app.get('/api/comments/:id', comment.get);
-//app.get('/api/comments', comment.view);
+//app.delete('/api/comments/:id', comment.deleteComment);

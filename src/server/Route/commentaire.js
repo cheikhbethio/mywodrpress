@@ -38,15 +38,18 @@ exports.create = function(req,res,next){
 
 
 exports.get = function(req,res,next){
-	    Commentaire.find({article : req.params.id} ,(function(err,result){
-	    	if(err){
-	        	return next(err);
-	       	}else {
-	        	res.json(result);
-	        }
+	Commentaire.find({article : req.params.id} ,(function(err,result){
+	   	if(err){
+	       	return next(err);
+    	}else {
+        	res.json(result);
+        }
 	}));
 }; 
      
+exports.deleteComment =function(req, res, next){
+
+};     
 
 
 /*
