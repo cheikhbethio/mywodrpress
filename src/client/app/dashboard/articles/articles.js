@@ -13,14 +13,27 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 		url: '/article/create',
 		templateUrl: 'dashboard/articles/create.html',
 		controller: 'createArticleController'
+	}).state('dashboard.editArticle', {
+		url: '/article/:id/edit',
+		templateUrl: 'dashboard/articles/edit.html',
+		controller: 'editArticleController'
 	});
 
 }])
 
 .controller('indexArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
+	
 	$scope.articles = Article.query();
 
+	$scope.deleteArticle=function(articleId) {
+		if (confirm("Voulez vous vraiment supprimer cet article?") == true) {
+			Article.remove({id: articleId});
+			$scope.articles = Article.query();
+		}
+    }
+
 }]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', '$localStorage', function($scope, $state, $stateParams, Article, $localStorage){
+	
 	$scope.addArticle = function() {
 
 		if(typeof $scope.ispublic === 'undefined')
@@ -38,4 +51,16 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 		Article.save(newArticle);
 		$state.go('dashboard.indexArticle');
 	}
+
+}]).controller('editArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
+	
+	$scope.article = Article.get({id: $stateParams.id}, function(page) {
+        console.log("get article "+$stateParams.id);
+    });
+
+    $scope.editArticle = function(){
+    	Article.update({id: $stateParams.id}, $scope.article);
+    	$state.go('dashboard.indexArticle');
+    }
+
 }]);
