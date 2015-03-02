@@ -20,13 +20,13 @@ var flash        = require('connect-flash');
 var cookieParser = require('cookie-parser');
 
 
-var user     = require('./Route/user.js');
-var page     = require('./Route/page.js');
-var article  = require('./Route/article.js');
-var comment  = require('./Route/commentaire.js');
-var passport = require('./Route/passport.js');
-var menu     = require('./Route/menu.js');
-
+var user        = require('./Route/user.js');
+var page        = require('./Route/page.js');
+var article     = require('./Route/article.js');
+var comment     = require('./Route/commentaire.js');
+var passport    = require('./Route/passport.js');
+var menu        = require('./Route/menu.js');
+var preferences = require("./Route/preferences");
 
 var app = express();
 
@@ -110,3 +110,6 @@ app.post('/api/menus/:id', menu.addPageToItem);
 app.post('/api/comments', comment.create);
 app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id', comment.deleteComment);
+
+
+/***** Preferences *****/

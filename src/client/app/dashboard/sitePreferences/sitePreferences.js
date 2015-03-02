@@ -21,4 +21,6 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 
 		console.log("Site preferences !!");
 
+		$scope.myHTML = "<p>This is HTML from inside the controller</p>";
+
 }]);
