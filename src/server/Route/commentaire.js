@@ -48,7 +48,11 @@ exports.get = function(req,res,next){
 }; 
      
 exports.deleteComment =function(req, res, next){
-
+    Commentaire.findById(req.params.id, function(err,doc){
+        if(err || !doc) return next(err);
+        doc.remove();
+        res.json(doc);
+    });
 };     
 
 

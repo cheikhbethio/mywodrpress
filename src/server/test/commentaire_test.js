@@ -125,8 +125,8 @@ describe('Commentaire Routing', function() {
 		        if (err) {
 		           throw err;
 		        }
-		        myComment = res.body;
-		        console.log(myComment);
+		        myCommentToDelete = res.body;
+		        console.log(myCommentToDelete);
            		res.body.author.should.equal(id_user);
            		res.body.article.should.equal(id_article);
            		res.body.date.should.equal('2000-10-10T00:00:00.000Z');
@@ -137,6 +137,25 @@ describe('Commentaire Routing', function() {
 		        done();
 		    });
 	    });
+
+	//delete one article
+	    it('should return error when Creation article failed', function(done) {
+	    	var id_comment = myCommentToDelete._id;
+		    request(url)
+			.delete('/api/comments/' + id_comment)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status + ': code retourné pour la supression d\'un article');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+
+
+	    
 
 
 	//view all comments for one article
@@ -157,20 +176,5 @@ describe('Commentaire Routing', function() {
 		        done();
 		    });
 	    });
-/*
-	//view all articles
-	    it('should return error when Creation article failed', function(done) {
-		    request(url)
-			.get('/api/articles')
-			.send()
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
-		          res.should.have.property('status',200);
-		          done();
-		    });
-	    });*/
 	});
 });
