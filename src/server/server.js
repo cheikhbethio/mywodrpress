@@ -114,4 +114,4 @@ app.delete('/api/comments/:id', comment.deleteComment);
 
 
 /***** Preferences *****/
-app.get('/api/preferences', preferences.get);
+//app.get('/api/preferences', preferences.get);
