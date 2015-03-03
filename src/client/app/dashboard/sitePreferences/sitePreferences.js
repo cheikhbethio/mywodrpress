@@ -6,7 +6,7 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('dashboard.preferences', {
-		url: 'preferences',
+		url: '/preferences',
 		templateUrl: 'dashboard/sitePreferences/sitePreferences.html',
 		controller: 'sitePreferencesController',
 		data: { 
