@@ -101,7 +101,8 @@ app.get('/api/articles_editor/:id', article.getByEditor);
 
 app.post('/api/menus', menu.createItem);
 app.get('/api/menus', menu.getItems);
-app.post('/api/menus/:id', menu.addPageToItem);
+app.post('/api/menus/page/:id', menu.addPageToItem);
+app.post('/api/menus/menu/:id', menu.addMenuToItem);
 
 
 

@@ -77,7 +77,7 @@ exports.addarticle = function(req,res,next){
               if(err) return next(err);
               if(req.body.id != null) 
                     doc.content.push(req.body.id);
-                  console.log()
+                  console.log(req.body.id)
               doc.save(function(err,result){
                        if(err || !doc){
                           return next(err);
