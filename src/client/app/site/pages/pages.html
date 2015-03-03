@@ -1,5 +1,12 @@
-{{page.title}}
+<div class="blog-post" ng-repeat="article in page.content">
+	        <h2 class="blog-post-title">{{article.title}}</h2>
+	        <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a></p>
 
-<br/>
+	        <div ng-bind-html="article.content"></div>
 
-{{page.content}}
+	        <hr>
+	        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
+	        <div>
+	       		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+	    	</div>
+</div>
