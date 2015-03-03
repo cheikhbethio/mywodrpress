@@ -14,7 +14,7 @@ module.exports.Page = Page;
 
 exports.create = function(req,res,next){
         var reqBody = req.body,
-        pageObj = {title: reqBody.title, content: []};
+        pageObj = {title: reqBody.title};
 
         var model = new Page(pageObj);
         model.save(function(err,doc){
@@ -77,7 +77,7 @@ exports.addarticle = function(req,res,next){
               if(err) return next(err);
               if(req.body.id != null) 
                     doc.content.push(req.body.id);
-                  console.log()
+                  console.log(req.body.id)
               doc.save(function(err,result){
                        if(err || !doc){
                           return next(err);

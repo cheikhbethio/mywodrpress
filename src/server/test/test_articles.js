@@ -1,4 +1,4 @@
-var should = require('should'); 
+/*var should = require('should'); 
 var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
@@ -72,7 +72,7 @@ describe('article Routing', function() {
 		          res.should.have.property('status',200);
 		          done();
 		    });
-	    });
+	    });/*
 
 	//duplicated article
 	    it('should return error when Creation article failed', function(done) {

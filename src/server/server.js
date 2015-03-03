@@ -101,7 +101,8 @@ app.get('/api/articles_editor/:id', article.getByEditor);
 
 app.post('/api/menus', menu.createItem);
 app.get('/api/menus', menu.getItems);
-app.post('/api/menus/:id', menu.addPageToItem);
+app.post('/api/menus/page/:id', menu.addPageToItem);
+app.post('/api/menus/menu/:id', menu.addMenuToItem);
 
 
 
@@ -113,5 +114,8 @@ app.delete('/api/comments/:id', comment.deleteComment);
 
 
 /***** Preferences *****/
+<<<<<<< HEAD
 
 app.get('/api/preferences', preferences.get);
+=======
+>>>>>>> 7fcfc13c77d0503ad72a925b883ff12941871559
