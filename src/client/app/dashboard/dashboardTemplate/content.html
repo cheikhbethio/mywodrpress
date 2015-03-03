@@ -1,9 +1,7 @@
-<div class="container-fluid" style="padding-top: 50px;">
-	<div class="row">
-		<div ng-include="'dashboard/dashboardTemplate/sidebar.html'"></div>
+<div snap-drawer>
+	<div ng-include="'dashboard/dashboardTemplate/sidebar.html'"></div>
+</div snap-drawer>
 
-		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			<div ui-view></div>
-		</div>
-	</div>
-</div>
+<div id="content" snap-content  snap-options="snapOpts">
+		<div ui-view></div>
+</div snap-content>

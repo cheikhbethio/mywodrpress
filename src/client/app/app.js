@@ -15,12 +15,14 @@ angular.module('myWordPress', [
     'myWordPress.articleService',
     'myWordPress.loginService',
     'myWordPress.admin.article',
+    'myWordPress.admin.home',
     'myWordPress.sitePreferences',
 	'ui.bootstrap.showErrors',
 	'ui.router',
 	'contenteditable',
     'ngStorage',    
     'textAngular',
+    'snap',
 	'myWordPress.registration.registration-directive',
     'myWordPress.siteTemplate.siteTemplate-directive'
 ])
@@ -57,7 +59,8 @@ angular.module('myWordPress', [
                 controller: 'dashboardTemplateController'
             },
             'content': {
-                templateUrl: 'dashboard/dashboardTemplate/content.html'
+                templateUrl: 'dashboard/dashboardTemplate/content.html',
+                controller: 'dashboardTemplateController'
             }
         },
         data: { 
