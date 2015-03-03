@@ -1,4 +1,4 @@
-var should = require('should'); 
+ var should = require('should'); 
 var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
@@ -91,10 +91,9 @@ describe('Account Creation', function() {
 });
 
 it('should add an article in a page', function(done){
-  var reqart = {id: myArtcile._id};
   request(url)
-  .put('/api/pages/article/'+myPage._id)
-  .send(reqart)
+  .put('/api/pages/'+myPage._id+'/article/'+myArtcile._id)
+  .send()
   .expect(200)
   .end(function(err,res){
     should.not.exist(err);
@@ -131,7 +130,7 @@ it('should view all page', function(done) {
     done();
   });
 });
-
+/*
  it('should del an article in a page', function(done){
   var reqart = {id: myArtcile._id};
   request(url)
@@ -145,5 +144,21 @@ it('should view all page', function(done) {
     done();
   });
 });
+
+it('should view all page', function(done) {
+  request(url)
+  .get('/api/pages')
+  .send()
+  .end(function(err, res) {
+    if (err) {
+      throw err;
+    }
+    console.log(res.body);
+    res.should.have.property('status',200);
+    done();
+  });
+});
+
+*/
 });
 });

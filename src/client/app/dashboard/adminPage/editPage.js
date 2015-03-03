@@ -13,12 +13,14 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
 
 }])
 
-.controller('editPageController', ['$scope', 'Page','$state','$stateParams',function($scope,Page, $state,$stateParams){
+.controller('editPageController', ['$scope', 'Page','PageArticle','Article','$state','$stateParams',function($scope,Page,PageArticle,Article, $state,$stateParams){
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);
     });
     $scope.editTitle=$scope.page.title;
     $scope.isEdit=false;
+    $scope.boolArticle=false;
+    $scope.articles=Article.query();
  
  $scope.valid=function(){
  	var npage={
@@ -33,13 +35,24 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
  };
 
 
-$scope.reset=function(){
-	$scope.editTitle=$scope.page.title;
+$scope.modeArticle=function(editable){
+	$scope.boolArticle=editable;
 };
- 
- $scope.switchEdit= function(editble){
- 	$scope.isEdit=editble;
+
+ $scope.switchEdit= function(editable){
+ 	$scope.isEdit=editable;
  };
+
+ $scope.delArticle=function(idArt){
+ 	PageArticle.remove({id:$stateParams.id,idart: idArt});
+ 	$scope.page = Page.get({id: $stateParams.id}, function(page) {});
+ }
  	
+
+ $scope.addArticle=function(idArt,article){
+ 	PageArticle.update({id:$stateParams.id,idart: idArt},article);
+ 	$scope.page = Page.get({id: $stateParams.id}, function(page) {});
+
+ }
 
 }]);

@@ -28,7 +28,7 @@ exports.create = function(req,res,next){
 
 exports.getPage = function(req,res,next){
         var id = req.params.id;
-        Page.findById(id, function(err,result){
+        Page.findOne({_id: id}).populate('content').exec(function(err,result){
                      if(err) return next(err);
                     res.json(result);
     });
@@ -72,12 +72,11 @@ exports.view = function(req,res,next){
 };
 
 exports.addarticle = function(req,res,next){
-  console.log(req.body);
+  console.log(req.params.idart);
         Page.findById(req.params.id,function(err,doc){
               if(err) return next(err);
-              if(req.body.id != null) 
-                    doc.content.push(req.body.id);
-                  console.log(req.body.id)
+              if(req.params.idart != null) 
+                    doc.content.push(req.params.idart);
               doc.save(function(err,result){
                        if(err || !doc){
                           return next(err);
@@ -92,8 +91,8 @@ exports.addarticle = function(req,res,next){
 exports.delarticle = function(req,res,next){
         Page.findById(req.params.id,function(err,doc){
               if(err || !doc) return next(err);
-              if(req.body.id != null) 
-                    doc.content.splice(doc.content.indexOf(req.body.id),1);
+              if(req.params.idart != null) 
+                    doc.content.splice(doc.content.indexOf(req.params.idart),1);
               doc.save(function(err,result){
                        if(err || !doc){
                           return next(err);
