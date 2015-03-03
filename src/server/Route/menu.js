@@ -4,22 +4,24 @@ var Schema = mongoose.Schema;
 
 var ItemSchema = new mongoose.Schema({
                         name: String,
-                        items: [{type: Schema.Types.ObjectId, ref:'MenuItem'}]
+                        items: {
+                                pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
+                                menu : [{type: Schema.Types.ObjectId, ref:'Item'}]
+                               }
 });
-
-var MenuItemSchema = new mongoose.Schema({
+/*var MenuItemSchema = new mongoose.Schema({
                         pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
                         menu : [{type: Schema.Types.ObjectId, ref:'Item'}]
 });
-/*var PageSchema = new mongoose.Schema({
+var PageSchema = new mongoose.Schema({
                          title : String,
                          content : String
-});
+});*/
 
 
-var Page = mongoose.model('Page',PageSchema);*/
+/*var Page = mongoose.model('Page',PageSchema);*/
 
-var MenuItem = mongoose.model('MenuItem',MenuItemSchema);
+//var MenuItem = mongoose.model('MenuItem',MenuItemSchema);
 var Item = mongoose.model('Item' ,ItemSchema);
 
 exports.createItem = function(req,res,next){
@@ -36,7 +38,7 @@ exports.createItem = function(req,res,next){
 };
 
 exports.getItems = function(req,res,next){
-                Item.find().populate('items').exec(function(err,result){
+                Item.find().populate('items.pages').populate('items.menu').exec(function(err,result){
                    if(err){
                        return next(err);
                     }else{
@@ -52,7 +54,27 @@ exports.addPageToItem = function(req,res,next){
                               return next(err);
                               }
                            else{
-                              doc.items.push(req.body.pageId);
+                               console.log(req.body);
+                              doc.items.pages.push(req.body._id);
+                              doc.save(function(err,result){
+                               if(err || !result){
+                                  return next(err);
+                                }
+                               else{
+                                  res.json(result);
+                                }
+                             });
+                           }
+                        });
+};
+exports.addMenuToItem = function(req,res,next){
+                     Item.findById(req.params.id, function(err,doc){
+                          if(err || !doc){
+                              return next(err);
+                              }
+                           else{
+                               console.log(req.body);
+                              doc.items.menu.push(req.body._id);
                               doc.save(function(err,result){
                                if(err || !result){
                                   return next(err);
