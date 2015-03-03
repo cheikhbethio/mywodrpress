@@ -7,7 +7,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" ui-sref="dashboard"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> MyWordPress DashBoard</a>
+            <button ng-click="changeArrowOrientation()" snap-toggle="left" class="btn btn-primary navbar-btn pull-left" style="margin-right:10px;">
+                <span ng-show="{{ menuOpen }}" class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> 
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> 
+                <span ng-hide="{{ menuOpen }}" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span> 
+            </button>
+            <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> MyWordPress DashBoard</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">

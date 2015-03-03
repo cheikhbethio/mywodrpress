@@ -3,11 +3,11 @@
 
 angular.module('myWordPress.siteTemplate', ['ui.router'])
 
-.controller('siteTemplateController', ['$scope', '$rootScope', '$location', '$localStorage' , function($scope, $rootScope, $location, $localStorage){
+.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage' , function($scope, $rootScope, $state, $stateParams, $localStorage){
 
 
         $scope.isActiveHeader = function (viewLocation) { 
-        	return viewLocation === $location.path();
+        	return viewLocation === $state.current.name;
         }
 
         $scope.isUserConnected = function() {
