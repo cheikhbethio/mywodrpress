@@ -16,6 +16,7 @@ angular.module('myWordPress', [
     'myWordPress.loginService',
     'myWordPress.admin.article',
     'myWordPress.sitePreferences',
+    'myWordPress.pageArticleService',
 	'ui.bootstrap.showErrors',
 	'ui.router',
 	'contenteditable',
