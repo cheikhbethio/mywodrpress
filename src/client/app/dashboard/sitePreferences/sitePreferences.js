@@ -19,8 +19,16 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 .controller('sitePreferencesController', ['$scope', '$rootScope', 'User', '$localStorage', 
 	function($scope, $rootScope, User, $localStorage){
 
-		console.log("Site preferences !!");
+	$scope.preferences = {
+		apropos: {
+			title: "A propos title",
+			content: "A propos subtitle"
+		},
 
-		$scope.myHTML = "<p>This is HTML from inside the controller</p>";
+		site: {
+			title: "A title",
+			subtitle: "site subtitle"
+		}
+	};
 
 }]);
