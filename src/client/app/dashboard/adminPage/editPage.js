@@ -17,22 +17,28 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);
     });
-    
- $scope.editpage=Page.get({id: $stateParams.id}, function(page) {
-        console.log("get page "+$stateParams.id);
-    });
+    $scope.editTitle=$scope.page.title;
+    $scope.isEdit=false;
  
  $scope.valid=function(){
  	var npage={
  	id : $scope.page._id,
- 	title : $scope.editpage.title
+ 	title : $scope.editTitle
  	};
  	Page.update({id: $stateParams.id},npage);
+ 	$scope.isEdit=false;
+ 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
+        console.log("get page "+$stateParams.id);
+    });
  };
+
+
+$scope.reset=function(){
+	$scope.editTitle=$scope.page.title;
+};
  
- $scope.reset= function(valedit,valinit){
- 	console.log("reset");
-	valedit.title=valinit.title;
+ $scope.switchEdit= function(editble){
+ 	$scope.isEdit=editble;
  };
  	
 

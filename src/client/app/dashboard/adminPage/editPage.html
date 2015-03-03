@@ -1,15 +1,35 @@
-<h2 class="page-header"> Modifier la page {{page._id}} </h2>
+<h2 class="page-header"> Modifier la page: {{page.title}} </h2>
+
+			
+
+			<div>
+
+                <label ng-hide="isEdit == true"> Modifiez le titre de la page :</label>
+              <input type="text" ng-show="isEdit== true" ng-model="editTitle" />
+          
+
+              <button type="button" 
+                      class="btn btn-primary btn-sm"
+                      ng-click="switchEdit(true)"
+                      ng-hide="isEdit == true"                      >
+                       <span class="glyphicon glyphicon-pencil"></span>
+              </button>
+              <button type="button" 
+                      class="btn btn-danger"
+                      ng-click="switchEdit(false)"
+                      ng-show="isEdit == true">
+                      Cancel
+              </button>
+              <button type="button" 
+                      class="btn btn-primary"
+                      ng-click="valid()"
+                      ng-show="isEdit == true">
+                      Save
+              </button>
+              </div>
 
 
+ 
 
-  <label contenteditable="true"
-        ng-model="editpage.title"
-        strip-br="false"
-        select-non-editable="false">
-  </label>
-
-
-
-	<button class="btn btn-default" ng-click="valid()">Valider</button>
-	<button class="btn btn-default" ng-click="reset(editpage,page)">Annuler</button>
+	<a ui-sref="dashboard.adminPage" class="btn btn-default">Retour</a>
 

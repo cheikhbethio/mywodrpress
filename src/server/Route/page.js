@@ -14,7 +14,7 @@ module.exports.Page = Page;
 
 exports.create = function(req,res,next){
         var reqBody = req.body,
-        pageObj = {title: reqBody.title, content: []};
+        pageObj = {title: reqBody.title};
 
         var model = new Page(pageObj);
         model.save(function(err,doc){
