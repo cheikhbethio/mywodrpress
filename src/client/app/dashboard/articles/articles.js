@@ -17,6 +17,10 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 		url: '/article/:id/edit',
 		templateUrl: 'dashboard/articles/edit.html',
 		controller: 'editArticleController'
+	}).state('dashboard.showArticle', {
+		url: '/article/:id',
+		templateUrl: 'dashboard/articles/show.html',
+		controller: 'showArticleController'
 	});
 
 }])
@@ -69,5 +73,11 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 			console.log('Formulaire Invalide.');
 		}
     }
+
+}]).controller('showArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
+	
+	$scope.article = Article.get({id: $stateParams.id}, function(page) {
+        console.log("get article "+$stateParams.id);
+    });
 
 }]);
