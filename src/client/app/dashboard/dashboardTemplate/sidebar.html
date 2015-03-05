@@ -2,7 +2,7 @@
     <ul class="nav nav-sidebar">
       <li snap-close ng-class="{ active: isActiveDashboard('dashboard.home')}"><a ui-sref="dashboard.home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a></li>
       <li snap-close ng-class="{ active: isActiveDashboard('dashboard.adminPage')}"><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Gestion des Pages</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Gestion du Menu</a></li>
+      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.indexMenu')}"><a ui-sref="dashboard.indexMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Gestion du Menu</a></li>
     </ul>
     <ul class="nav nav-sidebar">
       <li snap-close ng-class="{ active: isActiveDashboard('dashboard.indexArticle')}"><a ui-sref="dashboard.indexArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Gestion des Articles</a></li>

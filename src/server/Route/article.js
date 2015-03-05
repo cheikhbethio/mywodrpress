@@ -7,6 +7,7 @@ var ArticleSchema = new mongoose.Schema({
                      author : {type : Schema.Types.ObjectId, ref:'user'},
                      date : Date,
                      ispublic : Boolean,
+                     isHome : Boolean,
                      content : String,
                      keywords : [String]
 });
@@ -47,6 +48,17 @@ exports.getByEditor = function(req,res,next){
 	        }
 	}));	
 };
+
+exports.searchByKeyWord = function(req,res,next){
+      Article.find({keyword :{$in: req.body.keywords}} ,(function(err,result){
+        if(err){
+            return next(err);
+          }else {
+            res.json(result);
+          }
+  }));  
+};
+
 
 exports.view = function(req,res,next){
   Article.find().populate('author').exec((function (err, result) {
@@ -99,4 +111,18 @@ exports.deleteArticle = function(req,res,next){
         res.json(doc);
      });
  
+};
+
+exports.home = function(req,res,next){
+    Article.findById(req.params.id,function(err,doc){
+       doc.isHome = !doc.isHome;
+
+        doc.save(function(err,result){
+            if(err || !doc){
+                return next(err);
+            } else {
+                res.json(result);
+            }
+        });
+  });
 };
