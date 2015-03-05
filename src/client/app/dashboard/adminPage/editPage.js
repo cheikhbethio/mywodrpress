@@ -9,7 +9,11 @@ angular.module('myWordPress.editPage', ['ui.router', 'contenteditable'])
 		url: '/page/:id/edit',
 		templateUrl: 'dashboard/adminPage/editPage.html',
 		controller: 'editPageController'
-	});
+	}).state('dashboard.editHome', {
+        url: '/page/home/edit',
+        templateUrl: 'dashboard/adminPage/editHome.html',
+        controller: 'editPageHomeController'
+    });
 
 }])
 
@@ -54,5 +58,18 @@ $scope.modeArticle=function(editable){
  	$scope.page = Page.get({id: $stateParams.id}, function(page) {});
 
  }
+
+}]).controller('editPageHomeController', ['$scope', 'Page','PageArticle','Article','$state','$stateParams',function($scope,Page,PageArticle,Article, $state,$stateParams){
+    $scope.isEdit=false;
+    $scope.boolArticle=false;
+    $scope.articles=Article.query();
+
+    $scope.modeArticle=function(editable){
+        $scope.boolArticle=editable;
+    };
+
+     $scope.switchEdit= function(editable){
+        $scope.isEdit=editable;
+     };
 
 }]);

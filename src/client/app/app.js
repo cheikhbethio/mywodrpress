@@ -1,24 +1,26 @@
 'use strict';
 
 angular.module('myWordPress', [
+    // site
 	'myWordPress.registration',
 	'myWordPress.siteTemplate',
-	'myWordPress.dashboardTemplate',
 	'myWordPress.connection',
 	'myWordPress.editProfile',
 	'myWordPress.pages',
-	'myWordPress.editPage',
-    'myWordPress.adminPage',
-    'myWordPress.createPage',
-	'myWordPress.userService',
-    'myWordPress.pageService',
-    'myWordPress.articleService',
-    'myWordPress.loginService',
-    'myWordPress.admin.article',
-    'myWordPress.admin.home',
     'myWordPress.sitePreferences',
     'myWordPress.site.article',
-    'myWordPress.pageArticleService',
+    'myWordPress.site.home',
+
+    // admin
+    'myWordPress.editPage',
+    'myWordPress.adminPage',
+    'myWordPress.createPage',
+    'myWordPress.admin.article',
+    'myWordPress.admin.home',
+    'myWordPress.admin.menu',
+    'myWordPress.dashboardTemplate',
+
+    // libs
     'colorpicker.module',
 	'ui.bootstrap.showErrors',
 	'ui.router',
@@ -26,6 +28,15 @@ angular.module('myWordPress', [
     'ngStorage',    
     'textAngular',
     'snap',
+
+    // services
+    'myWordPress.pageArticleService',
+    'myWordPress.userService',
+    'myWordPress.pageService',
+    'myWordPress.articleService',
+    'myWordPress.loginService',
+
+    // directives
 	'myWordPress.registration.registration-directive',
     'myWordPress.siteTemplate.siteTemplate-directive'
 ])
@@ -37,7 +48,6 @@ angular.module('myWordPress', [
 
 	$stateProvider
 	.state("site", {
-		url: '/',
 		views: {
             'header': {
                 templateUrl: 'site/siteTemplate/header.html',
