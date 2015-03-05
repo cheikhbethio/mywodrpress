@@ -20,6 +20,7 @@ angular.module('myWordPress', [
     'myWordPress.sitePreferences',
     'myWordPress.site.article',
     'myWordPress.pageArticleService',
+    'myWordPress.preferenceService',
     'myWordPress.admin.menu',
     'myWordPress.dashboardTemplate',
 
