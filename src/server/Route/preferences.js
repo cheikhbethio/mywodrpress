@@ -10,9 +10,67 @@ var preferencesSchema = new Schema({
 
 	site: {
 		title: String,
-		subtitle: String
+		titlecolor: String,
+		subtitle: String,
+		subtitlecolor: String
 	}
 });
 
-
 var Preferences = mongoose.model('Preferences', preferencesSchema);
+
+exports.preferences = Preferences;
+
+preferencesSchema.pre("save", function(next) {
+    var self = this;
+
+    console.log("pre save: ");
+
+    Preferences.find(function (err, pref) {
+	  if (err) 
+	  	return console.error(err);
+
+	  if(pref.length > 0){
+	  	var err = new Error('Not saving, preferences already set !');
+  		next(err);
+	  }
+	  
+	  next();
+
+	});
+});
+
+var default_pref = new Preferences({
+
+	"apropos": {
+		"title": "A propos title",
+		"content": "A propos subtitle"
+	},
+
+	"site": {
+		"title": "A title",
+		"titlecolor": "#000000",
+		"subtitle": "site subtitle",
+		"subtitlecolor": "#000000"
+	}
+
+});
+
+default_pref.save(function (err, pref) {
+
+	if (err) 
+		return console.error(err);
+
+	console.log("Saved: " + pref);
+
+});
+
+
+exports.get = function(req,res,next){
+
+    Preferences.find(function (err, pref) {
+	 	if (err) 
+	 		return console.error(err);
+	 	
+	  	res.json(pref);
+	})
+};
