@@ -18,6 +18,7 @@ angular.module('myWordPress', [
     'myWordPress.admin.home',
     'myWordPress.sitePreferences',
     'myWordPress.pageArticleService',
+    'myWordPress.preferenceService',
     'colorpicker.module',
 	'ui.bootstrap.showErrors',
 	'ui.router',
