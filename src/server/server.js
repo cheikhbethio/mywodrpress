@@ -87,6 +87,7 @@ app.get('/api/pages', page.view);
 app.put('/api/pages/:id/article/:idart',page.addarticle);
 app.delete('/api/pages/:id/article/:idart',page.delarticle);
 
+
 /***** Articles *****/
 
 
@@ -97,6 +98,7 @@ app.get('/api/articles/:id', article.get);
 app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);
 app.put('/api/articles/home', article.home);
+app.get('/api.articles/keyword' , article.searchByKeyWord);
 
 /***** Menus *****/
 
