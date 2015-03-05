@@ -29,8 +29,15 @@ exports.create = function(req,res,next){
 exports.getPage = function(req,res,next){
         var id = req.params.id;
         Page.findOne({_id: id}).populate('content').exec(function(err,result){
-                     if(err) return next(err);
-                    res.json(result);
+          if(err) return next(err);
+          Page.populate(result,{
+            path: 'content.author',
+            select: 'firstname lastname login',
+            model: 'user'
+          },function(err,doc){
+            if(err) return next(err);
+            res.json(doc);
+          });
     });
 };
 

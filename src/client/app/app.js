@@ -17,6 +17,7 @@ angular.module('myWordPress', [
     'myWordPress.admin.article',
     'myWordPress.admin.home',
     'myWordPress.sitePreferences',
+    'myWordPress.site.article',
     'myWordPress.pageArticleService',
     'myWordPress.preferenceService',
     'colorpicker.module',
