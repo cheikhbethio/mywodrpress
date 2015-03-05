@@ -19,6 +19,7 @@ angular.module('myWordPress', [
     'myWordPress.sitePreferences',
     'myWordPress.site.article',
     'myWordPress.pageArticleService',
+    'myWordPress.searchKeyWord',
     'colorpicker.module',
 	'ui.bootstrap.showErrors',
 	'ui.router',
