@@ -7,7 +7,6 @@ angular.module('myWordPress', [
 	'myWordPress.connection',
 	'myWordPress.editProfile',
 	'myWordPress.pages',
-    'myWordPress.sitePreferences',
     'myWordPress.site.article',
     'myWordPress.site.home',
     'myWordPress.site.searchKeyWord',
@@ -22,6 +21,7 @@ angular.module('myWordPress', [
     'myWordPress.sitePreferences',
     'myWordPress.site.article',
     'myWordPress.pageArticleService',
+    'myWordPress.preferenceService',
     'myWordPress.admin.menu',
     'myWordPress.dashboardTemplate',
 
@@ -41,6 +41,7 @@ angular.module('myWordPress', [
     'myWordPress.pageService',
     'myWordPress.articleService',
     'myWordPress.loginService',
+    'myWordPress.service.articleHome',
 
     // directives
 	'myWordPress.registration.registration-directive',

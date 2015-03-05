@@ -98,7 +98,7 @@ app.get('/api/articles/:id', article.get);
 app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);
 app.get('/api/articles/keyword' , article.searchByKeyWord);
-app.put('/api/articles/home', article.home);
+app.put('/api/articles/home/:id', article.home);
 
 /***** Menus *****/
 
@@ -117,4 +117,4 @@ app.delete('/api/comments/:id', comment.deleteComment);
 
 
 /***** Preferences *****/
-//app.get('/api/preferences', preferences.get);
+app.get('/api/preferences', preferences.get);

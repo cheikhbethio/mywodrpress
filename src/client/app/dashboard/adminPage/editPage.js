@@ -59,17 +59,23 @@ $scope.modeArticle=function(editable){
 
  }
 
-}]).controller('editPageHomeController', ['$scope', 'Page','PageArticle','Article','$state','$stateParams',function($scope,Page,PageArticle,Article, $state,$stateParams){
+}]).controller('editPageHomeController', ['$scope', 'Article', 'ArticleHome', '$state', '$stateParams', function($scope, Article, ArticleHome, $state,$stateParams){
     $scope.isEdit=false;
     $scope.boolArticle=false;
     $scope.articles=Article.query();
+    $scope.articlesChosen=Article.query();
 
-    $scope.modeArticle=function(editable){
+    $scope.modeArticle = function(editable){
         $scope.boolArticle=editable;
     };
 
-     $scope.switchEdit= function(editable){
+    $scope.switchEdit = function(editable){
         $scope.isEdit=editable;
      };
+
+    $scope.switchArticle = function(idArt){
+        ArticleHome.switch({ id: idArt },{});
+        $scope.articlesChosen=Article.query();
+    }
 
 }]);
