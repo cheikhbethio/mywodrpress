@@ -1,7 +1,7 @@
 
 <h2 style="text-align:center">Preferences du site</h2>
 
-Prefs: {{ preferences.preferences | json}}
+Prefs: {{ preferences | json}}
 
 
 <form role="form">
@@ -10,12 +10,12 @@ Prefs: {{ preferences.preferences | json}}
 
 	<div class="form-group">
 		<label for="title_title">Titre du site: </label>
-		<input id="title_title" type="text" class="form-control" ng-model="preferences.current.site.title">
+		<input id="title_title" type="text" class="form-control" ng-model="preferences.site.title">
 	</div>
 
 	<div class="form-group">
 		<label for="title_color">Couleur du titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
-		<input colorpicker id="title_color" class="form-control" ng-style="{'color': preferences.current.site.titlecolor}" ng-model="preferences.current.site.titlecolor" type="text">
+		<input colorpicker id="title_color" class="form-control" ng-style="{'color': preferences.site.titlecolor}" ng-model="preferences.site.titlecolor" type="text">
 	</div>
 
 	<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
@@ -28,12 +28,12 @@ Prefs: {{ preferences.preferences | json}}
 
 	<div class="form-group">
 		<label for="subtitle_title">Sous titre du site: </label>
-		<input id="subtitle_title" type="text" class="form-control" ng-model="preferences.current.site.subtitle">
+		<input id="subtitle_title" type="text" class="form-control" ng-model="preferences.site.subtitle">
 	</div>
 
 	<div class="form-group">
 		<label for="subtitle_color">Couleur du sous titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
-		<input colorpicker id="subtitle_color" class="form-control" ng-model="preferences.current.site.subtitlecolor" type="text">
+		<input colorpicker id="subtitle_color" class="form-control" ng-model="preferences.site.subtitlecolor" type="text">
 	</div>
 
 	<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>

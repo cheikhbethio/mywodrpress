@@ -70,7 +70,7 @@ exports.get = function(req,res,next){
     Preferences.find(function (err, pref) {
 	 	if (err) 
 	 		return console.error(err);
-	 	
-	  	res.json(pref);
+
+	  	res.json(pref[0]);
 	})
 };

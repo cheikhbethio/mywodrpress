@@ -16,12 +16,14 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 
 }])
 
-.controller('sitePreferencesController', ['$scope', '$http','$rootScope', 'Preferences', '$localStorage', 
-	function($scope, $http, $rootScope, Preferences, $localStorage){
+.controller('sitePreferencesController', ['$scope', '$rootScope', 'Preferences', '$localStorage', 
+	function($scope,  $rootScope, Preferences, $localStorage){
 
 	$scope.preferences = Preferences.get();
 
 	$scope.savePreferences = function(){
+
+		//Preferences.put
 
 	};
 
