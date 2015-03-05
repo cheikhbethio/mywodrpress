@@ -13,8 +13,6 @@ angular.module('myWordPress.site.home', ['ui.router'])
 
 }])
 
-.controller('siteHomeController', ['$scope', '$state','$stateParams', function($scope, $state, $stateParams){
-	
-
-
+.controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article',function($scope, $state, $stateParams, Article){
+	$scope.articlesHome = Article.query()
 }]);
