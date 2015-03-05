@@ -5,19 +5,21 @@ angular.module('myWordPress.site.searchKeyWord', ['ui.router'])
 
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
-	$stateProvider.state('site.showArticle', {
+	$stateProvider.state('site.searchKeyWord', {
 		url: 'article/search',
-		templateUrl: 'site/search/show.html',
+		templateUrl: 'site/search/searchShow.html',
 		controller: 'siteSearchController',
-		params: ['keywords']
+		params: {keywords : {array : true}}
 	})
 
 }])
 
-.controller('siteSearchController', ['$scope', '$state','$stateParams', 'searchKeyWord', function($scope, $state, $stateParams, searchKeyWord){
+.controller('siteSearchController', ['$scope', '$state','$stateParams', 'KeyWord', function($scope, $state, $stateParams, KeyWord){
 	
-	$scope.article = Article.get({id: $stateParams.id}, function(page) {
-        console.log("get article "+$stateParams.id);
+	var search= $stateParams.keywords;
+
+	$scope.articles = KeyWord.get({keyword: search}, function(page) {
+        console.log("get article keyword");
     });
 
 }]);$

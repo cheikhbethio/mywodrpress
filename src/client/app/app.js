@@ -10,7 +10,8 @@ angular.module('myWordPress', [
     'myWordPress.sitePreferences',
     'myWordPress.site.article',
     'myWordPress.site.home',
-    'myWordPress.searchKeyWord',
+    'myWordPress.site.searchKeyWord',
+    
 
     // admin
     'myWordPress.editPage',
@@ -34,6 +35,7 @@ angular.module('myWordPress', [
     'snap',
 
     // services
+    'myWordPress.keywordService',
     'myWordPress.pageArticleService',
     'myWordPress.userService',
     'myWordPress.pageService',
