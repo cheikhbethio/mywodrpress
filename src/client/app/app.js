@@ -61,7 +61,8 @@ angular.module('myWordPress', [
                 controller: 'siteTemplateController'
             },
             'content': {
-                templateUrl: 'site/siteTemplate/content.html'
+                templateUrl: 'site/siteTemplate/content.html',
+                controller: 'siteTemplateController'
             },
             'footer': {
                 templateUrl: 'site/siteTemplate/footer.html'

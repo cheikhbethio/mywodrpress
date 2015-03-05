@@ -19,4 +19,8 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
                 delete $rootScope.currentUser;
         	delete $localStorage.currentUser;
         }
+
+        $scope.search= function(key){
+                $state.go('site.searchKeyWord',{keywords: key});
+        }
 }]);

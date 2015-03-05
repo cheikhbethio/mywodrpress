@@ -50,7 +50,7 @@ exports.getByEditor = function(req,res,next){
 };
 
 exports.searchByKeyWord = function(req,res,next){
-      Article.find({keyword :{$in: req.body.keywords}}).populate('author','firstname lastname').exec(function(err,result){
+      Article.find({keywords : req.query.keyword}).populate('author','firstname lastname').exec(function(err,result){
         if(err){
             return next(err);
           }else {

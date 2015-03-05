@@ -17,9 +17,8 @@ angular.module('myWordPress.site.searchKeyWord', ['ui.router'])
 .controller('siteSearchController', ['$scope', '$state','$stateParams', 'KeyWord', function($scope, $state, $stateParams, KeyWord){
 	
 	var search= $stateParams.keywords;
+	$scope.search=search;
 
-	$scope.articles = KeyWord.get({keyword: search}, function(page) {
-        console.log("get article keyword");
-    });
+	$scope.articles = KeyWord.get({keyword: search});
 
 }]);$
