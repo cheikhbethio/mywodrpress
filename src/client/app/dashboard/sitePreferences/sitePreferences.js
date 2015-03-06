@@ -23,7 +23,11 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 
 	$scope.savePreferences = function(){
 
-		//Preferences.put
+		Preferences.save($scope.preferences, function(response) {
+			console.log("Correct put response: " + response);
+		}, function(error){
+			console.log("Response: " + error);
+		});
 
 	};
 
