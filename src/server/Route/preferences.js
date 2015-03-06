@@ -76,9 +76,7 @@ exports.get = function(req,res,next){
 };
 
 exports.edit = function(req,res,next){
-
-
-
+	
 	console.log("ID: " + req.body._id);
 	console.log("Body: " + JSON.stringify(req.body.site));
 

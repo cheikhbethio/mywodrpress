@@ -26,7 +26,7 @@ var article     = require('./Route/article.js');
 var comment     = require('./Route/commentaire.js');
 var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
-var preferences = require("./Route/preferences");
+var preferences = require('./Route/preferences');
 
 var app = express();
 
@@ -102,12 +102,14 @@ app.put('/api/articles/home/:id', article.home);
 
 /***** Menus *****/
 
-app.post('/api/menus', menu.createItem);
+/*app.post('/api/menus', menu.createItem);
 app.get('/api/menus', menu.getItems);
 app.post('/api/menus/page/:id', menu.addPageToItem);
-app.post('/api/menus/menu/:id', menu.addMenuToItem);
+app.post('/api/menus/menu/:id', menu.addMenuToItem);*/
 
-
+app.get('/api/menus', menu.getMenus);
+app.post('/api/menus', menu.postMenu);
+app.put('/api/menus', menu.editMenu);
 
 /*****Commentaires*****/
 

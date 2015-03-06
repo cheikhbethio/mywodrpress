@@ -1,89 +1,45 @@
 var mongoose = require('mongoose');
-//var page = require('./page.js');
 var Schema = mongoose.Schema;
 
-var ItemSchema = new mongoose.Schema({
-                        name: String,
-                        items: {
-                                pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
-                                menu : [{type: Schema.Types.ObjectId, ref:'Item'}]
-                               }
+var MenuSchema = new mongoose.Schema({
+  name: String,
+  single: Boolean,
+  page: {type: Schema.Types.ObjectId, ref:'Page'},
+  dropdown: [{type: Schema.Types.ObjectId, ref:'Page'}]
 });
-/*var MenuItemSchema = new mongoose.Schema({
-                        pages: [{type: Schema.Types.ObjectId, ref:'Page'}],
-                        menu : [{type: Schema.Types.ObjectId, ref:'Item'}]
-});
-var PageSchema = new mongoose.Schema({
-                         title : String,
-                         content : String
-});*/
 
+var Menus = mongoose.model('Menus', MenuSchema);
 
-/*var Page = mongoose.model('Page',PageSchema);*/
+exports.menus = Menus;
 
-//var MenuItem = mongoose.model('MenuItem',MenuItemSchema);
-var Item = mongoose.model('Item' ,ItemSchema);
+exports.getMenus = function(req, res, next){
+  Menus.find(function (err, menu) {
+    if (err) 
+      return console.error(err);
 
-exports.createItem = function(req,res,next){
-       var itemObj = {name : req.body.name};
-       var model = new Item(itemObj);
-        model.save(function(err,doc){
-                       if(err || !doc){
-                           return next(err);
-                         } else {
-                               res.json(doc);       
-                        }
-            });
-
+    res.json(menu);
+  });
 };
 
-exports.getItems = function(req,res,next){
-                Item.find().populate('items.pages').populate('items.menu').exec(function(err,result){
-                   if(err){
-                       return next(err);
-                    }else{
-                        res.json(result);
-                        console.log(result);
-                       }
-                  });
+exports.postMenu = function(req, res, next){
+  Menus.save(function(err, menu){
+    if(err)
+      return console.error(err);
+
+    console.log("Successfully saved the menu !");
+  });
 };
 
-exports.addPageToItem = function(req,res,next){
-                     Item.findById(req.params.id, function(err,doc){
-                          if(err || !doc){
-                              return next(err);
-                              }
-                           else{
-                               console.log(req.body);
-                              doc.items.pages.push(req.body._id);
-                              doc.save(function(err,result){
-                               if(err || !result){
-                                  return next(err);
-                                }
-                               else{
-                                  res.json(result);
-                                }
-                             });
-                           }
-                        });
-};
-exports.addMenuToItem = function(req,res,next){
-                     Item.findById(req.params.id, function(err,doc){
-                          if(err || !doc){
-                              return next(err);
-                              }
-                           else{
-                               console.log(req.body);
-                              doc.items.menu.push(req.body._id);
-                              doc.save(function(err,result){
-                               if(err || !result){
-                                  return next(err);
-                                }
-                               else{
-                                  res.json(result);
-                                }
-                             });
-                           }
-                        });
+exports.editMenu = function(req, res, next){
+  
+  console.log("ID: " + req.body._id);
+
+  Menus.findByIdAndUpdate(req.body._id,  req.body, function(err, menu){
+    if(err)
+      console.log("Error !!");
+
+    res.send(200);
+  });
+
 };
 
