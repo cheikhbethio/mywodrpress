@@ -15,6 +15,9 @@ angular.module('myWordPress.site.article', ['ui.router'])
 
 .controller('siteArticleController', ['$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', function($scope, $state, $stateParams,$localStorage, Article,Commentaire){
 	
+
+   $scope.boolformulaire = false;
+   
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
     });
@@ -28,6 +31,15 @@ angular.module('myWordPress.site.article', ['ui.router'])
                   console.log(newComment);
                   Commentaire.save(newComment);
                   console.log("sauvegarde effectuée");
-               }
+                  $state.go('site.showArticle');
+               };
+
+        $scope.modeFormulaire = function(editable){
+        $scope.boolformulaire=editable;
+    };
+
+    $scope.commentList = Commentaire.get({id: $stateParams.id},function(){
+      console.log('sds,dsd;:s');
+    });
 
 }]);
