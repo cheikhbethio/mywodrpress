@@ -72,5 +72,26 @@ exports.get = function(req,res,next){
 	 		return console.error(err);
 
 	  	res.json(pref[0]);
-	})
+	});
+};
+
+exports.edit = function(req,res,next){
+
+
+
+	console.log("ID: " + req.body._id);
+	console.log("Body: " + JSON.stringify(req.body.site));
+
+	var site = req.body.site;
+	var apropos = req.body.apropos;
+
+	Preferences.findByIdAndUpdate(req.body._id,  {site: site, apropos: apropos}, function(err, pref){
+		if(err)
+			console.log("Error !!");
+
+		res.send(pref);
+	});
+
+	
+
 };
