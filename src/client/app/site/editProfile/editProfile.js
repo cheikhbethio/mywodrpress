@@ -6,7 +6,7 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('site.editprofile', {
-		url: 'editprofile',
+		url: '/editprofile',
 		templateUrl: 'site/editProfile/editProfile.html',
 		controller: 'editProfileController',
 		data: { 
