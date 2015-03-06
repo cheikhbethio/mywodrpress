@@ -21,34 +21,33 @@ angular.module('myWordPress.site.article', ['ui.router'])
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
     });
+
     $scope.addComment=function(){
+
     	var newComment={
-    		           author : $localStorage.currentUser._id,
-                   article :$scope.article._id,
-                   date : Date.now(),
-                   content : $scope.comment.content
-                  };
-                  console.log(newComment);
-                  Commentaire.save(newComment, function(res){
-              	    Commentaire.get({id: $stateParams.id},function(res){
-              	    	$scope.commentList = res;
-				      console.log('sds,dsd;:s');
-				    });
-                  //	$scope.commentList.push(newComment);
-                  	$scope.comment.content = "";
-                  	$scope.boolformulaire=false;
-                  });
-                  console.log("sauvegarde effectuée");
+			author : $localStorage.currentUser._id,
+			article :$scope.article._id,
+			date : Date.now(),
+			content : $scope.comment.content
+		};
 
-                  $state.go('site.showArticle');
-               };
+		Commentaire.save(newComment, function(res){
 
-        $scope.modeFormulaire = function(editable){
+			Commentaire.get({id: $stateParams.id},function(res){
+				$scope.commentList = res;
+			});
+
+			$scope.comment.content = "";
+			$scope.boolformulaire=false;
+		});
+	};
+
+    $scope.modeFormulaire = function(editable){
         $scope.boolformulaire=editable;
     };
 
     $scope.commentList = Commentaire.get({id: $stateParams.id},function(){
-      console.log('sds,dsd;:s');
+    	console.log('sds,dsd;:s');
     });
 
 }]);
