@@ -2,43 +2,47 @@
 
 <!-- Prefs: {{ preferences | json}} -->
 
-
-<form role="form">
-
+<div class="col-md-6">
 	<h2 class="page-header">Titre</h2>
+	<form role="form">
 
-	<div class="form-group">
-		<label for="title_title">Titre du site: </label>
-		<input id="title_title" type="text" class="form-control" ng-model="preferences.site.title">
-	</div>
 
-	<div class="form-group">
-		<label for="title_color">Couleur du titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
+		<div class="form-group">
+			<label for="title_title">Titre du site: </label>
+			<input id="title_title" type="text" class="form-control" ng-model="preferences.site.title">
+		</div>
 
-		<input colorpicker colorpicker-position="right" id="title_color" class="form-control" ng-style="{'color': preferences.site.titlecolor}" ng-model="preferences.site.titlecolor" type="text">
-	</div>
+		<div class="form-group">
+			<label for="title_color">Couleur du titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
 
-	<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
+			<input colorpicker colorpicker-position="right" id="title_color" class="form-control" ng-style="{'color': preferences.site.titlecolor}" ng-model="preferences.site.titlecolor" type="text">
+		</div>
 
-</form> 
+		<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
 
+	</form> 
+</div>
+
+
+
+<div class="col-md-6">
 	<h2 class="page-header">Sous titre</h2>
+	<form role="form">
 
-<form role="form">
+		<div class="form-group">
+			<label for="subtitle_title">Sous titre du site: </label>
+			<input id="subtitle_title" type="text" class="form-control" ng-model="preferences.site.subtitle">
+		</div>
 
-	<div class="form-group">
-		<label for="subtitle_title">Sous titre du site: </label>
-		<input id="subtitle_title" type="text" class="form-control" ng-model="preferences.site.subtitle">
-	</div>
+		<div class="form-group">
+			<label for="subtitle_color">Couleur du sous titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
+			<input colorpicker colorpicker-position="right" id="subtitle_color" class="form-control" ng-model="preferences.site.subtitlecolor" type="text" />
+		</div>
 
-	<div class="form-group">
-		<label for="subtitle_color">Couleur du sous titre (cliquez sur le champ pour ouvrir le selecteur de couleur): </label>
-		<input colorpicker colorpicker-position="right" id="subtitle_color" class="form-control" ng-model="preferences.site.subtitlecolor" type="text" />
-	</div>
-
-	<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
-	
-</form> 
+		<button type="submit" class="btn btn-primary pull-right" ng-click="savePreferences()">Sauvegarder</button>
+		
+	</form>
+</div>
 
 
 <!-- <form role="form">

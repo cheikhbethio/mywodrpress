@@ -11,8 +11,11 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 		controller: 'indexMenuController'
 	})
 
-}]).controller('indexMenuController', ['$scope', '$state','$stateParams', function($scope, $state, $stateParams){
-	
+}]).controller('indexMenuController', ['$scope', '$state','$stateParams', 'Page', function($scope, $state, $stateParams, Page){
+	$scope.boolAdd = false;
 
+	$scope.showAddMenu = function(){
+		$scope.boolAdd = true;
+	}
 
 }]);
