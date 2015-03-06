@@ -38,6 +38,7 @@ angular.module('myWordPress', [
     'ngStorage',    
     'textAngular',
     'snap',
+    'ngToast',
 
     // services
     'myWordPress.keywordService',
@@ -94,7 +95,19 @@ angular.module('myWordPress', [
         }
 	});
 
-}]).run(function ($rootScope,  $state) {
+}])
+
+.config(['ngToastProvider', function(ngToast) {
+    ngToast.configure({
+      verticalPosition: 'bottom',
+      horizontalPosition: 'center',
+      maxNumber: 1,
+      dismissOnTimeout: true,
+      timeout: 2000
+    });
+}])
+
+.run(function ($rootScope,  $state) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;

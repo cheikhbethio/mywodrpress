@@ -16,8 +16,8 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 
 }])
 
-.controller('sitePreferencesController', ['$scope', '$rootScope', 'Preferences', '$localStorage', 
-	function($scope,  $rootScope, Preferences, $localStorage){
+.controller('sitePreferencesController', ['$scope', '$rootScope', 'Preferences', '$localStorage', 'ngToast', 
+	function($scope,  $rootScope, Preferences, $localStorage, ngToast){
 
 	$scope.preferences = Preferences.get();
 
@@ -25,6 +25,7 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 
 		Preferences.save($scope.preferences, function(response) {
 			console.log("Correct put response: " + response);
+			ngToast.create('Modifications enregistrées !');
 		}, function(error){
 			console.log("Response: " + error);
 		});
