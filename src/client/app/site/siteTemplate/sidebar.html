@@ -9,10 +9,14 @@
               <div class="form-group">
                 <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Recherche par mot clé:
                 </label>
-                <div>
-                  <input class="form-control" name="searchkeyword" type="text" id="searchkeyword" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list=",">
-                  <button class="btn btn-primary btn-sm pull-right" ng-click="search(keywords)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
-                </div>
+
+                <div class="input-group">
+                   <input class="form-control" name="searchkeyword" type="text" id="searchkeyword" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list=",">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" ng-click="search(keywords)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
+                  </span>
+                </div><!-- /input-group -->
+            </form>
 
             <h4>Archives</h4>
             <ol class="list-unstyled">
