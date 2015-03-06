@@ -13,10 +13,21 @@ angular.module('myWordPress.site.article', ['ui.router'])
 
 }])
 
-.controller('siteArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
+.controller('siteArticleController', ['$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', function($scope, $state, $stateParams,$localStorage, Article,Commentaire){
 	
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
     });
+    $scope.addComment=function(){
+    	var newComment={
+    		           author : $localStorage.currentUser._id,
+                   article :$scope.article._id,
+                   date : Date.now(),
+                   content : $scope.comment.content
+                  };
+                  console.log(newComment);
+                  Commentaire.save(newComment);
+                  console.log("sauvegarde effectuée");
+               }
 
 }]);

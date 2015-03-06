@@ -11,3 +11,12 @@
 	</div>
 	<hr>
 </div>
+<div class = "container">
+	<form name ="createCommentForm">
+		<div class="form-group">
+			 <label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Laisser un commentaire</label></br>
+         <textarea rows="6" cols="60" ng-model="comment.content" required></textarea>
+     </div>
+     <button class="btn btn-primary pull-left" ng-click="addComment()">Commenter</button>
+ </form>
+</div>
