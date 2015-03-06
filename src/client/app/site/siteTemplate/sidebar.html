@@ -4,6 +4,16 @@
             <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
           </div>
           <div class="sidebar-module">
+
+            <form name="SearchArticleForm">
+              <div class="form-group">
+                <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Recherche par mot clé:
+                </label>
+                <div>
+                  <input class="form-control" name="searchkeyword" type="text" id="searchkeyword" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list=",">
+                  <button class="btn btn-primary btn-sm pull-right" ng-click="search(keywords)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button></div>
+                </div>
+
             <h4>Archives</h4>
             <ol class="list-unstyled">
               <li><a href="#">March 2014</a></li>

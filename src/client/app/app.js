@@ -7,10 +7,10 @@ angular.module('myWordPress', [
 	'myWordPress.connection',
 	'myWordPress.editProfile',
 	'myWordPress.pages',
-    'myWordPress.sitePreferences',
     'myWordPress.site.article',
     'myWordPress.site.home',
-    'myWordPress.searchKeyWord',
+    'myWordPress.site.searchKeyWord',
+    
 
     // admin
     'myWordPress.editPage',
@@ -35,11 +35,13 @@ angular.module('myWordPress', [
     'snap',
 
     // services
+    'myWordPress.keywordService',
     'myWordPress.pageArticleService',
     'myWordPress.userService',
     'myWordPress.pageService',
     'myWordPress.articleService',
     'myWordPress.loginService',
+    'myWordPress.service.articleHome',
 
     // directives
 	'myWordPress.registration.registration-directive',
@@ -59,7 +61,8 @@ angular.module('myWordPress', [
                 controller: 'siteTemplateController'
             },
             'content': {
-                templateUrl: 'site/siteTemplate/content.html'
+                templateUrl: 'site/siteTemplate/content.html',
+                controller: 'siteTemplateController'
             },
             'footer': {
                 templateUrl: 'site/siteTemplate/footer.html'

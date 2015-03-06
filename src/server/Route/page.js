@@ -32,7 +32,7 @@ exports.getPage = function(req,res,next){
           if(err) return next(err);
           Page.populate(result,{
             path: 'content.author',
-            select: 'firstname lastname login',
+            select: 'firstname lastname',
             model: 'user'
           },function(err,doc){
             if(err) return next(err);

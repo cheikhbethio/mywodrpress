@@ -1,7 +1,7 @@
-angular.module('myWordPress.searchKeyWord', ['ngResource'])
+angular.module('myWordPress.keywordService', ['ngResource'])
 
-.factory('searchKeyWord', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/articles/keyword', {}, {    	
+.factory('KeyWord', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/search/article', {}, {    	
     	get: {method:'GET', isArray:true}
     });
   }]);
