@@ -5,16 +5,21 @@ var mongoose = require('mongoose');
 var bcrypt=require('bcrypt');
 var mydb     = require('../Route/user.js');
 //var winston = require('winston');
- /*
+ 
 describe('User Routing', function() {
   	var url = 'http://localhost:4711';
- 	*/
- 	/*before(function(done) {
+ 	
+ 	before(function(done) {
     	mongoose.connect('localhost:27017');
     	done();
-  	});*/
+  	});
 
-	  /*
+ 	after(function(done) {
+    	mongoose.disconnect();
+    	done();
+  	});
+
+	  
 	describe('Account Creation', function() {
 	  	var myUser;
 	  	var createdAcount = {
@@ -197,14 +202,3 @@ describe('User Routing', function() {
 
 
 
-
-
-
-/*
-
-app.post('/api/users', user.create);
-app.put('/api/users/:id', user.edit);
-app.get('/api/users/:id', user.get);
-app.get('/api/users', user.view);
-
-*/
