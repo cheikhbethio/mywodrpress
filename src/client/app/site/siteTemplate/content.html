@@ -1,7 +1,10 @@
 <div class="container" class="scrollable">
 	<div class="blog-header">
-    	<h1 class="blog-title">MyWordPress</h1>
-    	<p class="lead blog-description">Template de base</p>
+
+    	<h1 class="blog-title" ng-style="{ 'color': preferences.site.titlecolor }">{{ preferences.site.title }}</h1>
+
+    	<p class="lead blog-description">{{ preferences.site.subtitle }}</p>
+
   	</div>
 
   	<div class="row">
