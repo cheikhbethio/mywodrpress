@@ -29,8 +29,17 @@ angular.module('myWordPress.site.article', ['ui.router'])
                    content : $scope.comment.content
                   };
                   console.log(newComment);
-                  Commentaire.save(newComment);
+                  Commentaire.save(newComment, function(res){
+              	    Commentaire.get({id: $stateParams.id},function(res){
+              	    	$scope.commentList = res;
+				      console.log('sds,dsd;:s');
+				    });
+                  //	$scope.commentList.push(newComment);
+                  	$scope.comment.content = "";
+                  	$scope.boolformulaire=false;
+                  });
                   console.log("sauvegarde effectuée");
+
                   $state.go('site.showArticle');
                };
 
