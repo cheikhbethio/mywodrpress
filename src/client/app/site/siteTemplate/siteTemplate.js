@@ -3,8 +3,17 @@
 
 angular.module('myWordPress.siteTemplate', ['ui.router'])
 
-.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage' , function($scope, $rootScope, $state, $stateParams, $localStorage){
+.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 
+        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences){
 
+        $scope.preferences = Preferences.get(function(succ){
+                console.log("succes");
+                console.log("prefs title: " + $scope.preferences.site.subtitle);
+        }, function(err){
+                console.log("error");
+        });
+        //console.log("prefs title: " + $scope.preferences.site.subtitle);
+        
 
         $scope.isActiveHeader = function (viewLocation) { 
         	return viewLocation === $state.current.name;
