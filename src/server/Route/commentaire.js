@@ -48,7 +48,7 @@ exports.get = function(req,res,next){
 }; 
    */
 exports.get = function(req,res,next){   
-	Commentaire.find(req.params.id).populate('author').exec(function(err,result){
+	Commentaire.find({article : req.params.id}).populate('author').exec(function(err,result){
 		   	if(err){
 		       	return next(err);
 	    	}else {
