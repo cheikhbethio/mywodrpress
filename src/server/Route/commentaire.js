@@ -36,7 +36,7 @@ exports.create = function(req,res,next){
                
 };
 
-
+/*
 exports.get = function(req,res,next){
 	Commentaire.find({article : req.params.id} ,(function(err,result){
 	   	if(err){
@@ -46,7 +46,17 @@ exports.get = function(req,res,next){
         }
 	}));
 }; 
-     
+   */
+exports.get = function(req,res,next){   
+	Commentaire.find(req.params.id).populate('author').exec(function(err,result){
+		   	if(err){
+		       	return next(err);
+	    	}else {
+	        	res.json(result);
+	        }
+		});
+}
+
 exports.deleteComment =function(req, res, next){
     Commentaire.findById(req.params.id, function(err,doc){
         if(err || !doc) return next(err);
@@ -54,27 +64,3 @@ exports.deleteComment =function(req, res, next){
         res.json(doc);
     });
 };     
-
-
-/*
-exports.get = function(req,res,next){
-	    Commentaire.findById(req.params.id).populate('article').exec(function(err,result){
-	    	if(err){
-	        	return next(err);
-	       	}else {
-	        	res.json(result);
-	        }
-	});
-}; 
-      
-exports.view = function(req,res,next){
-	Article.find().populate('author').exec((function (err, result) {
-	    if (err) {
-	        return next(err);
-	    } else {
-	        res.json(result);
-	    }
-	}));
-
-};
-*/
