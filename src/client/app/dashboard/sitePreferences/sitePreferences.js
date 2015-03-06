@@ -16,19 +16,17 @@ angular.module('myWordPress.sitePreferences', ['ui.router'])
 
 }])
 
-.controller('sitePreferencesController', ['$scope', '$rootScope', 'User', '$localStorage', 
-	function($scope, $rootScope, User, $localStorage){
+.controller('sitePreferencesController', ['$scope', '$rootScope', 'Preferences', '$localStorage', 
+	function($scope,  $rootScope, Preferences, $localStorage){
 
-	$scope.preferences = {
-		apropos: {
-			title: "A propos title",
-			content: "A propos subtitle"
-		},
+	$scope.preferences = Preferences.get();
 
-		site: {
-			title: "A title",
-			subtitle: "site subtitle"
-		}
+	$scope.savePreferences = function(){
+
+		//Preferences.put
+
 	};
+
+	console.log("Preferences : " + $scope.preferences);
 
 }]);

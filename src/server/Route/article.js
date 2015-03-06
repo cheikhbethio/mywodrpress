@@ -7,6 +7,7 @@ var ArticleSchema = new mongoose.Schema({
                      author : {type : Schema.Types.ObjectId, ref:'user'},
                      date : Date,
                      ispublic : Boolean,
+                     isHome : Boolean,
                      content : String,
                      keywords : [String]
 });
@@ -29,7 +30,7 @@ exports.create = function(req,res,next){
 };
 
 exports.get = function(req,res,next){
-    Article.findById(req.params.id).populate('author').exec(function(err,result){
+    Article.findById(req.params.id).populate('author','firstname lastname').exec(function(err,result){
         if(err){
           return next(err);
         }else {
@@ -39,17 +40,28 @@ exports.get = function(req,res,next){
 }; 
         
 exports.getByEditor = function(req,res,next){
-	    Article.find({author : req.params.id} ,(function(err,result){
+	    Article.find({author : req.params.id}).populate('author','firstname lastname').exec(function(err,result){
 	    	if(err){
 	        	return next(err);
 	       	}else {
 	        	res.json(result);
 	        }
-	}));	
+	});	
 };
 
+exports.searchByKeyWord = function(req,res,next){
+      Article.find({keywords : req.query.keyword}).populate('author','firstname lastname').exec(function(err,result){
+        if(err){
+            return next(err);
+          }else {
+            res.json(result);
+          }
+  });  
+};
+
+
 exports.view = function(req,res,next){
-  Article.find().populate('author').exec((function (err, result) {
+  Article.find().populate('author','firstname lastname').exec((function (err, result) {
         if (err) {
             return next(err);
         } else {
@@ -99,4 +111,18 @@ exports.deleteArticle = function(req,res,next){
         res.json(doc);
      });
  
+};
+
+exports.home = function(req,res,next){
+    Article.findById(req.params.id,function(err,doc){
+       doc.isHome = !doc.isHome;
+
+        doc.save(function(err,result){
+            if(err || !doc){
+                return next(err);
+            } else {
+                res.json(result);
+            }
+        });
+  });
 };
