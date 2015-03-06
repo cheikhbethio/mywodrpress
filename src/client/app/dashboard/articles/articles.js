@@ -80,4 +80,5 @@ angular.module('myWordPress.admin.article', ['ui.router'])
         console.log("get article "+$stateParams.id);
     });
 
+    
 }]);

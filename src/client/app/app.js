@@ -13,6 +13,7 @@ angular.module('myWordPress', [
 	'myWordPress.userService',
     'myWordPress.pageService',
     'myWordPress.articleService',
+    'myWordPress.commentService',
     'myWordPress.loginService',
     'myWordPress.admin.article',
     'myWordPress.admin.home',
