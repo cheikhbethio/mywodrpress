@@ -21,6 +21,10 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
         	return viewLocation === $state.current.name;
         }
 
+        $scope.isActiveHeaderPage = function (stateParamsId) { 
+                return stateParamsId === $state.params.id;
+        }
+
         $scope.isUserConnected = function() {
         	$rootScope.currentUser = $localStorage.currentUser;
         	return typeof $localStorage.currentUser != 'undefined';

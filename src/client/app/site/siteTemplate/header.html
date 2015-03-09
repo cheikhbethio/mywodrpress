@@ -34,7 +34,7 @@
 
         <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
             <a ng-class="{ active: isActiveHeader('site.home')}" class="blog-nav-item" ui-sref="site.home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
-            <a ng-class="{ active: isActiveHeader('site.page({id : menu.page._id})')}" class="blog-nav-item" ng-repeat="menu in menus" ui-sref="site.page({id : menu.page._id})"> {{menu.name}} {{meu.page}}</a>
+            <a ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}" class="blog-nav-item" ng-repeat="menu in menus" ui-sref="site.pages({id : menu.page})"> {{menu.name}}</a>
         </nav>
 
         <div ng-hide="isUserConnected()" >
