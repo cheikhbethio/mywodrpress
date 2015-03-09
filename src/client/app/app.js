@@ -100,7 +100,7 @@ angular.module('myWordPress', [
 
 .config(['ngToastProvider', function(ngToast) {
     ngToast.configure({
-      verticalPosition: 'right',
+      verticalPosition: 'bottom',
       horizontalPosition: 'center',
       maxNumber: 1,
       dismissOnTimeout: true,

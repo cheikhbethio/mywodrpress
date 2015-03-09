@@ -2,7 +2,7 @@
 
 <!-- Prefs: {{ preferences | json}} -->
 
-<toast></toast>
+
 
 <!-- Apercu -->
 
@@ -35,11 +35,13 @@
 
 <hr>
 
-<div id="div_peek" ng-style="{ 'background-color': preferences.site.bgcolor }">
-	<div ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
+<div id="div_peek" class="well" >
+	<div ng-style="{ 'background-color': preferences.site.bgcolor }" style="background-color: white" ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
 </div>
 
 <hr>
+
+<toast></toast>
 
 <div class="row">
 
