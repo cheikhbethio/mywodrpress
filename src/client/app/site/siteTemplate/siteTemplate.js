@@ -3,8 +3,10 @@
 
 angular.module('myWordPress.siteTemplate', ['ui.router'])
 
-.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 
-        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences){
+.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 'Menu', 
+        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences, Menu){
+
+        $scope.menus = Menu.query();
 
         $scope.preferences = Preferences.get(function(succ){
                 console.log("succes");

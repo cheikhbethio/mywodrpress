@@ -22,19 +22,18 @@ exports.getMenus = function(req, res, next){
 };
 
 exports.postMenu = function(req, res, next){
-  Menus.save(function(err, menu){
+  var menu= new Menus(req.body);
+  menu.save(function(err, menu){
     if(err)
-      return console.error(err);
+      return res.send(err);
+    res.send(menu);
 
     console.log("Successfully saved the menu !");
   });
 };
 
 exports.editMenu = function(req, res, next){
-  
-  console.log("ID: " + req.body._id);
-
-  Menus.findByIdAndUpdate(req.body._id,  req.body, function(err, menu){
+  Menus.findByIdAndUpdate(req.params.id,  req.body, function(err, menu){
     if(err)
       console.log("Error !!");
 

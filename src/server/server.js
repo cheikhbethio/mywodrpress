@@ -109,7 +109,7 @@ app.post('/api/menus/menu/:id', menu.addMenuToItem);*/
 
 app.get('/api/menus', menu.getMenus);
 app.post('/api/menus', menu.postMenu);
-app.put('/api/menus', menu.editMenu);
+app.put('/api/menus/:id', menu.editMenu);
 
 /*****Commentaires*****/
 

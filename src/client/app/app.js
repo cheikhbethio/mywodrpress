@@ -49,6 +49,7 @@ angular.module('myWordPress', [
     'myWordPress.articleService',
     'myWordPress.loginService',
     'myWordPress.service.articleHome',
+    'myWordPress.service.menuService',
 
     // directives
 	'myWordPress.registration.registration-directive',

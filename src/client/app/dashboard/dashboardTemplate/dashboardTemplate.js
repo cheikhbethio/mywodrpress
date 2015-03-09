@@ -12,14 +12,7 @@ angular.module('myWordPress.dashboardTemplate', ['ui.router'])
         }
 
         $scope.snapOpts = {
-      		disable: 'right'
-    	};
-
-    	$scope.changeArrowOrientation = function() {
-    		if($scope.menuOpen == false){
-    			$scope.menuOpen = true
-    		} else if ($scope.menuOpen == true) {
-    			$scope.menuOpen = false;
-    		}
+      		disable: 'right',
+            touchToDrag: false
     	};
 }]);
