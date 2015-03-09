@@ -39,6 +39,7 @@ angular.module('myWordPress', [
     'textAngular',
     'snap',
     'ngToast',
+    'minicolors',
 
     // services
     'myWordPress.keywordService',
@@ -99,13 +100,19 @@ angular.module('myWordPress', [
 
 .config(['ngToastProvider', function(ngToast) {
     ngToast.configure({
-      verticalPosition: 'bottom',
+      verticalPosition: 'right',
       horizontalPosition: 'center',
       maxNumber: 1,
       dismissOnTimeout: true,
       timeout: 2000
     });
 }])
+
+.config(function (minicolorsProvider) {
+    angular.extend(minicolorsProvider.defaults, {
+        theme: 'bootstrap'
+    });
+})
 
 .run(function ($rootScope,  $state) {
 
