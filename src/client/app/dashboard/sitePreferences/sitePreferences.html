@@ -1,6 +1,6 @@
 <h2 class="page-header" >Preferences du site</h2>
 
-Prefs: {{ preferences | json}}
+<!-- Prefs: {{ preferences | json}} -->
 
 
 
@@ -31,12 +31,14 @@ Prefs: {{ preferences | json}}
 
 	</form>
 	</div>
+
+	<button style="margin-top: 15px;margin-left: 15px;" type="submit" class="btn btn-primary" ng-click="savePreferences()">Sauvegarder</button>
 </div>
 
 <hr>
 
 <div id="div_peek" class="well" >
-	<div ng-style="{ 'background-color': preferences.site.bgcolor }" style="background-color: white" ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
+	<div ng-style="{ 'background-color': preferences.site.backgroundcolor }" style="background-color: white" ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
 </div>
 
 <hr>
