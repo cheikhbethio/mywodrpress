@@ -57,14 +57,18 @@
         <hr>
         <div class="form-group" ng-if="firstTabSelected">
            	<label class="control-label"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Choississez la page</label>
-            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id">
+            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id" placeholder="Sélectionnez une page">
+            	<option value='' disabled selected style='display:none;'>Choisissez une page</option>
 			</select>
+
+			<br/>
+			<button class="btn btn-primary" ng-click="saveMenuSimple()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu</button>
         </div>
 
-        <div class="form-group" ng-if="!firstTabSelected">
+        <div ng-if="!firstTabSelected">
 
         </div>
 
-         <button class="btn btn-primary" ng-click="saveMenu()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu</button>
+
 	</form>
 </div>

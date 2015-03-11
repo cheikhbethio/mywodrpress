@@ -23,22 +23,44 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 		$scope.boolAdd = true;
 	}
 
-	$scope.saveMenu = function() {
+	$scope.saveMenuSimple = function() {
 		if ($scope.createMenuForm.$valid){ 
 			
 			var newMenu={
 			   	name: $scope.menu.title,
 				single: $scope.firstTabSelected,
 				page: $scope.menu.page._id,
-				dropdown: [$scope.menu.page._id]
+				dropdown: []
 			};
 
 			Menu.save(newMenu);
 			$scope.menus = Menu.query();
+
+			$scope.menu = {};
 		} else {
 			console.log('Formulaire Invalide.');
 		}
 	}
+
+	$scope.saveMenuDropDown = function() {
+		if ($scope.createMenuForm.$valid){ 
+			
+			var newMenu={
+			   	name: $scope.menu.title,
+				single: $scope.firstTabSelected,
+				page: $scope.menu.page._id,
+				dropdown: []
+			};
+
+			Menu.save(newMenu);
+			$scope.menus = Menu.query();
+
+			$scope.menu = {};
+		} else {
+			console.log('Formulaire Invalide.');
+		}
+	}
+
 
 	$scope.deleteMenu = function(articleId, name){
 		if (confirm("Voulez vous vraiment supprimer le menu "+ name +"?") == true) {
