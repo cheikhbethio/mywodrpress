@@ -15,7 +15,11 @@
 
 	        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
 	            <a class="blog-nav-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
-	            <a class="blog-nav-item" ng-repeat="menu in menus"> {{menu.name}}</a>
+	            <a class="blog-nav-item" ng-repeat="menu in menus"> {{menu.name}}                		
+	            	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)">
+  						<span aria-hidden="true">&times;</span>
+					</button>
+				</a>
 	            <button class="btn btn-success" ng-click="showAddMenu()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
 	        </nav>
 

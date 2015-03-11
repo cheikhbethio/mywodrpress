@@ -29,7 +29,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 				$localStorage.currentUser = user;
 
 				console.log("current user : " + $localStorage.currentUser.login);
-				$state.go('site');
+				$state.go('site.home');
 
 			}, function(error){
 				console.log('Erreur de connexion.');

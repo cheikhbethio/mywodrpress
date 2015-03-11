@@ -33,12 +33,17 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 				dropdown: [$scope.menu.page._id]
 			};
 
-
-			//console.log($scope.menu.page._id);
 			Menu.save(newMenu);
-			//$state.go('dashboard.indexArticle');
+			$scope.menus = Menu.query();
 		} else {
 			console.log('Formulaire Invalide.');
+		}
+	}
+
+	$scope.deleteMenu = function(articleId, name){
+		if (confirm("Voulez vous vraiment supprimer le menu "+ name +"?") == true) {
+			Menu.remove({id: articleId});
+			$scope.menus = Menu.query();
 		}
 	}
 

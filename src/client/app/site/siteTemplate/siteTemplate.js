@@ -14,9 +14,7 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
         }, function(err){
                 console.log("error");
         });
-        //console.log("prefs title: " + $scope.preferences.site.subtitle);
         
-
         $scope.isActiveHeader = function (viewLocation) { 
         	return viewLocation === $state.current.name;
         }
