@@ -26,10 +26,10 @@ exports.create = function(req,res,next){
 	  var model = new Commentaire(commentaireObj);
 	  model.save(function(err,doc){
 	        if(err || !doc){
-	        	console.log('eeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrreeeeeeeeeeeeeeeeeeuuuuuuuuuuuuuuuuuuuuur')
+	        	console.log('error for saving comment')
 	        	return next(err);
 	        }else{
-	        		console.log('gooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooood')
+	        		console.log('succes for saving comment')
 	            	res.json(doc);
 	        	}
 	       });
@@ -52,9 +52,23 @@ exports.get = function(req,res,next){
 		   	if(err){
 		       	return next(err);
 	    	}else {
+	    		//console.log('this is our test comment acount ..................................'+result.length);
 	        	res.json(result);
 	        }
 		});
+}
+
+exports.getNbcomment = function(req,res,next){   
+	Commentaire.find({author : req.params.id} ,(function(err,result){
+		   	if(err){
+		       	return next(err);
+	    	}else {
+	    		console.log('this is our test comment acount .............. '+ result.length);
+	        	var resultat =  result.length
+	        	console.log(resultat);
+	        	res.json(resultat);
+	        }
+		}));
 }
 
 exports.deleteComment =function(req, res, next){

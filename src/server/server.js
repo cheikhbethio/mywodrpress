@@ -124,3 +124,8 @@ app.get('/api/comments/last_comments', comment.getLastComments);
 /***** Preferences *****/
 app.get('/api/preferences', preferences.get);
 app.put('/api/preferences', preferences.edit);
+
+/******statistiques*******/
+app.get('/api/statistics/comment/:id', comment.getNbcomment);
+app.get('/api/statistics/article/:id', comment.getNbcomment);
+
