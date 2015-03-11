@@ -15,7 +15,12 @@ var preferencesSchema = new Schema({
 		subtitlecolor: String,
 		backgroundcolor: String,
 		bannercolor: String
-	}
+	},
+
+	links:[{
+		text: String,
+		url: String
+	}]
 });
 
 var Preferences = mongoose.model('Preferences', preferencesSchema);
@@ -56,7 +61,22 @@ var default_pref = new Preferences({
 
 		"backgroundcolor": "#ffffff",
 		"bannercolor": "#428bca"
-	}
+	},
+
+	"links": [{
+		"text": "GitHub",
+		"url": "https://github.com/"
+	},
+
+	{
+		"text": "Twitter",
+		"url": "https://twitter.com/"
+	},
+
+	{
+		"text": "Facebook",
+		"url": "https://facebook.com/"
+	}]
 	
 });
 
@@ -87,8 +107,9 @@ exports.edit = function(req,res,next){
 
 	var site = req.body.site;
 	var apropos = req.body.apropos;
+	var links = req.body.links;
 
-	Preferences.findByIdAndUpdate(req.body._id,  {site: site, apropos: apropos}, function(err, pref){
+	Preferences.findByIdAndUpdate(req.body._id,  {site: site, apropos: apropos, links: links}, function(err, pref){
 		if(err)
 			console.log("Error !!");
 

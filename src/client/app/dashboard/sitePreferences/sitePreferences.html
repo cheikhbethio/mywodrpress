@@ -122,6 +122,56 @@
 <div class="col-md-6">
 	<h2 class="page-header">Liens</h2>
 
+	    <table class="table">
+
+		    <thead>
+		      <tr>
+		        <th>Text</th>
+		        <th>Link</th>
+		        <th><span class="pull-right">Supprimer</span></th>
+		      </tr>
+		    </thead>
+
+        <tbody ng-repeat="link in preferences.links">
+
+            <td>
+              <p>{{ link.text }}</p>
+            </td>
+
+            <td>
+              <p>{{ link.url }}</p>
+            </td>
+            <td>
+	            <button type="button" 
+	                      class="btn btn-danger btn-sm pull-right"
+	                      ng-click="deleteLink($index)" >
+	                      <span class="glyphicon glyphicon-remove"></span>
+	            </button>
+            </td>
+
+        </tbody>
+
+        <tbody ng-repeat-end>
+
+            <td>
+              <input type="text" placeholder="Link title" class="form-control" ng-model="newLink.text"></input>
+            </td>
+
+            <td>
+               <input type="text" placeholder="Link url" class="form-control" ng-model="newLink.url"></input>
+            </td>
+            <td>
+	            <button type="button" 
+	                      class="btn btn-success btn-sm pull-right"
+	                      ng-click="addLink()" >
+	                      <span class="glyphicon glyphicon-ok"></span>
+	            </button>
+            </td>
+            
+        </tbody>
+
+
+      </table>
 
 </div>
 

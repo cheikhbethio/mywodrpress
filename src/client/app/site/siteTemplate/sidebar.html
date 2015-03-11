@@ -34,12 +34,22 @@
               <li><a href="#">April 2013</a></li>
             </ol>
           </div>-->
-          <div class="sidebar-module">
+
+        <tbody ng-repeat="link in preferences.links">
+
+        <div class="sidebar-module">
+
             <h4>Ailleurs sur le web</h4>
-            <ol class="list-unstyled">
-              <li><a href="#">GitHub</a></li>
-              <li><a href="#">Twitter</a></li>
-              <li><a href="#">Facebook</a></li>
+
+            <ol class="list-unstyled" >
+              <li ng-repeat="link in preferences.links">
+                <a target="_blank" href="{{link.url}}">{{ link.text }}</a></li>
             </ol>
-          </div>
+
+        </div>
+
+
+
+
+
         </div><!-- /.blog-sidebar -->
