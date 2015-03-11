@@ -11,20 +11,22 @@
 	</div>
 	<hr>
 
-  <button type="button"
-    class="btn btn-primary"
-    ng-click="modeFormulaire(true)"
-    ng-hide="boolformulaire == true">
-      <span class="glyphicon glyphicon-plus"></span> Ajouter un Commentaire
-  </button>
+  <div ng-if="isUserConnected()">
+    <button type="button"
+      class="btn btn-primary"
+      ng-click="modeFormulaire(true)"
+      ng-hide="boolformulaire == true">
+        <span class="glyphicon glyphicon-plus"></span> Ajouter un Commentaire
+    </button>
 
-  <button type="button"
-    class="btn btn-primary"
-    ng-click="modeFormulaire(false)"
-    ng-show="boolformulaire== true">
-      <span class="glyphicon glyphicon-minus"></span> Cacher le formulaire d'ajout de commentaires
-  </button>
-  <br/><br/>
+    <button type="button"
+      class="btn btn-primary"
+      ng-click="modeFormulaire(false)"
+      ng-show="boolformulaire== true">
+        <span class="glyphicon glyphicon-minus"></span> Cacher le formulaire d'ajout de commentaires
+    </button>
+    <br/><br/>
+</div>
 
   <form name ="createCommentForm" ng-show="boolformulaire">
   	<div class="form-group">
