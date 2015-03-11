@@ -42,3 +42,11 @@ exports.editMenu = function(req, res, next){
 
 };
 
+exports.deleteMenu = function(req,res,next){
+      Menus.findById(req.params.id, function(err,doc){
+        if(err || !doc) return next(err);
+            doc.remove();
+            res.json(doc);
+     });
+ 
+};

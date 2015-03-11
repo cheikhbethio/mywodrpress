@@ -41,7 +41,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 		    		User.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
-							$state.go('site');
+							$state.go('site.connection');
 						}else if( resp.error == 1){
 							$scope.emailAlreadyUsed = true;
 						}else if(resp.error == 2){

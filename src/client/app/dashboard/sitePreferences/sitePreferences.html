@@ -15,7 +15,7 @@
 
 		<label for="bg_color">Couleur de fond: </label>
 		<div class="form-group">
-			<input minicolors id="bg_color" type="text" class="form-control" ng-model="preferences.site.bgcolor">
+			<input minicolors id="bg_color" type="text" class="form-control" ng-model="preferences.site.backgroundcolor">
 		</div>
 
 	</form>
@@ -31,12 +31,14 @@
 
 	</form>
 	</div>
+
+	<button style="margin-top: 15px;margin-left: 15px;" type="submit" class="btn btn-primary" ng-click="savePreferences()">Sauvegarder</button>
 </div>
 
 <hr>
 
 <div id="div_peek" class="well" >
-	<div ng-style="{ 'background-color': preferences.site.bgcolor }" style="background-color: white" ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
+	<div ng-style="{ 'background-color': preferences.site.backgroundcolor }" style="background-color: white" ng-include="'dashboard/sitePreferences/fake_site_header.html'"></div>
 </div>
 
 <hr>
@@ -101,12 +103,12 @@
 
 	<div class="form-group">
 		<label for="apropos_title">Titre</label>
-		<input id="apropos_title" type="text" class="form-control" ng-model="preferences.current.apropos.title">
+		<input id="apropos_title" type="text" class="form-control" ng-model="preferences.apropos.title">
 	</div>
 
 	<div class="form-group">
 		<label for="apropos_content">Text</label>
-		<textarea id="apropos_content" class="form-control" rows="5" ng-model="preferences.current.apropos.content"></textarea>
+		<textarea id="apropos_content" class="form-control" rows="5" ng-model="preferences.apropos.content"></textarea>
 
 	</div>
 

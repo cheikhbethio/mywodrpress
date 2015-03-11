@@ -19,11 +19,14 @@
 
 </head>
 <body>
+
+	<!-- <div ng-style="{ 'background-color': preferences.site.backgroundcolor }"> -->
 	 <div ui-view="header"></div>
 
-     <div ui-view="content"></div>
+     <div ui-view="content" ng-style="{ 'background-color': preferences.site.backgroundcolor }"></div>
 
      <div ui-view="footer"></div>
+
 	
 	<!-- Bootstrap's js requires jQuery -->
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
