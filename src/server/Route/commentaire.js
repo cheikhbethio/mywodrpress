@@ -63,4 +63,16 @@ exports.deleteComment =function(req, res, next){
         doc.remove();
         res.json(doc);
     });
-};     
+};  
+
+exports.getLastComments = function(req,res,next){
+	  var currentDate = Date.now;
+	      currentDate.setDate(currentDate.getDate() - 3);
+	      Commentaire.find({date: {$gte: currentDate}}, function(err,results){
+	      	   if(err){
+	      	   	    return next(err);
+	      	   } else {
+	      	   	    res.json(results);
+	      	   }
+	      });
+};  

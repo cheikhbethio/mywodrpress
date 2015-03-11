@@ -126,3 +126,17 @@ exports.home = function(req,res,next){
         });
   });
 };
+
+exports.getLastArticles = function(req,res,next){
+  var currentDate = Date.now;
+      currentDate.setDate(currentDate.getDate()- 5);
+    Article.find({date : {$gte: currentDate}}, function(err,results){
+              if(err){
+                 return next(err)
+               } else{
+                      res.json(results);
+               }
+
+    });
+
+};

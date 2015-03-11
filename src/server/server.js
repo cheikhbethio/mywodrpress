@@ -99,6 +99,7 @@ app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);
 app.get('/api/search/article' , article.searchByKeyWord);
 app.put('/api/articles/home/:id', article.home);
+app.get('/api/articles/last_articles',article.getLastArticles);
 
 /***** Menus *****/
 
@@ -116,6 +117,7 @@ app.put('/api/menus/:id', menu.editMenu);
 app.post('/api/comments', comment.create);
 app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id', comment.deleteComment);
+app.get('/api/comments/last_comments', comment.getLastComments);
 
 
 /***** Preferences *****/
