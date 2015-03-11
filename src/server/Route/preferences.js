@@ -12,7 +12,9 @@ var preferencesSchema = new Schema({
 		title: String,
 		titlecolor: String,
 		subtitle: String,
-		subtitlecolor: String
+		subtitlecolor: String,
+		backgroundcolor: String,
+		bannercolor: String
 	}
 });
 
@@ -48,11 +50,14 @@ var default_pref = new Preferences({
 
 	"site": {
 		"title": "A title",
-		"titlecolor": "#000000",
+		"titlecolor": "#428bca",
 		"subtitle": "site subtitle",
-		"subtitlecolor": "#000000"
-	}
+		"subtitlecolor": "#000000",
 
+		"backgroundcolor": "#ffffff",
+		"bannercolor": "#428bca"
+	}
+	
 });
 
 default_pref.save(function (err, pref) {
