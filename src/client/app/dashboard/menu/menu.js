@@ -64,12 +64,12 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 			var newMenu={
 			   	name: $scope.menu.title,
 				single: $scope.firstTabSelected,
-				dropdown: [$scope.dropdown]
+				dropdown: $scope.dropdown
 			};
 
 			Menu.save(newMenu);
 			$scope.menus = Menu.query();
-
+			
 			$scope.menu = {};
 				$scope.dropdown = [{ 
 				title : "", 
