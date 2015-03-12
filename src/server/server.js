@@ -24,7 +24,7 @@ var user        = require('./Route/user.js');
 var page        = require('./Route/page.js');
 var article     = require('./Route/article.js');
 var comment     = require('./Route/commentaire.js');
-//var favoris     = require('./Route/favoris_article.js');
+var favoris     = require('./Route/favoris_article.js');
 var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
 var preferences = require('./Route/preferences');
@@ -133,9 +133,9 @@ app.get('/api/statistics/page/:id', page.getNbPage);
 app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
 
 /******favoris*******/
-/* app.post('/api/favoris', favoris.create);
+app.post('/api/favoris', favoris.create);
 app.delete('/api/favoris/:id', favoris.deleteFavoris);
 app.get('/api/favoris/:id', favoris.get);
-app.get('/api/favoris/all/:id', favoris.view); */
+app.get('/api/favoris/all/:id', favoris.view); 
 
 
