@@ -40,6 +40,7 @@ angular.module('myWordPress', [
     'snap',
     'ngToast',
     'minicolors',
+    'ui.bootstrap',
 
     // services
     'myWordPress.keywordService',

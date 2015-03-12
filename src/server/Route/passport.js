@@ -4,16 +4,6 @@ var user = require('./user.js');
 var LocalStrategy = require('passport-local').Strategy;
 
 module.exports=passport;
-	///connextion
-	// Serialized and deserialized methods when got from session
-	/*
-	passport.serializeUser(function(user, done) {
-	    done(null, user);
-	});
-
-	passport.deserializeUser(function(user, done) {
-	    done(null, user);
-	});*/
 
 	passport.serializeUser( function(user, done){
 	  var sessionUser = { _id: user._id, name: user.lastname, email: user.email, roles: user.right }
@@ -50,13 +40,7 @@ module.exports=passport;
 
 	                if (!user.validPassword(password)){console.log('wrong password');
 	                    return done(null, false,  { message: 'Oops!! wrong password.' });}
-
-	                // all is well, return user
 	                else{ 
-	                	///
-	                	//res.cookie('user_right', user.right, { maxAge: 2592000000 });
-	                	///
-	                	
 	                    return done(null, user);
 	                }
 	            });

@@ -19,26 +19,67 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 	$scope.pages = Page.query();
 	$scope.menus = Menu.query();
 
+	$scope.dropdown = [{ 
+		title : "", 
+		page : {}
+	}];
+
+	$scope.addSubMenu = function(){
+		$scope.dropdown.push({
+			title : "",
+			page : {}
+		});
+	}
+
 	$scope.showAddMenu = function(){
 		$scope.boolAdd = true;
 	}
 
-	$scope.saveMenu = function() {
+	$scope.saveMenuSimple = function() {
 		if ($scope.createMenuForm.$valid){ 
 			
 			var newMenu={
 			   	name: $scope.menu.title,
 				single: $scope.firstTabSelected,
-				page: $scope.menu.page._id,
-				dropdown: [$scope.menu.page._id]
+				page: $scope.menu.page._id
 			};
 
 			Menu.save(newMenu);
 			$scope.menus = Menu.query();
+
+			$scope.menu = {};
+			$scope.dropdown = [{ 
+				title : "", 
+				page : {}
+			}];
+
 		} else {
 			console.log('Formulaire Invalide.');
 		}
 	}
+
+	$scope.saveMenuDropDown = function() {
+		if ($scope.createMenuForm.$valid){ 
+			
+			var newMenu={
+			   	name: $scope.menu.title,
+				single: $scope.firstTabSelected,
+				dropdown: $scope.dropdown
+			};
+
+			Menu.save(newMenu);
+			$scope.menus = Menu.query();
+			
+			$scope.menu = {};
+				$scope.dropdown = [{ 
+				title : "", 
+				page : {}
+			}];
+		} else {
+			console.log('Formulaire Invalide.');
+		}
+	}
+
 
 	$scope.deleteMenu = function(articleId, name){
 		if (confirm("Voulez vous vraiment supprimer le menu "+ name +"?") == true) {

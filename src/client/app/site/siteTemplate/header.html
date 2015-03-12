@@ -34,7 +34,23 @@
 
         <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
             <a ng-class="{ active: isActiveHeader('site.home')}" class="blog-nav-item" ui-sref="site.home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
-            <a ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}" class="blog-nav-item" ng-repeat="menu in menus" ui-sref="site.pages({id : menu.page})"> {{menu.name}}</a>
+            <span ng-repeat="menu in menus">
+                <span ng-if="menu.single">
+                    <a ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : menu.page})"> {{menu.name}}</a>
+                </span>
+
+
+                <span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
+                  <a href class="dropdown-toggle blog-nav-item" dropdown-toggle>
+                    {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li ng-repeat="drop in menu.dropdown">
+                      <a ng-class="{ active: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
+                    </li>
+                  </ul>
+                </span>
+            </span>
         </nav>
 
         <div ng-hide="isUserConnected()" >
