@@ -1,13 +1,13 @@
 <div class="blog-post" ng-repeat="article in page.content | orderBy:'date':true" ng-if="article.ispublic">
-    <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id})">{{article.title}}</a>  
+    <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})">{{article.title}}</a>  
 
 
-    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="changeFavoris()" ng-if="okFavoris">
+    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="changeFavoris()" ng-if="!okFavoris">
 
   			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
 
 		</button>
-    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="changeFavoris()" ng-if="!okFavoris">
+    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="changeFavoris()" ng-if="okFavoris">
 
   			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
 
