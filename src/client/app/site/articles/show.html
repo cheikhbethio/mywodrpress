@@ -39,7 +39,8 @@
 
   <h3 class="page-header">Tous les commentaires</h3>
   <div class="aricle-comment well well-sm" ng-repeat = "comment in commentList | orderBy:'comment.date':true">
-      <p class="blog-post-meta"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Posté le {{comment.date | date:'dd/MM/yyyy'}} par <a>{{comment.author.firstname}} {{comment.author.lastname}}</a></p>
+      <p class="blog-post-meta"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> </span> Posté le {{comment.date | date:'dd/MM/yyyy'}} par <a>{{comment.author.firstname}} {{comment.author.lastname}}</a></p>
       <p>{{comment.content}}</p>
+
   </div>
 </div>
