@@ -19,6 +19,18 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 	$scope.pages = Page.query();
 	$scope.menus = Menu.query();
 
+	$scope.dropdown = [{ 
+		title : "", 
+		page : {}
+	}];
+
+	$scope.addSubMenu = function(){
+		$scope.dropdown.push({
+			title : "",
+			page : {}
+		});
+	}
+
 	$scope.showAddMenu = function(){
 		$scope.boolAdd = true;
 	}

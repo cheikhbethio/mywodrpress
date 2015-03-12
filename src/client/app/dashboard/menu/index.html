@@ -36,11 +36,12 @@
 <div class="col-md-6">
 	<form name="createMenuForm" ng-model="menu" ng-show="boolAdd" novalidate>
 		<h4> Paramétrez votre menu </h4>
-	    <div class="form-group" >
-	        <label class="control-label">Nom du menu</label>
+	    <div class="input-group">
+			<span class="input-group-addon">Titre du menu</span>
 	        <input type="text" class="form-control"  placeholder="Titre du menu" ng-model="menu.title" required>
 	    </div>
 
+	    <br/>
         <div class="form-group" >
 	       	<label class="control-label">Type du menu</label>
 	       	<div class="radio">
@@ -57,7 +58,7 @@
         <hr>
         <div class="form-group" ng-if="firstTabSelected">
            	<label class="control-label"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Choississez la page</label>
-            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id" placeholder="Sélectionnez une page">
+            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id">
             	<option value='' disabled selected style='display:none;'>Choisissez une page</option>
 			</select>
 
@@ -66,7 +67,22 @@
         </div>
 
         <div ng-if="!firstTabSelected">
+        	<h4>Entrez les sous menus désirés</h4>
 
+        	<div class="form-group" ng-repeat="submenu in dropdown">
+			        	<div class="input-group">
+						  <span class="input-group-addon">Titre du sous menu</span>
+						  <input type="text" class="form-control" placeholder="Titre" ng aria-describedby="basic-addon1">
+						  							<select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id">
+			            		<option value='' disabled selected style='display:none;'>Choisissez une page</option>
+							</select>
+						</div>
+				</div>
+	    	</div>
+
+	    	<button  type="button" class="btn btn-xs btn-primary" ng-click="addSubMenu()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
         </div>
 
 
