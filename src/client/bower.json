@@ -21,7 +21,8 @@
     "angular-snap": "~1.8.1",
     "angular-bootstrap-colorpicker": "buberdds/angular-bootstrap-colorpicker",
     "ngToast": "tameraydin/ngToast",
-    "angular-minicolors": "kaihenzler/angular-minicolors"
+    "angular-minicolors": "kaihenzler/angular-minicolors",
+    "angular-bootstrap": "~0.12.1"
   },
   "resolutions": {
     "angular": "1.2.28"

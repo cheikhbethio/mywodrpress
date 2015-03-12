@@ -41,14 +41,18 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 			var newMenu={
 			   	name: $scope.menu.title,
 				single: $scope.firstTabSelected,
-				page: $scope.menu.page._id,
-				dropdown: []
+				page: $scope.menu.page._id
 			};
 
 			Menu.save(newMenu);
 			$scope.menus = Menu.query();
 
 			$scope.menu = {};
+			$scope.dropdown = [{ 
+				title : "", 
+				page : {}
+			}];
+
 		} else {
 			console.log('Formulaire Invalide.');
 		}
@@ -60,14 +64,17 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 			var newMenu={
 			   	name: $scope.menu.title,
 				single: $scope.firstTabSelected,
-				page: $scope.menu.page._id,
-				dropdown: []
+				dropdown: [$scope.dropdown]
 			};
 
 			Menu.save(newMenu);
 			$scope.menus = Menu.query();
 
 			$scope.menu = {};
+				$scope.dropdown = [{ 
+				title : "", 
+				page : {}
+			}];
 		} else {
 			console.log('Formulaire Invalide.');
 		}

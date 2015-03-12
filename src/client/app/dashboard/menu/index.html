@@ -15,11 +15,12 @@
 
 	        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
 	            <a class="blog-nav-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
-	            <a class="blog-nav-item" ng-repeat="menu in menus"> {{menu.name}}                		
+	            <a class="blog-nav-item" ng-repeat="menu in menus"> {{menu.name}             		
 	            	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)">
   						<span aria-hidden="true">&times;</span>
 					</button>
 				</a>
+
 	            <button class="btn btn-success" ng-click="showAddMenu()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
 	        </nav>
 
@@ -63,26 +64,28 @@
 			</select>
 
 			<br/>
-			<button class="btn btn-primary" ng-click="saveMenuSimple()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu</button>
+			<button class="btn btn-primary" ng-click="saveMenuSimple()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu simple</button>
         </div>
 
         <div ng-if="!firstTabSelected">
         	<h4>Entrez les sous menus désirés</h4>
 
-        	<div class="form-group" ng-repeat="submenu in dropdown">
-			        	<div class="input-group">
-						  <span class="input-group-addon">Titre du sous menu</span>
-						  <input type="text" class="form-control" placeholder="Titre" ng aria-describedby="basic-addon1">
-						  							<select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id">
-			            		<option value='' disabled selected style='display:none;'>Choisissez une page</option>
-							</select>
-						</div>
+        	<div class="form-group" ng-repeat="subMenu in dropdown">
+	        	<div class="input-group">
+				  <span class="input-group-addon">Sous-menu</span>
+				  <input type="text" class="form-control" placeholder="Titre" ng-model="subMenu.title" ng aria-describedby="basic-addon1">
+				  	<select class="form-control" ng-model="subMenu.dropdown.page" ng-options="page as page.title for page in pages track by page._id">
+	            		<option value='' disabled selected style='display:none;'>Choisissez une page</option>
+					</select>
 				</div>
-	    	</div>
+			</div>
 
-	    	<button  type="button" class="btn btn-xs btn-primary" ng-click="addSubMenu()">
+	    	<button  type="button" class="btn btn-xs btn-info" ng-click="addSubMenu()">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </button>
+
+            <br/><br/>
+			<button class="btn btn-primary" ng-click="saveMenuDropDown()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu DropDown</button>
         </div>
 
 
