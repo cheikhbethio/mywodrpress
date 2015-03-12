@@ -71,6 +71,20 @@ exports.getNbcomment = function(req,res,next){
 		}));
 }
 
+
+exports.getNbcommentByArticle = function(req,res,next){   
+	Commentaire.find({article : req.params.id} ,(function(err,result){
+		   	if(err){
+		       	return next(err);
+	    	}else {
+	    		console.log('this is our test comment acount .............. '+ result.length);
+	        	var resultat =  result.length
+	        	console.log(resultat);
+	        	res.json(resultat);
+	        }
+		}));
+}
+
 exports.deleteComment =function(req, res, next){
     Commentaire.findById(req.params.id, function(err,doc){
         if(err || !doc) return next(err);

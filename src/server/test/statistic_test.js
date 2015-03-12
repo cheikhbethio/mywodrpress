@@ -84,6 +84,15 @@ describe('Statistics Routing', function() {
 	        done();
 	    });
 
+	//factory of article creation
+	    it('should return error when 2° to 5° article creation failed', function(done) {
+	    	creatArticle(myUser._id, url, '2000-10-10T00:00:00.000Z', 'first contenu');
+	    	creatArticle(myUser._id, url, '2001-10-10T00:00:00.000Z', 'seconde contenu');
+	    	creatArticle(myUser._id, url, '2005-10-10T00:00:00.000Z', 'third contenu');
+	    	creatArticle(myUser._id, url, '2004-10-10T00:00:00.000Z', 'fourt contenu');
+	        done();
+	    });
+
 	//view all comments for one user 
 	    it('should return error view comments for one user failed', function(done) {
 		 	var id_user = myUser._id;
@@ -103,6 +112,59 @@ describe('Statistics Routing', function() {
 		        done();
 		    });
 	    });
+
+	//view all article for one user 
+	    it('should return error view comments for one user failed', function(done) {
+		 	var id_user = myUser._id;
+		    request(url)
+			.get('/api/statistics/article/'+ id_user)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		        decompte = res.body;
+		       	res.body.should.equal(5);
+		        console.log(res.body + ' statistics nbr de commentaires');
+		        console.log(res.status+ ': code retourné pour la decompte des commentaires d\'un users');
+		        res.should.have.property('status',200);
+		        done();
+		    });
+	    });
+
+	//view all articles for a user
+	    it('should return error when Creation article failed', function(done) {
+	    	var id_author = myUser._id;
+		    request(url)
+			.get('/api/statistics/article/' + id_author)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+
+
+	//view all comments for one article
+	    it('should return error when Creation article failed', function(done) {
+	    	var id_article = myArticle._id;
+		    request(url)
+			.get('/api/statistics/comment/article/' + id_article)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          console.log(res.status+ ': code retourné pour la vue de tous les comments d\'un article');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+
 	});    
 });
 
@@ -121,8 +183,6 @@ var creatcomment =function(id_user, id_article, url1, thedate, thecontent){
         if (err) {
            throw err;
         }
-        //myCommentToDelete = res.body;
-        //console.log(myCommentToDelete);
    		res.body.author.should.equal(id_user);
    		res.body.article.should.equal(id_article);
    		res.body.date.should.equal(thedate);
@@ -131,4 +191,25 @@ var creatcomment =function(id_user, id_article, url1, thedate, thecontent){
         console.log(res.status+ ': code retourné pour la Creation de commentaire ');
         res.should.have.property('status',200);
 	});
+};
+
+var creatArticle =function(id, url1, thedate, thecontent){
+  	var createdArticle = {
+         title : "myartcile",
+         author : id,
+         date : thedate,
+         ispublic : true,
+         content : thecontent,
+         keywords : ["str1", "str2"]
+    };
+    request(url1)
+	.post('/api/articles')
+	.send(createdArticle)
+	.end(function(err, res) {
+          if (err) {
+            throw err;
+          }
+          console.log(res.status+ ': code retourné pour la Creation d\'articles ');
+          res.should.have.property('status',200);
+    });
 };

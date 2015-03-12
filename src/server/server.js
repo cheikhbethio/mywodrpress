@@ -127,5 +127,8 @@ app.put('/api/preferences', preferences.edit);
 
 /******statistiques*******/
 app.get('/api/statistics/comment/:id', comment.getNbcomment);
-app.get('/api/statistics/article/:id', comment.getNbcomment);
+app.get('/api/statistics/article/:id', article.getNbArticle);
+app.get('/api/statistics/page/:id', page.getNbPage);
+app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
+
 

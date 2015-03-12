@@ -35,7 +35,7 @@ describe('Commentaire Routing', function() {
 	    };
 
 
-	    it('should return error when Creation failed', function(done) {
+	    it('return error when Creation failed', function(done) {
 		    request(url)
 			.post('/api/users')
 			.send(createdAcount)
@@ -53,7 +53,7 @@ describe('Commentaire Routing', function() {
 	 	
 
 	// article creation
-	    it('should return error when article Creation failed', function(done) {
+	    it('return error when article Creation failed', function(done) {
 		 	var id = myUser._id;
 		  	var createdArticle = {
 	             title : "myArticle",
@@ -80,7 +80,7 @@ describe('Commentaire Routing', function() {
 	    });
 		 	
 	//second comment creation for deleting after
-	    it('should return error when 2° comment creation failed', function(done) {
+	    it('return error when 2° comment creation failed', function(done) {
 		 	var id_user = myUser._id;
 		 	var	id_article = myArticle._id;
 		  	var createdComment2 = {
@@ -120,7 +120,7 @@ describe('Commentaire Routing', function() {
 	    });
 
 	//delete one comment
-	    it('should return error when Creation article failed', function(done) {
+	    it('return error when deleting article failed', function(done) {
 	    	var id_comment = myCommentToDelete._id;
 		    request(url)
 			.delete('/api/comments/' + id_comment)
@@ -136,7 +136,7 @@ describe('Commentaire Routing', function() {
 	    });
 
 	//view all comments for one article
-	    it('should return error view comments failed', function(done) {
+	    it('return error  if view comments failed', function(done) {
 		 	var id_article = myArticle._id;
 		 	console.log(id_article);
 		    request(url)
