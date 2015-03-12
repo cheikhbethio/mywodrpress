@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var CommentaireSchema = new mongoose.Schema({
 	author : {type : Schema.Types.ObjectId, ref:'user'},
-	article : {type : Schema.Types.ObjectId, ref:'Artcile'},
+	article : {type : Schema.Types.ObjectId, ref:'Article'},
 	date : Date,
 	content : String,
 });
@@ -66,9 +66,7 @@ exports.deleteComment =function(req, res, next){
 };  
 
 exports.getLastComments = function(req,res,next){
-	  var currentDate = Date.now;
-	      currentDate.setDate(currentDate.getDate() - 3);
-	      Commentaire.find({date: {$gte: currentDate}}, function(err,results){
+	      Commentaire.find({$query:{} ,$orderby:{date: -1}}).populate('author').populate('article').limit(3).exec(function(err,results){
 	      	   if(err){
 	      	   	    return next(err);
 	      	   } else {
