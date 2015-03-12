@@ -2,18 +2,16 @@
     <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id})">{{article.title}}</a>  
 
 
-    	<button type="button" class="btn btn-default btn-sm pull-right" aria-label="Right Align" ng-click="changeFavoris()" ng-if="okFavoris">
+    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="changeFavoris()" ng-if="okFavoris">
 
   			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
 
 		</button>
-    	<button type="button" class="btn btn-warning btn-sm pull-right" aria-label="Right Align" ng-click="changeFavoris()" ng-if="!okFavoris">
+    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="changeFavoris()" ng-if="!okFavoris">
 
   			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
 
 		</button>
-
-
 
 	</h2>
 
@@ -24,14 +22,16 @@
     <div ng-bind-html="article.content"></div>
 
     <div class="col-md-12">	<hr></div>
-    <div class="col-md-8">
-	    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
-	    <div>
-	   		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+    <div class="row">
+	    <div class="col-md-8">
+		    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
+		    <div>
+		   		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+			</div>
 		</div>
-	</div>
-	<div class="col-md-4">
-	    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Commentaires
+		<div class="col-md-4">
+		    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Commentaires
+		</div>
 	</div>
 	<div class="col-md-12">	<hr></div>
 </div>
