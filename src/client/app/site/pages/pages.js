@@ -17,4 +17,12 @@ angular.module('myWordPress.pages', ['ui.router'])
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);
     });
+
+	$scope.okFavoris = false;
+
+	$scope.changeFavoris=function(){
+		$scope.okFavoris = !$scope.okFavoris;
+	}
+
+
 }]);
