@@ -3,7 +3,7 @@ var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
 
-
+/*
 describe('Statistics Routing', function() {
   	var url = 'http://localhost:4711';
 
@@ -212,4 +212,4 @@ var creatArticle =function(id, url1, thedate, thecontent){
           console.log(res.status+ ': code retourné pour la Creation d\'articles ');
           res.should.have.property('status',200);
     });
-};
+};*/

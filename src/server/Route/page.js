@@ -117,7 +117,7 @@ exports.getNbPage = function(req,res,next){
         if(err){
             return next(err);
         }else {
-          console.log('this is our test comment acount .............. '+ result.length);
+          console.log('this is our test page acount .............. '+ result.length);
             var resultat =  result.length
             console.log(resultat);
             res.json(resultat);
