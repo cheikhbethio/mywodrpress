@@ -8,7 +8,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> MyWordPress Mini-DashBoard</a>
+                <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Mini-DashBoard</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -41,12 +41,12 @@
 
 
                 <span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
-                  <a href class="dropdown-toggle blog-nav-item" dropdown-toggle>
+                  <a href class="dropdown-toggle blog-nav-item" dropdown-toggle ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}">
                     {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                   </a>
-                  <ul class="dropdown-menu">
-                    <li ng-repeat="drop in menu.dropdown">
-                      <a ng-class="{ active: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
+                  <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;"  ng-style="{ 'background-color': preferences.site.bannercolor }">
+                    <li ng-repeat="drop in menu.dropdown"s>
+                      <a ng-class="{ activeDrop: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
                     </li>
                   </ul>
                 </span>
