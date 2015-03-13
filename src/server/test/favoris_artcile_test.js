@@ -39,7 +39,7 @@ describe('favoris Routing', function() {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ ': code retourné pour la création de compte pour test la creation d\'un article');
+		          console.log(res.status+ ': code retourné pour la création de compte pour test la creation d\'un compte');
 		          myUser = res.body.result;
 		         // console.log(myUser);
 		          res.should.have.property('status',200);
@@ -128,9 +128,9 @@ describe('favoris Routing', function() {
 	    });
 
 	//delete favoris
-	    /*it('return error when deleting favoris failed', function(done) {
+	    it('return error when deleting favoris failed', function(done) {
 	    	var id_favoris = myFavorisToDelete._id;
-	    	console.log('for deleting' + id_favoris);
+	    	console.log('id favorite for deleting' + id_favoris);
 		    request(url)
 			.delete('/api/favoris/' + id_favoris)
 			.send()
@@ -142,12 +142,12 @@ describe('favoris Routing', function() {
 		          res.should.have.property('status',200);
 		          done();
 		    });
-	    });*/
+	    });
 
-	//view one favoris
+	//get one favoris
 	    it(' return error when view favoris failed', function(done) {
 		 	var id_favoris = myFavoris._id;
-		 	console.log(id_favoris);
+		 	console.log("id du favoris à voir " + id_favoris);
 		    request(url)
 			.get('/api/favoris/'+ id_favoris)
 			.send()
@@ -161,10 +161,10 @@ describe('favoris Routing', function() {
 		    });
 	    });
 
-	//view one favoris
+	//get all favoris
 	    it(' return error when view all favoris failed', function(done) {
 		 	var id = myUser._id;
-		 	console.log(id);
+		 	console.log("id de lutilisateur pour voir ses favoris " + id);
 		    request(url)
 			.get('/api/favoris/all/'+ id)
 			.send()
@@ -172,12 +172,11 @@ describe('favoris Routing', function() {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ ': code retourné pour la vue des favoris);
+		          console.log(res.status+ ': code retourné pour la vue des favoris');
 		          res.should.have.property('status',200);
 		          done();
 		    });
 	    });
-
 	});
 });
 

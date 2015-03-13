@@ -3,7 +3,7 @@ var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
 
-/*
+
 describe('Statistics Routing', function() {
   	var url = 'http://localhost:4711';
 
@@ -96,7 +96,7 @@ describe('Statistics Routing', function() {
 	//view all comments for one user 
 	    it('should return error view comments for one user failed', function(done) {
 		 	var id_user = myUser._id;
-		 	console.log(id_user);
+		 	console.log('id de l\'utilistauer '+ id_user);
 		    request(url)
 			.get('/api/statistics/comment/'+ id_user)
 			.send()
@@ -125,8 +125,8 @@ describe('Statistics Routing', function() {
 		          }
 		        decompte = res.body;
 		       	res.body.should.equal(5);
-		        console.log(res.body + ' statistics nbr de commentaires');
-		        console.log(res.status+ ': code retourné pour la decompte des commentaires d\'un users');
+		        console.log(res.body + ' statistics nbr d\'articles');
+		        console.log(res.status+ ': code retourné pour la decompte des articles d\'un users');
 		        res.should.have.property('status',200);
 		        done();
 		    });
@@ -142,7 +142,7 @@ describe('Statistics Routing', function() {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
+		          console.log(res.status+ ': code retourné pour la vue de tous les articles d\'un auteur');
 		          res.should.have.property('status',200);
 		          done();
 		    });
@@ -212,4 +212,4 @@ var creatArticle =function(id, url1, thedate, thecontent){
           console.log(res.status+ ': code retourné pour la Creation d\'articles ');
           res.should.have.property('status',200);
     });
-};*/
+};

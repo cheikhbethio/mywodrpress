@@ -19,7 +19,11 @@
       		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Gestion favoris
       	</a>
       </li>
-      <li><a href="#">Exemple</a></li>
+      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.favorite')}">
+      	<a ui-sref="dashboard.favorite">
+      		<span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Statistiques du sites
+      	</a>
+      </li>
       <li><a href="#">Exemple</a></li>
     </ul>
 </div>

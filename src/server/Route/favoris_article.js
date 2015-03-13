@@ -30,6 +30,17 @@ exports.create = function(req,res,next){
 	});
                
 };
+/*
+exports.get = function(req,res,next){   
+	Commentaire.find({article : req.params.id}).populate('author').exec(function(err,result){
+		   	if(err){
+		       	return next(err);
+	    	}else {
+	    		//console.log('this is our test comment acount ..................................'+result.length);
+	        	res.json(result);
+	        }
+		});
+}
 
 exports.get = function(req,res,next){
     Favoris.findById(req.params.id).populate('article').exec(function(err,result){
@@ -40,16 +51,38 @@ exports.get = function(req,res,next){
         }
     });
 }; 
+exports.view = function(req,res,next){
+  Favoris.findById(req.params.id).populate('article').exec(function (err, result) {
+        if (err) {
+            return next(err);
+        } else {
+            res.json(result);
+        }
+    });
+
+};
+
+
+*/
+
+exports.get = function(req,res,next){
+	Favoris.findById(req.params.id ,(function(err,result){
+	   	if(err){
+	       	return next(err);
+    	}else {
+        	res.json(result);
+        }
+	}));
+}; 
 
 exports.view = function(req,res,next){
-  Favoris.find({author :req.params.id}).populate('article').exec((function (err, result) {
+  Favoris.find({author : req.params.id}, (function (err, result) {
         if (err) {
             return next(err);
         } else {
             res.json(result);
         }
     }));
-
 };
 
 
