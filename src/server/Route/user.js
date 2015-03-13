@@ -131,7 +131,7 @@ exports.get = function(req,res,next){
     };
 
 exports.view = function (req, res ,next) {
-    user.find().exec(function (err, result) {
+    user.find().select('firestname lastname right').exec(function (err, result) {
         if (!err) {
             return res.send(result);
         } else {

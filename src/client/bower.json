@@ -23,7 +23,8 @@
     "ngToast": "tameraydin/ngToast",
     "angular-minicolors": "kaihenzler/angular-minicolors",
     "angular-dialog-service": "m-e-conroy/angular-dialog-service",
-    "angular-iu": "angular-ui/bootstrap-bower"
+    "angular-iu": "angular-ui/bootstrap-bower",
+    "angular-bootstrap": "~0.12.1"
   },
   "resolutions": {
     "angular": "1.2.28"

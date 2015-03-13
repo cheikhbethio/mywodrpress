@@ -24,10 +24,12 @@ var user        = require('./Route/user.js');
 var page        = require('./Route/page.js');
 var article     = require('./Route/article.js');
 var comment     = require('./Route/commentaire.js');
-//var favoris     = require('./Route/favoris_article.js');
+var favoris     = require('./Route/favoris_article.js');
 var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
 var preferences = require('./Route/preferences');
+
+var token= require('./Route/token.js');
 
 var app = express();
 
@@ -73,9 +75,12 @@ app.post('/api/logout',  function(req, res){
 /***** Users ******/
 
 app.post('/api/users', user.create);
-app.put('/api/users/:id', user.edit);
+app.put('/api/users/:id',[token.authedit], user.edit);
 app.get('/api/users/:id', user.get);
 app.get('/api/users', user.view);
+
+/***** Token *****/
+app.post('/api/token', token.gettoken);
 
 /***** Pages ******/
 
@@ -100,7 +105,7 @@ app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);
 app.get('/api/search/article' , article.searchByKeyWord);
 app.put('/api/articles/home/:id', article.home);
-app.get('/api/articles/last_articles',article.getLastArticles);
+app.get('/api/last_articles',article.getLastArticles);
 
 /***** Menus *****/
 
@@ -119,7 +124,8 @@ app.delete('/api/menus/:id', menu.deleteMenu);
 app.post('/api/comments', comment.create);
 app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id', comment.deleteComment);
-app.get('/api/comments/last_comments', comment.getLastComments);
+app.get('/api/last_comments', comment.getLastComments);
+app.get('/api/comments_editor/:id', comment.getByEditor);
 
 
 /***** Preferences *****/
@@ -133,9 +139,9 @@ app.get('/api/statistics/page/:id', page.getNbPage);
 app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
 
 /******favoris*******/
-/* app.post('/api/favoris', favoris.create);
+app.post('/api/favoris', favoris.create);
 app.delete('/api/favoris/:id', favoris.deleteFavoris);
 app.get('/api/favoris/:id', favoris.get);
-app.get('/api/favoris/all/:id', favoris.view); */
+app.get('/api/favoris/all/:id', favoris.view); 
 
 

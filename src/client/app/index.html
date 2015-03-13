@@ -30,7 +30,7 @@
      <div ui-view="footer"></div>
 
 	
-	<!-- Bootstrap's js requires jQuery -->
+	<!-- BOWER/LIBS -->
 	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -48,12 +48,11 @@
 	<script src='bower_components/ngToast/dist/ngToast.js'></script>
 	<script src='bower_components/jquery-minicolors/jquery.minicolors.js'></script>
 	<script src='bower_components/angular-minicolors/angular-minicolors.js'></script>
-
-	<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 	<script src='bower_components/angular-dialog-service/dist/dialogs.min.js'></script>
 	<script src='bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js'></script>
 
+	<!-- APP -->
 	<script src="app.js"></script>
 
 	<!-- SITE -->
@@ -90,6 +89,9 @@
 	<script src="components/preferences/preferences-service.js"></script>
 	<script src="components/services/searchKeyWord.js"></script>
 	<script src="components/services/articleHome.js"></script>
+	<script src="components/services/lastArticles.js"></script>
+	<script src="components/services/lastComments.js"></script>
+
 
 </body>
 </html>

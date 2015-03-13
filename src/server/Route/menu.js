@@ -6,7 +6,7 @@ var MenuSchema = new mongoose.Schema({
   single: Boolean,
   page: {type: Schema.Types.ObjectId, ref:'Page'},
   dropdown: [{
-                title:String, 
+                title : String, 
                 page : {type: Schema.Types.ObjectId, ref:'Page'}
             }]
 });
