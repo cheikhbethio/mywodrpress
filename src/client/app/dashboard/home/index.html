@@ -1,6 +1,6 @@
 <h2 class="page-header">Tableau de Bord <i>MyWordPress</i> </h2>
 
-<button class="btn btn-default" type="button" ng-model="clicked" ng-init="clicked=false" ng-click="show()"> <span ng-if="!clicked" class="glyphicon glyphicon-eye-open"></span> Dernières publications sur le site</button>
+<button class="btn btn-default" type="button" ng-model="clicked" ng-init="clicked=false" ng-click="show()"> <span ng-if="!clicked" class="glyphicon glyphicon-eye-open"></span> <span ng-if="clicked" class="glyphicon glyphicon-eye-close"></span>  Dernières publications sur le site</button>
 
 
 <div ng-if="clicked">
