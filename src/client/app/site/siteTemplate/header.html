@@ -11,6 +11,11 @@
                 <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Mini-DashBoard</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Rédiger un article</a></li>
+                    <li><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Créer une page</a></li>
+                    <li><a ui-sref="dashboard.indexMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Modifier le menu</a></li>
+                </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ui-sref="dashboard.home"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Aller au Dashboard</a></li>
                     <li><a ui-sref="dashboard.preferences"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Préférences</a></li>
@@ -44,7 +49,7 @@
                   <a href class="dropdown-toggle blog-nav-item" dropdown-toggle ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}">
                     {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
                   </a>
-                  <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;"  ng-style="{ 'background-color': preferences.site.bannercolor }">
+                  <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;" ng-style="{ 'background-color': preferences.site.bannercolor }">
                     <li ng-repeat="drop in menu.dropdown"s>
                       <a ng-class="{ activeDrop: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
                     </li>

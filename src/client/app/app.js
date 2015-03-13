@@ -41,6 +41,8 @@ angular.module('myWordPress', [
     'ngToast',
     'minicolors',
     'ui.bootstrap',
+    'ui.bootstrap.modal',
+    'dialogs.main',
 
     // services
     'myWordPress.keywordService',
@@ -54,6 +56,7 @@ angular.module('myWordPress', [
     'myWordPress.service.menuService',
     'myWordPress.lastArticleService',
     'myWordPress.lastCommentService',
+    'myWordPress.statisticService',
 
     // directives
 	'myWordPress.registration.registration-directive',

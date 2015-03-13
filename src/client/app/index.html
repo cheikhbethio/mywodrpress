@@ -16,11 +16,11 @@
 	<link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css">
 
 	<link rel="stylesheet" href="bower_components/jquery-minicolors/jquery.minicolors.css" >
+	<link rel="stylesheet" href="bower_components/angular-dialog-service/dist/dialogs.min.css">
+
 
 </head>
 <body>
-
-	<!-- <div ng-style="{ 'background-color': preferences.site.backgroundcolor }"> -->
 	 <div ui-view="header"></div>
 
      <div ui-view="content" ng-style="{ 'background-color': preferences.site.backgroundcolor }"></div>
@@ -47,6 +47,8 @@
 	<script src='bower_components/jquery-minicolors/jquery.minicolors.js'></script>
 	<script src='bower_components/angular-minicolors/angular-minicolors.js'></script>
 	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src='bower_components/angular-dialog-service/dist/dialogs.min.js'></script>
+	<script src='bower_components/angular-dialog-service/dist/dialogs-default-translations.min.js'></script>
 
 	<!-- APP -->
 	<script src="app.js"></script>
@@ -88,6 +90,7 @@
 	<script src="components/services/articleHome.js"></script>
 	<script src="components/services/lastArticles.js"></script>
 	<script src="components/services/lastComments.js"></script>
+	<script src="components/services/statistics.js"></script>
 
 
 </body>

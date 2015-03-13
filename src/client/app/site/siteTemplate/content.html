@@ -1,38 +1,16 @@
 <div class="container" class="scrollable" >
 	<div class="blog-header">
-
     	<h1 class="blog-title" ng-style="{ 'color': preferences.site.titlecolor }">{{ preferences.site.title }}</h1>
 
     	<p class="lead blog-description">{{ preferences.site.subtitle }}</p>
-
   	</div>
 
   	<div class="row">
   		<div class="col-sm-8 blog-main">
-			   
-         <div ui-view></div>
-     	
-      </div>
+            <div ui-view></div>
+        </div>
 
 		<div ng-include="'site/siteTemplate/sidebar.html'"></div>
     </div>
-
 </div>
-
-
-
-
-
-
-<!--<div class="blog-post">
-        <h2 class="blog-post-title">{{title}}</h2>
-        <p class="blog-post-meta">January 1, 2014 by <a href="#">{{user.name}}</a></p>
-
-        {{content}}
-</div>-->
-  <!--<nav>
-        <ul class="pager">
-            <li><a href="#">Précédent</a></li>
-            <li><a href="#">Suivant</a></li>
-        </ul>
-  </nav>-->
+<br/>

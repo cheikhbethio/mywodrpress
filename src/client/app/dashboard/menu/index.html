@@ -15,29 +15,32 @@
 
 	        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
 	            <a class="blog-nav-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
+
 	            <span ng-repeat="menu in menus">
-		            <a class="blog-nav-item"> 
-		            	<span ng-if="menu.single">
-		            		{{menu.name}}       	
-		            	</span>
-		            </a>
+	                <span ng-if="menu.single">
+	                    <a class="blog-nav-item">{{menu.name}}</a>
+	                </span>
 
 
-	            	<span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
-				      <a href class="dropdown-toggle blog-nav-item" dropdown-toggle>
-				        {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
-				      </a>
-				      <ul class="dropdown-menu">
-				        <li ng-repeat="drop in menu.dropdown">
-				          <a>{{drop.title}}</a>
-				        </li>
-				      </ul>
-				    </span>
+	                <span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
+	                  <a href class="dropdown-toggle blog-nav-item" dropdown-toggle>
+	                    {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+	                  </a>
+	                  <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;" ng-style="{ 'background-color': preferences.site.bannercolor }">
+	                    <li ng-repeat="drop in menu.dropdown"s>
+	                     <a>{{drop.title}}</a>
+	                    </li>
+	                  </ul>
+	                </span>
 
-	            	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)">
+	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)">
   						<span aria-hidden="true">&times;</span>
 					</button>
 				</span>
+
+            	</span>
+
+
 
 	            <button class="btn btn-success" ng-click="showAddMenu()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
 	        </nav>
