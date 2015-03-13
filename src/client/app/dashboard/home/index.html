@@ -1,30 +1,35 @@
 <h2 class="page-header">Tableau de Bord <i>MyWordPress</i> </h2>
-<div class="container">
-	<button class="btn btn-default" type="button" ng-model="clicked" ng-init="clicked=false" ng-click="show()"> <span ng-if="!clicked" class="glyphicon glyphicon-eye-open"></span> Dernières publications sur le site</button><hr>
-	<div ng-if="clicked">
-	<h3>Articles </h3>
-	<div ng-repeat= "article in lastArticles | orderBy:'article.date':true">
-		<div class="well">
-			<div class="container">
-     <p> Posté le {{article.date | date:'dd/MM/yyyy'}} par {{article.author.lastname}}  {{article.author.firstname}} </p>
-     <p><a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
- </div>
-</div>
-	
-</div><hr>
-	<h3>Commentaires </h3>
-	
-	<div ng-repeat= "comment in lastComments ">
-		<div class="media">
-         <a href="#" class="pull-left"> </a>
-         <img class="pull-left" src="">
 
-        <div class="media-body">
+<button class="btn btn-default" type="button" ng-model="clicked" ng-init="clicked=false" ng-click="show()"> <span ng-if="!clicked" class="glyphicon glyphicon-eye-open"></span> <span ng-if="clicked" class="glyphicon glyphicon-eye-close"></span>  Dernières publications sur le site</button>
 
-        <h4 class="media-heading"> 
-        	{{comment.author.lastname}} {{comment.author.firstname}}<small><i> Posté le {{comment.date | date:'dd/MM/yyyy'}} sur <a ui-sref="site.showArticle({id : article._id})"> {{comment.article.title}} </a> </i></small></h4>
-            <p>{{comment.content}} </p>	
-</div>
-</div><hr>
-</div>
+
+<div ng-if="clicked">
+	<hr>
+	<div class="col-md-6">
+		<h3>Articles </h3>
+		<div ng-repeat= "article in lastArticles | orderBy:'article.date':true">
+			<div class="well">
+	 			<p> Posté le {{article.date | date:'dd/MM/yyyy'}} par {{article.author.lastname}}  {{article.author.firstname}} </p>
+	 			<p><a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
+				</div>
+		</div>
+	</div>
+	
+	<div class="col-md-6">
+		<h3>Commentaires </h3>
+		
+		<div ng-repeat= "comment in lastComments ">
+			<div class="media">
+	         	<a href="#" class="pull-left"> </a>
+	         	<img class="pull-left" src="">
+
+	        	<div class="media-body">
+
+	        		<h4 class="media-heading"> 
+	        		{{comment.author.lastname}} {{comment.author.firstname}}<small><i> Posté le {{comment.date | date:'dd/MM/yyyy'}} sur <a ui-sref="site.showArticle({id : article._id})"> {{comment.article.title}} </a> </i></small></h4>
+	           		<p>{{comment.content}} </p>	
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

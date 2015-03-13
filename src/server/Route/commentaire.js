@@ -102,3 +102,12 @@ exports.getLastComments = function(req,res,next){
 	      	   }
 	      });
 };  
+exports.getByEditor = function(req,res,next){
+	Commentaire.find({author : req.params.id}).populate('author','firstname lastname').populate('article','title').exec(function(err,result){
+		if(err){
+			return next(err);
+		}else{
+			res.json(result);
+		}
+	});
+}

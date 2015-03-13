@@ -29,6 +29,8 @@ var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
 var preferences = require('./Route/preferences');
 
+var token= require('./Route/token.js');
+
 var app = express();
 
 app.use(express.static(path.join(application_root ,'../client')));
@@ -73,9 +75,12 @@ app.post('/api/logout',  function(req, res){
 /***** Users ******/
 
 app.post('/api/users', user.create);
-app.put('/api/users/:id', user.edit);
+app.put('/api/users/:id',[token.authedit], user.edit);
 app.get('/api/users/:id', user.get);
 app.get('/api/users', user.view);
+
+/***** Token *****/
+app.post('/api/token', token.gettoken);
 
 /***** Pages ******/
 
@@ -120,6 +125,7 @@ app.post('/api/comments', comment.create);
 app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id', comment.deleteComment);
 app.get('/api/last_comments', comment.getLastComments);
+app.get('/api/comments_editor/:id', comment.getByEditor);
 
 
 /***** Preferences *****/
