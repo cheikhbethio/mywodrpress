@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 var FavorisSchema = new mongoose.Schema({
   title : String,
   author : {type : Schema.Types.ObjectId, ref:'user'},
-  article : {type : Schema.Types.ObjectId, ref:'article'},
+  article : {type : Schema.Types.ObjectId, ref:'Article'},
   date : Date,
   ispublic : Boolean,
   isHome : Boolean,
@@ -41,6 +41,7 @@ exports.get = function(req,res,next){
 	        }
 		});
 }
+*/
 
 exports.get = function(req,res,next){
     Favoris.findById(req.params.id).populate('article').exec(function(err,result){
@@ -52,7 +53,7 @@ exports.get = function(req,res,next){
     });
 }; 
 exports.view = function(req,res,next){
-  Favoris.findById(req.params.id).populate('article').exec(function (err, result) {
+  Favoris.find({author :req.params.id}).populate('article').exec(function (err, result) {
         if (err) {
             return next(err);
         } else {
@@ -63,8 +64,8 @@ exports.view = function(req,res,next){
 };
 
 
-*/
 
+/*
 exports.get = function(req,res,next){
 	Favoris.findById(req.params.id ,(function(err,result){
 	   	if(err){
@@ -84,7 +85,7 @@ exports.view = function(req,res,next){
         }
     }));
 };
-
+*/
 
 exports.deleteFavoris = function(req,res,next){
     Favoris.findById(req.params.id, function(err,doc){
