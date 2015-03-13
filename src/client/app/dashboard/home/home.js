@@ -13,7 +13,17 @@ angular.module('myWordPress.admin.home', ['ui.router'])
 
 }])
 
-.controller('homeController', ['$scope', '$state','$stateParams', function($scope, $state, $stateParams){
+.controller('homeController', ['$scope', '$state','$stateParams','LastArticle','LastComment', function($scope, $state, $stateParams,LastArticle,LastComment){
+	 $scope.lastArticles = LastArticle.getLast();
+	 $scope.lastComments = LastComment.getLast();
+	 $scope.show = function(){
+	 	     if($scope.clicked ==true){
+	 	     	$scope.clicked = false;
+	 	     }
+	 	     else{
+	 	     $scope.clicked = true;
+	 	 }
+	 };
 	
 
 

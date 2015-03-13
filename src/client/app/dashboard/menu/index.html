@@ -15,11 +15,30 @@
 
 	        <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
 	            <a class="blog-nav-item"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
-	            <a class="blog-nav-item" ng-repeat="menu in menus"> {{menu.name}}                		
+	            <span ng-repeat="menu in menus">
+		            <a class="blog-nav-item"> 
+		            	<span ng-if="menu.single">
+		            		{{menu.name}}       	
+		            	</span>
+		            </a>
+
+
+	            	<span class="dropdown" dropdown on-toggle="toggled(open)" ng-if="!menu.single">
+				      <a href class="dropdown-toggle blog-nav-item" dropdown-toggle>
+				        {{menu.name}} <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				      </a>
+				      <ul class="dropdown-menu">
+				        <li ng-repeat="drop in menu.dropdown">
+				          <a>{{drop.title}}</a>
+				        </li>
+				      </ul>
+				    </span>
+
 	            	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)">
   						<span aria-hidden="true">&times;</span>
 					</button>
-				</a>
+				</span>
+
 	            <button class="btn btn-success" ng-click="showAddMenu()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
 	        </nav>
 
@@ -36,11 +55,12 @@
 <div class="col-md-6">
 	<form name="createMenuForm" ng-model="menu" ng-show="boolAdd" novalidate>
 		<h4> Paramétrez votre menu </h4>
-	    <div class="form-group" >
-	        <label class="control-label">Nom du menu</label>
+	    <div class="input-group">
+			<span class="input-group-addon">Titre du menu</span>
 	        <input type="text" class="form-control"  placeholder="Titre du menu" ng-model="menu.title" required>
 	    </div>
 
+	    <br/>
         <div class="form-group" >
 	       	<label class="control-label">Type du menu</label>
 	       	<div class="radio">
@@ -57,16 +77,33 @@
         <hr>
         <div class="form-group" ng-if="firstTabSelected">
            	<label class="control-label"><span class="glyphicon glyphicon-link" aria-hidden="true"></span> Choississez la page</label>
-            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id" placeholder="Sélectionnez une page">
+            <select class="form-control" ng-model="menu.page" ng-options="page as page.title for page in pages track by page._id">
             	<option value='' disabled selected style='display:none;'>Choisissez une page</option>
 			</select>
 
 			<br/>
-			<button class="btn btn-primary" ng-click="saveMenuSimple()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu</button>
+			<button class="btn btn-primary" ng-click="saveMenuSimple()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu simple</button>
         </div>
 
         <div ng-if="!firstTabSelected">
+        	<h4>Entrez les sous menus désirés</h4>
 
+        	<div class="form-group" ng-repeat="subMenu in dropdown">
+	        	<div class="input-group">
+				  <span class="input-group-addon">Sous-menu</span>
+				  <input type="text" class="form-control" placeholder="Titre" ng-model="subMenu.title">
+				  	<select class="form-control" ng-model="subMenu.page" ng-options="page._id as page.title for page in pages">
+	            		<option value='' disabled selected style='display:none;'>Choisissez une page</option>
+					</select>
+				</div>
+			</div>
+
+	    	<button  type="button" class="btn btn-xs btn-info" ng-click="addSubMenu()">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </button>
+
+            <br/><br/>
+			<button class="btn btn-primary" ng-click="saveMenuDropDown()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Sauvegarder ce menu DropDown</button>
         </div>
 
 

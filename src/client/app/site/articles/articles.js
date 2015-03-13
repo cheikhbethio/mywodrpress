@@ -6,7 +6,7 @@ angular.module('myWordPress.site.article', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('site.showArticle', {
-		url: 'article/:id',
+		url: 'article/:id?isfavorite',
 		templateUrl: 'site/articles/show.html',
 		controller: 'siteArticleController'
 	})
@@ -15,8 +15,15 @@ angular.module('myWordPress.site.article', ['ui.router'])
 
 .controller('siteArticleController', ['$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', function($scope, $state, $stateParams,$localStorage, Article,Commentaire){
 	
+	$scope.isfavorite = $stateParams.isfavorite;
 
-   $scope.boolformulaire = false;
+	console.log($scope.isfavorite + ' test passage de parametre');
+
+	$scope.changeFavoris=function(){
+		$scope.isfavorite = !$scope.isfavorite;
+	}
+
+    $scope.boolformulaire = false;
    
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);

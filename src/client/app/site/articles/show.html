@@ -1,5 +1,21 @@
+
 <div class="blog-post">
-    <h2 class="blog-post-title">{{article.title}}</h2>
+    <h2 class="blog-post-title">{{article.title}}
+
+
+    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="changeFavoris()" ng-hide="isfavorite">
+
+  			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
+
+		</button>
+
+    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="changeFavoris()" ng-show="isfavorite">
+
+  			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
+
+		</button>
+    </h2>
+
     <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a></p>
 
     <div ng-bind-html="article.content"></div>
@@ -18,7 +34,6 @@
       ng-hide="boolformulaire == true">
         <span class="glyphicon glyphicon-plus"></span> Ajouter un Commentaire
     </button>
-
     <button type="button"
       class="btn btn-primary"
       ng-click="modeFormulaire(false)"
@@ -37,9 +52,10 @@
      <br/>
   </form>
 
-  <h3 class="page-header">Tous les commentaires</h3>
+  <h3 class="page-header" name="comments">Tous les commentaires</h3>
   <div class="aricle-comment well well-sm" ng-repeat = "comment in commentList | orderBy:'comment.date':true">
-      <p class="blog-post-meta"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Posté le {{comment.date | date:'dd/MM/yyyy'}} par <a>{{comment.author.firstname}} {{comment.author.lastname}}</a></p>
+      <p class="blog-post-meta"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> </span> Posté le {{comment.date | date:'dd/MM/yyyy'}} par <a>{{comment.author.firstname}} {{comment.author.lastname}}</a></p>
       <p>{{comment.content}}</p>
+
   </div>
 </div>
