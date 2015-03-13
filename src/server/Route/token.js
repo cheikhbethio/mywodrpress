@@ -82,10 +82,10 @@ exports.authmember=function(req,res,next){
   				res.end('Access token has expired');
 			}
 			else{
-				user.findById(decoded.iss,function (err, user){
+				modelUser.findById(decoded.iss,function (err, doc){
 					if(err) next(err);
 					else {
-						if(!user){
+						if(!doc){
 							res.status(401);
 							res.end("Access token isn't valid");
 						} else{
@@ -111,18 +111,18 @@ exports.authwritter=function(req,res,next){
   			
 	    	var decoded = jwt.decode(token, secret_Token);
     	 	if (decoded.exp <= Date.now()) {
-    	 		res.status(400);
+    	 		res.status(401);
   				res.end('Access token has expired');
 			}
 			else{
-				user.findById(decoded.iss,function (err, user){
+				modelUser.findById(decoded.iss,function (err, doc){
 					if(err) next(err);
 					else {
-						if(!user){
+						if(!doc){
 							res.status(401);
 							res.end("Access token isn't valid");
-						} else if (user.right<1){
-							res.status(402);
+						} else if (doc.right<1){
+							res.status(401);
 							res.end("Insufficient right");
 
 						}else {
@@ -132,7 +132,7 @@ exports.authwritter=function(req,res,next){
 				});
 			} 
  	 	} catch (err) {
-    		return next();
+    		return next(err);
   		}
 	} else {
 		res.status(404);
@@ -143,23 +143,27 @@ exports.authwritter=function(req,res,next){
 exports.authadmin=function(req,res,next){
 
 	var token = req.headers['x-access-token'];
-
+	console.log(token);
 	if (token) {
-  		try {
-  			
+
+  		try {  			
 	    	var decoded = jwt.decode(token, secret_Token);
+	    	console.log(decoded);
     	 	if (decoded.exp <= Date.now()) {
+
     	 		res.status(400);
   				res.end('Access token has expired');
 			}
 			else{
-				user.findById(decoded.iss,function (err, user){
+				console.log("test")
+				modelUser.findOne({'_id':decoded.iss}).exec(function (err, doc){
+					console.log('test');
 					if(err) next(err);
 					else {
-						if(!user){
+						if(!doc){
 							res.status(401);
 							res.end("Access token isn't valid");
-						} else if (user.right<2){
+						} else if (doc.right<2){
 							res.status(402);
 							res.end("Insufficient right");
 

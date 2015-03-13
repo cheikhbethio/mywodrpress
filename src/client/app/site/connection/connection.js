@@ -13,7 +13,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 }])
 
-.controller('connectionController', ['$scope','$http', '$rootScope', '$state', 'Login', "$localStorage", function($scope, $http, $rootScope, $state, Login, $localStorage){
+.controller('connectionController', ['$scope','$http', '$rootScope', '$state', 'Login','Token', "$localStorage", function($scope, $http, $rootScope, $state, Login,Token, $localStorage){
 	$scope.newUser;
 	
 	$scope.connectUser=function(){
@@ -33,6 +33,17 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 			}, function(error){
 				console.log('Erreur de connexion.');
+			});
+
+			Token.login({
+				login: $scope.newUser.login,
+				password: $scope.newUser.password,
+			}, function(res){
+
+				$rootScope.accessToken = res.token;
+
+			}, function(error){
+				console.log('Erreur Token');
 			});
 		}else{
 			console.log('Formulaire Invalide.');

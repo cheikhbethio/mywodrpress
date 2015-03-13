@@ -49,6 +49,7 @@ angular.module('myWordPress', [
     'myWordPress.pageService',
     'myWordPress.articleService',
     'myWordPress.loginService',
+    'myWordPress.tokenService',
     'myWordPress.service.articleHome',
     'myWordPress.service.menuService',
     'myWordPress.lastArticleService',
@@ -130,4 +131,14 @@ angular.module('myWordPress', [
         } 
   });
 
-});
+})
+.run(['$rootScope','$injector',function($rootScope,$injector){
+    $injector.get("$http").defaults.transformRequest=function(data, headersGetter){
+        if($rootScope.accessToken){
+           headersGetter()['x-access-token']=$rootScope.accessToken;
+        }
+        if(data){
+            return angular.toJson(data);
+        }
+    }
+}]);

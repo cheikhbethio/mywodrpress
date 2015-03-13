@@ -76,8 +76,8 @@ app.post('/api/logout',  function(req, res){
 
 app.post('/api/users', user.create);
 app.put('/api/users/:id',[token.authedit], user.edit);
-app.get('/api/users/:id', user.get);
-app.get('/api/users', user.view);
+app.get('/api/users/:id',[token.authedit], user.get);
+app.get('/api/users',[token.authadmin], user.view);
 
 /***** Token *****/
 app.post('/api/token', token.gettoken);
@@ -85,9 +85,9 @@ app.post('/api/token', token.gettoken);
 /***** Pages ******/
 
 
-app.post('/api/pages',page.create);
-app.put('/api/pages/:id', page.edit);
-app.delete('/api/pages/:id', page.deletePage);
+app.post('/api/pages',[token.authadmin],page.create);
+app.put('/api/pages/:id',[token.authadmin], page.edit);
+app.delete('/api/pages/:id',[token.authadmin], page.deletePage);
 app.get('/api/pages/:id', page.getPage);
 app.get('/api/pages', page.view);
 app.put('/api/pages/:id/article/:idart',page.addarticle);
@@ -97,9 +97,9 @@ app.delete('/api/pages/:id/article/:idart',page.delarticle);
 /***** Articles *****/
 
 
-app.post('/api/articles', article.create);
-app.put('/api/articles/:id', article.edit);
-app.delete('/api/articles/:id', article.deleteArticle);
+app.post('/api/articles',[token.authwritter], article.create);
+app.put('/api/articles/:id',[token.authwritter], article.edit);
+app.delete('/api/articles/:id',[token.authwritter], article.deleteArticle);
 app.get('/api/articles/:id', article.get);
 app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);
@@ -115,22 +115,22 @@ app.post('/api/menus/page/:id', menu.addPageToItem);
 app.post('/api/menus/menu/:id', menu.addMenuToItem);*/
 
 app.get('/api/menus', menu.getMenus);
-app.post('/api/menus', menu.postMenu);
-app.put('/api/menus/:id', menu.editMenu);
-app.delete('/api/menus/:id', menu.deleteMenu);
+app.post('/api/menus',[token.authadmin], menu.postMenu);
+app.put('/api/menus/:id',[token.authadmin], menu.editMenu);
+app.delete('/api/menus/:id',[token.authadmin], menu.deleteMenu);
 
 /*****Commentaires*****/
 
-app.post('/api/comments', comment.create);
+app.post('/api/comments',[token.authmember], comment.create);
 app.get('/api/comments/:id', comment.get);
-app.delete('/api/comments/:id', comment.deleteComment);
+app.delete('/api/comments/:id',[token.authmember], comment.deleteComment);
 app.get('/api/last_comments', comment.getLastComments);
 app.get('/api/comments_editor/:id', comment.getByEditor);
 
 
 /***** Preferences *****/
 app.get('/api/preferences', preferences.get);
-app.put('/api/preferences', preferences.edit);
+app.put('/api/preferences',[token.authadmin], preferences.edit);
 
 /******statistiques*******/
 app.get('/api/statistics/comment/:id', comment.getNbcomment);

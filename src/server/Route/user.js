@@ -22,6 +22,26 @@ var user = mongoose.model('user', userSchema);
 
 module.exports.users=user;
 
+user.findOne({right:2},function(err,doc){
+    if(err) next(err);
+    else if (!doc){
+        var admin = new user({
+            'login' : 'admin' ,
+            'password' : bcrypt.hashSync('admin', 8),
+            'firstname' : 'admin',
+            'lastname' : 'admin',
+            'right' : 2
+            })
+        admin.save(function(err,doc){
+            if(err) next(err);
+            else console.log("account admin created")
+        })
+    }
+    else{
+        console.log("account admin already ceated")
+    }
+});
+
 userSchema.pre("save", function(next) {
     var self = this;
     user.findOne({email : this.email}, 'email', function(err, results) {
