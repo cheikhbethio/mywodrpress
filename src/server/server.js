@@ -120,6 +120,7 @@ app.post('/api/comments', comment.create);
 app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id', comment.deleteComment);
 app.get('/api/last_comments', comment.getLastComments);
+app.get('/api/comments_editor/:id', comment.getByEditor);
 
 
 /***** Preferences *****/
