@@ -6,7 +6,7 @@ angular.module('myWordPress.site.home', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('site.home', {
-		url: '/',
+		url: '/?connectionSuccess',
 		templateUrl: 'site/home/index.html',
 		controller: 'siteHomeController'
 	});
@@ -15,4 +15,10 @@ angular.module('myWordPress.site.home', ['ui.router'])
 
 .controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article',function($scope, $state, $stateParams, Article){
 	$scope.articlesHome = Article.query()
+
+	$scope.connectionSuccess = $stateParams.connectionSuccess;
+
+	$scope.closeAlert = function() {
+        $scope.connectionSuccess = false;
+    };
 }]);

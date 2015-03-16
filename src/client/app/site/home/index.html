@@ -1,3 +1,5 @@
+<alert type="success" ng-show="connectionSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Connexion réussie. Bon retour parmi nous, {{currentUser.firstname}}.</alert>
+
 <div class="blog-post" ng-repeat="article in articlesHome | orderBy:'date':true" ng-if="article.ispublic && article.isHome">
     <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id})">{{article.title}}</a></h2>
     <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a></p>
