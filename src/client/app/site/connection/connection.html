@@ -1,7 +1,8 @@
 <h2 class="page-header">Se connecter</h2>
 
 
-<alert type="danger" ng-if="showConnectionError" close="closeAlert()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Echec de la connexion. Vérifiez votre identifiant et/ou votre mot de passe.</alert>
+<alert type="danger" ng-show="connectionError" close="closeAlert()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Echec de la connexion. Vérifiez votre identifiant et/ou votre mot de passe.</alert>
+
 
 <form name="connectionForm" novalidate ng-controller='connectionController'>
     
