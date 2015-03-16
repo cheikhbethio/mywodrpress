@@ -1,7 +1,8 @@
 <h2 class="page-header">Se connecter</h2>
 
 
-<!--<div class="alert alert-danger" ng-if="message.length > 0">{{ message }}</div>-->
+<alert type="danger" ng-if="showConnectionError" close="closeAlert()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Echec de la connexion. Vérifiez votre identifiant et/ou votre mot de passe.</alert>
+
 <form name="connectionForm" novalidate ng-controller='connectionController'>
     
     <div class="form-group" show-errors='{ showSuccess: true }'>
@@ -18,4 +19,4 @@
 </form>
          
 <br/>
-<div>Pas de compte? <a ui-sref="registration">Créez en un maintenant !</a></div>
+<div>Pas de compte? <a ui-sref="site.registration">Créez en un maintenant !</a></div>

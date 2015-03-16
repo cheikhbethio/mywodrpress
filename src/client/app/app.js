@@ -10,7 +10,6 @@ angular.module('myWordPress', [
     'myWordPress.site.article',
     'myWordPress.site.home',
     'myWordPress.site.searchKeyWord',
-    
 
     // admin
     'myWordPress.editPage',
@@ -136,10 +135,10 @@ angular.module('myWordPress', [
   });
 
 })
-.run(['$rootScope','$injector',function($rootScope,$injector){
+.run(['$localStorage','$injector',function($localStorage,$injector){
     $injector.get("$http").defaults.transformRequest=function(data, headersGetter){
-        if($rootScope.accessToken){
-           headersGetter()['x-access-token']=$rootScope.accessToken;
+        if($localStorage.accessToken){
+           headersGetter()['x-access-token']=$localStorage.accessToken;
         }
         if(data){
             return angular.toJson(data);

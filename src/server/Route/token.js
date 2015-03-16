@@ -63,7 +63,7 @@ exports.authedit=function(req,res,next){
     		return next();
   		}
 	} else {
-		res.status(404);
+		res.status(401);
   		res.end('Token not received')
 		}
 };
@@ -98,7 +98,7 @@ exports.authmember=function(req,res,next){
     		return next();
   		}
 	} else {
-		res.status(404);
+		res.status(401);
   		res.end('Token not received')
 		}
 };
@@ -135,7 +135,7 @@ exports.authwritter=function(req,res,next){
     		return next(err);
   		}
 	} else {
-		res.status(404);
+		res.status(401);
   		res.end('Token not received')
 		}
 };
@@ -177,7 +177,7 @@ exports.authadmin=function(req,res,next){
     		return next();
   		}
 	} else {
-		res.status(404);
+		res.status(401);
   		res.end('Token not received')
 		}
 
