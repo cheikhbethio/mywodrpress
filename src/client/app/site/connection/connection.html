@@ -6,13 +6,13 @@
 
 <form name="connectionForm" novalidate ng-controller='connectionController'>
     
-    <div class="form-group" show-errors='{ showSuccess: true }'>
-        <label for="login"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Identifiant</label>
+    <div class="form-group input-group" show-errors='{ showSuccess: true }'>
+    	<span for="login" class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Identifiant</span>
         <input type="text" class="form-control" name="login" placeholder="Entrez votre login" ng-model="newUser.login" required>
     </div>
     
-    <div class="form-group" show-errors='{ showSuccess: true }'>
-        <label for="password"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Mot de passe</label>
+    <div class="form-group input-group" show-errors='{ showSuccess: true }'>
+    	<span for="passwword" class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span> Mot de passe</span>
         <input type="password" class="form-control" name="password" placeholder="Entrez votre mot de passe" ng-model="newUser.password" required>
     </div>
     
