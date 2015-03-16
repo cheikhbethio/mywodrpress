@@ -1,8 +1,9 @@
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var bcrypt=require('bcrypt');
+var User=require('../models/users');
 
 
-var Schema = mongoose.Schema;
+/*var Schema = mongoose.Schema;
 
 var userSchema = Schema({
     login		: String,
@@ -13,19 +14,19 @@ var userSchema = Schema({
     token   	: String,
     right		: Number
 });
-
-userSchema.methods.validPassword = function(password) {
+*/
+User.userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
 };
 
-var user = mongoose.model('user', userSchema);
+//var user = mongoose.model('user', userSchema);
 
-module.exports.users=user;
+module.exports.users=User.user;
 
-user.findOne({right:2},function(err,doc){
+User.user.findOne({right:2},function(err,doc){
     if(err) next(err);
     else if (!doc){
-        var admin = new user({
+        var admin = new User.user({
             'login' : 'admin' ,
             'password' : bcrypt.hashSync('admin', 8),
             'firstname' : 'admin',
@@ -42,9 +43,9 @@ user.findOne({right:2},function(err,doc){
     }
 });
 
-userSchema.pre("save", function(next) {
+User.userSchema.pre("save", function(next) {
     var self = this;
-    user.findOne({email : this.email}, 'email', function(err, results) {
+    User.user.findOne({email : this.email}, 'email', function(err, results) {
         if(err) {
             next(err);
         } else if(results) {
@@ -56,9 +57,9 @@ userSchema.pre("save", function(next) {
     });
 });
 
-userSchema.pre("save", function(next) {
+User.userSchema.pre("save", function(next) {
     var self = this;
-    user.findOne({login : this.login}, 'login', function(err, results) {
+    User.user.findOne({login : this.login}, 'login', function(err, results) {
         if(err) {
             next(err);
         } else if(results) {
@@ -73,7 +74,7 @@ userSchema.pre("save", function(next) {
 
 exports.create=function (req, res , next) {
 
-    var newUser = new user();
+    var newUser = new User.user();
 
     newUser.login=req.body.login;
     newUser.password=bcrypt.hashSync(req.body.password, 8);
@@ -98,7 +99,7 @@ exports.edit = function (req, res , next) {
 
     var query= ({_id : req.params.id});
  		var maj={};
-    user.findById(req.params.id, function(error,result){
+    User.user.findById(req.params.id, function(error,result){
         if(error) next(error);
         else if(result==null){
             console.log("user not found when editing");
@@ -106,7 +107,7 @@ exports.edit = function (req, res , next) {
             next();
         }
         else
-            user.findOne({email : req.body.email}, function(errt, doc) {
+           User.user.findOne({email : req.body.email}, function(errt, doc) {
                 if(errt) next(errt);
                 else{
                     console.log("req",req.body);
@@ -125,7 +126,7 @@ exports.edit = function (req, res , next) {
                             maj.firstname=req.body.firstname;
                         if(req.body.lastname!=null)
                             maj.lastname=req.body.lastname;
-                        user.update(query, maj,function(errs,n){
+                        User.user.update(query, maj,function(errs,n){
                             if(errs){
                                 console.log("error when update user");
                                 next(errs);
@@ -143,7 +144,7 @@ exports.edit = function (req, res , next) {
 
 exports.get = function(req,res,next){
         var id = req.params.id;
-        user.findById(id, function(err,result){
+        User.user.findById(id, function(err,result){
             if(err) return next(err);
             else
                 res.json(result);
@@ -151,7 +152,7 @@ exports.get = function(req,res,next){
     };
 
 exports.view = function (req, res ,next) {
-    user.find().select('firestname lastname right').exec(function (err, result) {
+    User.user.find().select('firestname lastname right').exec(function (err, result) {
         if (!err) {
             return res.send(result);
         } else {
