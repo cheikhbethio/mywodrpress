@@ -10,6 +10,7 @@ angular.module('myWordPress', [
     'myWordPress.site.article',
     'myWordPress.site.home',
     'myWordPress.site.searchKeyWord',
+    'myWordPress.showProfile',
     
 
     // admin

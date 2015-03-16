@@ -14,9 +14,12 @@ angular.module('myWordPress.showProfile', ['ui.router'])
 	});
 
 }])
-.controller('showProfileController', ['$scope','$state','$stateParams','User_articles','User_comments'],function($scope, $state,$stateParams,User_articles,User_comments){
-           $scope.articles = User_articles.get({id: $stateParams.id}, function(articles){
-                  console.log("get articles for user_id: "+$stateParams.id);
+.controller('showProfileController', ['$scope','$localStorage', 'User_articles','User_comments',function($scope,$localStorage,User_articles,User_comments){
+           $scope.articles = User_articles.get({id: $localStorage.currentUser._id}, function(articles){
+                  console.log("get articles for user_id: "+$localStorage.currentUser._id);
            });
-          // $scope.comments = User_comments.get();
-})
+           $scope.comments = User_comments.get({id: $localStorage.currentUser._id}, function(comments){
+                  console.log("get comments for user_id: "+$localStorage.currentUser._id);
+           });
+           $scope.user=$localStorage.currentUser;
+}]);

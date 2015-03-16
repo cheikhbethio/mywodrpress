@@ -1,6 +1,40 @@
 
 <h2 class="page-header">Profil</h2>
-<div>
+<div class= "media">
+	<a href="#" class="pull-left"> </a>
+	  <img class="pull-left" src="">
+
+	 <div class="media-body">
+	 	<h4 class="media-heading">
+	 		<p>{{user.lastname}}  {{user.firstname}}</p>
+	 		<p>
+	 			email : {{user.email}}</p>
+	 	    <p> login : {{user.login}}</p>
+	 </div>
+</div>
+<hr>
+	<div class="col-md-6">
+		<h3>Articles </h3>
+		<div ng-repeat= "article in articles | orderBy:'article.date':true">
+			<div class="well">
+	 			<p> Posté le {{article.date | date:'dd/MM/yyyy'}}</p>
+	 			<p><a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
+				</div>
+		</div>
+	</div>
+
+	<hr>
+	<div class="col-md-6">
+		<h3>Commentaires </h3>
+		<div ng-repeat= "comment in comments | orderBy:'comment.date':true">
+			<div class="well">
+	 			<p> Posté le {{comment.date | date:'dd/MM/yyyy'}}</p>
+	 			<p> {{comment.content}}</p>
+				</div>
+		</div>
+	</div>
+<!--<div>
   {{ articles}};
   {{ comments }};
+  {{user}};
  </div>

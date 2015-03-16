@@ -67,7 +67,7 @@
 
         <div ng-show="isUserConnected()">
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <a class="blog-nav-item" ng-class="{ active: isActiveHeader('site.editrofile')}" ui-sref="site.editprofile"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bienvenue <strong>{{currentUser.firstname}}</strong></a>
+                <a class="blog-nav-item" ng-class="{ active: isActiveHeader('site.showprofile')}" ui-sref="site.showprofile"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Bienvenue <strong>{{currentUser.firstname}}</strong></a>
                 <a class="blog-nav-item" href="javascript:void(0)" ng-click="logOut()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnection</a>
             </nav>
         </div>
