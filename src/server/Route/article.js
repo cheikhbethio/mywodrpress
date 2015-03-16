@@ -9,7 +9,8 @@ var ArticleSchema = new mongoose.Schema({
                      ispublic : Boolean,
                      isHome : Boolean,
                      content : String,
-                     keywords : [String]
+                     keywords : [String],
+                     nbrComment: Number
 });
 
 var Article = mongoose.model('Article',ArticleSchema);
@@ -17,7 +18,7 @@ var Article = mongoose.model('Article',ArticleSchema);
 exports.articles=Article;
 
 exports.create = function(req,res,next){                           
-	var articleObj = {title: req.body.title, author: req.body.author, date: req.body.date, ispublic: req.body.ispublic, content:req.body.content, keywords: req.body.keywords};
+	var articleObj = {title: req.body.title, author: req.body.author, date: req.body.date, ispublic: req.body.ispublic, content:req.body.content, keywords: req.body.keywords, nbrComment :0};
 	var model = new Article(articleObj);
 	model.save(function(err,doc){
 	 if(err || !doc){
@@ -38,7 +39,29 @@ exports.get = function(req,res,next){
         }
     });
 }; 
-        
+
+exports.updateNbrComment = function(id,res,next){
+	console.log(id);
+    Article.findById(id, function(err,doc){
+        if(err || !doc){
+          return next(err);
+        }else {
+        	var tempo = doc.nbrComment;
+        	doc.nbrComment = tempo+1;
+        	console.log(doc.nbrComment);
+	        doc.save(function(err,result){
+	            if(err || !result){
+	            	 console.log('erreur sur le update de nb comment');
+	                //return next(err);
+	            } else {
+	            	 console.log('succès sur le update de nb comment');
+	                //res.json(result); 
+	            } 
+	        });
+        }
+    });
+}; 
+           
 exports.getByEditor = function(req,res,next){
 	    Article.find({author : req.params.id}).populate('author','firstname lastname').exec(function(err,result){
 	    	if(err){

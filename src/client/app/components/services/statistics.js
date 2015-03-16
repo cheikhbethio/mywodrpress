@@ -4,7 +4,7 @@
 
 angular.module('myWordPress.statisticService', ['ngResource'])
 .factory('StateNbComment', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/statistics/comment/:id', {}, {
+	return $resource('http://localhost:4711/api/statistics/articlecomment/:id', {}, {
 		get: {method:'GET', isArray:false},
 	});
 }]);

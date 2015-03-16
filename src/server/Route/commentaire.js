@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var user = require('./user.js');
 var article = require('./article.js');
 var Schema = mongoose.Schema;
+//var modelarticle =article.articles
+
 
 var CommentaireSchema = new mongoose.Schema({
 	author : {type : Schema.Types.ObjectId, ref:'user'},
@@ -29,6 +31,7 @@ exports.create = function(req,res,next){
 	        	console.log('error for saving comment')
 	        	return next(err);
 	        }else{
+	        		article.updateNbrComment(req.body.article);
 	        		console.log('succes for saving comment')
 	            	res.json(doc);
 	        	}
@@ -52,7 +55,7 @@ exports.get = function(req,res,next){
 		   	if(err){
 		       	return next(err);
 	    	}else {
-	    		//console.log('this is our test comment acount ..................................'+result.length);
+	    		//console.log('this is our test comment acount '+result.length);
 	        	res.json(result);
 	        }
 		});
@@ -71,7 +74,18 @@ exports.getNbcomment = function(req,res,next){
 		}));
 }
 
-
+exports.getNbcommentForAticle = function(req,res,next){   
+	Commentaire.find({article : req.params.id} ,(function(err,result){
+		   	if(err){
+		       	return next(err);
+	    	}else {
+	    		console.log('this is our test comment acount .............. '+ result.length);
+	        	var resultat =  result.length
+	        	console.log(resultat);
+	        	res.json({aaa : resultat});
+	        }
+		}));
+}
 exports.getNbcommentByArticle = function(req,res,next){   
 	Commentaire.find({article : req.params.id} ,(function(err,result){
 		   	if(err){

@@ -21,6 +21,7 @@ describe('Statistics Routing', function() {
 	describe('Account Creation for statistics', function() {
 	  	var myUser;
 	  	var myArticle;
+	  	var myArticle1;
 	  	var createdAcount = {
 	        login		: 'statistic',
 	    	password	: 'statistic',
@@ -52,7 +53,7 @@ describe('Statistics Routing', function() {
 	    it('should return error when article Creation failed', function(done) {
 		 	var id = myUser._id;
 		  	var createdArticle = {
-	             title : "myArticle",
+	             title : "myArticle0",
 	             author : id,
 	             date : "10-10-2000",
 	             ispublic : true,
@@ -74,12 +75,39 @@ describe('Statistics Routing', function() {
 		          done();
 		    });
 	    });
+
+	// article creation
+	    it('should return error when article Creation failed', function(done) {
+		 	var id = myUser._id;
+		  	var createdArticle = {
+	             title : "myArticle1",
+	             author : id,
+	             date : "10-10-2000",
+	             ispublic : true,
+	             content : "mycontent",
+	             keywords : ["str1", "str2"]
+		    };
+
+		    request(url)
+			.post('/api/articles')
+			.send(createdArticle)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          myArticle1 = res.body;
+		       //   console.log(myArticle);
+		          console.log(res.status+ ': code retourné pour la Creation d\'articles ');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
 		 		
 	//factory of comment creation
 	    it('should return error when 1° to 4 comment creation failed', function(done) {
 	    	creatcomment(myUser._id,  myArticle._id, url, '2000-10-10T00:00:00.000Z', 'first contenu');
 	    	creatcomment(myUser._id,  myArticle._id, url, '2001-10-10T00:00:00.000Z', 'seconde contenu');
-	    	creatcomment(myUser._id,  myArticle._id, url, '2005-10-10T00:00:00.000Z', 'third contenu');
+	    	creatcomment(myUser._id,  myArticle1._id, url, '2005-10-10T00:00:00.000Z', 'third contenu');
 	    	creatcomment(myUser._id,  myArticle._id, url, '2004-10-10T00:00:00.000Z', 'fourt contenu');
 	        done();
 	    });
@@ -105,8 +133,8 @@ describe('Statistics Routing', function() {
 		            throw err;
 		          }
 		        decompte = res.body;
-		       	res.body.should.equal(4);
-		        console.log(res.body + ' statistics nbr de commentaires');
+		       	res.body.aaa.should.equal(4);
+		        console.log(res.body.aaa + ' statistics nbr de commentaires');
 		        console.log(res.status+ ': code retourné pour la decompte des commentaires d\'un users');
 		        res.should.have.property('status',200);
 		        done();
@@ -124,7 +152,7 @@ describe('Statistics Routing', function() {
 		            throw err;
 		          }
 		        decompte = res.body;
-		       	res.body.should.equal(5);
+		       	res.body.should.equal(6);
 		        console.log(res.body + ' statistics nbr d\'articles');
 		        console.log(res.status+ ': code retourné pour la decompte des articles d\'un users');
 		        res.should.have.property('status',200);
@@ -132,36 +160,20 @@ describe('Statistics Routing', function() {
 		    });
 	    });
 
-	//view all articles for a user
-	    it('should return error when Creation article failed', function(done) {
-	    	var id_author = myUser._id;
-		    request(url)
-			.get('/api/statistics/article/' + id_author)
-			.send()
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ ': code retourné pour la vue de tous les articles d\'un auteur');
-		          res.should.have.property('status',200);
-		          done();
-		    });
-	    });
-
-
 	//view all comments for one article
-	    it('should return error when Creation article failed', function(done) {
+	    it('should return error when getting nbr comment for one article failed', function(done) {
 	    	var id_article = myArticle._id;
 		    request(url)
-			.get('/api/statistics/comment/article/' + id_article)
+			.get('/api/statistics/articlecomment/' + id_article)
 			.send()
 			.end(function(err, res) {
 		          if (err) {
 		            throw err;
 		          }
-		          console.log(res.status+ ': code retourné pour la vue de tous les comments d\'un article');
-		          res.should.have.property('status',200);
-		          done();
+		       	res.body.aaa.should.equal(3);
+		        console.log(res.status+ ': code retourné pour la vue l\'obtention du nbr de comments d\'un article');
+		        res.should.have.property('status',200);
+		        done();
 		    });
 	    });
 
