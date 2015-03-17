@@ -1,51 +1,7 @@
-var mongoose = require('mongoose');
-//var Preferences = require('../models/preferences');
-var Schema = mongoose.Schema;
 
-var preferencesSchema = new Schema({
-	
-	apropos: {
-		title: String,
-		content: String
-	},
+var Preferences = require('../models/preferences');
 
-	site: {
-		title: String,
-		titlecolor: String,
-		subtitle: String,
-		subtitlecolor: String,
-		backgroundcolor: String,
-		bannercolor: String
-	},
-
-	links:[{
-		text: String,
-		url: String
-	}]
-});
-
-var Preferences = mongoose.model('Preferences', preferencesSchema);
-
-exports.preferences = Preferences;
-
-  preferencesSchema.pre("save", function(next) {
-   var self = this;
-
-   console.log("pre save: ");
-
-    Preferences.find(function (err, pref) {
-	  if (err) 
-	  	return console.error(err);
-
-	  if(pref.length > 0){
-	  	var err = new Error('Not saving, preferences already set !');
-  		next(err);
-	  }
-	  
-	  next();
-
-	});
-});
+    
 
 var default_pref = new Preferences({
 
