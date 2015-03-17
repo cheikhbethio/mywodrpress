@@ -6,7 +6,7 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('dashboard.indexArticle', {
-		url: '/article/?success',
+		url: '/article/?success?editSuccess',
 		templateUrl: 'dashboard/articles/index.html',
 		controller: 'indexArticleController'
 	}).state('dashboard.createArticle', {
@@ -30,9 +30,11 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 	$scope.articles = Article.query();
 
 	$scope.success = $stateParams.success;
+	$scope.editSuccess = $stateParams.editSuccess;
 
 	$scope.closeAlert = function() {
         $scope.success = false;
+        $scope.editSuccess = false;
     };
 
 	$scope.deleteArticle=function(articleId) {
@@ -74,7 +76,7 @@ angular.module('myWordPress.admin.article', ['ui.router'])
     $scope.editArticle = function(){
     	if ($scope.editArticleForm.$valid){ 
 	    	Article.update({id: $stateParams.id}, $scope.article);
-	    	$state.go('dashboard.indexArticle');
+	    	$state.go('dashboard.indexArticle', {editSuccess:true});
 	   	} else {
 			console.log('Formulaire Invalide.');
 		}
