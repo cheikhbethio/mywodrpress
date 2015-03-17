@@ -22,8 +22,8 @@ var preferencesSchema = new Schema({
 		url: String
 	}]
 });
-//exports.Preferences= mongoose.model('Preferences', preferencesSchema);
-var Preferences = mongoose.model('Preferences', preferencesSchema);
+
+module.exports= mongoose.model('Preferences', preferencesSchema);
 
 exports.preferencesSchema =preferencesSchema;
-exports.Preferences = Preferences;
+//exports.Preferences = Preferences;

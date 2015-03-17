@@ -1,21 +1,4 @@
-var mongoose = require('mongoose');
-var user = require('./user.js');
-var article = require('./article.js');
-var Schema = mongoose.Schema;
-
-var FavorisSchema = new mongoose.Schema({
-  title : String,
-  author : {type : Schema.Types.ObjectId, ref:'user'},
-  article : {type : Schema.Types.ObjectId, ref:'Article'},
-  date : Date,
-  ispublic : Boolean,
-  isHome : Boolean,
-  content : String,
-  keywords : [String]
-});
-
-var Favoris = mongoose.model('Favoris',FavorisSchema);
-
+var Favoris=require('../models/favoris_article');
 exports.favoris=Favoris;
 
 exports.create = function(req,res,next){                           

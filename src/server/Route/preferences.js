@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var preferences = require('../models/preferences');
-/*var Schema = mongoose.Schema;
+//var Preferences = require('../models/preferences');
+var Schema = mongoose.Schema;
 
 var preferencesSchema = new Schema({
 	
@@ -25,15 +25,15 @@ var preferencesSchema = new Schema({
 });
 
 var Preferences = mongoose.model('Preferences', preferencesSchema);
-*/
-exports.preferences = preferences.Preferences;
 
-  preferences.preferencesSchema.pre("save", function(next) {
-    var self = this;
+exports.preferences = Preferences;
 
-    console.log("pre save: ");
+  preferencesSchema.pre("save", function(next) {
+   var self = this;
 
-    preferences.Preferences.find(function (err, pref) {
+   console.log("pre save: ");
+
+    Preferences.find(function (err, pref) {
 	  if (err) 
 	  	return console.error(err);
 
@@ -47,7 +47,7 @@ exports.preferences = preferences.Preferences;
 	});
 });
 
-var default_pref = new preferences.Preferences({
+var default_pref = new Preferences({
 
 	"apropos": {
 		"title": "A propos title",
@@ -93,7 +93,7 @@ default_pref.save(function (err, pref) {
 
 exports.get = function(req,res,next){
 
-    preferences.Preferences.find(function (err, pref) {
+    Preferences.find(function (err, pref) {
 	 	if (err) 
 	 		return console.error(err);
 
@@ -110,7 +110,7 @@ exports.edit = function(req,res,next){
 	var apropos = req.body.apropos;
 	var links = req.body.links;
 
-	preferences.Preferences.findByIdAndUpdate(req.body._id,  {site: site, apropos: apropos, links: links}, function(err, pref){
+	Preferences.findByIdAndUpdate(req.body._id,  {site: site, apropos: apropos, links: links}, function(err, pref){
 		if(err)
 			console.log("Error !!");
 

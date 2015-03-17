@@ -12,8 +12,8 @@ var userSchema = Schema({
     right		: Number
 });
 
-/*var user= mongoose.model('user', userSchema);
-exports.user = user;
-exports.userSchema = userSchema;*/
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};
 
 module.exports = mongoose.model('user', userSchema);

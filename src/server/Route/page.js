@@ -1,16 +1,4 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var article=require('./article.js')
-
-var PageSchema = new mongoose.Schema({
-                         title : String,
-                         content : [{type: Schema.Types.ObjectId, ref:'Article'}]
-});
-
-
-var Page = mongoose.model('Page',PageSchema);
-
-module.exports.Page = Page;
+var Page=require('../models/page');
 
 exports.create = function(req,res,next){
         var reqBody = req.body,
