@@ -53,6 +53,8 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 				page : {}
 			}];
 
+			$scope.boolAdd = false;
+
 		} else {
 			console.log('Formulaire Invalide.');
 		}
@@ -75,6 +77,10 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 				title : "", 
 				page : {}
 			}];
+
+			
+			$scope.boolAdd = false;
+
 		} else {
 			console.log('Formulaire Invalide.');
 		}
