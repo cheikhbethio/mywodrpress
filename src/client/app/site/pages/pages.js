@@ -13,7 +13,7 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 }])
 
-.controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'StateNbComment', 'Article', function($scope, $state, $stateParams, Page, $localStorage, StateNbComment, Article){
+.controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'AddFavorite', 'Article', function($scope, $state, $stateParams, Page, $localStorage, AddFavorite, Article){
 
 
     $scope.id_user = $localStorage.currentUser._id;
@@ -28,7 +28,7 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 
 	$scope.changeFavoris=function(id_article){
-		StateNbComment.post(id_article, function(page) {
+		AddFavorite.post(id_article, function(page) {
 	        Article.get({id : id_article._id}, function(page) {
 				$scope.art_to_change = page;
 		        var tempo = $scope.page.content;
