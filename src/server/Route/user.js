@@ -22,7 +22,7 @@ var user = mongoose.model('user', userSchema);
 
 module.exports.users=user;
 
-user.findOne({right:2},function(err,doc){
+user.findOne({right:3},function(err,doc){
     if(err) next(err);
     else if (!doc){
         var admin = new user({
@@ -30,7 +30,7 @@ user.findOne({right:2},function(err,doc){
             'password' : bcrypt.hashSync('admin', 8),
             'firstname' : 'admin',
             'lastname' : 'admin',
-            'right' : 2
+            'right' : 3
             })
         admin.save(function(err,doc){
             if(err) next(err);

@@ -10,7 +10,8 @@ var ArticleSchema = new mongoose.Schema({
                      isHome : Boolean,
                      content : String,
                      keywords : [String],
-                     nbrComment: Number
+                     nbrComment: Number,
+                     isFavorite: Boolean
 });
 
 var Article = mongoose.model('Article',ArticleSchema);
@@ -18,7 +19,7 @@ var Article = mongoose.model('Article',ArticleSchema);
 exports.articles=Article;
 
 exports.create = function(req,res,next){                           
-	var articleObj = {title: req.body.title, author: req.body.author, date: req.body.date, ispublic: req.body.ispublic, content:req.body.content, keywords: req.body.keywords, nbrComment :0};
+	var articleObj = {title: req.body.title, author: req.body.author, date: req.body.date, ispublic: req.body.ispublic, content:req.body.content, keywords: req.body.keywords, nbrComment :0, isFavorite:false};
 	var model = new Article(articleObj);
 	model.save(function(err,doc){
 	 if(err || !doc){
@@ -61,7 +62,27 @@ exports.updateNbrComment = function(id,res,next){
         }
     });
 }; 
-           
+   
+exports.updateFavoris = function(id){
+	console.log(id);
+    Article.findById(id, function(err,doc){
+        if(err || !doc){
+         	console.log('erreur, doc introuvable pour le update du favoris ');
+        }else {
+        	var tempo = doc.isFavorite;
+        	doc.isFavorite = !tempo;
+        	console.log(doc.isFavorite);
+	        doc.save(function(err,result){
+	            if(err || !result){
+	            	 console.log('erreur sur le update du favoris ');
+	            } else {
+	            	 console.log('succès sur le update du favoris');
+	            } 
+	        });
+        }
+    });
+}; 
+
 exports.getByEditor = function(req,res,next){
 	    Article.find({author : req.params.id}).populate('author','firstname lastname').exec(function(err,result){
 	    	if(err){
