@@ -151,7 +151,7 @@ exports.get = function(req,res,next){
     };
 
 exports.view = function (req, res ,next) {
-    user.find().select('firestname lastname right').exec(function (err, result) {
+    user.find().select('firstname lastname right').exec(function (err, result) {
         if (!err) {
             return res.send(result);
         } else {
@@ -159,4 +159,32 @@ exports.view = function (req, res ,next) {
             next(err);
         }
     });
+};
+
+exports.profile=function(req,res,next){
+    var id = req.params.id;
+        user.findById(id, 'firstname lastname right', function(err,result){
+            if(err) return next(err);
+            else
+                res.json(result);
+        });
+
+};
+
+exports.right=function(req,res,next){
+    var query= ({_id : req.params.id});
+    var maj={};
+    if(req.body.right!=null){
+        maj.right=req.body.right;
+    }
+    user.update(query,maj,function(errs,n){
+                            if(errs){
+                                console.log("error when update user");
+                                next(errs);
+                            }
+                            else
+                                res.send({error : "0", numAffected : n, result : maj});
+                                next();
+                            });
+
 };

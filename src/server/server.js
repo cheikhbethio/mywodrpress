@@ -78,6 +78,8 @@ app.post('/api/users', user.create);
 app.put('/api/users/:id',[token.authedit], user.edit);
 app.get('/api/users/:id',[token.authedit], user.get);
 app.get('/api/users',[token.authadmin], user.view);
+app.get('/api/users/:id/profile',user.profile);
+app.put('/api/users/:id/right',[token.authadmin],user.right);
 
 /***** Token *****/
 app.post('/api/token', token.gettoken);
