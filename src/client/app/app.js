@@ -60,6 +60,7 @@ angular.module('myWordPress', [
     'myWordPress.lastCommentService',
     'myWordPress.statisticService',
     'myWordPress.profilService',
+    'myWordPress.rightService',
 
     // directives
 	'myWordPress.registration.registration-directive',
