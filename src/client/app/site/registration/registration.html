@@ -2,8 +2,8 @@
 
 <form name="registrationForm" novalidate>
 
-	<div class="form-group" ng-class="{ 'has-error': $scope.noLastName }">
-		<label for="lastname">Nom:</label>
+	<div class="form-group input-group" ng-class="{ 'has-error': $scope.noLastName }">
+		<span for="lastname" class="input-group-addon"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></span>
 		<input id="input_lastname" 
 			type="text"  
 			name="lastname" 
@@ -14,8 +14,8 @@
 		/>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
-		<label for="firstname">Prenom:</label>
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.firstname.$invalid && registrationForm.firstname.$dirty }">
+		<span for="firstname" class="input-group-addon"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></span>
 		<input id="input_firstname" 
 			type="text" 
 			name="firstname" 
@@ -26,8 +26,8 @@
 		/>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': registrationForm.login.$invalid && registrationForm.login.$dirty }">
-		<label for="login">Login:</label>
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.login.$invalid && registrationForm.login.$dirty }">
+    	<span for="login" class="input-group-addon" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
 		<input id="input_login" 
 			type="text" 
 			name="login" 
@@ -39,8 +39,8 @@
 		<p ng-show="loginAlreadyUsed">Login déjà utilisé</p>
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': registrationForm.email.$invalid && registrationForm.email.$dirty }">
-		<label for="email">Email:</label>
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.email.$invalid && registrationForm.email.$dirty }">
+		<span for="email" class="input-group-addon"><b>@</b></span>
 		<input id="input_email"
 			type="email"
 			name="email"
@@ -53,8 +53,8 @@
 		<p ng-show="emailAlreadyUsed">Email déjà utilisé</p>
 	</div>
 
-	<div class="form-group">
-		<label for="password">Mot de passe: </label>
+	<div class="form-group input-group">
+    	<span for="password" class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
 		<input id="input_password"
 		type="password"
 		class="form-control"
@@ -63,8 +63,8 @@
 		ng-model="newUser.password" />
 	</div>
 
-	<div class="form-group" ng-class="{ 'has-error': registrationForm.passwordConfirmation.$invalid}">
-		<label for="passwordConfirmation">Confirmation du mot de passe</label>
+	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.passwordConfirmation.$invalid}">
+		 <span for="passwordConfirmation" class="input-group-addon"><span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span></span>
 		<input id="input_passwordConfirmation"
 		type="password"
 		name="passwordConfirmation"
