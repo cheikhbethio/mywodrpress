@@ -1,4 +1,4 @@
-<div ng-show="isUserConnected()" style="padding-bottom: 50px;"> 
+<div ng-if="isUserConnected() && currentUser.right > 0" style="padding-bottom: 50px;"> 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">

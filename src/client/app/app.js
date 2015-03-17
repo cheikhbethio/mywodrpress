@@ -125,14 +125,13 @@ angular.module('myWordPress', [
     });
 })
 
-.run(function ($rootScope,  $state) {
+.run(function ($rootScope,  $state, $localStorage) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
 
-        if (requireLogin && typeof $rootScope.currentUser === 'undefined') {
+        if ((requireLogin && typeof $rootScope.currentUser === 'undefined') || (requireLogin && $localStorage.currentUser.right == 0)) {
             event.preventDefault();
-            console.log($state);
             $state.go('site.connection');
         } 
   });
