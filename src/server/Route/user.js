@@ -1,6 +1,11 @@
 //var mongoose = require('mongoose');
-var bcrypt=require('bcrypt');
-var User=require('../models/users');
+
+
+//var bcrypt=require('bcrypt');
+
+var express = require('express');
+var Users =require('../models/users');
+
 
 
 /*var Schema = mongoose.Schema;
@@ -15,15 +20,61 @@ var userSchema = Schema({
     right		: Number
 });
 */
-User.userSchema.methods.validPassword = function(password) {
+
+/* A mettre avec le Schema */
+/*User.userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
-};
+};*/
+
+
+/*********** Nouvelle organisation *****************/
+/* 4 routes:                                      **/
+/* app.post('/api/users', user.create);           **/
+/* app.put('/api/users/:id', user.edit);          **/
+/* app.get('/api/users/:id', user.get);           **/
+/* app.get('/api/users', user.view);              **/
+/***************************************************/
+
+
+var router = express.Router();
+
+
+router.get('/', function(req, res){
+
+    Users.find(function(err, users){
+        if(err)
+            return console.error(err);
+        else
+            res.send(users);
+    });
+
+});
+
+router.param('id', function(req, res, next, id){
+    console.log('ID parameter: ', id);
+    req.id = id;
+    next();
+});
+
+router.get('/:id', function(req, res){
+    Users.findById(req.id, function(err, user){
+        if(err)
+            return next(err);
+        else
+            res.send(user);
+    });
+});
+
+
+module.exports = router;
+
+/***************************************************/
 
 //var user = mongoose.model('user', userSchema);
 
-module.exports.users=User.user;
+//module.exports.users=User.user;
 
-User.user.findOne({right:2},function(err,doc){
+/*User.user.findOne({right:2},function(err,doc){
     if(err) next(err);
     else if (!doc){
         var admin = new User.user({
@@ -160,4 +211,4 @@ exports.view = function (req, res ,next) {
             next(err);
         }
     });
-};
+};*/

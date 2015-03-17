@@ -20,7 +20,9 @@ var flash        = require('connect-flash');
 var cookieParser = require('cookie-parser');
 
 
-var user        = require('./Route/user.js');
+var users        = require('./Route/user.js');
+
+
 var page        = require('./Route/page.js');
 var article     = require('./Route/article.js');
 var comment     = require('./Route/commentaire.js');
@@ -42,8 +44,8 @@ app.use(bodyParser());
 app.use(methodOverride());
 app.use(session({ secret: 'securedsession' }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+/*app.use(passport.initialize());
+app.use(passport.session());*/
 
 //app.use(app.router);
 
@@ -61,7 +63,7 @@ app.listen(port, function () {
 var db = mongoose.connect('mongodb://localhost/myWP');
 
 
-app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
+/*app.post('/api/login', passport.authenticate('local-login'), function(req, res) {
 	console.log(req.session.passport.user.roles);
 	res.cookie('userid', req.user.right, { maxAge: 2592000000 });
 	  res.send(req.user);
@@ -69,35 +71,40 @@ app.post('/api/login', passport.authenticate('local-login'), function(req, res) 
 app.post('/api/logout',  function(req, res){
 	req.logOut();
 	res.send(200);
-});
+});*/
 
+/*app.use('/api');*/
 
 /***** Users ******/
 
-app.post('/api/users', user.create);
+app.use('/api/users', users);
+
+
+/* Old users */
+/*app.post('/api/users', user.create);
 app.put('/api/users/:id',[token.authedit], user.edit);
 app.get('/api/users/:id',[token.authedit], user.get);
-app.get('/api/users',[token.authadmin], user.view);
+app.get('/api/users',[token.authadmin], user.view);*/
 
 /***** Token *****/
-app.post('/api/token', token.gettoken);
+/*app.post('/api/token', token.gettoken);*/
 
 /***** Pages ******/
 
 
-app.post('/api/pages',[token.authadmin],page.create);
+/*app.post('/api/pages',[token.authadmin],page.create);
 app.put('/api/pages/:id',[token.authadmin], page.edit);
 app.delete('/api/pages/:id',[token.authadmin], page.deletePage);
 app.get('/api/pages/:id', page.getPage);
 app.get('/api/pages', page.view);
 app.put('/api/pages/:id/article/:idart',page.addarticle);
-app.delete('/api/pages/:id/article/:idart',page.delarticle);
+app.delete('/api/pages/:id/article/:idart',page.delarticle);*/
 
 
 /***** Articles *****/
 
 
-app.post('/api/articles',[token.authwritter], article.create);
+/*app.post('/api/articles',[token.authwritter], article.create);
 app.put('/api/articles/:id',[token.authwritter], article.edit);
 app.delete('/api/articles/:id',[token.authwritter], article.deleteArticle);
 app.get('/api/articles/:id', article.get);
@@ -105,7 +112,7 @@ app.get('/api/articles', article.view);
 app.get('/api/articles_editor/:id', article.getByEditor);
 app.get('/api/search/article' , article.searchByKeyWord);
 app.put('/api/articles/home/:id', article.home);
-app.get('/api/last_articles',article.getLastArticles);
+app.get('/api/last_articles',article.getLastArticles);*/
 
 /***** Menus *****/
 
@@ -114,34 +121,34 @@ app.get('/api/menus', menu.getItems);
 app.post('/api/menus/page/:id', menu.addPageToItem);
 app.post('/api/menus/menu/:id', menu.addMenuToItem);*/
 
-app.get('/api/menus', menu.getMenus);
+/*app.get('/api/menus', menu.getMenus);
 app.post('/api/menus',[token.authadmin], menu.postMenu);
 app.put('/api/menus/:id',[token.authadmin], menu.editMenu);
-app.delete('/api/menus/:id',[token.authadmin], menu.deleteMenu);
+app.delete('/api/menus/:id',[token.authadmin], menu.deleteMenu);*/
 
 /*****Commentaires*****/
 
-app.post('/api/comments',[token.authmember], comment.create);
+/*app.post('/api/comments',[token.authmember], comment.create);
 app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id',[token.authmember], comment.deleteComment);
 app.get('/api/last_comments', comment.getLastComments);
-app.get('/api/comments_editor/:id', comment.getByEditor);
+app.get('/api/comments_editor/:id', comment.getByEditor);*/
 
 
 /***** Preferences *****/
-app.get('/api/preferences', preferences.get);
-app.put('/api/preferences',[token.authadmin], preferences.edit);
+/*app.get('/api/preferences', preferences.get);
+app.put('/api/preferences',[token.authadmin], preferences.edit);*/
 
 /******statistiques*******/
-app.get('/api/statistics/comment/:id', comment.getNbcomment);
+/*app.get('/api/statistics/comment/:id', comment.getNbcomment);
 app.get('/api/statistics/article/:id', article.getNbArticle);
 app.get('/api/statistics/page/:id', page.getNbPage);
-app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
+app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);*/
 
 /******favoris*******/
-app.post('/api/favoris', favoris.create);
+/*app.post('/api/favoris', favoris.create);
 app.delete('/api/favoris/:id', favoris.deleteFavoris);
 app.get('/api/favoris/:id', favoris.get);
-app.get('/api/favoris/all/:id', favoris.view); 
+app.get('/api/favoris/all/:id', favoris.view); */
 
 
