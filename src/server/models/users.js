@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 
 var Schema = mongoose.Schema;
 
@@ -8,7 +9,6 @@ var userSchema = Schema({
     firstname	: String,
     lastname	: String,
     email	  	: String,
-    token   	: String,
     right		: Number
 });
 
