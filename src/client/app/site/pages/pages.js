@@ -15,10 +15,10 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 .controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'StateNbComment', function($scope, $state, $stateParams, Page, $localStorage, StateNbComment){
 
-	
-    $scope.id_user = $localStorage.currentUser._id;
-    console.log($scope.id_user + " test id user");
-	var tem;
+	if(typeof $localStorage.currentUser != 'undefined'){
+    	$scope.id_user = $localStorage.currentUser._id;
+    	console.log($scope.id_user + " test id user");
+	}
 
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);

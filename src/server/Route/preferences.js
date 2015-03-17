@@ -49,14 +49,14 @@ preferencesSchema.pre("save", function(next) {
 var default_pref = new Preferences({
 
 	"apropos": {
-		"title": "A propos title",
-		"content": "A propos subtitle"
+		"title": "A propos",
+		"content": "Contenu du A propos"
 	},
 
 	"site": {
-		"title": "A title",
+		"title": "Démo WordPress",
 		"titlecolor": "#428bca",
-		"subtitle": "site subtitle",
+		"subtitle": "Powered by Wordpress",
 		"subtitlecolor": "#000000",
 
 		"backgroundcolor": "#ffffff",
