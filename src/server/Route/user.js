@@ -4,7 +4,7 @@
 //var bcrypt=require('bcrypt');
 
 var express = require('express');
-var Users =require('../models/users');
+var User = require('../models/users');
 
 
 
@@ -50,6 +50,25 @@ router.get('/', function(req, res){
 
 });
 
+router.post('/', function (req, res , next) {
+
+    var newUser = new User();
+
+    newUser.login = req.body.login;
+    newUser.password = req.body.password;//bcrypt.hashSync(req.body.password, 8);
+    newUser.firstname = req.body.firstname;
+    newUser.lastname = req.body.lastnameuser
+    newUser.email = req.body.email;
+    newUser.right = 0;
+
+    newUser.save(function(err, results){
+        if (err)
+            res.status(401).json( {error : err.message} );
+        else
+            res.status(200).send({error : 0, result : results});
+    });
+});
+
 router.param('id', function(req, res, next, id){
     console.log('ID parameter: ', id);
     req.id = id;
@@ -64,6 +83,8 @@ router.get('/:id', function(req, res){
             res.send(user);
     });
 });
+
+
 
 
 module.exports = router;

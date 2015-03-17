@@ -19,11 +19,14 @@ var session = require('express-session');
 var flash        = require('connect-flash');
 var cookieParser = require('cookie-parser');
 
+/************* New **************************/
 
+var login        = require('./Route/login.js');
 var users        = require('./Route/user.js');
 
+/********************************************/
 
-var page        = require('./Route/page.js');
+/*var page        = require('./Route/page.js');
 var article     = require('./Route/article.js');
 var comment     = require('./Route/commentaire.js');
 var favoris     = require('./Route/favoris_article.js');
@@ -31,7 +34,7 @@ var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
 var preferences = require('./Route/preferences');
 
-var token= require('./Route/token.js');
+var token = require('./Route/token.js'); */
 
 var app = express();
 
@@ -46,6 +49,8 @@ app.use(session({ secret: 'securedsession' }));
 
 /*app.use(passport.initialize());
 app.use(passport.session());*/
+
+app.set('jwtTokenSecret', 'BIG_fat_secret');
 
 //app.use(app.router);
 
@@ -77,7 +82,9 @@ app.post('/api/logout',  function(req, res){
 
 /***** Users ******/
 
+app.use('/api/login', login);
 app.use('/api/users', users);
+
 
 
 /* Old users */
