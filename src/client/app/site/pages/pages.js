@@ -13,34 +13,33 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 }])
 
-.controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'StateNbComment', function($scope, $state, $stateParams, Page, $localStorage, StateNbComment){
+.controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'StateNbComment', 'Article', function($scope, $state, $stateParams, Page, $localStorage, StateNbComment, Article){
 
-	
+
     $scope.id_user = $localStorage.currentUser._id;
-    console.log($scope.id_user + " test id user");
-	var tem;
 
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);
-        console.log(page.content);
+        console.log(page.content);/*
         for(var i = 0; i < page.content.length; i++){
-        	console.log(page.content[i].nbrComment);
-        }
+        	console.log(page.content[i].isFavorite);
+        }*/
     });
 
-    /*
-	$scope.nbComment =0;
-	StateNbComment.get({id: $scope.id_user}, function(res) {
-		$scope.nbComment = res.aaa;
-        console.log("getted comment "+ $scope.nbComment);
-    });
-    console.log($scope.nbComment);
-*/
 
-	$scope.okFavoris = false;
-
-	$scope.changeFavoris=function(){
-		$scope.okFavoris = !$scope.okFavoris;
+	$scope.changeFavoris=function(id_article){
+		StateNbComment.post(id_article, function(page) {
+	        Article.get({id : id_article._id}, function(page) {
+				$scope.art_to_change = page;
+		        var tempo = $scope.page.content;
+		        for(var i = 0; i < tempo.length; i++){
+		        	if(tempo[i]._id == $scope.art_to_change._id){
+		        		tempo[i].isFavorite = $scope.art_to_change.isFavorite;
+		        		console.log('modification favorite');
+		        	}
+		        }
+			}); 
+	    });
 	}
 
 
