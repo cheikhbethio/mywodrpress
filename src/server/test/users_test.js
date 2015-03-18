@@ -2,11 +2,11 @@ var should = require('should');
 var assert = require('assert');
 var request = require('supertest');  
 var mongoose = require('mongoose');
-var bcrypt=require('bcrypt');
-var mydb     = require('../Route/user.js');
-//var winston = require('winston');
+var bcrypt = require('bcrypt');
+var mydb = require('../Route/user.js');
  
-describe('User Routing', function() {
+describe('User', function() {
+
   	var url = 'http://localhost:4711';
  	
  	before(function(done) {
@@ -18,46 +18,47 @@ describe('User Routing', function() {
     	mongoose.disconnect();
     	done();
   	});
-
 	  
 	describe('Account Creation', function() {
 	  	var myUser;
+
 	  	var createdAcount = {
-	        login		: 'kkk',
-	    	password	: 'kkk',
 	   	 	firstname	: 'kkk',
 	    	lastname	: 'kkk',
+	    	login		: 'kkk',
 	    	email	  	: 'kkk@kkk.kkk',
-	    	right		: 1
+	    	password	: 'kkk'
 	    };
+
 	    var updateAccont = {
 	    	password	: '1kkk',
 	   	 	firstname	: '1kkk',
 	    	lastname	: '1kkk',
 	    	email	  	: '1kkk@kkk.kkk',
 	    };
+	    
 	    var token;
+
+	    it('')
 
 	    it('should return error when Creation failed', function(done) {
 
 		    request(url)
-			.post('/api/users')
-			.send(createdAcount)
-		    // end handles the response
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ '  code de requete retournéé pour la Creation');
-		          //res.should.have.status(400);
-		          myUser = res.body.result;
-		       //   console.log(myUser);
-		          res.should.have.property('status',200);
-		          done();
-		        });
+				.post('/api/users')
+				.send(createdAcount)
+				.end(function(err, res) {
+					if (err) 
+						throw err;
+					else {
+						//res.should.have.status(400);
+						myUser = res.body.result;
+						//   console.log(myUser);
+						res.should.have.property('status',200);
+						done();
+					}
+				});
 	    });
 
-		//for duplicate accont
 	    it('should return error trying to save duplicate username', function(done) {
 		request(url)
 		.post('/api/users')

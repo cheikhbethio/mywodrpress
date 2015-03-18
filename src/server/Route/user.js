@@ -1,31 +1,7 @@
-//var mongoose = require('mongoose');
-
-
-//var bcrypt=require('bcrypt');
-
 var express = require('express');
+var bcrypt = require('bcrypt');
+
 var User = require('../models/users');
-
-
-
-/*var Schema = mongoose.Schema;
-
-var userSchema = Schema({
-    login		: String,
-    password	: String,
-    firstname	: String,
-    lastname	: String,
-    email	  	: String,
-    token   	: String,
-    right		: Number
-});
-*/
-
-/* A mettre avec le Schema */
-/*User.userSchema.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.password);
-};*/
-
 
 /*********** Nouvelle organisation *****************/
 /* 4 routes:                                      **/
@@ -35,13 +11,12 @@ var userSchema = Schema({
 /* app.get('/api/users', user.view);              **/
 /***************************************************/
 
-
 var router = express.Router();
 
 
 router.get('/', function(req, res){
 
-    Users.find(function(err, users){
+    User.find(function(err, users){
         if(err)
             return console.error(err);
         else
@@ -52,14 +27,8 @@ router.get('/', function(req, res){
 
 router.post('/', function (req, res , next) {
 
-    var newUser = new User();
-
-    newUser.login = req.body.login;
-    newUser.password = req.body.password;//bcrypt.hashSync(req.body.password, 8);
-    newUser.firstname = req.body.firstname;
-    newUser.lastname = req.body.lastnameuser
-    newUser.email = req.body.email;
-    newUser.right = 0;
+    var newUser = new User(req.body);
+    newUser.password = bcrypt.hashSync(req.body.password, 8);
 
     newUser.save(function(err, results){
         if (err)
@@ -70,13 +39,12 @@ router.post('/', function (req, res , next) {
 });
 
 router.param('id', function(req, res, next, id){
-    console.log('ID parameter: ', id);
     req.id = id;
     next();
 });
 
 router.get('/:id', function(req, res){
-    Users.findById(req.id, function(err, user){
+    User.findById(req.id, function(err, user){
         if(err)
             return next(err);
         else
@@ -84,12 +52,32 @@ router.get('/:id', function(req, res){
     });
 });
 
+router.put('/:id', function(req, res){
 
+});
 
 
 module.exports = router;
 
 /***************************************************/
+
+/*var Schema = mongoose.Schema;
+
+var userSchema = Schema({
+    login       : String,
+    password    : String,
+    firstname   : String,
+    lastname    : String,
+    email       : String,
+    token       : String,
+    right       : Number
+});
+*/
+
+/* A mettre avec le Schema */
+/*User.userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+};*/
 
 //var user = mongoose.model('user', userSchema);
 
