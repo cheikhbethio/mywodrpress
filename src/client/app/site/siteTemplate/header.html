@@ -17,7 +17,7 @@
                     <li><a ui-sref="dashboard.indexMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Modifier le menu</a></li>
                 </ul>
 
-            <ul class="nav navbar-nav navbar-left" ng-if="currentUser.right == 1">
+                <ul class="nav navbar-nav navbar-left" ng-if="currentUser.right == 1">
                     <li><a ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Rédiger un article</a></li>
                     <li><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Ajouter un article dans une page</a></li>
                 </ul>
@@ -67,8 +67,8 @@
 
         <div ng-hide="isUserConnected()" >
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <a ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection">Connexion</a>
-                <a ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" ui-sref="site.registration">Inscription</a>
+                <a ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Connexion</a>
+                <a ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" ui-sref="site.registration"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Inscription</a>
             </nav>
         </div>
 

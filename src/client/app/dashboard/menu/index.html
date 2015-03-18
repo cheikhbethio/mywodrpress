@@ -1,5 +1,7 @@
 <h2 class="page-header">Gestion du menu</h2>
 
+<alert type="warning" ng-if="currentUser.right == 1"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Vous ne pouvez pas modifier le menu, seul l'administrateur en a les droits.</alert>
+
 <h4 class="page-header"> Aperçu du menu </h4>
 <div class="well">
 	<div class="blog-masthead" id="top-scroll" name="top" ng-style="{ 'background-color': preferences.site.titlecolor }">
@@ -33,7 +35,7 @@
 	                  </ul>
 	                </span>
 
-	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)">
+	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)" ng-if="currentUser.right == 3">
   						<span aria-hidden="true">&times;</span>
 					</button>
 				</span>
@@ -42,7 +44,7 @@
 
 
 
-	            <button class="btn btn-success" ng-click="showAddMenu()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
+	            <button class="btn btn-success" ng-click="showAddMenu()" ng-if="currentUser.right == 3"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
 	        </nav>
 
 
