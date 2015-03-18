@@ -59,7 +59,6 @@ angular.module('myWordPress.pages', ['ui.router'])
 	$scope.popFavoris=function(id_article){
 		console.log('pop favorite');
 		console.log(id_article);
-		$scope.test();
 		AddFavorite.remove({id_user: $scope.id_user, id_art: id_article});
 	};
 	/*
