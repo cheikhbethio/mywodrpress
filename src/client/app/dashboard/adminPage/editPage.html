@@ -1,6 +1,6 @@
 <h2 class="page-header"> Titre: {{page.title}} </h2>
 
-<div>
+<div ng-if="currentUser.right == 3">
   <label ng-hide="isEdit == true"> Modifiez le titre de la page :</label>
   <input type="text" ng-show="isEdit== true" ng-model="editTitle" />
 
@@ -11,21 +11,21 @@
     <span class="glyphicon glyphicon-pencil"></span>
   </button>
 
-  <button type="button"
-  class="btn btn-danger"
-  ng-click="switchEdit(false)"
-  ng-show="isEdit == true">
-    Cancel
-  </button>
-
   <button type="button" 
   class="btn btn-primary"
   ng-click="valid()"
   ng-show="isEdit == true">
-   Save
+   Enregistrer
+  </button>
+
+  <button type="button"
+  class="btn btn-danger"
+  ng-click="switchEdit(false)"
+  ng-show="isEdit == true">
+    Annuler
   </button>
 </div>
-
+<br/>
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -94,4 +94,6 @@
 </table>
 
 <a ui-sref="dashboard.adminPage" class="btn btn-default">Retour</a>
+
+<br/><br/>
 

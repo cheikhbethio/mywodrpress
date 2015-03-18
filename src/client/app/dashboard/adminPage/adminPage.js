@@ -17,10 +17,10 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 	function($scope,Page, $state,$stateParams, ngToast, dialogs){
 	
 	$scope.pages = Page.query();
-
+	
 	$scope.deletepage=function(pageid) {
 
-		var dlg = dialogs.confirm();
+		//var dlg = dialogs.confirm();
 					/*dlg.result.then(function(btn){
 						$scope.confirmed = 'You confirmed "Yes."';
 					},function(btn){
@@ -28,10 +28,10 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 					});*/
 
 
-		/*if (confirm("sure to delete") == true) {
+		if (confirm("Voulez vous vraiment supprimer cette page?") == true) {
 			Page.remove({id: pageid});
 			$scope.pages = Page.query();
-        }*/
+        }
    	};
 
     $scope.addPage = function() {
