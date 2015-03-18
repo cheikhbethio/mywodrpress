@@ -2,15 +2,15 @@
 
 
 <form name="createArticleForm">
-    <div class="form-group" novalidate>
-        <label for="description"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Titre</label>
+    <div class="form-group input-group" novalidate>
+        <span for="title" class="input-group-addon"><span class="glyphicon glyphicon-tower" aria-hidden="true"></span></span>
         <input class="form-control" name="title" type="text" id="title" placeholder="Titre de l'article" ng-model="title" required>
     </div>
 
     <text-angular ng-model="htmlVariable" required></text-angular>
 
-    <div class="form-group">
-        <label for="description"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés (séparés par une virgule)</label>
+    <div class="form-group input-group">
+        <span for="description" class="input-group-addon"><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> (séparés par une virgule)</span>
         <input class="form-control" name="keywords" type="text" id="keywords" placeholder="MotClé1, MotClé2, ..." ng-model="keywords" ng-list="," required>
     </div>
 

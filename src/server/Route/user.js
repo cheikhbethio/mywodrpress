@@ -36,8 +36,8 @@ user.findOne({right:3},function(err,doc){
             'right' : 3
             })
         admin.save(function(err,doc){
-            if(err) next(err);
-            else console.log("account admin created")
+            //if(err) next(err);
+            //else console.log("account admin created")
         })
     }
     else{
@@ -154,7 +154,7 @@ exports.get = function(req,res,next){
     };
 
 exports.view = function (req, res ,next) {
-    user.find().select('firestname lastname right').exec(function (err, result) {
+    user.find().select('firstname lastname right').exec(function (err, result) {
         if (!err) {
             return res.send(result);
         } else {
@@ -253,5 +253,31 @@ isFavorite =function(tab, param1){
             };
             console.log('non présent dans les favoris');
             return false;
+
+exports.profile=function(req,res,next){
+    var id = req.params.id;
+        user.findById(id, 'firstname lastname right', function(err,result){
+            if(err) return next(err);
+            else
+                res.json(result);
+        });
+
+};
+
+exports.right=function(req,res,next){
+    var query= ({_id : req.params.id});
+    var maj={};
+    if(req.body.right!=null){
+        maj.right=req.body.right;
+    }
+    user.update(query,maj,function(errs,n){
+                            if(errs){
+                                console.log("error when update user");
+                                next(errs);
+                            }
+                            else
+                                res.send({error : "0", numAffected : n, result : maj});
+                                next();
+                            });
 
 };

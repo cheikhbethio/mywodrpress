@@ -22,6 +22,8 @@ angular.module('myWordPress.registration', ['ui.router'])
 		$scope.loginAlreadyUsed = false;
 		$scope.emailAlreadyUsed = false;
 
+		$scope.invalidForm = false;
+
 		$scope.nonMatchingPwd = false;
 
 		$scope.saveNewUser = function() {
@@ -41,7 +43,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 		    		User.save(nuser, function(resp) {
 						if(resp.error == 0){
 							console.log("Successfuly posted: " + resp.error);
-							$state.go('site.connection');
+							$state.go('site.connection', {registration : true});
 						}else if( resp.error == 1){
 							$scope.emailAlreadyUsed = true;
 						}else if(resp.error == 2){
@@ -60,6 +62,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 		  	}
 		  	else{
 		  		console.log("Invalide form: ");
+		  		$scope.invalidForm = true;
 		  	}
 
 		  	console.log($scope.newUser);
@@ -82,4 +85,9 @@ angular.module('myWordPress.registration', ['ui.router'])
   			console.log("User password: " + newUser.password);
   			console.log("User passwordConfirmation: " + newUser.passwordConfirmation);
   		};
+
+  		$scope.closeAlert = function() {
+			$scope.invalidForm = false;
+		};
+
 }]);

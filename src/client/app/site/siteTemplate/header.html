@@ -1,4 +1,4 @@
-<div ng-show="isUserConnected()" style="padding-bottom: 50px;"> 
+<div ng-if="isUserConnected() && currentUser.right > 0" style="padding-bottom: 50px;"> 
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -11,14 +11,21 @@
                 <a class="navbar-brand" ui-sref="dashboard.home"><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span> Mini-DashBoard</a>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-left">
+                <ul class="nav navbar-nav navbar-left" ng-if="currentUser.right == 3">
                     <li><a ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Rédiger un article</a></li>
                     <li><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Créer une page</a></li>
                     <li><a ui-sref="dashboard.indexMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Modifier le menu</a></li>
                 </ul>
+
+                <ul class="nav navbar-nav navbar-left" ng-if="currentUser.right == 1">
+                    <li><a ui-sref="dashboard.createArticle"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Rédiger un article</a></li>
+                    <li><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Ajouter un article dans une page</a></li>
+                </ul>
+
+
                 <ul class="nav navbar-nav navbar-right">
                     <li><a ui-sref="dashboard.home"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Aller au Dashboard</a></li>
-                    <li><a ui-sref="dashboard.preferences"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Préférences</a></li>
+                    <li ng-if="currentUser.right == 3"><a ui-sref="dashboard.preferences"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Préférences</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Aide</a></li>
                 </ul>
             </div>
@@ -51,7 +58,7 @@
                   </a>
                   <ul class="dropdown-menu blog-dropdown" style="margin-top:10px;" ng-style="{ 'background-color': preferences.site.bannercolor }">
                     <li ng-repeat="drop in menu.dropdown"s>
-                      <a ng-class="{ activeDrop: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
+                      <a ng-class="{ activeDrop: isActiveHeaderPage('{{drop.page}}')}" class="blog-nav-item drop" ui-sref="site.pages({id : drop.page})"> {{drop.title}}</a>
                     </li>
                   </ul>
                 </span>
@@ -60,8 +67,8 @@
 
         <div ng-hide="isUserConnected()" >
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <a ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection">Connexion</a>
-                <a ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" ui-sref="site.registration">Inscription</a>
+                <a ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Connexion</a>
+                <a ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" ui-sref="site.registration"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Inscription</a>
             </nav>
         </div>
 

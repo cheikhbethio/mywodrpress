@@ -2,6 +2,8 @@
 
 <form name="registrationForm" novalidate>
 
+<alert type="danger" ng-show="invalidForm" close="closeAlert()"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Echec de l'inscription. Vérifiez que vous avez bien renseigné tous les champs et que les mots de passes sont identiques. Si c'est le cas, votre identifiant ou adresse email est déjà utilisé.</alert>
+
 	<div class="form-group input-group" ng-class="{ 'has-error': $scope.noLastName }">
 		<span for="lastname" class="input-group-addon"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></span>
 		<input id="input_lastname" 
@@ -36,7 +38,7 @@
 			placeholder="Login" 
 			required
 		/>
-		<p ng-show="loginAlreadyUsed">Login déjà utilisé</p>
+		<p ng-show="loginAlreadyUsed" class="input-group-addon">Login déjà utilisé</p>
 	</div>
 
 	<div class="form-group input-group" ng-class="{ 'has-error': registrationForm.email.$invalid && registrationForm.email.$dirty }">
@@ -49,8 +51,8 @@
 			placeholder="Email"
 			required
 		/>
-		<p class="help-block" ng-if="registrationForm.email.$error.email">Adresse mail invalid</p>
-		<p ng-show="emailAlreadyUsed">Email déjà utilisé</p>
+		<p class="help-block input-group-addon" ng-if="registrationForm.email.$error.email">Adresse mail invalide</p>
+		<p class="input-group-addon"ng-show="emailAlreadyUsed">Email déjà utilisé</p>
 	</div>
 
 	<div class="form-group input-group">

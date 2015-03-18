@@ -29,9 +29,9 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
                 }
 
                 $scope.logOut = function() {
-                        $state.go("site.home");
                         delete $rootScope.currentUser;
                 	delete $localStorage.currentUser;
+                        $state.go("site.home", {connectionSuccess:false});
                 }
 
                 $scope.search= function(key){
