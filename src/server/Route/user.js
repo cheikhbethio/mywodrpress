@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt=require('bcrypt');
+var article=require('./article.js')
 
 
 var Schema = mongoose.Schema;
@@ -11,6 +12,7 @@ var userSchema = Schema({
     lastname	: String,
     email	  	: String,
     token   	: String,
+    favorite	: [{type: Schema.Types.ObjectId, ref:'Article'}],
     right		: Number
 });
 
@@ -30,6 +32,7 @@ user.findOne({right:3},function(err,doc){
             'password' : bcrypt.hashSync('admin', 8),
             'firstname' : 'admin',
             'lastname' : 'admin',
+            'email'	: 'admin@admin.com',
             'right' : 3
             })
         admin.save(function(err,doc){
@@ -159,4 +162,96 @@ exports.view = function (req, res ,next) {
             next(err);
         }
     });
+};
+
+
+exports.addFavorite = function(req,res,next){
+	var tmp = req.params; 
+	var query= ({_id : tmp.id_user});
+ 	var maj={};
+ 	var ishere = false;
+    console.log("id_user suivi du id_article : ");
+    console.log(tmp.id_user);
+    console.log(tmp.id_art);
+
+    user.findById(tmp.id_user,function(err,doc){
+        if(err) return next(err);
+	    maj.login =	doc.login;
+	    maj.password =	doc.password;
+	    maj.firstname =	doc.firstname;
+	    maj.lastname =	doc.lastname;
+	    maj.email =	doc.email;
+	    //maj.token  = doc.token	;
+	    maj.favorite =	doc.favorite;
+	    maj.right =	doc.right;
+	    here = isFavorite(maj.favorite, tmp.id_art);
+	    console.log(here);
+	    if(tmp.id_art != null && !here){     	
+	        maj.favorite.push(tmp.id_art);
+	        console.log(maj);
+	        user.update(query, maj, function(err,result){
+	               if(err){
+	                  return next(err);
+	               } else {
+	               		console.log('favorite is added');
+	                   res.json(result);
+	                }
+	       });
+	    }
+    });
+
+};
+
+
+exports.delFavorite = function(req,res,next){
+	var tmp = req.params; 
+	var query= ({_id : tmp.id_user});
+ 	var maj={};
+
+    console.log("id_user suivi du id_article : ");
+    console.log(tmp.id_user);
+    console.log(tmp.id_art);
+
+    user.findById(tmp.id_user,function(err,doc){
+        if(err || !doc) return next(err);
+
+	    maj.login =	doc.login;
+	    maj.password =	doc.password;
+	    maj.firstname =	doc.firstname;
+	    maj.lastname =	doc.lastname;
+	    maj.email =	doc.email;
+	    //maj.token  = doc.token	;
+	    maj.favorite =	doc.favorite;
+	    maj.right =	doc.right;
+	    here = isFavorite(maj.favorite, tmp.id_art);
+	    console.log(here);
+
+        if(tmp.id_art != null && here){
+			maj.favorite.splice(maj.favorite.indexOf(tmp.id_art),1);
+	        console.log(maj);
+	        user.update(query, maj, function(err,result){
+	            if(err){
+	                return next(err);
+	            } else {
+	               		console.log('favorite is deleted');
+	                res.json(result);
+	            }
+	            
+	       });
+        } 
+      });
+};
+
+isFavorite =function(tab, param1){
+ 	var ishere = false;
+            for (var i = 0; i < tab.length; i++) {
+            	if(tab[i]== param1){
+            		console.log('deja présent dans les favoris');
+            		return true;
+            		break;
+            	}
+            };
+            console.log('non présent dans les favoris');
+            return false;
+
 };

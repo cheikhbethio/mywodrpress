@@ -13,22 +13,31 @@ angular.module('myWordPress.pages', ['ui.router'])
 
 }])
 
-.controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'AddFavorite', 'Article', function($scope, $state, $stateParams, Page, $localStorage, AddFavorite, Article){
+.controller('pagesController', ['$scope', '$state', '$stateParams', 'Page','$localStorage', 'AddFavorite', 'Article', '$http', function($scope, $state, $stateParams, Page, $localStorage, AddFavorite, Article, $http){
 
 	if(typeof $localStorage.currentUser != 'undefined'){
     	$scope.id_user = $localStorage.currentUser._id;
-    	console.log($scope.id_user + " test id user");
+    	console.log($scope.id_user );
 	}
+	$scope.isFavorite;
 
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
         console.log("get page "+$stateParams.id);
-        console.log(page.content);/*
-        for(var i = 0; i < page.content.length; i++){
-        	console.log(page.content[i].isFavorite);
-        }*/
+        console.log(page.content);
     });
 
+	$scope.pushFavoris=function(id_article){
+		console.log('push favorite');
+		console.log(id_article);
+		AddFavorite.update({id_user: $scope.id_user, id_art: id_article}, {});
+	};
 
+	$scope.popFavoris=function(id_article){
+		console.log('pop favorite');
+		console.log(id_article);
+		AddFavorite.remove({id_user: $scope.id_user, id_art: id_article});
+	};
+	/*
 	$scope.changeFavoris=function(id_article){
 		AddFavorite.post(id_article, function(page) {
 	        Article.get({id : id_article._id}, function(page) {
@@ -42,7 +51,7 @@ angular.module('myWordPress.pages', ['ui.router'])
 		        }
 			}); 
 	    });
-	}
+	}*/
 
 
 }]);

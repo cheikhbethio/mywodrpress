@@ -13,22 +13,33 @@ angular.module('myWordPress.site.article', ['ui.router'])
 
 }])
 
-.controller('siteArticleController', ['$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', function($scope, $state, $stateParams,$localStorage, Article,Commentaire){
+.controller('siteArticleController', ['$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', 'AddFavorite', function($scope, $state, $stateParams,$localStorage, Article,Commentaire, AddFavorite){
 	
-	$scope.isfavorite = $stateParams.isfavorite;
+	//$scope.isfavorite;
 
 	console.log($scope.isfavorite + ' test passage de parametre');
-
-	$scope.changeFavoris=function(){
-		$scope.isfavorite = !$scope.isfavorite;
-	}
 
     $scope.boolformulaire = false;
    
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
     });
+/////////////////////////////////////////////////////////////////////
 
+	$scope.changeFavoris=function(){
+		var tempo = $scope.article;
+
+		AddFavorite.post(tempo, function(res){
+		        		//$scope.article.isFavorite = res.isFavorite;
+		        	//	$scope.isfavorite = page.isFavorite;
+		        		console.log($scope.article);
+		        		console.log(res);
+
+			}); 
+	    //});		
+	};
+
+/////////////////////////////////////////////////
     $scope.addComment=function(){
 
     	var newComment={

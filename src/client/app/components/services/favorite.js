@@ -3,12 +3,24 @@
 /* Services */
 
 angular.module('myWordPress.favoriteService', ['ngResource'])
+
+.factory('AddFavorite', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/users/:id_user/article/:id_art', {}, {    	
+     	update: {method:'PUT', isArray:false},
+     	remove : {method : 'DELETE', isArray:false}
+    });
+  }]);
+
+
+
+/*
+angular.module('myWordPress.favoriteService', ['ngResource'])
 .factory('AddFavorite', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/favoris', {}, {
 		post: {method:'POST', isArray:false},
 	});
 }]);
-/*
+
 .factory('StateNbArticle', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/statistics/article/:id', {}, {
 		get: {method:'GET', isArray:true},
