@@ -18,7 +18,7 @@
     <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a> 
 
     </p>
-------------------------{{article.isFavorite}}---------------------------
+------------------------{{isFavorite[$index]}}---------------------------
     <div ng-bind-html="article.content"></div>
 
     <div class="col-md-12">	<hr></div>

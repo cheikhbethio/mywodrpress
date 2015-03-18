@@ -25,25 +25,22 @@ angular.module('myWordPress.pages', ['ui.router'])
 		for (var i = 0; i <$scope.ListFavorite.length; i++) {
 			console.log($scope.ListFavorite[i]);
 		};
-	})
-	$scope.test= function() {
-		User.get({id :$scope.id_user}, function(res){
-			console.log('uplooaded ');
-		})};
-	$scope.isFavorite=[];
+	});
 
+	$scope.isFavorite=[];
+	$scope.mypage;
 	$scope.page = Page.get({id: $stateParams.id}, function(page) {
-        console.log("get page "+$stateParams.id);
-        console.log(page.content);
+        //console.log(page.content);
+        $scope.mypage = page.content;
         var tempo = page.content;
         var bool=false;
         for(var i = 0; i < tempo.length; i++){
         	 for (var j = 0; j < $scope.ListFavorite.length; j++) {
-        	 	if($scope.ListFavorite[j] == page.content[i]._id){
+        	 	if($scope.ListFavorite[j] == tempo[i]._id){
         	 		bool = true;
         	 	}
         	 }
-        	$scope.isFavorite.push(bool);  
+        	$scope.isFavorite[i]=bool;  
         	bool = false;
         };
          console.log($scope.isFavorite);
@@ -52,30 +49,50 @@ angular.module('myWordPress.pages', ['ui.router'])
 	$scope.pushFavoris=function(id_article){
 		console.log('push favorite');
 		console.log(id_article);
-		$scope.test();
+		console.log($scope.mypage);
+		console.log($scope.ListFavorite);
+		
 		AddFavorite.update({id_user: $scope.id_user, id_art: id_article}, {});
+		
+		User.get({id :$scope.id_user}, function(res){
+			$scope.ListFavorite = res.favorite;
+	        var temp = $scope.mypage;
+	        var bool=false;
+	        for(var i = 0; i < temp.length; i++){
+	        	 for (var j = 0; j < $scope.ListFavorite.length; j++) {
+	        	 	if($scope.ListFavorite[j] == temp[i]._id){
+	        	 		bool = true;
+	        	 	}
+	        	 }
+	        	$scope.isFavorite[i]=bool;  
+	        	bool = false;
+	        };
+	         console.log($scope.isFavorite);
+		});
 	};
 
 	$scope.popFavoris=function(id_article){
 		console.log('pop favorite');
 		console.log(id_article);
+		console.log($scope.mypage);
+		console.log($scope.ListFavorite);
 		AddFavorite.remove({id_user: $scope.id_user, id_art: id_article});
-	};
-	/*
-	$scope.changeFavoris=function(id_article){
-		AddFavorite.post(id_article, function(page) {
-	        Article.get({id : id_article._id}, function(page) {
-				$scope.art_to_change = page;
-		        var tempo = $scope.page.content;
-		        for(var i = 0; i < tempo.length; i++){
-		        	if(tempo[i]._id == $scope.art_to_change._id){
-		        		tempo[i].isFavorite = $scope.art_to_change.isFavorite;
-		        		console.log('modification favorite');
-		        	}
-		        }
-			}); 
-	    });
-	}*/
 
+		User.get({id :$scope.id_user}, function(res){
+			$scope.ListFavorite = res.favorite;
+	        var temp = $scope.mypage;
+	        var bool=false;
+	        for(var i = 0; i < temp.length; i++){
+	        	 for (var j = 0; j < $scope.ListFavorite.length; j++) {
+	        	 	if($scope.ListFavorite[j] == temp[i]._id){
+	        	 		bool = true;
+	        	 	}
+	        	 }
+	        	$scope.isFavorite[i]=bool;  
+	        	bool = false;
+	        };
+	         console.log($scope.isFavorite);
+		});
+	};
 
 }]);
