@@ -14,7 +14,7 @@ angular.module('myWordPress.showProfile', ['ui.router'])
 	});
 
 }])
-.controller('showProfileController', ['$scope','$localStorage', 'User_articles','User_comments',function($scope,$localStorage,User_articles,User_comments){
+.controller('showProfileController', ['$scope','$state','$localStorage', 'User_articles','User_comments',function($scope,$state,$localStorage,User_articles,User_comments){
            $scope.articles = User_articles.get({id: $localStorage.currentUser._id}, function(articles){
                   console.log("get articles for user_id: "+$localStorage.currentUser._id);
            });
@@ -22,4 +22,21 @@ angular.module('myWordPress.showProfile', ['ui.router'])
                   console.log("get comments for user_id: "+$localStorage.currentUser._id);
            });
            $scope.user=$localStorage.currentUser;
+
+           $scope.editprofile= function(){
+                    $state.go('site.editprofile');
+
+           }
+           if($scope.user.right===0){
+            $scope.user_statut ='membre';
+          }
+          else if($scope.user.right===1){
+                  $scope.user_statut ='redacteur'; 
+          }
+          else if($scope.user.right===2){
+                  $scope.user_statut ='moderateur'; 
+          }
+          else if($scope.user.right===3){
+                  $scope.user_statut ='admin'; 
+          }
 }]);

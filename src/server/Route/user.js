@@ -33,8 +33,8 @@ user.findOne({right:3},function(err,doc){
             'right' : 3
             })
         admin.save(function(err,doc){
-            if(err) next(err);
-            else console.log("account admin created")
+            //if(err) next(err);
+            //else console.log("account admin created")
         })
     }
     else{
