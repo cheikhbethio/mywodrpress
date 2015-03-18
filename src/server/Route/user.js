@@ -253,6 +253,7 @@ isFavorite =function(tab, param1){
             };
             console.log('non présent dans les favoris');
             return false;
+};
 
 exports.profile=function(req,res,next){
     var id = req.params.id;
@@ -275,9 +276,10 @@ exports.right=function(req,res,next){
                                 console.log("error when update user");
                                 next(errs);
                             }
-                            else
+                            else{
                                 res.send({error : "0", numAffected : n, result : maj});
                                 next();
-                            });
+                            }
 
-};
+	})
+}

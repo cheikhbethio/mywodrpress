@@ -1,13 +1,13 @@
-<div class="blog-post" ng-repeat="article in page.content | orderBy:'date':true" ng-if="article.ispublic">
+<div class="blog-post" ng-repeat="article in page.content  track by $index | orderBy:'date':true" ng-if="article.ispublic">
     <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})">{{article.title}}</a>  
 
 
-    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="pushFavoris(article._id)" ng-if="!isFavorite">
+    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="pushFavoris(article._id)" ng-if="!isFavorite[$index]">
 
   			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
 
 		</button>
-    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="popFavoris(article._id)" ng-if="isFavorite">
+    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="popFavoris(article._id)" ng-if="isFavorite[$index]">
 
   			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
 
