@@ -9,24 +9,18 @@
 	 	<h4>
 	 		<p><b>{{user.lastname}}  {{user.firstname}}</b></p>
 	 		<p>Email : {{user.email}}</p>
-	 	    <p> Statut: {{user_statut}}</p>
+	 	    <p>Statut: {{user_statut}}</p>
 	 </div>
 
 </div>
 
-   <button class="btn btn-primary" type="button" ng-click="editprofile()"> <span class="glyphicon glyphicon-pencil"></span> Modifier 
-   </button>
+<button type="button" class="btn btn-primary  pull-right" ng-click="editFavorite()" >
+		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Gestion favoris
+</button>
 
-    <button type="button" class="btn btn-primary  pull-right" ng-click="editFavorite()" >
-  		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Gestion favoris
-	</button>
-
- 
-
-
-
-   <button class="btn btn-primary" type="button" ng-click="editprofile()"> <span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</button>
+<button class="btn btn-primary" type="button" ng-click="editprofile()"> <span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</button>
 <hr>
+
 <div class="col-md-6" ng-if="currentUser.right > 0">
 	   <h3>Articles</h3>
             <div ng-repeat= "article in articles | orderBy:'article.date':true">
@@ -35,11 +29,7 @@
  			<a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
 			</div>
 		</div>
-   </div>
-
-
-
-
+</div>
 
 <div ng-class="{'col-md-12': currentUser.right == 0, 'col-md-6': currentUser.right > 0}">
 	<h3>Commentaires </h3>
