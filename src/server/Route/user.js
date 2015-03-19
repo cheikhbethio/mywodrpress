@@ -257,7 +257,7 @@ isFavorite =function(tab, param1){
 
 exports.profile=function(req,res,next){
     var id = req.params.id;
-        user.findById(id, 'firstname lastname right', function(err,result){
+        user.findById(id, 'firstname lastname right email', function(err,result){
             if(err) return next(err);
             else
                 res.json(result);
