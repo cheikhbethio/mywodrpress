@@ -193,7 +193,7 @@ exports.getNbArticle = function(req,res,next){
           console.log('this is our test articles acount .............. '+ result.length);
             var resultat =  result.length
             console.log(resultat);
-            res.json(resultat);
+            res.json({aaa : resultat});
           }
     }));
 }

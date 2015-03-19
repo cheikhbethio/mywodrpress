@@ -121,7 +121,7 @@ describe('Statistics Routing', function() {
 	        done();
 	    });
 
-	//view all comments for one user 
+	//view nbr of comments for one user 
 	    it('should return error view comments for one user failed', function(done) {
 		 	var id_user = myUser._id;
 		 	console.log('id de l\'utilistauer '+ id_user);

@@ -141,7 +141,7 @@ app.put('/api/preferences',[token.authadmin], preferences.edit);
 /******statistiques*******/
 app.get('/api/statistics/comment/:id', comment.getNbcomment);
 app.get('/api/statistics/article/:id', article.getNbArticle);
-app.get('/api/statistics/page/:id', page.getNbPage);
+app.get('/api/statistics/page', page.getNbPage);
 app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
 
 /******favoris*******/

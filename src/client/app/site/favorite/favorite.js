@@ -29,6 +29,7 @@ angular.module('myWordPress.gestionFavoris', ['ui.router'])
 	
 	GetFavorite.get({id : $scope.id_user}, function(res){
 		$scope.favorite = res;	
+		if (res.length ==0 ) { alert("vous n'avez pas encore d'article favoris!!")};
 		console.log('liste des favorites :'+ JSON.stringify($scope.favorite));
 	});
 
@@ -39,10 +40,7 @@ angular.module('myWordPress.gestionFavoris', ['ui.router'])
 		if (confirm("Voulez vous vraiment supprimer ce favoris?") == true) {
 			AddFavorite.remove({id_user: $scope.id_user, id_art: articleId});	
 			
-			GetFavorite.get({id : $scope.id_user}, function(res){
-				$scope.favorite = res;	
-				console.log('liste des favorites à jour : '+ JSON.stringify($scope.favorite));
-			});
+			$scope.favorite = GetFavorite.get({id : $scope.id_user});
 
 		}
     }
