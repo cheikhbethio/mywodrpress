@@ -10,12 +10,6 @@ describe("Connection", function() {
 		$controller = _$controller_;
 	}));
 
-  describe('test test', function(){
-    it('should be that true is true', function(){
-      expect(true).toEqual(true);
-    });
-  });
-
   describe('initialy', function(){
 
 		var $scope, controller;
