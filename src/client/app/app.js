@@ -32,6 +32,7 @@ angular.module('myWordPress', [
     'myWordPress.admin.menu',
     'myWordPress.dashboardTemplate',
     'myWordPress.admin.gestionFavorite',
+    'myWordPress.listMember',
 
     // libs
     'colorpicker.module',
