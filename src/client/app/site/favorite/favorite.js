@@ -20,7 +20,7 @@ angular.module('myWordPress.gestionFavoris', ['ui.router'])
 
 }])
 
-.controller('indexFavorisController', ['$localStorage', 'GetFavorite', '$scope', '$state','$stateParams', 'Article', function($localStorage, GetFavorite, $scope, $state, $stateParams, Article){
+.controller('indexFavorisController', ['AddFavorite' ,'$localStorage', 'GetFavorite', '$scope', '$state','$stateParams', 'Article', function(AddFavorite, $localStorage, GetFavorite, $scope, $state, $stateParams, Article){
 	
 	if(typeof $localStorage.currentUser != 'undefined'){
     	$scope.id_user = $localStorage.currentUser._id;
@@ -35,15 +35,15 @@ angular.module('myWordPress.gestionFavoris', ['ui.router'])
 	$scope.success = $stateParams.success;
 	$scope.editSuccess = $stateParams.editSuccess;
 
-	$scope.closeAlert = function() {
-        $scope.success = false;
-        $scope.editSuccess = false;
-    };
+	$scope.deleteFavorite=function(articleId) {
+		if (confirm("Voulez vous vraiment supprimer ce favoris?") == true) {
+			AddFavorite.remove({id_user: $scope.id_user, id_art: articleId});	
+			
+			GetFavorite.get({id : $scope.id_user}, function(res){
+				$scope.favorite = res;	
+				console.log('liste des favorites à jour : '+ JSON.stringify($scope.favorite));
+			});
 
-	$scope.deleteArticle=function(articleId) {
-		if (confirm("Voulez vous vraiment supprimer cet article?") == true) {
-			Article.remove({id: articleId});
-			$scope.articles = Article.query();
 		}
     }
 
