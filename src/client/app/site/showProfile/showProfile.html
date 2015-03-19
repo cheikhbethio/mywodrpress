@@ -1,45 +1,39 @@
 
 <h2 class="page-header">Profil</h2>
 <div class= "media">
-	<a href="#" class="pull-left"> </a>
-	  <img class="pull-left" src="">
+	<div class="pull-left">
+	  <img class="thumbnail" src="components/res/default.png">
+	</div>
 
-	 <div class="media-body">
-	 	<h4 class="media-heading">
-	 		<p>{{user.lastname}}  {{user.firstname}}</p>
-	 		<p>
-	 			email : {{user.email}}</p>
-	 	    <p> login : {{user.login}}</p>
-	 	    <p> statut: {{user_statut}}</p>
+	 <div class="pull-right">
+	 	<h4>
+	 		<p><b>{{user.lastname}}  {{user.firstname}}</b></p>
+	 		<p>Email : {{user.email}}</p>
+	 	    <p> Statut: {{user_statut}}</p>
 	 </div>
 </div>
-   <button class="btn btn-primary" type="button" ng-click="editprofile()"> <span class="glyphicon glyphicon-pencil"></span> Modifier </button>
+   <button class="btn btn-primary" type="button" ng-click="editprofile()"> <span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</button>
 <hr>
-	<div class="col-md-6">
-		   <h3>Articles</h3>
-                <div ng-repeat= "article in articles | orderBy:'article.date':true">
-			     <div class="well well-sm"> 
-	 			<p> Posté le {{article.date | date:'dd/MM/yyyy'}}
-	 			<a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
-				</div>
+<div class="col-md-6" ng-if="currentUser.right > 0">
+	   <h3>Articles</h3>
+            <div ng-repeat= "article in articles | orderBy:'article.date':true">
+		     <div class="well well-sm"> 
+ 			<p> Posté le {{article.date | date:'dd/MM/yyyy'}}
+ 			<a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
 			</div>
-	   </div>
-	
+		</div>
+   </div>
 
 
 
-	
-	<div class="col-md-6">
-		<h3>Commentaires </h3>
-		<div ng-repeat= "comment in comments | orderBy:'comment.date':true">
-			<div >
-	 			<p> Posté le {{comment.date | date:'dd/MM/yyyy'}} sur <a ui-sref="site.showArticle({id : article._id})"> {{comment.article.title}}</a></p>
-	 			<p> {{comment.content}}</p><hr>
-				</div>
+
+
+<div ng-class="{'col-md-12': currentUser.right == 0, 'col-md-6': currentUser.right > 0}">
+	<h3>Commentaires </h3>
+	<div ng-repeat= "comment in comments | orderBy:'comment.date':true">
+		<div class="well well-sm" >
+ 			<p> Posté le {{comment.date | date:'dd/MM/yyyy'}} <br/> sur <a ui-sref="site.showArticle({id : article._id})"> {{comment.article.title}}</a></p><hr>
+ 			<p> {{comment.content}}</p>
 		</div>
 	</div>
-<!--<div>
-  {{ articles}};
-  {{ comments }};
-  {{user}};
- </div>
+</div>
