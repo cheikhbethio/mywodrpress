@@ -1,5 +1,5 @@
 <div class="blog-post" ng-repeat="article in page.content  track by $index | orderBy:'date':true" ng-if="article.ispublic">
-    <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})">{{article.title}}</a>  
+    <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.title}}</a>  
 
 
     	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="pushFavoris(article._id)" ng-if="!isFavorite[$index]">
@@ -15,7 +15,7 @@
 
 	</h2>
 
-    <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a> 
+    <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a ui-sref="site.showprofile({id : article.author._id})">{{article.author.firstname}} {{article.author.lastname}}</a> 
 
     </p>
 ------------------------{{isFavorite[$index]}}---------------------------
