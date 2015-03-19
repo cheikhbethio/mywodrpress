@@ -11,6 +11,7 @@ angular.module('myWordPress', [
     'myWordPress.site.home',
     'myWordPress.site.searchKeyWord',
     'myWordPress.showProfile',
+    'myWordPress.gestionFavoris',
     
 
 
@@ -31,7 +32,6 @@ angular.module('myWordPress', [
     'myWordPress.preferenceService',
     'myWordPress.admin.menu',
     'myWordPress.dashboardTemplate',
-    'myWordPress.admin.gestionFavorite',
 
     // libs
     'colorpicker.module',

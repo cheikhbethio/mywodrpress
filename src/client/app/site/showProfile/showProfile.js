@@ -22,9 +22,15 @@ angular.module('myWordPress.showProfile', ['ui.router'])
                   console.log("get comments for user_id: "+$localStorage.currentUser._id);
            });
            $scope.user=$localStorage.currentUser;
+           console.log($scope.user);
 
            $scope.editprofile= function(){
                     $state.go('site.editprofile');
+
+           }
+
+           $scope.editFavorite= function(){
+                    $state.go('site.editFavorite');
 
            }
            if($scope.user.right===0){

@@ -283,3 +283,39 @@ exports.right=function(req,res,next){
 
 	})
 }
+
+exports.getFavorite=function(req, res, next){
+	var tmp = req.params
+	user.findById(tmp.id).populate('favorite').exec(function(err,doc){
+		if (err) {
+			console.log('erreur bd pour get favorite dun user');
+			return next(err);
+		}
+		if (doc == null) {
+			console.log("doc  abscent dans la collection");
+		} else{
+			console.log("doc retrouvé de la collection" + doc.favorite);
+			
+			user.populate(doc,{
+            path: 'favorite.author',
+            select: 'firstname lastname',
+            model: 'user'
+          },function(err,doc){
+            if(err) return next(err);
+            res.json(doc.favorite);
+          });
+
+		};
+	});
+};
+
+
+exports.getByEditor = function(req,res,next){
+	    Article.find({author : req.params.id}).populate('author','firstname lastname').exec(function(err,result){
+	    	if(err){
+	        	return next(err);
+	       	}else {
+	        	res.json(result);
+	        }
+	});	
+};
