@@ -11,6 +11,7 @@ angular.module('myWordPress', [
     'myWordPress.site.home',
     'myWordPress.site.searchKeyWord',
     'myWordPress.showProfile',
+    'myWordPress.gestionFavoris',
     
 
 

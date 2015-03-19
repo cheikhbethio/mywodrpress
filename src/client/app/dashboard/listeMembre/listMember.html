@@ -17,7 +17,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="user in users">			
+		<tr ng-repeat="user in users" ng-if="currentUser._id!=user._id">			
 			<td>
 				{{user.login}}
 			</td>
@@ -28,7 +28,9 @@
 				<div class="form-group input-group">
 					<select class="form-control" ng-model="selected" ng-options="dis.value as dis.name for dis in selectValue"/>
 					<span class="input-group-btn">
-				 		<input type="submit" class="btn btn-primary"/>
+				 		<button type="submit" class="btn btn-primary" >
+				 			<span class="glyphicon glyphicon-ok"></span>
+				 		</button>
 				 	</span>
 				</div>
 			</form>
