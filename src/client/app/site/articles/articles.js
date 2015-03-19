@@ -13,30 +13,76 @@ angular.module('myWordPress.site.article', ['ui.router'])
 
 }])
 
-.controller('siteArticleController', ['$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', 'AddFavorite', function($scope, $state, $stateParams,$localStorage, Article,Commentaire, AddFavorite){
+.controller('siteArticleController', ['User','$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', 'AddFavorite', function(User, $scope, $state, $stateParams,$localStorage, Article,Commentaire, AddFavorite){
 	
 	//$scope.isfavorite;
 
+	if(typeof $localStorage.currentUser != 'undefined'){
+    	$scope.id_user = $localStorage.currentUser._id;
+    	console.log($scope.id_user );
+	}
 	console.log($scope.isfavorite + ' test passage de parametre');
 
     $scope.boolformulaire = false;
+	$scope.isFavorite=false;
    
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
     });
-/////////////////////////////////////////////////////////////////////
+/////////////////////////////Favoris hyper chiant////////////////////////////////////////
+	
+	User.get({id :$scope.id_user}, function(res){
+		$scope.ListFavorite = res.favorite;
+		var bool = false;
+		console.log("id de l'articel: " + JSON.stringify($scope.article._id));
+		for (var i = 0; i <$scope.ListFavorite.length; i++) {
+			if ($scope.ListFavorite[i] == $scope.article._id) {
+				console.log("cool");
+				bool = true;
+			};
+			console.log($scope.ListFavorite[i]);
+		};
+		$scope.isFavorite=bool;
+	});
 
-	$scope.changeFavoris=function(){
-		var tempo = $scope.article;
+	$scope.pushFavoris=function(art){
+		console.log('push Favoris');
+		console.log("id de l'article recu en parametre: " + JSON.stringify(art));
+		console.log("la liste des favorite avant le push Favoris: " + JSON.stringify($scope.ListFavorite));
 
-		AddFavorite.post(tempo, function(res){
-		        		//$scope.article.isFavorite = res.isFavorite;
-		        	//	$scope.isfavorite = page.isFavorite;
-		        		console.log($scope.article);
-		        		console.log(res);
+		AddFavorite.update({id_user: $scope.id_user, id_art: art}, {});
+		
+		User.get({id :$scope.id_user}, function(res){
+			$scope.ListFavorite = res.favorite;
+			var boole =false
+			for (var i = 0; i <$scope.ListFavorite.length; i++) {
+				if ($scope.ListFavorite[i] == art) {
+					console.log("cool");
+					boole = true;
+				};
+			};
+			$scope.isFavorite=boole;
+		});	
+	};
 
-			}); 
-	    //});		
+	$scope.popFavoris=function(art){
+		console.log('popFavoris');
+		console.log("id de l'article recu en parametre: " + JSON.stringify(art));
+		console.log("la liste des favorite avant le popFavoris: " + JSON.stringify($scope.ListFavorite));
+
+		AddFavorite.remove({id_user: $scope.id_user, id_art: art});
+		
+		User.get({id :$scope.id_user}, function(res){
+			$scope.ListFavorite = res.favorite;
+			var boole =false
+			for (var i = 0; i <$scope.ListFavorite.length; i++) {
+				if ($scope.ListFavorite[i] == art) {
+					console.log("cool");
+					boole = true;
+				};
+			};
+			$scope.isFavorite=boole;
+		});	
 	};
 
 /////////////////////////////////////////////////
@@ -65,7 +111,7 @@ angular.module('myWordPress.site.article', ['ui.router'])
     };
 
     $scope.commentList = Commentaire.get({id: $stateParams.id},function(){
-    	console.log('sds,dsd;:s');
+    	console.log('');
     });
 
 }]);
