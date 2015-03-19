@@ -17,23 +17,23 @@ angular.module('myWordPress.listMember', ['ui.router'])
 	function($scope,User,Right, $state,$stateParams){
 	
 	$scope.users = User.query();
-	$scope.editmode=false;
+	$scope.editmode=null;
 	$scope.displayRight=[];
 	$scope.displayRight[0]="Membre";
 	$scope.displayRight[1]="Rédacteur";
-	$scope.displayRight[2]="Modérateur";
+	//$scope.displayRight[2]="Modérateur";
 	$scope.displayRight[3]="Administrateur";
-	$scope.selectValue=[{value: 0, name : "Membre"},{value: 1, name : "Rédacteur"},{value: 2, name : "Modérateur"},{value: 3, name : "Administrateur"}];
+	$scope.selectValue=[{value: 0, name : "Membre"},{value: 1, name : "Rédacteur"},/*{value: 2, name : "Modérateur"},*/{value: 3, name : "Administrateur"}];
     $scope.edit = function(iduser,val) {
     	var maj={right : val};
     	Right.update({id : iduser},maj);
     	$scope.users= User.query();
-    	$scope.swap();
+    	$scope.swap(null);
 
    };
 
-   $scope.swap=function(){
-   	$scope.editmode= !$scope.editmode;
+   $scope.swap=function(id){
+   		$scope.editmode=id;
    }
 
 }]);
