@@ -28,6 +28,7 @@ var favoris     = require('./Route/favoris_article.js');
 var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
 var preferences = require('./Route/preferences');
+var participate = require('./Route/participate.js');
 
 var token= require('./Route/token.js');
 
@@ -140,9 +141,15 @@ app.put('/api/preferences',[token.authadmin], preferences.edit);
 
 /******statistiques*******/
 app.get('/api/statistics/comment/:id', comment.getNbcomment);
+app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
 app.get('/api/statistics/article/:id', article.getNbArticle);
 app.get('/api/statistics/page', page.getNbPage);
-app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
+
+app.get('/api/nbr/admin', participate.getNbAdmin);
+app.get('/api/nbr/moderator', participate.getNbModerator);
+app.get('/api/nbr/writer', participate.getNbWriter);
+app.get('/api/nbr/member', participate.getNbMember);
+
 
 /******favoris*******/
 app.post('/api/favoris', favoris.create);
