@@ -107,7 +107,8 @@ angular.module('myWordPress', [
             }
         },
         data: { 
-            requireLogin: true
+            requireLogin: true,
+            requireLoginDashboard: true
         }
 	});
 
@@ -133,8 +134,9 @@ angular.module('myWordPress', [
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
+        var requireLoginDashboard = toState.data.requireLoginDashboard;
 
-        if ((requireLogin && typeof $rootScope.currentUser === 'undefined') || (requireLogin && $localStorage.currentUser.right == 0)) {
+        if ((requireLogin && typeof $rootScope.currentUser === 'undefined') || (requireLoginDashboard && $localStorage.currentUser.right == 0)) {
             event.preventDefault();
             $state.go('site.connection');
         } 
