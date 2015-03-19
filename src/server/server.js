@@ -76,7 +76,7 @@ app.post('/api/logout',  function(req, res){
 
 app.post('/api/users', user.create);
 app.put('/api/users/:id',[token.authedit], user.edit);
-app.get('/api/users/:id', user.get);
+app.get('/api/users/:id',[token.authedit], user.get);
 app.get('/api/users',[token.authadmin], user.view);
 app.put('/api/users/:id_user/article/:id_art', user.addFavorite);
 app.delete('/api/users/:id_user/article/:id_art',user.delFavorite);

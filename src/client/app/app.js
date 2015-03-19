@@ -64,6 +64,8 @@ angular.module('myWordPress', [
     'myWordPress.profilService',
     'myWordPress.favoriteService',
     'myWordPress.rightService',
+    'myWordPress.profileService',
+
 
 
     // directives
