@@ -15,7 +15,7 @@ var CommentaireSchema = new mongoose.Schema({
 var Commentaire = mongoose.model('Commentaire',CommentaireSchema);
 
 exports.commentaire=Commentaire;
-
+//module.exports.users=user;
 exports.create = function(req,res,next){
 
 	  var commentaireObj = {
@@ -63,18 +63,6 @@ exports.getNbcomment = function(req,res,next){
 		}));
 }
 
-exports.getNbcommentForAticle = function(req,res,next){   
-	Commentaire.find({article : req.params.id} ,(function(err,result){
-		   	if(err){
-		       	return next(err);
-	    	}else {
-	    		console.log('this is our test comment acount .............. '+ result.length);
-	        	var resultat =  result.length
-	        	console.log(resultat);
-	        	res.json({aaa : resultat});
-	        }
-		}));
-}
 exports.getNbcommentByArticle = function(req,res,next){   
 	Commentaire.find({article : req.params.id} ,(function(err,result){
 		   	if(err){

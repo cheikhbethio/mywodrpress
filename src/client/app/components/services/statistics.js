@@ -10,30 +10,44 @@ angular.module('myWordPress.statisticService', ['ngResource'])
 }])
 
 .factory('StateAdmin', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/statistics/article/:id', {}, {
-		get: {method:'GET', isArray:true},
+	return $resource('http://localhost:4711/api/nbr/admin', {}, {
+		get: {method:'GET', isArray:false},
+	});
+}])
+
+.factory('StateModerateur', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/nbr/moderator', {}, {
+		get: {method:'GET', isArray:false},
+	});
+}])
+
+.factory('StateWriter', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/nbr/writer', {}, {
+		get: {method:'GET', isArray:false},
+	});
+}])
+.factory('StateMember', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/nbr/member', {}, {
+		get: {method:'GET', isArray:false},
+	});
+}])
+
+.factory('StatePage', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/nbr/page', {}, {
+		get: {method:'GET', isArray:false},
+	});
+}])
+
+.factory('StateArticles', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/nbr/article', {}, {
+		get: {method:'GET', isArray:false},
+	});
+}])
+
+.factory('StateComment', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/nbr/comment', {}, {
+		get: {method:'GET', isArray:false},
 	});
 }]);
-/*
-.factory('StateNbPage', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/statistics/page/:id', {}, {
-		get: {method:'GET', isArray:true},
-	});
-}]);
-.factory('StateNbCommentByArticle', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/statistics/comment/article/:id', {}, {
-		get: {method:'GET', isArray:true},
-	});
-}]);
 
 
-;
-*/
-
-/******statistiques
-
-app.get('/api/statistics/comment/:id', comment.getNbcomment);
-app.get('/api/statistics/article/:id', article.getNbArticle);
-app.get('/api/statistics/page/:id', page.getNbPage);
-app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
-*******/
