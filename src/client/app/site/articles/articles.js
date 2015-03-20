@@ -21,20 +21,35 @@ angular.module('myWordPress.site.article', ['ui.router'])
     	$scope.id_user = $localStorage.currentUser._id;
     	console.log($scope.id_user );
 	}
-	console.log($scope.isfavorite + ' test passage de parametre');
 
     $scope.boolformulaire = false;
 	$scope.isFavorite=false;
    
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
+		console.log("id de l'article: " + JSON.stringify(page._id));
+
+		User.get({id :$scope.id_user}, function(res){
+			$scope.ListFavorite = res.favorite;
+			var bool = false;
+			console.log("id de l'article: " + JSON.stringify(page._id));
+			for (var i = 0; i <$scope.ListFavorite.length; i++) {
+				if ($scope.ListFavorite[i] == page._id) {
+					console.log("cool");
+					bool = true;
+				};
+				console.log($scope.ListFavorite[i]);
+			};
+			$scope.isFavorite=bool;
+		});
+    
     });
 /////////////////////////////Favoris hyper chiant////////////////////////////////////////
-	
+	/*
 	User.get({id :$scope.id_user}, function(res){
 		$scope.ListFavorite = res.favorite;
 		var bool = false;
-		console.log("id de l'articel: " + JSON.stringify($scope.article._id));
+		console.log("id de l'article: " + JSON.stringify($scope.article._id));
 		for (var i = 0; i <$scope.ListFavorite.length; i++) {
 			if ($scope.ListFavorite[i] == $scope.article._id) {
 				console.log("cool");
@@ -43,7 +58,7 @@ angular.module('myWordPress.site.article', ['ui.router'])
 			console.log($scope.ListFavorite[i]);
 		};
 		$scope.isFavorite=bool;
-	});
+	});*/
 
 	$scope.pushFavoris=function(art){
 		console.log('push Favoris');

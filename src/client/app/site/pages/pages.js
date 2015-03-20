@@ -19,7 +19,8 @@ angular.module('myWordPress.pages', ['ui.router'])
     	$scope.id_user = $localStorage.currentUser._id;
     	console.log($scope.id_user );
 	}
-	
+	//ne pas effacer ces commentaires
+	/*
 	User.get({id :$scope.id_user}, function(res){
 		$scope.ListFavorite = res.favorite;
 		for (var i = 0; i <$scope.ListFavorite.length; i++) {
@@ -34,6 +35,7 @@ angular.module('myWordPress.pages', ['ui.router'])
         $scope.mypage = page.content;
         var tempo = page.content;
         var bool=false;
+
         for(var i = 0; i < tempo.length; i++){
         	 for (var j = 0; j < $scope.ListFavorite.length; j++) {
         	 	if($scope.ListFavorite[j] == tempo[i]._id){
@@ -44,6 +46,39 @@ angular.module('myWordPress.pages', ['ui.router'])
         	bool = false;
         };
          console.log($scope.isFavorite);
+    });*/
+
+	User.get({id :$scope.id_user}, function(res){
+		$scope.ListFavorite = res.favorite;
+		for (var i = 0; i <$scope.ListFavorite.length; i++) {
+			console.log($scope.ListFavorite[i]);
+		};
+	});
+
+	$scope.isFavorite=[];
+	$scope.mypage;
+	$scope.page = Page.get({id: $stateParams.id}, function(page) {
+        //console.log(page.content);
+        $scope.mypage = page.content;
+        var tempo = page.content;
+        var bool=false;
+
+		User.get({id :$scope.id_user}, function(res){
+			$scope.ListFavorite = res.favorite;
+	        
+	        for(var i = 0; i < tempo.length; i++){
+	        	 for (var j = 0; j < $scope.ListFavorite.length; j++) {
+	        	 	if($scope.ListFavorite[j] == tempo[i]._id){
+	        	 		bool = true;
+	        	 	}
+	        	 }
+	        	$scope.isFavorite[i]=bool;  
+	        	bool = false;
+	        };
+	        console.log($scope.isFavorite);
+			
+		});
+
     });
 
 	$scope.pushFavoris=function(id_article){
