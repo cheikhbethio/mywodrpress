@@ -9,18 +9,15 @@ angular.module('myWordPress.favoriteService', ['ngResource'])
      	update: {method:'PUT', isArray:false},
      	remove : {method : 'DELETE', isArray:false}
     });
-  }]);
-
-
-
-/*
-angular.module('myWordPress.favoriteService', ['ngResource'])
-.factory('AddFavorite', ['$resource', function($resource){
-	return $resource('http://localhost:4711/api/favoris', {}, {
-		post: {method:'POST', isArray:false},
+  }])
+.factory('GetFavorite', ['$resource', function($resource){
+	return $resource('http://localhost:4711/api/users/favoris/:id', {}, {
+		get: {method:'GET', isArray:true},
 	});
 }]);
 
+
+/*
 .factory('StateNbArticle', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/statistics/article/:id', {}, {
 		get: {method:'GET', isArray:true},
@@ -40,11 +37,3 @@ angular.module('myWordPress.favoriteService', ['ngResource'])
 
 ;
 */
-
-/******statistiques
-
-app.get('/api/statistics/comment/:id', comment.getNbcomment);
-app.get('/api/statistics/article/:id', article.getNbArticle);
-app.get('/api/statistics/page/:id', page.getNbPage);
-app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
-*******/

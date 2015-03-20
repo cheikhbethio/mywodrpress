@@ -11,42 +11,46 @@ angular.module('myWordPress.showProfile', ['ui.router'])
 	});
 
 }])
+
+
 .controller('showProfileController', ['$scope','$state', '$stateParams', '$localStorage', 'User_articles','User_comments', 'User', 
   function($scope, $state, $stateParams, $localStorage, User_articles, User_comments, User){
 
-    $scope.user = User.get({id: $stateParams.id}, function(user) {
-        console.log("get user "+$stateParams.id);
-        console.log(user);
+        $scope.user = User.get({id: $stateParams.id}, function(user) {
+            console.log("get user "+$stateParams.id);
+            console.log(user);
 
 
-        $scope.articles = User_articles.get({id:user._id}, function(articles){
-            console.log("get articles for user_id: "+user._id);
+            $scope.articles = User_articles.get({id:user._id}, function(articles){
+                console.log("get articles for user_id: "+user._id);
+            });
+            $scope.comments = User_comments.get({id: user._id}, function(comments){
+                console.log("get comments for user_id: "+user._id);
+            });
+
+            if(user.right===0){
+                $scope.user_statut ='Membre';
+            }
+            else if(user.right===1){
+                $scope.user_statut ='Rédacteur'; 
+            }
+            else if(user.right===2){
+                $scope.user_statut ='Moderateur'; 
+            }
+            else if(user.right===3){
+              $scope.user_statut ='Administrateur'; 
+            }
         });
-        $scope.comments = User_comments.get({id: user._id}, function(comments){
-            console.log("get comments for user_id: "+user._id);
-        });
 
-        if(user.right===0){
-            $scope.user_statut ='Membre';
+        $scope.editFavorite= function(){
+            $state.go('site.editFavorite');
+
         }
-        else if(user.right===1){
-            $scope.user_statut ='Rédacteur'; 
-        }
-        else if(user.right===2){
-            $scope.user_statut ='Moderateur'; 
-        }
-        else if(user.right===3){
-          $scope.user_statut ='Administrateur'; 
-        }
-    });
-
-
-
-           //$scope.user=$localStorage.currentUser;
-
-           $scope.editprofile= function(){
+        
+        $scope.editprofile= function(){
             $state.go('site.editprofile');
 
         }
 
     }]);
+

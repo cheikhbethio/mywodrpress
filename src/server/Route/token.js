@@ -154,9 +154,7 @@ exports.authadmin=function(req,res,next){
   				res.end('Access token has expired');
 			}
 			else{
-				console.log("test")
 				modelUser.findOne({'_id':decoded.iss}).exec(function (err, doc){
-					console.log('test');
 					if(err) next(err);
 					else {
 						if(!doc){

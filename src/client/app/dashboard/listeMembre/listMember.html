@@ -1,0 +1,40 @@
+<h2 class="page-header">Liste des Membres</h2>
+
+<toast></toast>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Login</th>
+			<th>Name</th>
+			<th>Droit</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in users" ng-if="currentUser._id!=user._id">			
+			<td>
+				{{user.login}}
+			</td>
+			<td>{{user.firstname}} {{user.lastname}}</a></td>
+			<td> <div ng-hide="editmode==user._id" >{{displayRight[user.right]}}
+			<button type="button"
+  					class="btn btn-primary"
+  					ng-click="swap(user._id)">  					
+  				 <span class="glyphicon glyphicon-pencil"></span>    				
+  				</button>
+			</div>
+			<form ng-model="selected" ng-show="editmode==user._id" ng-submit="edit(user._id,selected)">
+				<div class="form-group input-group">
+					<select class="form-control" ng-model="selected" ng-options="dis.value as dis.name for dis in selectValue"/>
+					<span class="input-group-btn">
+				 		<button type="submit" class="btn btn-primary" >
+				 			<span class="glyphicon glyphicon-ok"></span>
+				 		</button>
+				 	</span>
+				</div>
+			</form>
+			</td>
+		</tr>
+
+	<tbody>
+</table>

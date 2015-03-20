@@ -28,6 +28,7 @@ var favoris     = require('./Route/favoris_article.js');
 var passport    = require('./Route/passport.js');
 var menu        = require('./Route/menu.js');
 var preferences = require('./Route/preferences');
+var participate = require('./Route/participate.js');
 
 var token= require('./Route/token.js');
 
@@ -76,12 +77,13 @@ app.post('/api/logout',  function(req, res){
 
 app.post('/api/users', user.create);
 app.put('/api/users/:id',[token.authedit], user.edit);
-app.get('/api/users/:id', user.get);
+app.get('/api/users/:id',[token.authedit], user.get);
 app.get('/api/users',[token.authadmin], user.view);
 app.put('/api/users/:id_user/article/:id_art', user.addFavorite);
 app.delete('/api/users/:id_user/article/:id_art',user.delFavorite);
 app.get('/api/users/:id/profile',user.profile);
 app.put('/api/users/:id/right',[token.authadmin],user.right);
+app.get('/api/users/favoris/:id', user.getFavorite);
 
 
 /***** Token *****/
@@ -139,9 +141,15 @@ app.put('/api/preferences',[token.authadmin], preferences.edit);
 
 /******statistiques*******/
 app.get('/api/statistics/comment/:id', comment.getNbcomment);
-app.get('/api/statistics/article/:id', article.getNbArticle);
-app.get('/api/statistics/page/:id', page.getNbPage);
 app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
+app.get('/api/statistics/article/:id', article.getNbArticle);
+app.get('/api/statistics/page', page.getNbPage);
+
+app.get('/api/nbr/admin', participate.getNbAdmin);
+app.get('/api/nbr/moderator', participate.getNbModerator);
+app.get('/api/nbr/writer', participate.getNbWriter);
+app.get('/api/nbr/member', participate.getNbMember);
+
 
 /******favoris*******/
 app.post('/api/favoris', favoris.create);

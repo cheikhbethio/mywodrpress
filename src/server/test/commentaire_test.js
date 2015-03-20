@@ -26,11 +26,11 @@ describe('Commentaire Routing', function() {
 	  	var myUser;
 	  	var myArticle;
 	  	var createdAcount = {
-	        login		: 'kksdsdk',
-	    	password	: 'ksdsdskk',
-	   	 	firstname	: 'kkdsdk',
-	    	lastname	: 'kksdsdk',
-	    	email	  	: 'ksdsdskk@kkk.kkk',
+	        login		: 'testcommentaire',
+	    	password	: 'testcommentaire',
+	   	 	firstname	: 'testcommentaire',
+	    	lastname	: 'testcommentaire',
+	    	email	  	: 'testcommentaire@testcommentaire.test',
 	    	right		: 1
 	    };
 
