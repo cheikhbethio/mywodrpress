@@ -13,8 +13,8 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 }])
 
-.controller('connectionController', ['$scope', '$state', '$stateParams', '$http', 'Token', 'CurrentUser',
-	function($scope, $state, $stateParams, $http, Token, CurrentUser){
+.controller('connectionController', ['$scope', '$state', '$stateParams', '$http', 'Token', 'CurrentUser', '$localStorage',
+	function($scope, $state, $stateParams, $http, Token, CurrentUser, $localStorage){
 
 		$scope.userCredentials = {};
 		$scope.connectionError = false;
@@ -26,7 +26,8 @@ angular.module('myWordPress.connection', ['ui.router'])
 				Token.login($scope.userCredentials, function(res){
 
 						CurrentUser.set(res.user);
-						$http.defaults.headers.common['x-access-token'] = res.token;
+						//$http.defaults.headers.common['x-access-token'] = res.token;
+						$localStorage.accessToken = res.token;
 
 						$state.go('site.home', {connectionSuccess:true});
 

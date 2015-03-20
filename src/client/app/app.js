@@ -145,7 +145,7 @@ angular.module('myWordPress', [
 
 })
 
-/*
+
 .run(['$localStorage','$injector',function($localStorage,$injector){
     $injector.get("$http").defaults.transformRequest=function(data, headersGetter){
         if($localStorage.accessToken){
@@ -155,6 +155,4 @@ angular.module('myWordPress', [
             return angular.toJson(data);
         }
     }
-}])
-*/
-;
+}]);
