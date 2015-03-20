@@ -7,13 +7,14 @@ angular.module('myWordPress.statisticService', ['ngResource'])
 	return $resource('http://localhost:4711/api/statistics/comment/:id', {}, {
 		get: {method:'GET', isArray:false},
 	});
-}]);
-/*
-.factory('StateNbArticle', ['$resource', function($resource){
+}])
+
+.factory('StateAdmin', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/statistics/article/:id', {}, {
 		get: {method:'GET', isArray:true},
 	});
 }]);
+/*
 .factory('StateNbPage', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/statistics/page/:id', {}, {
 		get: {method:'GET', isArray:true},

@@ -12,6 +12,8 @@ angular.module('myWordPress', [
     'myWordPress.site.searchKeyWord',
     'myWordPress.showProfile',
     'myWordPress.gestionFavoris',
+    'myWordPress.Statistiques',
+
     
 
 
