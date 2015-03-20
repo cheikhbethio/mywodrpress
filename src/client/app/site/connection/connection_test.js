@@ -37,7 +37,7 @@ describe("Connection", function() {
       it('should start with an undefined new user model', function(){
         expect(scope.userCredentials).toEqual({});
       });
-
+      
   	});
 
   describe('when login and password are entered', function(){

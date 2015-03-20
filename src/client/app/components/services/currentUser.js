@@ -1,33 +1,34 @@
-angular.module('myWordPress.currentUser', []).factory('CurrentUser', function() {
+angular.module('myWordPress.currentUser', []).factory('CurrentUser', ['$localStorage',  
+	function($localStorage) {
   
-	var currentUser;
+	//var currentUser;
 
 	return {
 
 		set: function(user) {
-			currentUser = angular.copy(user);
+			$localStorage.currentUser = angular.copy(user);
 		},
 
 		clear: function() {
-			currentUser = undefined;
+			$localStorage.currentUser = undefined;
 		},
 
 		isLoggedIn: function() {
-			if(currentUser === undefined)
+			if($localStorage.currentUser === undefined)
 				return false;
 			else
 				return true;
 		},
 
 		getRight: function(){
-			if(currentUser === undefined)
+			if($localStorage.currentUser === undefined)
 				return undefined;
 			else
-				return currentUser.right;
+				return $localStorage.currentUser.right;
 		},
 
-		currentUser: function() { return currentUser; }
+		currentUser: function() { return $localStorage.currentUser; }
 
 	};
-});
+}]);
 
