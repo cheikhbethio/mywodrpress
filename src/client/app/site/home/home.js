@@ -13,10 +13,14 @@ angular.module('myWordPress.site.home', ['ui.router'])
 
 }])
 
-.controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article',function($scope, $state, $stateParams, Article){
+.controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article', 'CurrentUser', 
+	function($scope, $state, $stateParams, Article, CurrentUser){
+
 	$scope.articlesHome = Article.query()
 
 	$scope.connectionSuccess = $stateParams.connectionSuccess;
+
+	console.log("Current user: " + JSON.stringify(CurrentUser.currentUser()));
 
 	$scope.closeAlert = function() {
         $scope.connectionSuccess = false;
