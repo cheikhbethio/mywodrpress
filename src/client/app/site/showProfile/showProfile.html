@@ -35,7 +35,7 @@
 	<h3>Commentaires </h3>
 	<div ng-repeat= "comment in comments | orderBy:'comment.date':true">
 		<div class="well well-sm" >
- 			<p> Posté le {{comment.date | date:'dd/MM/yyyy'}} <br/> sur <a ui-sref="site.showArticle({id : article._id})"> {{comment.article.title}}</a></p><hr>
+ 			<p> Posté le {{comment.date | date:'dd/MM/yyyy'}} <br/> sur <a ui-sref="site.showArticle({id : comment.article._id})"> {{comment.article.title}}</a></p><hr>
  			<p> {{comment.content}}</p>
 		</div>
 	</div>

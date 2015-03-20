@@ -1,6 +1,6 @@
 <h2 class="page-header">Gestion du menu</h2>
 
-<alert type="danger" ng-if="currentUser.right == 1"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Vous ne pouvez pas modifier le menu, seul l'administrateur en a les droits.</alert>
+<alert type="danger" ng-if="user.getRight() == 1"><span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Vous ne pouvez pas modifier le menu, seul l'administrateur en a les droits.</alert>
 
 <h4 class="page-header"> Aperçu du menu </h4>
 <div class="well">
@@ -35,7 +35,7 @@
 	                  </ul>
 	                </span>
 
-	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)" ng-if="currentUser.right == 3">
+	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)" ng-if="user.getRight() == 3">
   						<span aria-hidden="true">&times;</span>
 					</button>
 				</span>
@@ -44,7 +44,7 @@
 
 
 
-	            <button class="btn btn-success" ng-click="showAddMenu()" ng-if="currentUser.right == 3"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
+	            <button class="btn btn-success" ng-click="showAddMenu()" ng-if="user.getRight() == 3"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter</button>
 	        </nav>
 
 

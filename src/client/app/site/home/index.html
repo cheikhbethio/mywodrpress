@@ -1,4 +1,4 @@
-<alert type="success" ng-show="connectionSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Connexion réussie. Bon retour parmi nous, {{currentUser.firstname}}.</alert>
+<alert type="success" ng-show="connectionSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Connexion réussie. Bon retour parmi nous, {{user.currentUser().firstname}}.</alert>
 
 <div class="blog-post" ng-repeat="article in articlesHome | orderBy:'date':true" ng-if="article.ispublic && article.isHome">
     <h2 class="blog-post-title" ><a ui-sref="site.showArticle({id : article._id})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.title}}</a></h2>

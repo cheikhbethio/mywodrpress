@@ -20,7 +20,6 @@ angular.module('myWordPress', [
     // admin
     'myWordPress.editPage',
     'myWordPress.adminPage',
-    'myWordPress.createPage',
 	'myWordPress.userService',
     'myWordPress.pageService',
     'myWordPress.articleService',
@@ -134,13 +133,13 @@ angular.module('myWordPress', [
     });
 })
 
-.run(function ($rootScope,  $state, $localStorage) {
+.run(function ($rootScope,  $state, CurrentUser) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
         var requireLoginDashboard = toState.data.requireLoginDashboard;
 
-        if ((requireLogin && typeof $rootScope.currentUser === 'undefined') || (requireLoginDashboard && $localStorage.currentUser.right == 0)) {
+        if ((requireLogin && !CurrentUser.isLoggedIn()) || (requireLoginDashboard && CurrentUser.getRight() == 0)) {
             event.preventDefault();
             $state.go('site.connection');
         } 
@@ -148,7 +147,7 @@ angular.module('myWordPress', [
 
 })
 
-/*
+
 .run(['$localStorage','$injector',function($localStorage,$injector){
     $injector.get("$http").defaults.transformRequest=function(data, headersGetter){
         if($localStorage.accessToken){
@@ -158,6 +157,4 @@ angular.module('myWordPress', [
             return angular.toJson(data);
         }
     }
-}])
-*/
-;
+}]);

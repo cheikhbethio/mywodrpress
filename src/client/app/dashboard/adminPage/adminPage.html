@@ -14,10 +14,10 @@
 
 		<tr>
 			<td><b>Accueil</b></td>
-			<td><b>Accueil <span ng-if="currentUser.right == 3">(vous n'avez pas le droit de supprimer cette page)</span></b></td>
+			<td><b>Accueil <span ng-if="user.getRight() == 3">(vous n'avez pas le droit de supprimer cette page)</span></b></td>
 			<td>
 
-				<button class="btn btn-danger pull-right" ng-disabled="true" class="pull-right" ng-if="currentUser.right == 3"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				<button class="btn btn-danger pull-right" ng-disabled="true" class="pull-right" ng-if="user.getRight() == 3"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
 				<a ui-sref="dashboard.editHome" class="btn btn-info pull-right" style="margin-right: 5px;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Ajouter des articles</a>
 
@@ -33,13 +33,13 @@
 			<td><a target="_blank" ui-sref="site.pages({id: page._id})">{{page._id}}</a></td>
 			<td>
 
-				<button class="btn btn-danger pull-right" ng-click="deletepage(page._id)" ng-if="currentUser.right == 3"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+				<button class="btn btn-danger pull-right" ng-click="deletepage(page._id)" ng-if="user.getRight() == 3"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
 
-				<a ui-sref="dashboard.editPage({id : page._id})" class="btn btn-info pull-right" style="margin-right: 5px;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span ng-if="currentUser.right == 3"> Modifier / </span> Ajouter des articles</a>
+				<a ui-sref="dashboard.editPage({id : page._id})" class="btn btn-info pull-right" style="margin-right: 5px;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span><span ng-if="user.getRight() == 3"> Modifier / </span> Ajouter des articles</a>
 			</td>
 		</tr>
 
-		<tr ng-repeat-end ng-if="currentUser.right == 3">
+		<tr ng-repeat-end ng-if="user.getRight() == 3">
 			<td>
               <input type="text" placeholder="Titre de la page" class="form-control" ng-model="newPage.title"></input>
             </td>

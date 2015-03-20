@@ -11,13 +11,14 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 		controller: 'indexMenuController'
 	})
 
-}]).controller('indexMenuController', ['$scope', '$state','$stateParams', 'Page', 'Preferences', 'Menu', function($scope, $state, $stateParams, Page, Preferences, Menu){
+}]).controller('indexMenuController', ['$scope', '$state','$stateParams', 'Page', 'Preferences', 'Menu', 'CurrentUser', function($scope, $state, $stateParams, Page, Preferences, Menu, CurrentUser){
 	$scope.boolAdd = false;
 	$scope.firstTabSelected = true;
 	$scope.preferences = Preferences.get();
 
 	$scope.pages = Page.query();
 	$scope.menus = Menu.query();
+	$scope.user = CurrentUser;
 
 	$scope.dropdown = [{ 
 		title : "", 

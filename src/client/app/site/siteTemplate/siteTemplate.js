@@ -3,10 +3,12 @@
 
 angular.module('myWordPress.siteTemplate', ['ui.router'])
 
-.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 'Menu', 
-        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences, Menu){
+.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 'Menu', 'CurrentUser',
+        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences, Menu, CurrentUser){
 
                 $scope.menus = Menu.query();
+
+                $scope.user = CurrentUser;
 
                 $scope.preferences = Preferences.get(function(succ){
                         console.log("succes");
@@ -24,13 +26,11 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
                 }
 
                 $scope.isUserConnected = function() {
-                	$rootScope.currentUser = $localStorage.currentUser;
-                	return typeof $localStorage.currentUser != 'undefined';
+                	return CurrentUser.isLoggedIn();
                 }
 
                 $scope.logOut = function() {
-                        delete $rootScope.currentUser;
-                	delete $localStorage.currentUser;
+                        CurrentUser.clear();
                         $state.go("site.home", {connectionSuccess:false});
                 }
 
