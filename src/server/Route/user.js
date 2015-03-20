@@ -309,13 +309,3 @@ exports.getFavorite=function(req, res, next){
 	});
 };
 
-
-exports.getByEditor = function(req,res,next){
-	    Article.find({author : req.params.id}).populate('author','firstname lastname').exec(function(err,result){
-	    	if(err){
-	        	return next(err);
-	       	}else {
-	        	res.json(result);
-	        }
-	});	
-};
