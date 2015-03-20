@@ -1,40 +1,39 @@
-var user=require('./user.js');
-var jwt=require('jwt-simple');
-var moment=require('moment');
-var mongoose=require('mongoose')
-var secret_Token="testsecret";
-var modelUser=user.users;
-//moment.format();
+var user = require('./user.js');
+var jwt = require('jwt-simple');
+var moment = require('moment');
+var mongoose = require('mongoose')
+
+var modelUser = user.users;
+
+var secret_Token = "testsecret";
 
 
-
-
-
-//obtenir un token suite a iddentification;
 exports.gettoken=function(req,res,next){
-	var login=req.body.login;
-	var password=req.body.password;
-	modelUser.findOne({login: login},function(err, doc){
+
+	var login = req.body.login;
+	var password = req.body.password;
+
+	modelUser.findOne({login: login}, function(err, found_user){
+
 		if(err){
-			res.sendStatus(404,err.message);
-			next();
+			res.sendStatus(404, err.message);
 		}
-		else if(!doc){
-			res.sendStatus(401,"User not Found");
-			next();
+		else if(!found_user){
+			res.status(401).send(401, { message: "User not Found"} );
 		}
-		else if(!doc.validPassword(password)){
-			res.sendStatus(402,"Password not Match");
-			next();
+		else if(!found_user.validPassword(password)){
+			res.status(401).send(401, { message: "Passwords don't match"} );
 		}
-		else{
-			var expires=moment().add(2,'hours');
+		else {
+
+			var expires = moment().add(2,'hours');
+
 			var token = jwt.encode({
-				iss: doc.id,
+				iss: found_user.id,
 				exp: expires
 			}, secret_Token);
-			res.status(200);
-			res.send({token : token, expires : expires});
+
+			res.status(200).send({token : token, user : found_user});
 		}
 	});
 };

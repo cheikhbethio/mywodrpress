@@ -14,46 +14,29 @@ angular.module('myWordPress.connection', ['ui.router'])
 }])
 
 .controller('connectionController', ['$scope','$http', '$rootScope', '$state', '$stateParams', 'Login','Token', "$localStorage", function($scope, $http, $rootScope, $state, $stateParams, Login, Token, $localStorage){
-	$scope.newUser;
+	$scope.userCredentials = {};
 	$scope.connectionError = false;
 	$scope.registration = $stateParams.registration;
 
 	$scope.connectUser=function(){
   		if ($scope.connectionForm.$valid) {
-			//console.log($scope.newUser);
 
-			Login.login({
-				username: $scope.newUser.login,
-				password: $scope.newUser.password,
-			}, function(user){
+			Token.login($scope.userCredentials, function(res){
 
-				//$rootScope.currentUser = user;
-				$localStorage.currentUser = user;
+					$localStorage.accessToken = res.token;
+					$localStorage.currentUser = res.user;
 
-				//console.log("current user : " + $localStorage.currentUser.login);
-				$state.go('site.home', {connectionSuccess:true});
+					$state.go('site.home', {connectionSuccess:true});
 
-			}, function(error){
-				console.log('Erreur de connexion.');
-				$scope.$parent.connectionError = true;
+				}, function(err){
+					console.log('Could not get token: ' + err.data.message);
 			});
-
-			Token.login({
-				login: $scope.newUser.login,
-				password: $scope.newUser.password,
-			}, function(res){
-
-				$localStorage.accessToken = res.token;
-
-			}, function(error){
-				console.log('Erreur Token');
-			});
-		}else{
+		}
+		else {
 			console.log('Formulaire Invalide.');
-			$scope.$parent.connectionError = true;
+			$scope.connectionError = true;
 		}
 	}
-
 
 	$scope.closeAlert = function() {
 		$scope.connectionError = false;

@@ -5,25 +5,51 @@ describe("Connection", function() {
   beforeEach(module('myWordPress'));
 
  	var $controller;
+  var $rootScope;
 
-	beforeEach(inject(function(_$controller_){
+	beforeEach(inject(function(_$rootScope_, _$controller_){
 		$controller = _$controller_;
+    $rootScope = _$rootScope_;
+
 	}));
 
   describe('initialy', function(){
 
-		var $scope, controller;
+		var scope, controller;
 
   		beforeEach(function(){
-  			$scope = {};
-    		controller = $controller('connectionController', { $scope: $scope });
+  			scope = $rootScope.$new();
+    		controller = $controller('connectionController', { $scope: scope });
   		});
 
   		it('should have a connectionController', function(){
         expect('myWordPress.connectionController').toBeDefined();
 		  });
 
+      it('$scope.connectionError should be false', function(){
+        expect(scope.connectionError).toBe(false);
+      });
+
+      it('should start with an undefined new user model', function(){
+        expect(scope.newUser).toEqual({});
+      });
+
   	});
+
+  describe('when login and password are entered', function(){
+
+    var scope, controller;
+
+    beforeEach(function(){
+      scope = $rootScope.$new();
+      controller = $controller('connectionController', { $scope: scope });
+    });
+
+    it('and the credentials are correct', function(){
+      
+    });
+
+  });
 
   	/*describe('reset', function(){
 
