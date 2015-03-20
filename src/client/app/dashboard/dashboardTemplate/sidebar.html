@@ -5,27 +5,40 @@
 	      	<span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil
 	      </a>
       </li>
-      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.adminPage')}"><a ui-sref="dashboard.adminPage"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Gestion des Pages</a></li>
-      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.indexMenu')}"><a ui-sref="dashboard.indexMenu"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Gestion du Menu</a></li>
     </ul>
+
+
     <ul class="nav nav-sidebar">
       <li snap-close ng-class="{ active: isActiveDashboard('dashboard.indexArticle')}">
 	      <a ui-sref="dashboard.indexArticle">
 	      	<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Gestion des Articles
 	      </a>
       </li>
-      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.favorite')}">
-      	<a ui-sref="dashboard.indexFavorite">
-      		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Gestion favoris
-      	</a>
+
+      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.adminPage')}">
+        <a ui-sref="dashboard.adminPage">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span> Gestion des Pages
+        </a>
       </li>
-      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.favorite')}">
-      	<a ui-sref="dashboard.favorite">
-      		<span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Statistiques du sites
-      	</a>
+
+      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.indexMenu')}">
+        <a ui-sref="dashboard.indexMenu">
+          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span> Gestion du Menu
+        </a>
       </li>
+
+    </ul>
+
+    <ul class="nav nav-sidebar">
       <li><a ui-sref="dashboard.listMember">
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des Droits
-        </a></li>
+        </a>
+      </li>
+
+      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.favorite')}">
+        <a ui-sref="dashboard.favorite">
+          <span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Statistiques du sites
+        </a>
+      </li>
     </ul>
 </div>
