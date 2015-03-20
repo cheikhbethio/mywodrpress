@@ -25,7 +25,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 				Token.login($scope.userCredentials, function(res){
 
-						CurrentUser.set(res);
+						CurrentUser.set(res.user);
 						$http.defaults.headers.common['x-access-token'] = res.token;
 
 						$state.go('site.home', {connectionSuccess:true});

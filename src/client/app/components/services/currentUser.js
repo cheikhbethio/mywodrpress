@@ -10,7 +10,7 @@ angular.module('myWordPress.currentUser', []).factory('CurrentUser', ['$localSto
 		},
 
 		clear: function() {
-			$localStorage.currentUser = undefined;
+			delete $localStorage.currentUser;
 		},
 
 		isLoggedIn: function() {
