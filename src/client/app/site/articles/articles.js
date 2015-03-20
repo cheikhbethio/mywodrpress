@@ -13,9 +13,11 @@ angular.module('myWordPress.site.article', ['ui.router'])
 
 }])
 
-.controller('siteArticleController', ['User','$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', 'AddFavorite', function(User, $scope, $state, $stateParams,$localStorage, Article,Commentaire, AddFavorite){
+.controller('siteArticleController', ['User','$scope', '$state','$stateParams',"$localStorage", 'Article','Commentaire', 'AddFavorite', 'CurrentUser',
+ function(User, $scope, $state, $stateParams,$localStorage, Article, Commentaire, AddFavorite, CurrentUser){
 	
 	//$scope.isfavorite;
+	$scope.user = CurrentUser;
 
 	if(typeof $localStorage.currentUser != 'undefined'){
     	$scope.id_user = $localStorage.currentUser._id;
@@ -104,7 +106,7 @@ angular.module('myWordPress.site.article', ['ui.router'])
     $scope.addComment=function(){
 
     	var newComment={
-			author : $localStorage.currentUser._id,
+			author : CurrentUser.currentUser()._id,
 			article :$scope.article._id,
 			date : Date.now(),
 			content : $scope.comment.content
