@@ -18,9 +18,9 @@ angular.module('myWordPress.site.home', ['ui.router'])
 
 	$scope.articlesHome = Article.query()
 
-	$scope.connectionSuccess = $stateParams.connectionSuccess;
+	$scope.user = CurrentUser;
 
-	console.log("Current user: " + JSON.stringify(CurrentUser.currentUser()));
+	$scope.connectionSuccess = $stateParams.connectionSuccess;
 
 	$scope.closeAlert = function() {
         $scope.connectionSuccess = false;

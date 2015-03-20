@@ -13,10 +13,12 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 
 }])
 
-.controller('adminPageController', ['$scope', 'Page', '$state','$stateParams','ngToast', 'dialogs',
-	function($scope,Page, $state,$stateParams, ngToast, dialogs){
+.controller('adminPageController', ['$scope', 'Page', '$state','$stateParams','ngToast', 'dialogs', 'CurrentUser',
+	function($scope,Page, $state,$stateParams, ngToast, dialogs, CurrentUser){
 	
 	$scope.pages = Page.query();
+
+	$scope.user = CurrentUser;
 	
 	$scope.deletepage=function(pageid) {
 

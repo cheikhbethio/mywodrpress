@@ -44,8 +44,10 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 		}
     }
 
-}]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', '$localStorage', function($scope, $state, $stateParams, Article, $localStorage){
+}]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', 'CurrentUser', function($scope, $state, $stateParams, Article, CurrentUser){
 	
+	$scope.user = CurrentUser;
+
 	$scope.addArticle = function() {
 		if ($scope.createArticleForm.$valid){ 
 			if(typeof $scope.ispublic === 'undefined')
@@ -53,7 +55,7 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 			
 			var newArticle={
 				title: $scope.title,
-				author : $localStorage.currentUser._id,
+				author : CurrentUser.currentUser()._id,
 				date : Date.now(),
 				content: $scope.htmlVariable,
 				ispublic : $scope.ispublic,
