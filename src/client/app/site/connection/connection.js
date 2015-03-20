@@ -13,8 +13,8 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 }])
 
-.controller('connectionController', ['$scope', '$rootScope', '$state', '$stateParams', '$http', '$localStorage', 'Token', 'CurrentUser',
-	function($scope, $rootScope, $state, $stateParams, $http, $localStorage, Token, CurrentUser){
+.controller('connectionController', ['$scope', '$state', '$stateParams', '$http', 'Token', 'CurrentUser',
+	function($scope, $state, $stateParams, $http, Token, CurrentUser){
 
 		$scope.userCredentials = {};
 		$scope.connectionError = false;
