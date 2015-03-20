@@ -13,10 +13,10 @@ angular.module('myWordPress.showProfile', ['ui.router'])
 }])
 
 
-.controller('showProfileController', ['$scope','$state', '$stateParams', '$localStorage', 'User_articles','User_comments', 'User', 
-  function($scope, $state, $stateParams, $localStorage, User_articles, User_comments, User){
+.controller('showProfileController', ['$scope','$state', '$stateParams', '$localStorage', 'User_articles','User_comments', 'Profile', 
+  function($scope, $state, $stateParams, $localStorage, User_articles, User_comments, Profile){
 
-        $scope.user = User.get({id: $stateParams.id}, function(user) {
+        $scope.user = Profile.get({id: $stateParams.id}, function(user) {
             console.log("get user "+$stateParams.id);
             console.log(user);
 
