@@ -20,32 +20,33 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 
 	$scope.user = CurrentUser;
 	
-	$scope.deletepage=function(pageid) {
+	$scope.deletepage=function(pageIndex) {
 
-		//var dlg = dialogs.confirm();
-					/*dlg.result.then(function(btn){
-						$scope.confirmed = 'You confirmed "Yes."';
-					},function(btn){
-						$scope.confirmed = 'You confirmed "No."';
-					});*/
+		var dlg = dialogs.create('./components/dialogs/adminPage/confirmation_dialog.html', 
+		'confirmationDialogController', 
+		{pagetitle: $scope.pages[pageIndex].title}, 
+		'lg');
 
+		dlg.result.then(function(){
+			Page.remove( {id: $scope.pages[pageIndex]._id}, function(success){
+				$scope.pages.splice(pageIndex, 1);
+			});
+		},
 
-		if (confirm("Voulez vous vraiment supprimer cette page?") == true) {
-			Page.remove({id: pageid});
-			$scope.pages = Page.query();
-        }
+		function(){
+			console.log('You confirmed "No."');
+		});
    	};
 
     $scope.addPage = function() {
 
    		if($scope.newPage === undefined || $scope.newPage.title == ""){
-   			ngToast.create('Vous devez fournir un titre !');
+   			console.log('Vous devez fournir un titre !');
    		}
    		else {
 	   		Page.save($scope.newPage,
 	   			function(res){
-		   			console.log("Page saved succesfully: " + res);
-		   			$scope.pages = Page.query();
+		   			$scope.pages.push(res);
 		   			$scope.newPage = {};
 	   			}, 
 	   			function(err){
@@ -55,4 +56,58 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 	   	}
    };
 
-}]);
+   $scope.addPageFromDialog = function(){
+   		var dlg = dialogs.create('./components/dialogs/adminPage/new_page_dialog.html', 
+		'newPageDialogController', 
+		{}, 
+		'lg');
+
+		dlg.result.then(function(entered_title){
+			Page.save({title: entered_title},
+	   			function(res){
+		   			$scope.pages.push(res);
+		   			$scope.newPage = {};
+	   			}, 
+	   			function(err){
+	   				console.log("Error saving page !" + err);
+	   			}
+	   		);
+		},
+
+		function(){
+			console.log('You confirmed "No."');
+		});
+   };
+
+}])
+
+.controller('confirmationDialogController', function($scope, $modalInstance, data){
+
+		$scope.data = data;
+		
+		$scope.cancel = function(){
+			$modalInstance.dismiss('Canceled');
+		};
+		
+		$scope.save = function(){
+			$modalInstance.close();
+		};
+
+})
+
+.controller('newPageDialogController', function($scope, $modalInstance, data){
+		
+		$scope.cancel = function(){
+			$modalInstance.dismiss('Canceled');
+		};
+		
+		$scope.save = function(){
+			$modalInstance.close($scope.title);
+		};
+
+		$scope.hitEnter = function(evt){
+			if(angular.equals(evt.keyCode,13) && !(angular.equals($scope.user.name,null) || angular.equals($scope.user.name,'')))
+				$scope.save();
+		};
+
+});

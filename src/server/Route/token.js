@@ -16,7 +16,7 @@ exports.gettoken=function(req,res,next){
 	modelUser.findOne({login: login}, function(err, found_user){
 
 		if(err){
-			res.sendStatus(404, err.message);
+			res.status(404).send(404, err.message);
 		}
 		else if(!found_user){
 			res.status(401).send(401, { message: "User not Found"} );

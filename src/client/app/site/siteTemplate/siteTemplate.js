@@ -10,11 +10,8 @@ angular.module('myWordPress.siteTemplate', ['ui.router'])
 
                 $scope.user = CurrentUser;
 
-                $scope.preferences = Preferences.get(function(succ){
-                        console.log("succes");
-                        console.log("prefs title: " + $scope.preferences.site.subtitle);
-                }, function(err){
-                        console.log("error");
+                Preferences.get(function(preferences){
+                        $scope.preferences = preferences;
                 });
                 
                 $scope.isActiveHeader = function (viewLocation) { 

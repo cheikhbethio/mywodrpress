@@ -67,7 +67,7 @@
 
         <div ng-hide="user.isLoggedIn()" >
             <nav class="blog-nav navbar-right navbar-collapse collapse navbar-col">
-                <a ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Connexion</a>
+                <a id="connection_link" ng-class="{ active: isActiveHeader('site.connection')}" class="blog-nav-item" ui-sref="site.connection"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Connexion</a>
                 <a ng-class="{ active: isActiveHeader('site.registration')}" class="blog-nav-item" ui-sref="site.registration"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Inscription</a>
             </nav>
         </div>

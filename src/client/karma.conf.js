@@ -5,8 +5,6 @@ module.exports = function(config){
 
 		files : [
 
-
-
 			'app/bower_components/jquery/dist/jquery.min.js',
 			'app/bower_components/angular/angular.js',
 			'app/bower_components/angular-resource/angular-resource.js',
@@ -40,12 +38,6 @@ module.exports = function(config){
 			'app/components/**/*.js',
 			'app/site/**/*.js',
 			'app/dashboard/**/*.js'
-			
-
-			
-			/*'app/site/registration/*.js',*/
-			/*'app/master_template/*.js', */
-			//'app/site/connection/*.js'
 			
 		],
 
