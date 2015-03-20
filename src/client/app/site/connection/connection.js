@@ -15,7 +15,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 
 .controller('connectionController', ['$scope', '$rootScope', '$state', '$stateParams', '$http', '$localStorage', 'Token',
 	function($scope, $rootScope, $state, $stateParams, $http, $localStorage, Token){
-	
+
 		$scope.userCredentials = {};
 		$scope.connectionError = false;
 		$scope.registration = $stateParams.registration;

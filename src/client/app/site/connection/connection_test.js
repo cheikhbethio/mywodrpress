@@ -6,11 +6,15 @@ describe("Connection", function() {
 
  	var $controller;
   var $rootScope;
+  var $injector;
+  var $httpBackend;
+  var $localStorage;
 
-	beforeEach(inject(function(_$rootScope_, _$controller_){
+	beforeEach(inject(function(_$rootScope_, _$controller_, _$httpBackend_, _$localStorage_){
 		$controller = _$controller_;
     $rootScope = _$rootScope_;
-
+    $httpBackend = _$httpBackend_;
+    $localStorage = _$localStorage_;
 	}));
 
   describe('initialy', function(){
@@ -31,7 +35,7 @@ describe("Connection", function() {
       });
 
       it('should start with an undefined new user model', function(){
-        expect(scope.newUser).toEqual({});
+        expect(scope.userCredentials).toEqual({});
       });
 
   	});
@@ -42,11 +46,39 @@ describe("Connection", function() {
 
     beforeEach(function(){
       scope = $rootScope.$new();
+
       controller = $controller('connectionController', { $scope: scope });
     });
 
     it('and the credentials are correct', function(){
-      
+
+      var aUser = {
+        'login': 'aUser' ,
+        'password': 'xxx',
+        'firstname': 'user01',
+        'lastname': 'user01',
+        'email': 'user01@mywp.com',
+        'right': 1
+      };
+
+      var someCredentials = {
+        login: 'aUser',
+        password: 'xxx'
+      }
+
+      scope.userCredentials.login = 'aUser';
+      scope.userCredentials.password = 'aPassword';
+
+      //scope.connectionForm
+
+      $httpBackend.when('POST', 'http://localhost:4711/api/token').
+          respond({ token: 'xxx', user: aUser });
+
+      //scope.credentials = someCredentials;
+      scope.connectUser();
+
+      $httpBackend.flush();
+
     });
 
   });
