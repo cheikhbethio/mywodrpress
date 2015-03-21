@@ -27,6 +27,13 @@ angular.module('myWordPress.currentUser', []).factory('CurrentUser', ['$localSto
 				return $localStorage.currentUser.right;
 		},
 
+		getId: function(){
+			if($localStorage.currentUser === undefined)
+				return undefined;
+			else
+				return $localStorage.currentUser._id;
+		},
+
 		isAdmin: function(){
 			if($localStorage.currentUser === undefined)
 				return false;

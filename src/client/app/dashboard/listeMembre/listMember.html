@@ -5,35 +5,60 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Login</th>
-			<th>Name</th>
-			<th>Droit</th>
+			<th>Login (lien profile)</th>
+			<th>Prénom</th>
+			<th>Nom</th>
+			<th style="width:150px"><span> Droit</span></th>
+			<th style="width:300px"><span class="pull-right">Changer le droit</span></th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="user in users" ng-if="currentUser._id!=user._id">			
+
+		<tr ng-repeat="user in users | orderBy:rights[user.right].name" ng-if="currentUser.getId() != user._id">
+
 			<td>
-				{{user.login}}
+				<a target="_blank" ui-sref="site.showprofile({id: user._id})">{{user.login}}</a>
 			</td>
-			<td>{{user.firstname}} {{user.lastname}}</a></td>
-			<td> <div ng-hide="editmode==user._id" >{{displayRight[user.right]}}
-			<button type="button"
-  					class="btn btn-primary"
-  					ng-click="swap(user._id)">  					
-  				 <span class="glyphicon glyphicon-pencil"></span>    				
-  				</button>
-			</div>
-			<form ng-model="selected" ng-show="editmode==user._id" ng-submit="edit(user._id,selected)">
-				<div class="form-group input-group">
-					<select class="form-control" ng-model="selected" ng-options="dis.value as dis.name for dis in selectValue"/>
-					<span class="input-group-btn">
-				 		<button type="submit" class="btn btn-primary" >
-				 			<span class="glyphicon glyphicon-ok"></span>
-				 		</button>
-				 	</span>
+
+			<td>
+				{{user.firstname}} 
+			</td>
+
+			<td>
+				{{user.lastname}}
+			</td>
+
+			<td>
+				<div class="pull-left">
+					<span class="pull-left"> {{ rights[user.right].name }} </span>
 				</div>
-			</form>
+
 			</td>
+
+			<td>
+
+				<button type="button" ng-hide="editedUser == user" class="btn btn-primary pull-right" ng-click="setEditUserMode(user)">	
+  					 <span class="glyphicon glyphicon-pencil pull-right"></span>    				
+  				</button>
+
+				<form ng-model="selected" ng-show="editedUser == user">
+
+					<div class="form-group input-group pull-right">
+						<select ng-init="selectedRight = selectedRight || rights[user.right]" class="form-control" ng-model="selectedRight" ng-options="right as right.name for right in rights"/>
+						<span class="input-group-btn">
+				 			<button class="btn btn-primary" type="submit" ng-click="saveUserRight(selectedRight)">
+				 				<span class="glyphicon glyphicon-ok"></span>
+				 			</button>
+				 			<button class="btn btn-danger" type="submit" ng-click="setEditUserMode(false);selectedRight = rights[user.right]">
+				 				<span class="glyphicon glyphicon-remove"></span>
+				 			</button>
+				 		</span>
+					</div>
+
+				</form>
+
+			</td>
+
 		</tr>
 
 	<tbody>

@@ -13,27 +13,41 @@ angular.module('myWordPress.listMember', ['ui.router'])
 
 }])
 
-.controller('listMemberController', ['$scope', 'User','Right', '$state','$stateParams',
-	function($scope,User,Right, $state,$stateParams){
-	
-	$scope.users = User.query();
-	$scope.editmode=null;
-	$scope.displayRight=[];
-	$scope.displayRight[0]="Membre";
-	$scope.displayRight[1]="Rédacteur";
-	//$scope.displayRight[2]="Modérateur";
-	$scope.displayRight[3]="Administrateur";
-	$scope.selectValue=[{value: 0, name : "Membre"},{value: 1, name : "Rédacteur"},/*{value: 2, name : "Modérateur"},*/{value: 3, name : "Administrateur"}];
-    $scope.edit = function(iduser,val) {
-    	var maj={right : val};
-    	Right.update({id : iduser},maj);
-    	$scope.users= User.query();
-    	$scope.swap(null);
+.controller('listMemberController', ['$scope', 'User','Right', '$state','$stateParams', 'CurrentUser',
+	function($scope, User, Right, $state, $stateParams, CurrentUser){
 
+	$scope.currentUser = CurrentUser;
+	
+	User.query(function(users){
+		$scope.users = users;
+	});
+
+	$scope.rights = [
+		{rightNumber: 0, name: 'Membre'},
+		{rightNumber: 1, name: 'Rédacteur'},
+		{rightNumber: 2, name: 'Moderateur'},
+		{rightNumber: 3, name: 'Administrateur'}
+	];
+
+	$scope.editedUser = false;
+    
+    $scope.saveUserRight = function(selectedRight) {
+    	
+    	var id = {id : $scope.editedUser._id};
+    	var update = {right : selectedRight.rightNumber};
+
+    	Right.update(id, update, function(res){
+    		$scope.editedUser.right = res.result.right;
+    		$scope.setEditUserMode(false);
+    	});
    };
 
-   $scope.swap=function(id){
-   		$scope.editmode=id;
-   }
+	$scope.setEditUserMode = function(user) {
+
+		if(user === false)
+			$scope.editedUser = false;
+		else
+			$scope.editedUser = user;
+	}
 
 }]);
