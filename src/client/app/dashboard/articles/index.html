@@ -1,5 +1,12 @@
 <h2 class="page-header">Gestion des articles</h2>
 
+<form class="form pull-right" role="form">
+	<div class="form-group">
+	    <label for="page_search">Chercher parmis les articles du site: </label>
+	    <input id="page_search" type="text" class="form-control" ng-model="articleSearchText" placeholder="Votre recherche">
+	</div>
+</form>
+
 <alert type="success" ng-if="success" close="closeAlert()">
 	<span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Votre article a bien été créé. N'oubliez pas de <a ui-sref='dashboard.adminPage'>l'ajouter dans une page ! </a></alert>
 <alert type="success" ng-if="editSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Votre article a bien été modifié.</alert>
@@ -45,7 +52,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<tr ng-repeat="article in articles">
+		<tr ng-repeat="article in articles | filter:articleSearchText ">
 
 			<td>
 				<a ui-sref="dashboard.showArticle({id : article._id})">{{article.title}}</a>
