@@ -115,6 +115,13 @@ h6, .h6 {
 .blog-nav .drop{
     color: #cdddeb;
 }
+
+.headerPic{
+    width:18px; 
+    height:18px; 
+    border: 1px solid #fff; 
+    margin-right: 5px
+}
 /*
  * Blog name and description
  */

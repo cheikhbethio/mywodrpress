@@ -54,6 +54,14 @@ angular.module('myWordPress.currentUser', []).factory('CurrentUser', ['$localSto
 					return true;
 		},
 
+		profilePicUrl: function(){
+            if(this.hasProfilePic()){
+                return $localStorage.currentUser.picture;
+            } else {
+                return "components/res/default.png";
+            }
+        },
+
 		currentUser: function() { return $localStorage.currentUser; }
 
 	};
