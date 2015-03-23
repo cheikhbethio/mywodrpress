@@ -46,7 +46,7 @@
 					<div class="form-group input-group pull-right">
 						<select ng-init="selectedRight = selectedRight || rights[user.right]" class="form-control" ng-model="selectedRight" ng-options="right as right.name for right in rights"/>
 						<span class="input-group-btn">
-				 			<button class="btn btn-primary" type="submit" ng-click="saveUserRight(selectedRight)">
+				 			<button class="btn btn-success" type="submit" ng-click="saveUserRight(selectedRight)">
 				 				<span class="glyphicon glyphicon-ok"></span>
 				 			</button>
 				 			<button class="btn btn-danger" type="submit" ng-click="setEditUserMode(false);selectedRight = rights[user.right]">

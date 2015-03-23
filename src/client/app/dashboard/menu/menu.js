@@ -91,6 +91,8 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 	$scope.deleteMenu = function(articleId, name){
 		if (confirm("Voulez vous vraiment supprimer le menu "+ name +"?") == true) {
 			Menu.remove({id: articleId});
+			
+
 			$scope.menus = Menu.query();
 		}
 	}
