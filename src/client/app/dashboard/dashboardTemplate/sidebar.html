@@ -7,7 +7,6 @@
       </li>
     </ul>
 
-
     <ul class="nav nav-sidebar">
       <li snap-close ng-class="{ active: isActiveDashboard('dashboard.indexArticle')}">
 	      <a ui-sref="dashboard.indexArticle">
@@ -30,7 +29,8 @@
     </ul>
 
     <ul class="nav nav-sidebar">
-      <li><a ui-sref="dashboard.listMember">
+      <li snap-close ng-class="{ active: isActiveDashboard('dashboard.listMember')}">
+        <a ui-sref="dashboard.listMember">
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des Droits
         </a>
       </li>
