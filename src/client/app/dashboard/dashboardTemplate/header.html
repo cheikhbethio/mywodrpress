@@ -19,6 +19,7 @@
                 <li ng-if="user.getRight() == 3"><a snap-close ui-sref="dashboard.preferences"><span class="glyphicon glyphicon-wrench" aria-hidden="true" ></span> Préférences</a></li>
                 <li><a ui-sref="site.showprofile({id : user.currentUser()._id})"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Profil</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> Aide</a></li>
+                <li><a href="#" ng-click="logOut()"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Déconnection</a></li>
             </ul>
         </div>
     </div>

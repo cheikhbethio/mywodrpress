@@ -17,4 +17,10 @@ angular.module('myWordPress.dashboardTemplate', ['ui.router'])
       		disable: 'right',
             touchToDrag: false
     	};
+
+
+        $scope.logOut = function() {
+            CurrentUser.clear();
+            $state.go("site.home", {connectionSuccess:false});
+        }
 }]);
