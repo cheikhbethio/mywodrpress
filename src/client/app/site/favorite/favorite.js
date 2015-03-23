@@ -15,7 +15,10 @@ angular.module('myWordPress.gestionFavoris', ['ui.router'])
 	}).state('site.showFavorite', {
 		url: '/favorite/:id',
 		templateUrl: 'site/favorite/show.html',
-		controller: 'showFavoriteController'
+		controller: 'showFavoriteController',
+		data: { 
+            requireLogin: true
+        }
 	});
 
 }])

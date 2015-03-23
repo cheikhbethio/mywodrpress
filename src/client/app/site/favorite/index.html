@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 		<tr ng-repeat="fav in favorite">
-			<td><a ui-sref="site.showFavorite({id : fav._id})">{{fav.title}}</a></td>
+			<td><a ui-sref="site.showArticle({id : fav._id})">{{fav.title}}</a></td>
 			<td>{{fav.author.firstname}} {{fav.author.lastname}}</td>
 			<td>
 				<button class="btn btn-danger btn-sm" ng-click="deleteFavorite(fav._id)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Supprimer</button>

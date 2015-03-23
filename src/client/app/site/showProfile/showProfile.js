@@ -13,8 +13,10 @@ angular.module('myWordPress.showProfile', ['ui.router'])
 }])
 
 
-.controller('showProfileController', ['$scope','$state', '$stateParams', '$localStorage', 'User_articles','User_comments', 'Profile', 
-  function($scope, $state, $stateParams, $localStorage, User_articles, User_comments, Profile){
+.controller('showProfileController', ['$scope','$state', '$stateParams', '$localStorage', 'User_articles','User_comments', 'Profile', 'CurrentUser',
+  function($scope, $state, $stateParams, $localStorage, User_articles, User_comments, Profile, CurrentUser){
+
+        $scope.currentUser = CurrentUser;
 
         $scope.user = Profile.get({id: $stateParams.id}, function(user) {
             console.log("get user "+$stateParams.id);
@@ -29,16 +31,16 @@ angular.module('myWordPress.showProfile', ['ui.router'])
             });
 
             if(user.right===0){
-                $scope.user_statut ='Membre';
+                $scope.user_statut = 'Membre';
             }
             else if(user.right===1){
-                $scope.user_statut ='Rédacteur'; 
+                $scope.user_statut = 'Rédacteur'; 
             }
             else if(user.right===2){
-                $scope.user_statut ='Moderateur'; 
+                $scope.user_statut = 'Moderateur'; 
             }
             else if(user.right===3){
-              $scope.user_statut ='Administrateur'; 
+              $scope.user_statut = 'Administrateur'; 
             }
         });
 
