@@ -34,7 +34,7 @@ var token= require('./Route/token.js');
 
 var app = express();
 
-app.use(express.static(path.join(application_root ,'../client')));
+app.use(express.static(path.join(application_root ,'../client/app')));
 //app.use(express.favicon());
 app.use(logger('dev'));
 
