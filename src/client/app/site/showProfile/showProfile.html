@@ -14,11 +14,11 @@
 
 </div>
 
-<button type="button" class="btn btn-primary  pull-right" ng-click="editFavorite()" ng-if='currentUser.isLoggedIn()'>
+<button type="button" class="btn btn-primary  pull-right" ng-click="editFavorite()" ng-if='currentUser.isLoggedIn() && currentUser.currentUser()._id == user._id'>
 		<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Gestion favoris
 </button>
 
-<button class="btn btn-primary" type="button" ng-click="editprofile()" ng-if='currentUser.isLoggedIn()'> <span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</button> <!-- ngif currentuserid != userid -->
+<button class="btn btn-primary" type="button" ng-click="editprofile()" ng-if='currentUser.isLoggedIn() && currentUser.currentUser()._id == user._id'> <span class="glyphicon glyphicon-pencil"></span> Modifier mon profil</button> <!-- ngif currentuserid != userid -->
 <hr>
 
 <div class="col-md-6" ng-if="user.right > 0">
