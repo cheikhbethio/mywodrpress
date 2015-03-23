@@ -6,7 +6,7 @@ angular.module('myWordPress.site.article', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('site.showArticle', {
-		url: 'article/:id?isfavorite',
+		url: '/article/:id?isfavorite',
 		templateUrl: 'site/articles/show.html',
 		controller: 'siteArticleController'
 	})

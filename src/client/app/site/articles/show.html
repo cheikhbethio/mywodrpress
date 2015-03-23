@@ -53,7 +53,9 @@
 
   <h3 class="page-header" name="comments">Tous les commentaires</h3>
   <div class="aricle-comment well well-sm" ng-repeat = "comment in commentList | orderBy:'date':true">
+      <img src="{{user.profilePicUrl()}}" class="pull-left" style="height:40px; border: 3px solid #fff; margin-right: 5px">
       <p class="blog-post-meta"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> </span> Posté le {{comment.date | date:'dd/MM/yyyy'}} par <a  ui-sref="site.showprofile({id : comment.author._id})">{{comment.author.firstname}} {{comment.author.lastname}}</a></p>
+      <hr>
       <p>{{comment.content}}</p>
 
   </div>
