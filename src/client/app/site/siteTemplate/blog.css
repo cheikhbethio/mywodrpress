@@ -80,7 +80,6 @@ h6, .h6 {
 
 .blog-nav .activeDrop {
   color: #fff;
-  background-color: #428bca;
   border: 1px solid #fff;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
@@ -88,6 +87,7 @@ h6, .h6 {
   margin : 5px;
 }
 .blog-nav .activeDrop:after {
+    color: #fff;
   /*position: absolute;
   bottom: 0;
   left: 50%;
@@ -112,6 +112,9 @@ h6, .h6 {
   margin : 5px;
 }
 
+.blog-nav .drop{
+    color: #cdddeb;
+}
 /*
  * Blog name and description
  */
