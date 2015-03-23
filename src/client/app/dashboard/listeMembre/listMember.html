@@ -5,7 +5,7 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Login (lien profile)</th>
+			<th>Login (lien profil)</th>
 			<th>Prénom</th>
 			<th>Nom</th>
 			<th style="width:150px"><span> Droit</span></th>
@@ -30,7 +30,7 @@
 
 			<td>
 				<div class="pull-left">
-					<span class="pull-left"> {{ rights[user.right].name }} </span>
+					<span class="pull-left"><span class="glyphicon" ng-class="{'glyphicon-user': user.right == 0, 'glyphicon-edit': user.right == 1, 'glyphicon-king': user.right==3}" aria-hidden="true"></span> {{ rights[user.right].name }} </span>
 				</div>
 
 			</td>
@@ -44,7 +44,7 @@
 				<form ng-model="selected" ng-show="editedUser == user">
 
 					<div class="form-group input-group pull-right">
-						<select ng-init="selectedRight = selectedRight || rights[user.right]" class="form-control" ng-model="selectedRight" ng-options="right as right.name for right in rights"/>
+						<select ng-init="selectedRight = selectedRight || rights[user.right]" class="form-control" ng-model="selectedRight" ng-options="right as right.name for right in rights | filter:{ name : '!Moderateur' }"/>
 						<span class="input-group-btn">
 				 			<button class="btn btn-success" type="submit" ng-click="saveUserRight(selectedRight)">
 				 				<span class="glyphicon glyphicon-ok"></span>

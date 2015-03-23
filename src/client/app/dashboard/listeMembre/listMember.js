@@ -25,7 +25,7 @@ angular.module('myWordPress.listMember', ['ui.router'])
 	$scope.rights = [
 		{rightNumber: 0, name: 'Membre'},
 		{rightNumber: 1, name: 'Rédacteur'},
-		{rightNumber: 2, name: 'Moderateur'},
+		{rightNumber: 2, name: 'Moderateur'}, //Modérateur non géré par l'application, ligne écrite par cohérence. Filtré dans le html.
 		{rightNumber: 3, name: 'Administrateur'}
 	];
 
