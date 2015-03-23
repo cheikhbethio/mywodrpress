@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var bcrypt=require('bcrypt');
+var bcrypt = require('bcrypt');
 var article=require('./article.js')
 
 
@@ -124,16 +124,24 @@ exports.edit = function (req, res , next) {
                             res.sendStatus(401,{error : "1"});                            
                             return next();
                         }}
+
                         if(req.body.email!=null)
                             maj.email=req.body.email;
-                        if(req.body.password!=null)
+
+                        if(req.body.password!=null && req.body.password == result.password)
                             maj.password=req.body.password;
+                        else if(req.body.password!=null && req.body.password != result.password)
+                             maj.password=bcrypt.hashSync(req.body.password, 8);
+
                         if(req.body.firstname!=null)
                             maj.firstname=req.body.firstname;
+
                         if(req.body.lastname!=null)
                             maj.lastname=req.body.lastname;
+
                         if(req.body.picture!=null)
                             maj.picture=req.body.picture;
+
                         user.update(query, maj,function(errs,n){
                             if(errs){
                                 console.log("error when update user");

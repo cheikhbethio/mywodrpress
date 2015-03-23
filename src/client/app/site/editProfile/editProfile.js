@@ -25,9 +25,10 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 	$scope.keysToValues = {
 		firstname: 'Nom',
-		lastname: 'Prenom', 
-		login: 'Login',
+		lastname: 'Prénom', 
+		login: 'Identifiant',
 		email: 'Email',
+		password: 'Mot de passe',
 		picture: 'Photo de profil (url)'
 	};
 
@@ -69,9 +70,18 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 		return $scope.edit_mode == true && $scope.edit_index != index;
 	}
 
+	$scope.filterPassword = function(key){
+		if(key == "password"){
+			return "*********";
+		} else {
+			return $scope.profile[key];
+		}
+	}
 
 	$scope.saveUser = function() {
+		
 
+		
 		User.update({id: $scope.profile._id}, $scope.profile, function(resp) {
 
 			if(resp.error == 0){
