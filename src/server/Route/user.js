@@ -13,7 +13,8 @@ var userSchema = Schema({
     email	  	: String,
     token   	: String,
     favorite	: [{type: Schema.Types.ObjectId, ref:'Article'}],
-    right		: Number
+    right		: Number,
+    picture     : String
 });
 
 userSchema.methods.validPassword = function(password) {
@@ -33,7 +34,8 @@ user.findOne({right:3},function(err,doc){
             'firstname' : 'admin',
             'lastname' : 'admin',
             'email'	: 'admin@admin.com',
-            'right' : 3
+            'right' : 3,
+            'picture': ''
             })
         admin.save(function(err,doc){
             //if(err) next(err);
@@ -41,7 +43,7 @@ user.findOne({right:3},function(err,doc){
         })
     }
     else{
-        console.log("account admin already ceated")
+        console.log("[admin account already created]")
     }
 });
 
@@ -82,8 +84,9 @@ exports.create=function (req, res , next) {
     newUser.password=bcrypt.hashSync(req.body.password, 8);
     newUser.firstname=req.body.firstname;
    	newUser.lastname=req.body.lastname;
-		newUser.email=req.body.email;    
+	newUser.email=req.body.email;    
     newUser.right=0;
+    newUser.picture="";
 
     newUser.save(function(err, results){
         if (err) {
@@ -100,7 +103,8 @@ var callback = function(err, numAffected){
 exports.edit = function (req, res , next) {
 
     var query= ({_id : req.params.id});
- 		var maj={};
+    var maj={};
+    
     user.findById(req.params.id, function(error,result){
         if(error) next(error);
         else if(result==null){
@@ -123,11 +127,13 @@ exports.edit = function (req, res , next) {
                         if(req.body.email!=null)
                             maj.email=req.body.email;
                         if(req.body.password!=null)
-                            maj.password=bcrypt.hashSync(req.body.password, 8);
+                            maj.password=req.body.password;
                         if(req.body.firstname!=null)
                             maj.firstname=req.body.firstname;
                         if(req.body.lastname!=null)
                             maj.lastname=req.body.lastname;
+                        if(req.body.picture!=null)
+                            maj.picture=req.body.picture;
                         user.update(query, maj,function(errs,n){
                             if(errs){
                                 console.log("error when update user");
@@ -184,6 +190,7 @@ exports.addFavorite = function(req,res,next){
 	    //maj.token  = doc.token	;
 	    maj.favorite =	doc.favorite;
 	    maj.right =	doc.right;
+        maj.picture = doc.picture;
 	    here = isFavorite(maj.favorite, tmp.id_art);
 	    console.log(here);
 	    if(tmp.id_art != null && !here){     	

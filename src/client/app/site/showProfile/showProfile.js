@@ -18,6 +18,14 @@ angular.module('myWordPress.showProfile', ['ui.router'])
 
         $scope.currentUser = CurrentUser;
 
+        $scope.profilePicUrl = function(){
+            if(CurrentUser.hasProfilePic()){
+                return CurrentUser.currentUser().picture;
+            } else {
+                return "components/res/default.png";
+            }
+        }
+
         $scope.user = Profile.get({id: $stateParams.id}, function(user) {
             console.log("get user "+$stateParams.id);
             console.log(user);

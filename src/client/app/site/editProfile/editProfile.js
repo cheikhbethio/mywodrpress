@@ -16,10 +16,10 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 }])
 
-.controller('editProfileController', ['$scope', '$rootScope', 'User', '$localStorage', 
-	function($scope, $rootScope, User, $localStorage){
+.controller('editProfileController', ['$scope', '$state', 'User', 'CurrentUser', 
+	function($scope, $state, User, CurrentUser){
 
-	$scope.profile = angular.copy($localStorage.currentUser);
+	$scope.profile = angular.copy(CurrentUser.currentUser());
 
 	console.log("USER editprofile: " + $scope.profile);
 
@@ -27,7 +27,8 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 		firstname: 'Nom',
 		lastname: 'Prenom', 
 		login: 'Login',
-		email: 'Email'
+		email: 'Email',
+		picture: 'Photo de profil (url)'
 	};
 
 	$scope.loginAlreadyUsed = false;
@@ -71,11 +72,12 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 	$scope.saveUser = function() {
 
-		User.update($scope.profile, function(resp) {
+		User.update({id: $scope.profile._id}, $scope.profile, function(resp) {
 
 			if(resp.error == 0){
 				console.log("Successfuly posted: " + resp.error);
-				$state.go('app');
+				CurrentUser.set($scope.profile);
+				$state.go('site.showprofile', {id:$scope.profile._id});
 			} 
 			else if( resp.error == 1){
 				$scope.emailAlreadyUsed = true;
@@ -89,6 +91,7 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 		}, function(error) {
 			console.log("Response: " + error);
+			$scope.error = error;
 		});
 	};
 
