@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		<div class="col-md-4">
-		    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> {{article.nbrComment}} Commentaires
+		    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> <a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.nbrComment}} Commentaires</a>
 		</div>
 	</div>
 </div>
