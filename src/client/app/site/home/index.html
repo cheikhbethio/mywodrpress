@@ -1,20 +1,34 @@
-<alert type="success" ng-show="connectionSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> Connexion réussie. Bon retour parmi nous, {{user.currentUser().firstname}}.</alert>
+<div class="blog-post" ng-repeat="article in articlesHome track by $index | orderBy:'date':true"  ng-if="article.ispublic && article.isHome">
+    <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.title}}</a>  
 
-<div class="blog-post" ng-repeat="article in articlesHome | orderBy:'date':true" ng-if="article.ispublic && article.isHome">
-    <h2 class="blog-post-title" ><a ui-sref="site.showArticle({id : article._id})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.title}}</a></h2>
-    <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a>{{article.author.firstname}} {{article.author.lastname}}</a></p>
 
+    	<button type="button" class="btn btn-default btn-sm pull-right" ng-click="pushFavoris(article._id)" ng-if="!isFavorite[$index]">
+
+  			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
+
+		</button>
+    	<button type="button" class="btn btn-warning btn-sm pull-right" ng-click="popFavoris(article._id)" ng-if="isFavorite[$index]">
+
+  			<span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span> Favoris
+
+		</button>
+
+	</h2>
+
+    <p class="blog-post-meta">Posté le {{article.date | date:'dd/MM/yyyy'}} par <a ui-sref="site.showprofile({id : article.author._id})">{{article.author.firstname}} {{article.author.lastname}}</a></p>
+    
     <div ng-bind-html="article.content"></div>
 
     <hr>
-    <div class="col-md-8">
-	    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
-	    <div>
-	   		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+    <div class="row">
+	    <div class="col-md-8">
+		    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Mots clés
+		    <div>
+		   		<div class="label label-info" ng-repeat="keyword in article.keywords" style="margin-right: 5px;">{{keyword}}</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+		    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> <a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.nbrComment}} Commentaires</a>
 		</div>
 	</div>
-	<div class="col-md-4">
-	    <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Commentaires
-	</div>
-	<hr>
 </div>
