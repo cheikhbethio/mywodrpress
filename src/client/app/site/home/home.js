@@ -13,8 +13,8 @@ angular.module('myWordPress.site.home', ['ui.router'])
 
 }])
 
-.controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article', 'CurrentUser', 'User',
-	function($scope, $state, $stateParams, Article, CurrentUser, User){
+.controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article', 'CurrentUser', 'User', 'AddFavorite',
+	function($scope, $state, $stateParams, Article, CurrentUser, User, AddFavorite){
 
 	$scope.articlesHome = Article.query()
 
@@ -33,10 +33,16 @@ angular.module('myWordPress.site.home', ['ui.router'])
 		};
 	});
 
+   	if(CurrentUser.isLoggedIn()){
+    	$scope.id_user = CurrentUser.currentUser()._id;
+    	console.log($scope.id_user );
+	}
+
 
 	$scope.isFavorite=[];
 	$scope.mypage;
-
+    //var tempo = page.content;
+    var bool=false;
 
 	User.get({id :$scope.id_user}, function(res){
 		$scope.ListFavorite = res.favorite;

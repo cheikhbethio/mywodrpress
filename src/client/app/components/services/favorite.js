@@ -6,7 +6,7 @@ angular.module('myWordPress.favoriteService', ['ngResource'])
 
 .factory('AddFavorite', ['$resource', function($resource){
 	return $resource('http://localhost:4711/api/users/:id_user/article/:id_art', {}, {    	
-     	update: {method:'PUT', isArray:false},
+     	update: {method:'PUT', isArray:true},
      	remove : {method : 'DELETE', isArray:false}
     });
   }])
