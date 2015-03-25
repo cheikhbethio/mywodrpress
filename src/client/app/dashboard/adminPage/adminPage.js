@@ -17,6 +17,7 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 	function($scope,Page, $state,$stateParams, ngToast, dialogs, CurrentUser){
 	
 	$scope.pages = Page.query();
+	$scope.home = Page.get({ id: "home"});
 
 	$scope.user = CurrentUser;
 	

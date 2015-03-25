@@ -3,18 +3,22 @@
 
 angular.module('myWordPress.siteTemplate', ['ui.router'])
 
-.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 'Menu', 'CurrentUser',
-        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences, Menu, CurrentUser){
+.controller('siteTemplateController', ['$scope', '$rootScope', '$state','$stateParams', '$localStorage', 'Preferences', 'Menu', 'CurrentUser', 'Page',
+        function($scope, $rootScope, $state, $stateParams, $localStorage, Preferences, Menu, CurrentUser, Page){
 
                 $scope.menus = Menu.query();
-
+                $scope.home = Page.get({ id: "home"});
                 $scope.user = CurrentUser;
 
                 Preferences.get(function(preferences){
                         $scope.preferences = preferences;
                 });
                 
-                $scope.isActiveHeader = function (viewLocation) { 
+                $scope.isActiveHome = function (viewLocation) {
+                        return viewLocation === $state.params.id;
+                }
+
+                $scope.isActiveHeader = function (viewLocation) {
                 	return viewLocation === $state.current.name;
                 }
 

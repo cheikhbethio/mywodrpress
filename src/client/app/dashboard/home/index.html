@@ -1,14 +1,10 @@
 <h2 class="page-header">Tableau de Bord <i>MyWordPress</i> </h2>
 
-<button class="btn btn-default" type="button" ng-model="clicked" ng-init="clicked=false" ng-click="show()"> <span ng-if="!clicked" class="glyphicon glyphicon-eye-open"></span> <span ng-if="clicked" class="glyphicon glyphicon-eye-close"></span>  Dernières publications sur le site</button>
-
-
-<div ng-if="clicked">
-	<hr>
+<div>
 	<div class="col-md-6">
 		<h3>Articles </h3>
 		<div ng-repeat= "article in lastArticles | orderBy:'article.date':true">
-			<div class="well">
+			<div class="well well-sm">
 	 			<p> Posté le {{article.date | date:'dd/MM/yyyy'}} par {{article.author.lastname}}  {{article.author.firstname}} </p>
 	 			<p><a ui-sref="site.showArticle({id : article._id})">{{article.title}} </a></p>
 				</div>
@@ -19,7 +15,7 @@
 		<h3>Commentaires </h3>
 		
 		<div ng-repeat= "comment in lastComments ">
-			<div class="media">
+			<div class="media well well-sm">
 	         	<img src="{{user.profilePicUrl()}}" class="pull-left" style="height:50px; border: 1px solid #fff">
 
 	        	<div class="media-body">

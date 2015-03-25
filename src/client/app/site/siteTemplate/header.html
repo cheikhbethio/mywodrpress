@@ -47,7 +47,7 @@
         </div>
 
         <nav class="blog-nav navbar-left navbar-collapse collapse navbar-col">
-            <a ng-class="{ active: isActiveHeader('site.home')}" class="blog-nav-item" ui-sref="site.home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
+            <a ng-class="{ active: isActiveHome('home')}" class="blog-nav-item" ui-sref="site.home"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Accueil</a>
             <span ng-repeat="menu in menus">
                 <span ng-if="menu.single">
                     <a ng-class="{ active: isActiveHeaderPage('{{menu.page}}')}" class="blog-nav-item" ui-sref="site.pages({id : menu.page})"> {{menu.name}}</a>

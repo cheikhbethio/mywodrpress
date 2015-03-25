@@ -1,6 +1,6 @@
 <h2 class="page-header"> Titre: {{page.title}} </h2>
 
-<div ng-if="currentUser.right == 3">
+<div ng-if="user.getRight() == 3 && page.title != 'home'">
   <label ng-hide="isEdit == true"> Modifiez le titre de la page :</label>
   <input type="text" ng-show="isEdit== true" ng-model="editTitle" />
 
