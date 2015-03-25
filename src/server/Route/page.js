@@ -10,12 +10,24 @@ var PageSchema = new mongoose.Schema({
 
 var Page = mongoose.model('Page',PageSchema);
 
+Page.findOne({title : "home"}).exec(function(err,doc){
+  if(err) return next(err);
+  if(doc ==null){
+    console.log("Create Home page");
+    var Home= new Page({title : "home"});
+    Home.save();    
+  }
+});
+
+
 module.exports.Page = Page;
 
-exports.create = function(req,res,next){
-        var reqBody = req.body,
+exports.create = function(req,res,next) {
+        var reqBody = req.body;
+        if(req.body.title== "home")
+          res.send(401);
+        else{
         pageObj = {title: reqBody.title};
-
         var model = new Page(pageObj);
         model.save(function(err,doc){
                        if(err || !doc){
@@ -24,6 +36,21 @@ exports.create = function(req,res,next){
                                res.json(doc);
                         }
             });
+      }
+};
+
+exports.getHome = function(req,res,next){
+        Page.findOne({title: "home"}).populate('content').exec(function(err,result){
+          if(err) return next(err);
+          Page.populate(result,{
+            path: 'content.author',
+            select: 'firstname lastname',
+            model: 'user'
+          },function(err,doc){
+            if(err) return next(err);
+            res.json(doc);
+          });
+    });
 };
 
 exports.getPage = function(req,res,next){
@@ -44,7 +71,7 @@ exports.getPage = function(req,res,next){
 exports.edit = function(req,res,next){
         Page.findById(req.params.id,function(err,doc){
               if(err || !doc) return next(err);
-              if(req.body.title != null) 
+              if(req.body.title != null && req.body.title !="home") 
                     doc.title = req.body.title;
               doc.save(function(err,result){
                        if(err || !doc){
@@ -60,8 +87,11 @@ exports.edit = function(req,res,next){
 exports.deletePage = function(req,res,next){
         Page.findById(req.params.id, function(err,doc){
              if(err || !doc) return next(err);
+             if(doc.title=="home"){}
+              else{
              doc.remove();
              res.json(doc);
+           }
      });
  
 };

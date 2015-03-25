@@ -96,6 +96,7 @@ app.post('/api/token', token.gettoken);
 app.post('/api/pages',[token.authadmin],page.create);
 app.put('/api/pages/:id',[token.authadmin], page.edit);
 app.delete('/api/pages/:id',[token.authadmin], page.deletePage);
+app.get('/api/pages/home', page.getHome);
 app.get('/api/pages/:id', page.getPage);
 app.get('/api/pages', page.view);
 app.put('/api/pages/:id/article/:idart',page.addarticle);
