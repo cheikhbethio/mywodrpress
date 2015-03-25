@@ -13,10 +13,12 @@ var Page = mongoose.model('Page',PageSchema);
 Page.findOne({title : "home"}).exec(function(err,doc){
   if(err) return next(err);
   if(doc ==null){
-    console.log("Create Home page");
+    console.log("[Create Home page]");
     var Home= new Page({title : "home"});
     Home.save();    
   }
+  else
+    console.log("[Home Page already created]")
 });
 
 
