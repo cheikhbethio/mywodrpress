@@ -38,6 +38,7 @@ describe('Commentaire Routing', function() {
 	    it('return error when Creation failed', function(done) {
 		    request(url)
 			.post('/api/users')
+			.set('x-access-token',token)
 			.send(createdAcount)
 			.end(function(err, res) {
 		          if (err) {
@@ -66,6 +67,7 @@ describe('Commentaire Routing', function() {
 
 		    request(url)
 			.post('/api/articles')
+			.set('x-access-token',token)
 			.send(createdArticle)
 			.end(function(err, res) {
 		          if (err) {
@@ -92,6 +94,7 @@ describe('Commentaire Routing', function() {
 
 		    request(url)
 			.post('/api/comments')
+			.set('x-access-token',token)
 			.send(createdComment2)
 			.end(function(err, res) {
 		        if (err) {
@@ -124,6 +127,7 @@ describe('Commentaire Routing', function() {
 	    	var id_comment = myCommentToDelete._id;
 		    request(url)
 			.delete('/api/comments/' + id_comment)
+			.set('x-access-token',token)
 			.send()
 			.end(function(err, res) {
 		          if (err) {
@@ -141,6 +145,7 @@ describe('Commentaire Routing', function() {
 		 	console.log(id_article);
 		    request(url)
 			.get('/api/comments/'+ id_article)
+			.set('x-access-token',token)
 			.send()
 			.end(function(err, res) {
 		          if (err) {
@@ -166,6 +171,7 @@ var creatAcount =function(){
 	    };
  	request(url)
 	.post('/api/users')
+			.set('x-access-token',token)
 	.send(createdAcount1)
 	.end(function(err, res) {
           if (err) {
@@ -189,6 +195,7 @@ var creatcomment =function(id_user, id_article, url1, thedate, thecontent){
 
     request(url1)
 	.post('/api/comments')
+			.set('x-access-token',token)
 	.send(createdComment3)
 	.end(function(err, res) {
         if (err) {
@@ -218,6 +225,7 @@ var creatAcount =function(){
 	    };
  	request(url)
 	.post('/api/users')
+			.set('x-access-token',token)
 	.send(createdAcount1)
 	.end(function(err, res) {
           if (err) {

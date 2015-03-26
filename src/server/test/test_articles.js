@@ -260,7 +260,7 @@ describe('article Routing', function() {
 
 
 	    //to delete a user 
-		/*it('return error we cannot delete a user ', function(done) {
+		it('return error we cannot delete a user ', function(done) {
 			request(url)
 			.delete('/api/users/remove/'+myUser._id)
 			.set('x-access-token',token)
@@ -273,61 +273,6 @@ describe('article Routing', function() {
 	            res.should.have.property('status',200);
 	            done();
 	        });
-		});*/
-
-
-
-	  	/*var myUser;
-	  	var myArtcile;
-	  	var createdAcount = {
-	   
-	 	
-
-	//view one article
-	    it('should return error when Creation article failed', function(done) {
-		 	var id_articles = myArtcile._id;
-		    request(url)
-			.get('/api/articles/'+ id_articles)
-			.send()
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ ': code retourné pour la vue d\'un article');
-		          res.should.have.property('status',200);
-		          done();
-		    });
-	    });
-
-	//view all articles
-	    it('should return error when Creation article failed', function(done) {
-		    request(url)
-			.get('/api/articles')
-			.send()
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
-		          res.should.have.property('status',200);
-		          done();
-		    });
-	    });
-
-	//view all articles by author
-	    it('should return error when Creation article failed', function(done) {
-	    	var id_author = myArtcile.author;
-		    request(url)
-			.get('/api/articles_editor/' + id_author)
-			.send()
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ ': code retourné pour la vue de tous les articles');
-		          res.should.have.property('status',200);
-		          done();
-		    });
-	    });*/
+		});
 	});
 });

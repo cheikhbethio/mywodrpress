@@ -1,14 +1,13 @@
-<h1 class="page-header ">visulisation des statistiques</h1>
+<h1 class="page-header ">Visualisation des statistiques</h1>
 
-<br/>
-<br/>
+
+
 <h3 class="page-header">Utilisateurs :</h3>
 <table class="table table-hover">
 	<thead>
 		<tr>
 			<th><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Role</th>
 			<th><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Statistiques </th>
-			<th style="width:187px"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,38 +15,24 @@
 		<tr>
 			<td><a> Admin </a></td>
 			<td>{{nbAdmin}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 		<tr>
 			<td><a >Moderateur</a></td>
 			<td>{{nbModerator}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 		<tr>
 			<td><a >Utilisateur</a></td>
 			<td>{{nbWriter}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 		<tr>
 			<td><a >Membre</a></td>
 			<td>{{nbMember}}</td>
 			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 
 		<tr>
 			<td><a >Total inscrit</a></td>
 			<td>{{nbTotal}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 
 	</tbody>
@@ -60,7 +45,6 @@
 		<tr>
 			<th><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Types</th>
 			<th><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Statistiques </th>
-			<th style="width:187px"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Actions</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -68,23 +52,14 @@
 		<tr>
 			<td><a> Pages </a></td>
 			<td>{{nbPages}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 		<tr>
 			<td><a >Articles</a></td>
 			<td>{{nbArticles}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 		<tr>
 			<td><a >Commentaires</a></td>
 			<td>{{nbCommentaires}}</td>
-			<td>
-				<button class="btn btn-primary btn-sm" ng-click="EditParticipate()"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Editer</button>
-			</td>
 		</tr>
 
 	</tbody>
