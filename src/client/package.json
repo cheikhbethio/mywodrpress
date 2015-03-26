@@ -18,7 +18,7 @@
 		"postinstall": "bower install",
 
 		"prestart": "npm install",
-		"start": "chromium \"http://localhost:4711/app/#/\"",
+		"start": "chromium \"http://localhost:4711/#/\"",
 
 		"pretest": "npm install",
 		"test": "karma start karma.conf.js",
