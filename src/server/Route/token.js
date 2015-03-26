@@ -142,7 +142,7 @@ exports.authwritter=function(req,res,next){
 exports.authadmin=function(req,res,next){
 
 	var token = req.headers['x-access-token'];
-	console.log(token);
+	console.log(token + ": affichage token");
 	if (token) {
 
   		try {  			

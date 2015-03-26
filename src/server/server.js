@@ -85,7 +85,7 @@ app.delete('/api/users/:id_user/article/:id_art',user.delFavorite);
 app.get('/api/users/:id/profile',user.profile);
 app.put('/api/users/:id/right',[token.authadmin],user.right);
 app.get('/api/users/favoris/:id', user.getFavorite);
-
+app.delete('/api/users/remove/:id', [token.authadmin], user.remove);
 
 /***** Token *****/
 app.post('/api/token', token.gettoken);
@@ -134,23 +134,18 @@ app.get('/api/comments/:id', comment.get);
 app.delete('/api/comments/:id',[token.authmember], comment.deleteComment);
 app.get('/api/last_comments', comment.getLastComments);
 app.get('/api/comments_editor/:id', comment.getByEditor);
-/*
-app.post('/api/comments', comment.create);
-app.get('/api/comments/:id', comment.get);
-app.delete('/api/comments/:id', comment.deleteComment);
-app.get('/api/last_comments', comment.getLastComments);
-app.get('/api/comments_editor/:id', comment.getByEditor);
-*/
+
 
 /***** Preferences *****/
 app.get('/api/preferences', preferences.get);
 app.put('/api/preferences',[token.authadmin], preferences.edit);
 
 /******statistiques*******/
-app.get('/api/statistics/comment/:id', comment.getNbcomment);
+
+/*app.get('/api/statistics/comment/:id', comment.getNbcomment);
 app.get('/api/statistics/comment/article/:id', comment.getNbcommentByArticle);
 app.get('/api/statistics/article/:id', article.getNbArticle);
-app.get('/api/statistics/page', page.getNbPage);
+app.get('/api/statistics/page', page.getNbPage);*/
 
 app.get('/api/nbr/admin', participate.getNbAdmin);
 app.get('/api/nbr/moderator', participate.getNbModerator);
@@ -158,7 +153,7 @@ app.get('/api/nbr/writer', participate.getNbWriter);
 app.get('/api/nbr/member', participate.getNbMember);
 app.get('/api/nbr/comment', participate.getNbComment);
 app.get('/api/nbr/article', participate.getNbArticle);
-app.get('/api/nbr/page', participate.getNbArticle);
+app.get('/api/nbr/page', participate.getNbPage);
 
 
 /******favoris*******/

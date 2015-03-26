@@ -88,18 +88,19 @@ exports.edit = function(req,res,next){
 
 exports.deletePage = function(req,res,next){
         Page.findById(req.params.id, function(err,doc){
-             if(err || !doc) return next(err);
-             if(doc.title=="home"){}
-              else{
-             doc.remove();
-             res.json(doc);
+            if(err || !doc) 
+                return next(err);
+             
+            if(doc.title != "home"){
+                doc.remove();
+                res.json(doc);
            }
      });
  
 };
 
 exports.view = function(req,res,next){
-  Page.find().populate('content').exec(function (err, result) {
+  Page.find().where("title").ne("home").populate('content').exec(function (err, result) {
         console.log(result);
         if (err) {
             return next(err);
