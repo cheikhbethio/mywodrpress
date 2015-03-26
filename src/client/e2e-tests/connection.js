@@ -4,7 +4,7 @@ describe('MyWordPress', function() {
 
   it('should be able to connect as admin', function() {
 
-    browser.get('http://localhost:4711/app/');
+    browser.get('http://localhost:4711/');
 
     expect(browser.getLocationAbsUrl()).toMatch("/");
     element(by.id('connection_link')).click();
