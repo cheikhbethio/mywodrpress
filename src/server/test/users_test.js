@@ -4,8 +4,13 @@ var request = require('supertest');
 var mongoose = require('mongoose');
 var bcrypt=require('bcrypt');
 var mydb     = require('../Route/user.js');
-//var winston = require('winston');
  
+/*
+		        console.log("******************************************************");  
+		        console.log(res.body);  
+		        console.log("******************************************************");
+*/
+
 describe('User Routing', function() {
   	var url = 'http://localhost:4711';
  	
@@ -20,15 +25,15 @@ describe('User Routing', function() {
   	});
 
 	  
-	describe('Account Creation', function() {
-	  	var myUser;
+	describe('User Routing', function() {
+	  	var myUser; 
+	  	var myArtcile;
 	  	var createdAcount = {
-	        login		: 'kkk',
-	    	password	: 'kkk',
-	   	 	firstname	: 'kkk',
-	    	lastname	: 'kkk',
-	    	email	  	: 'kkk@kkk.kkk',
-	    	right		: 1
+	        login		: 'testAccontCreation',
+	    	password	: 'testAccontCreation',
+	   	 	firstname	: 'testAccontCreation',
+	    	lastname	: 'testAccontCreation',
+	    	email	  	: 'testAccontCreation@testAccontCreation.testAccontCreation'
 	    };
 	    var updateAccont = {
 	    	password	: '1kkk',
@@ -39,37 +44,39 @@ describe('User Routing', function() {
 	    var token;
 
 	    it('should return error when Creation failed', function(done) {
-
+	    	var pass ;
 		    request(url)
 			.post('/api/users')
 			.send(createdAcount)
-		    // end handles the response
 			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-		          console.log(res.status+ '  code de requete retournéé pour la Creation');
-		          //res.should.have.status(400);
-		          myUser = res.body.result;
-		       //   console.log(myUser);
-		          res.should.have.property('status',200);
-		          done();
-		        });
+		        if (err) {
+		           throw err;
+		        }
+		        console.log(res.status+ '  code de requete retournéé pour la Creation');
+		        myUser = res.body.result;
+           		myUser.login.should.equal('testAccontCreation');
+           		myUser.firstname.should.equal('testAccontCreation');
+           		myUser.lastname.should.equal('testAccontCreation');
+           		myUser.email.should.equal('testAccontCreation@testAccontCreation.testAccontCreation');
+           		assert.equal(true, bcrypt.compareSync('testAccontCreation', myUser.password));
+		        res.should.have.property('status',200);
+		        done();
+		    });
 	    });
 
 		//for duplicate accont
 	    it('should return error trying to save duplicate username', function(done) {
-		request(url)
-		.post('/api/users')
-		.send(createdAcount)
-		.end(function(err, res) {
-	          if (err) {
-	            throw err;
-	          }
-	        console.log(res.status+ '  code de requete pour tests de duplicate');
-		    res.should.have.property('status',401);
-	      	done();
-	    });
+			request(url)
+			.post('/api/users')
+			.send(createdAcount)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		        console.log(res.status+ '  code de requete pour tests de duplicate');
+			    res.should.have.property('status',401);
+		      	done();
+		    });
 	    });
 
 	    //get token	    
@@ -88,6 +95,30 @@ describe('User Routing', function() {
 	          	done();
 	        });
 	    });
+
+	    //view profile
+	    it('should return error we cannot see the user profile', function(done) {
+	    	var result;
+			request(url)
+			.get('/api/users/'+myUser._id)
+			.set('x-access-token',token)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		        result = res.body;
+           		result.login.should.equal(myUser.login);
+           		result.firstname.should.equal(myUser.firstname);
+           		result.lastname.should.equal(myUser.lastname);
+           		result.email.should.equal(myUser.email);
+           		result.password.should.equal(myUser.password);
+           		result.right.should.equal(myUser.right);
+	          	console.log(res.status+ '  code de requete pour voir le profile d\'un user');
+		        res.should.have.property('status',200);
+		      done();
+		    });
+		});
 
 	    //edit a profile Mail only	    
 	    it('return error when edition mail only failed', function(done) {
@@ -124,12 +155,12 @@ describe('User Routing', function() {
 		          if (err) {
 		            throw err;
 		          }
-	          	res.should.have.property('status',404);
+	          	res.should.have.property('status',401);
 	          	done();
 	        });
 	    });
 
-	    /*/edit a profile password firstname and las name	    
+	    //edit a profile firstname and lastname	    
 	    it('return error when edition password only failed', function(done) {
 		    var updateAccontPass = {
 		    	firstname	  	: 'newfirstname',
@@ -138,6 +169,7 @@ describe('User Routing', function() {
 			var newUserUpdated;
 			request(url)
 			.put('/api/users/'+myUser._id)
+			.set('x-access-token',token)
 			.send(updateAccontPass)
 			.end(function(err, res) {
 		          if (err) {
@@ -150,39 +182,136 @@ describe('User Routing', function() {
 	          	res.should.have.property('status',200);
 	          	done();
 	        });
-	    });//*/
+	    });//
 
-	    //view profile
-	    it('should return error we cannot see the user profile', function(done) {
-			request(url)
-			.get('/api/users/'+myUser._id)
-			.send()
-		    // end handles the response
-			.end(function(err, res) {
-		          if (err) {
-		            throw err;
-		          }
-	          	console.log(res.status+ '  code de requete pour voir le profile d\'un user');
-		      res.should.have.property('status',200);
-		      done();
-		    });
-		});
 
 	     //view all users profiles
 		it('return error we cannot see all users profiles', function(done) {
 			request(url)
 			.get('/api/users')
+			.set('x-access-token',token)
 			.send()
-		    // end handles the response
 			.end(function(err, res) {
 		          if (err) {
 		            throw err;
 		          }
 	          	console.log(res.status+ '  code de requete pour voir tous les profiles ');
+	          	res.should.have.property('status',200);
+	          done();
+	        });
+		});
+
+	    // article creation for user test 
+	    it('should return error when Creation article failed', function(done) {
+		 	var id = myUser._id;
+		  	var createdArticle = {
+	             title : "myartcile",
+	             author : id,
+	             date : "10-10-2000",
+	             ispublic : true,
+	             content : "mycontent",
+	             keywords : ["str1", "str2"]
+		    };
+
+		    request(url)
+			.post('/api/articles')
+			.set('x-access-token',token)
+			.send(createdArticle)
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		          myArtcile = res.body;
+	//	          console.log(myArtcile);
+		          console.log(res.status+ ': code retourné pour la Creation d\'articles ');
+		          res.should.have.property('status',200);
+		          done();
+		    });
+	    });
+		
+	    //to add a favorite
+		it('return error we cannot add a favorite', function(done) {
+			request(url)
+			.put('/api/users/'+myUser._id+'/article/'+ myArtcile._id)
+			.set('x-access-token',token)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		        assert.equal(1, res.body);
+	          	console.log(res.status+ '  code de requete pour add a favorite');
+	            res.should.have.property('status',200);
+	          done();
+	        });
+		});
+
+	    //to delete a favorite
+		it('return error we cannot delete a favorite', function(done) {
+			request(url)
+			.delete('/api/users/'+myUser._id+'/article/'+ myArtcile._id)
+			.set('x-access-token',token)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		          }
+		        assert.equal(1, res.body);
+	          	console.log(res.status+ '  code de requete pour delete un favorite');
 	          res.should.have.property('status',200);
 	          done();
 	        });
 		});
+
+	    //to get a user profile 
+		it('return error we cannot get a user profile', function(done) {
+			request(url)
+			.get('/api/users/'+myUser._id+'/profile')
+			.set('x-access-token',token)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		        }
+	          	console.log(res.status+ 'returned code to get a user profile');
+	            res.should.have.property('status',200);
+	            done();
+	        });
+		});
+
+	    //to get a user favorite  
+		it('return error when we cannot get a user favorite', function(done) {
+			request(url)
+			.get('/api/users/favoris/'+myUser._id)
+			.set('x-access-token',token)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		        }
+	          	console.log(res.status+ 'returned code to get a user favorite ');
+	            res.should.have.property('status',200);
+	            done();
+	        });
+		});
+	    //to put a user right  
+		it('return error we cannot put a user right', function(done) {
+			request(url)
+			.put('/api/users/'+myUser._id+'/right')
+			.set('x-access-token',token)
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		        }
+	          	console.log(res.status+ 'returned code to put a user right');
+	            res.should.have.property('status',200);
+	            done();
+	        });
+		});
+
+
+
 
 	});
 });

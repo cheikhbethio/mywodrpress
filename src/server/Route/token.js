@@ -161,7 +161,7 @@ exports.authadmin=function(req,res,next){
 							res.status(401);
 							res.end("Access token isn't valid");
 						} else if (doc.right<3){
-							res.status(402);
+							res.status(401);
 							res.end("Insufficient right");
 
 						}else {
