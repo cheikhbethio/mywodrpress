@@ -7,7 +7,7 @@ angular.module('myWordPress.registration', ['ui.router'])
 	function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('site.registration', {
-		url: 'registration',
+		url: '/registration',
 		templateUrl: 'site/registration/registration.html',
 		controller: 'registrationController'
 	});

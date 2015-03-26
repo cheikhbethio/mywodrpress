@@ -1,3 +1,5 @@
+<alert type="success" ng-show="connectionSuccess" close="closeAlert()"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span> Connexion réussie. Bon retour parmi nous, {{user.currentUser().firstname}}.</alert>
+
 <div class="blog-post" ng-repeat="article in page.content  track by $index | orderBy:'date':true" ng-if="article.ispublic">
     <h2 class="blog-post-title"><a ui-sref="site.showArticle({id : article._id, isfavorite : okFavoris})" ng-style="{ 'color': preferences.site.titlecolor }">{{article.title}}</a>  
 

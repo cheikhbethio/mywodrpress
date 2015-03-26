@@ -15,7 +15,7 @@ describe('MyWordPress', function() {
 
     element(by.id('connection_button')).click();
 
-    expect(browser.getLocationAbsUrl()).toMatch("/?connectionSuccess=true");
+    expect(browser.getLocationAbsUrl()).toMatch("http://localhost:4711/#/page/home?connectionSuccess=true");
 
   });
 

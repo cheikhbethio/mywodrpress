@@ -6,7 +6,7 @@ angular.module('myWordPress.connection', ['ui.router'])
 .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
 	$stateProvider.state('site.connection', {
-		url: 'connection?registration',
+		url: '/connection?registration',
 		templateUrl: 'site/connection/connection.html',
 		controller: 'connectionController'
 	});
@@ -26,13 +26,13 @@ angular.module('myWordPress.connection', ['ui.router'])
 				Token.login($scope.userCredentials, function(res){
 
 						CurrentUser.set(res.user);
-						//$http.defaults.headers.common['x-access-token'] = res.token;
 						$localStorage.accessToken = res.token;
 
 						$state.go('site.home', {connectionSuccess:true});
 
 					}, function(err){
 						console.log('Could not get token: ' + err.data.message);
+						$scope.connectionError = true;
 				});
 			}
 			else {
