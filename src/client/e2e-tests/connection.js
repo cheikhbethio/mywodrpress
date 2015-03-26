@@ -19,6 +19,7 @@ describe('The Connection page', function() {
      it('should show registration options', function(){
         //var button_creation_submit = element(by.id('button_creation_submit'));
         expect(element(by.id('account_creation_link')).isDisplayed()).toBeTruthy();
+        expect(element(by.id('header_registration_link')).isDisplayed()).toBeTruthy();
     });
 
 
