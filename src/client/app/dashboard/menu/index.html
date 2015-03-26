@@ -35,7 +35,7 @@
 	                  </ul>
 	                </span>
 
-	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu(menu._id, menu.name)" ng-if="user.getRight() == 3">
+	               	<button type="button" class="btn btn-xs btn-danger" style="margin-left: 5px;" ng-click="deleteMenu($index)" ng-if="user.getRight() == 3">
   						<span aria-hidden="true">&times;</span>
 					</button>
 				</span>

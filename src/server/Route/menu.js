@@ -25,7 +25,7 @@ exports.getMenus = function(req, res, next){
 };
 
 exports.postMenu = function(req, res, next){
-  var menu= new Menus(req.body);
+  var menu = new Menus(req.body);
   menu.save(function(err, menu){
     if(err)
       return res.send(err);

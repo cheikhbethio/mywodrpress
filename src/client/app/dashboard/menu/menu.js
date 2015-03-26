@@ -11,7 +11,10 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 		controller: 'indexMenuController'
 	})
 
-}]).controller('indexMenuController', ['$scope', '$state','$stateParams', 'Page', 'Preferences', 'Menu', 'CurrentUser', function($scope, $state, $stateParams, Page, Preferences, Menu, CurrentUser){
+}])
+
+.controller('indexMenuController', ['$scope', '$state','$stateParams', 'Page', 'Preferences', 'Menu', 'CurrentUser', 'dialogs',
+function($scope, $state, $stateParams, Page, Preferences, Menu, CurrentUser, dialogs){
 	$scope.boolAdd = false;
 	$scope.firstTabSelected = true;
 	$scope.preferences = Preferences.get();
@@ -36,6 +39,8 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 		$scope.boolAdd = true;
 	}
 
+
+
 	$scope.saveMenuSimple = function() {
 		if ($scope.createMenuForm.$valid){ 
 			
@@ -45,16 +50,10 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 				page: $scope.menu.page._id
 			};
 
-			Menu.save(newMenu);
-			$scope.menus = Menu.query();
-
-			$scope.menu = {};
-			$scope.dropdown = [{ 
-				title : "", 
-				page : {}
-			}];
-
-			$scope.boolAdd = false;
+			Menu.save(newMenu, function(savedMenu){
+				$scope.menus.push(savedMenu);
+				$scope.resetMenuCreation();
+			});
 
 		} else {
 			console.log('Formulaire Invalide.');
@@ -62,39 +61,61 @@ angular.module('myWordPress.admin.menu', ['ui.router'])
 	}
 
 	$scope.saveMenuDropDown = function() {
+
 		if ($scope.createMenuForm.$valid){ 
 			
-			var newMenu={
+			var newMenu = {
 			   	name: $scope.menu.title,
 				single: $scope.firstTabSelected,
 				dropdown: $scope.dropdown
 			};
 
-			Menu.save(newMenu);
-			$scope.menus = Menu.query();
-			
-			$scope.menu = {};
-				$scope.dropdown = [{ 
-				title : "", 
-				page : {}
-			}];
-
-			
-			$scope.boolAdd = false;
+			Menu.save(newMenu, function(savedMenu){
+				$scope.menus.push(savedMenu);
+				$scope.resetMenuCreation();
+			});
 
 		} else {
 			console.log('Formulaire Invalide.');
 		}
 	}
 
+	$scope.resetMenuCreation = function(){
+		$scope.menu = {};
+				$scope.dropdown = [{ 
+				title : "", 
+				page : {}
+			}];
 
-	$scope.deleteMenu = function(articleId, name){
-		if (confirm("Voulez vous vraiment supprimer le menu "+ name +"?") == true) {
-			Menu.remove({id: articleId});
+		$scope.boolAdd = false;
+	};
 
-			$scope.menus = Menu.query();
-			console.log($scope.menus);
-		}
-	}
+	$scope.deleteMenu = function(menuIndex){
 
-}]);
+		var dlg = dialogs.create('./components/dialogs/menu/confirmation_dialog.html', 
+		'confirmatioDialogController', 
+		{ menuname: $scope.menus[menuIndex].name },
+		'lg');
+
+		dlg.result.then(function(){
+			Menu.remove({id: $scope.menus[menuIndex]._id }, function(removed_menu){
+				$scope.menus.splice(menuIndex, 1);
+			});
+		});
+	};
+
+}])
+
+.controller('confirmatioDialogController', function($scope, $modalInstance, data){
+
+		$scope.menuname = data.menuname;
+		
+		$scope.cancel = function(){
+			$modalInstance.dismiss('Canceled');
+		};
+		
+		$scope.save = function(){
+			$modalInstance.close();
+		};
+
+});
