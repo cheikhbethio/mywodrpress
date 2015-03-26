@@ -21,12 +21,9 @@ angular.module('myWordPress.editProfile', ['ui.router'])
 
 	$scope.profile = angular.copy(CurrentUser.currentUser());
 
-	console.log("USER editprofile: " + $scope.profile);
-
 	$scope.keysToValues = {
 		firstname: 'Nom',
 		lastname: 'Prénom', 
-		login: 'Identifiant',
 		email: 'Email',
 		password: 'Mot de passe',
 		picture: 'Photo de profil (url)'
