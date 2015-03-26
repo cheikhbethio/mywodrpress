@@ -15,5 +15,5 @@ angular.module('myWordPress.site.home', ['ui.router'])
 .controller('siteHomeController', ['$scope', '$state', '$stateParams', 'Article', 'CurrentUser', 'User', 'AddFavorite',
 	function($scope, $state, $stateParams, Article, CurrentUser, User, AddFavorite){
 		
-		$state.go('site.pages', {id:"home"});
+		$state.go('site.pages', {id:"home", connectionSuccess:$stateParams.connectionSuccess});
 }]);
