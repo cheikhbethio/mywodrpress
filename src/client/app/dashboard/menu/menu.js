@@ -93,7 +93,7 @@ function($scope, $state, $stateParams, Page, Preferences, Menu, CurrentUser, dia
 	$scope.deleteMenu = function(menuIndex){
 
 		var dlg = dialogs.create('./components/dialogs/menu/confirmation_dialog.html', 
-		'confirmatioDialogController', 
+		'confirmationDialogController', 
 		{ menuname: $scope.menus[menuIndex].name },
 		'lg');
 
@@ -106,7 +106,7 @@ function($scope, $state, $stateParams, Page, Preferences, Menu, CurrentUser, dia
 
 }])
 
-.controller('confirmatioDialogController', function($scope, $modalInstance, data){
+.controller('confirmationDialogController', function($scope, $modalInstance, data){
 
 		$scope.menuname = data.menuname;
 		
