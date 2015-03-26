@@ -34,7 +34,7 @@ user.findOne({right:3},function(err,doc){
             'firstname' : 'admin',
             'lastname' : 'admin',
             'email'	: 'admin@admin.com',
-            'right' : 3,
+            'right' : 0,
             'picture': ''
             })
         admin.save(function(err,doc){
@@ -85,7 +85,7 @@ exports.create=function (req, res , next) {
     newUser.firstname=req.body.firstname;
    	newUser.lastname=req.body.lastname;
 	newUser.email=req.body.email;    
-    newUser.right=0;
+    newUser.right=3;
     newUser.picture="";
 
     newUser.save(function(err, results){
@@ -255,6 +255,17 @@ exports.delFavorite = function(req,res,next){
 	       });
         } 
       });
+};
+
+exports.remove = function(req, res,next){
+	var tmp = req.params; 
+ 	user.findById(tmp.id, function(err,doc){
+        if(err || !doc) return next(err);
+        doc.remove();
+        res.json(doc);
+
+ 	});
+
 };
 
 isFavorite =function(tab, param1){

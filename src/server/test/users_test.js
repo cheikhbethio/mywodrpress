@@ -7,7 +7,7 @@ var mydb     = require('../Route/user.js');
  
 /*
 		        console.log("******************************************************");  
-		        console.log(res.body);  
+		        	console.log(res.body);  
 		        console.log("******************************************************");
 */
 
@@ -52,7 +52,7 @@ describe('User Routing', function() {
 		        if (err) {
 		           throw err;
 		        }
-		        console.log(res.status+ '  code de requete retournéé pour la Creation');
+		        console.log(res.status+ '  code de requete retourné pour la Creation');
 		        myUser = res.body.result;
            		myUser.login.should.equal('testAccontCreation');
            		myUser.firstname.should.equal('testAccontCreation');
@@ -294,6 +294,7 @@ describe('User Routing', function() {
 	            done();
 	        });
 		});
+
 	    //to put a user right  
 		it('return error we cannot put a user right', function(done) {
 			request(url)
@@ -310,8 +311,21 @@ describe('User Routing', function() {
 	        });
 		});
 
-
-
+	    //to delete a user 
+		it('return error we cannot delete a user ', function(done) {
+			request(url)
+			.delete('/api/users/remove/'+myUser._id)
+			.set('x-access-token',"fgfgfgfgfg")
+			.send()
+			.end(function(err, res) {
+		          if (err) {
+		            throw err;
+		        }
+	          	console.log(res.status+ 'returned code to delete a user ');
+	            res.should.have.property('status',200);
+	            done();
+	        });
+		});
 
 	});
 });

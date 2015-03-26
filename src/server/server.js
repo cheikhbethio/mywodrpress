@@ -85,7 +85,7 @@ app.delete('/api/users/:id_user/article/:id_art',user.delFavorite);
 app.get('/api/users/:id/profile',user.profile);
 app.put('/api/users/:id/right',[token.authadmin],user.right);
 app.get('/api/users/favoris/:id', user.getFavorite);
-
+app.delete('/api/users/remove/:id', [token.authadmin], user.remove);
 
 /***** Token *****/
 app.post('/api/token', token.gettoken);
