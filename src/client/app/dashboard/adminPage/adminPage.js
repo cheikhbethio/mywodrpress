@@ -24,7 +24,7 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 	$scope.deletepage=function(pageIndex) {
 
 		var dlg = dialogs.create('./components/dialogs/adminPage/confirmation_dialog.html', 
-		'confirmationDialogController', 
+		'deletePageDialogController',
 		{pagetitle: $scope.pages[pageIndex].title}, 
 		'lg');
 
@@ -82,9 +82,11 @@ angular.module('myWordPress.adminPage', ['ui.router'])
 
 }])
 
-.controller('confirmationDialogController', function($scope, $modalInstance, data){
+.controller('deletePageDialogController', function($scope, $modalInstance, data){
 
 		$scope.data = data;
+
+		console.log("ogogl");
 		
 		$scope.cancel = function(){
 			$modalInstance.dismiss('Canceled');

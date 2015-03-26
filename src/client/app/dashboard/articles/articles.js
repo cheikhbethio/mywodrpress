@@ -25,7 +25,8 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 
 }])
 
-.controller('indexArticleController', ['$scope', '$state','$stateParams', 'Article', function($scope, $state, $stateParams, Article){
+.controller('indexArticleController', ['$scope', '$state','$stateParams', 'Article', 'dialogs',
+	function($scope, $state, $stateParams, Article, dialogs){
 	
 	$scope.articles = Article.query();
 
@@ -37,14 +38,43 @@ angular.module('myWordPress.admin.article', ['ui.router'])
         $scope.editSuccess = false;
     };
 
-	$scope.deleteArticle=function(articleId) {
-		if (confirm("Voulez vous vraiment supprimer cet article?") == true) {
-			Article.remove({id: articleId});
-			$scope.articles = Article.query();
-		}
-    }
+	$scope.deleteArticle=function(articleIndex) {
 
-}]).controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', 'CurrentUser', function($scope, $state, $stateParams, Article, CurrentUser){
+		console.log("Article: " + JSON.stringify($scope.articles[articleIndex]));
+
+		var dlg = dialogs.create('./components/dialogs/articles/confirmation_dialog.html', 
+		'deleteArticleDialogController', 
+		{ articletitle: $scope.articles[articleIndex].title },
+		'lg');
+
+		dlg.result.then(function(){
+			Article.remove({id: $scope.articles[articleIndex]._id }, function(removed_article){
+				$scope.articles.splice(articleIndex, 1);
+			});
+		});
+    };
+
+}])
+
+.controller('deleteArticleDialogController', function($scope, $modalInstance, data){
+
+		$scope.articletitle = data.articletitle;
+		console.log("Title: " + $scope.articletitle);
+
+		console.log("Title: ");
+		
+		$scope.cancel = function(){
+			$modalInstance.dismiss('Canceled');
+		};
+		
+		$scope.save = function(){
+			$modalInstance.close();
+		};
+
+})
+
+
+.controller('createArticleController', ['$scope', '$state','$stateParams', 'Article', 'CurrentUser', function($scope, $state, $stateParams, Article, CurrentUser){
 	
 	$scope.user = CurrentUser;
 
