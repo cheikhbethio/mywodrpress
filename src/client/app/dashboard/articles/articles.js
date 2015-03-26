@@ -119,6 +119,5 @@ angular.module('myWordPress.admin.article', ['ui.router'])
 	$scope.article = Article.get({id: $stateParams.id}, function(page) {
         console.log("get article "+$stateParams.id);
     });
-
     
 }]);

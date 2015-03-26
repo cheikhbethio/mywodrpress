@@ -1,22 +1,49 @@
+// Finir connection
+// Creation article 
+// Creation page
 
 
-describe('MyWordPress', function() {
+describe('The Connection page', function() {
 
-  it('should be able to connect as admin', function() {
+    beforeEach(function(){
 
-    browser.get('http://localhost:4711/');
+        browser.driver.manage().window().maximize();
+        browser.get('http://localhost:4711/#/connection');
+        expect(browser.getLocationAbsUrl()).toMatch("/connection");
 
-    expect(browser.getLocationAbsUrl()).toMatch("/");
-    element(by.id('connection_link')).click();
-    expect(browser.getLocationAbsUrl()).toMatch("/connection");
+        /*element(by.id('connection_link')).click();
+        expect(browser.getLocationAbsUrl()).toMatch("/connection");*/
 
-    element(by.model('userCredentials.login')).sendKeys('admin');
-    element(by.model('userCredentials.password')).sendKeys('admin');
+    });
 
-    element(by.id('connection_button')).click();
+     it('should show registration options', function(){
+        //var button_creation_submit = element(by.id('button_creation_submit'));
+        expect(element(by.id('account_creation_link')).isDisplayed()).toBeTruthy();
+    });
 
-    expect(browser.getLocationAbsUrl()).toMatch("http://localhost:4711/#/page/home?connectionSuccess=true");
 
-  });
+    it('should show the connection input fields', function(){
+
+        var login_input = by.model('userCredentials.login');
+        var password_input = by.model('userCredentials.password');
+
+        expect(element(login_input).isDisplayed()).toBeTruthy();
+        expect(element(password_input).isDisplayed()).toBeTruthy();
+    });
+
+
+    it('should be able to connect as admin', function() {
+
+        var login_input = by.model('userCredentials.login');
+        var password_input = by.model('userCredentials.password');
+
+        element(login_input).sendKeys('admin');
+        element(password_input).sendKeys('admin');
+
+        element(by.id('connection_button')).click();
+
+        expect(browser.getCurrentUrl()).toEqual("http://localhost:4711/#/page/home?connectionSuccess=true");
+
+    });
 
 });
