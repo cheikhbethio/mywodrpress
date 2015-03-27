@@ -28,7 +28,7 @@
 
     </ul>
 
-    <ul class="nav nav-sidebar">
+    <ul class="nav nav-sidebar" ng-if="user.getRight() == 3">
       <li snap-close ng-class="{ active: isActiveDashboard('dashboard.listMember')}">
         <a ui-sref="dashboard.listMember">
           <span class="glyphicon glyphicon-user" aria-hidden="true"></span> Gestion des Droits
