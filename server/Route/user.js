@@ -85,7 +85,7 @@ exports.create=function (req, res , next) {
     newUser.firstname=req.body.firstname;
    	newUser.lastname=req.body.lastname;
 	newUser.email=req.body.email;    
-    newUser.right=3;
+    newUser.right=0;
     newUser.picture="";
 
     newUser.save(function(err, results){
