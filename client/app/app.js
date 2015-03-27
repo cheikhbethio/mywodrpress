@@ -54,7 +54,6 @@ angular.module('myWordPress', [
     'myWordPress.articleService',
     'myWordPress.loginService',
     'myWordPress.tokenService',
-    'myWordPress.service.articleHome',
     'myWordPress.service.menuService',
     'myWordPress.lastArticleService',
     'myWordPress.lastCommentService',
