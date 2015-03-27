@@ -34,7 +34,7 @@ user.findOne({right:3},function(err,doc){
             'firstname' : 'admin',
             'lastname' : 'admin',
             'email'	: 'admin@admin.com',
-            'right' : 0,
+            'right' : 3,
             'picture': ''
             })
         admin.save(function(err,doc){
